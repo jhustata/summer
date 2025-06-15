@@ -1,0 +1,568 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Quick References &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'quickrefs';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="5. Graphs" href="chapter5.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jhu-logo.jpeg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/jhu-logo.jpeg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. Overview, commands, syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. Return values, macros, programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fquickrefs.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/quickrefs.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Quick References</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="quick-references">
+<h1>Quick References<a class="headerlink" href="#quick-references" title="Permalink to this heading">#</a></h1>
+<p>Room</p>
+<ul class="simple">
+<li><p>Wolfe <strong>E2014</strong> (Sommer Hall)</p></li>
+<li><p>East Baltimore Campus</p></li>
+<li><p>You’re all welcome to join the in-person experience</p></li>
+</ul>
+<p><a class="reference external" href="https://jhjhm.zoom.us/j/98481767907">Zoom</a></p>
+<ul class="simple">
+<li><p>Sessions &amp; labs will be recorded</p></li>
+<li><p>Videos will remain in the cloud for 120 days</p></li>
+<li><p>Helpful to share your screen when troubleshooting during lab</p></li>
+</ul>
+<p>Recordings</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jhjhm.zoom.us/rec/share/Tu4I0oHi9-SE3zpXydt8d7ldkN8kUVkkuB_kybLvi8HZnVIMDPhVF4N5x9llqbxS.lPNfG3sdsAv7fG5O?startTime=1687178245000">M</a></p></li>
+<li><p><a class="reference external" href="https://jhjhm.zoom.us/rec/share/DOkjkKeGpKzEpeLfyaMZtW9k5oWYQS5L5lrvwZqdYbGTMptB7b_9cGF46OzxW43r.MbT2DUyqnVOJFQJr?startTime=1687264435000">T</a></p></li>
+<li><p><a class="reference external" href="https://jhjhm.zoom.us/rec/share/buPksDbihv1XvSCEOOVHHeLeRXb_dvY9te2PHx2c9vsNiLoCjN3CwH0kfwWUwWzl.J-YRvvvALTr9Jm_H?startTime=1687350628000">W</a></p></li>
+<li><p><a class="reference external" href="https://jhjhm.zoom.us/rec/share/9e0VU26X5-WMpnZX62L9hkohCTSpHA4B2K1Jn0kY9jk7fDrkujhoq2G19QFzJFnv.55H1DWN_-cJc1lXY?startTime=1687437161000">Th</a></p></li>
+<li><p><a class="reference external" href="https://jhjhm.zoom.us/rec/share/XuT1ENQEfx81xyHb3TyQU5m3rDN6U6THucGPnKudNuMI9hfaNN8fkrWN7hTtOh0v.9goirJ6Onrn1LN2T?startTime=1687523553000">F</a></p></li>
+</ul>
+<p><a class="reference external" href="https://www.jhsph.edu/courses/course/36824/2023/340.600.11/stata-programming">Syllabus</a></p>
+<p><a class="reference external" href="https://courseplus.jhu.edu/core/index.cfm/go/home/">CoursePlus</a></p>
+<ul class="simple">
+<li><p>Content</p>
+<ul>
+<li><p>Video passcodes</p></li>
+</ul>
+</li>
+<li><p>Discussion Forum</p></li>
+<li><p>Lab Dropbox</p></li>
+</ul>
+<p>Your Instructor</p>
+<ul class="simple">
+<li><p>Abimereki Muzaale <a class="reference external" href="mailto:muzaale&#37;&#52;&#48;jhmi&#46;edu">muzaale<span>&#64;</span>jhmi<span>&#46;</span>edu</a></p></li>
+</ul>
+<p>Teaching Assistants</p>
+<ul class="simple">
+<li><p>Ning Meng <a class="reference external" href="mailto:nmeng2&#37;&#52;&#48;jh&#46;edu">nmeng2<span>&#64;</span>jh<span>&#46;</span>edu</a></p></li>
+<li><p>Monica Jia <a class="reference external" href="mailto:hjia11&#37;&#52;&#48;jhu&#46;edu">hjia11<span>&#64;</span>jhu<span>&#46;</span>edu</a></p></li>
+<li><p>Xujun Gu <a class="reference external" href="mailto:xgu23&#37;&#52;&#48;jhmi&#46;edu">xgu23<span>&#64;</span>jhmi<span>&#46;</span>edu</a></p></li>
+</ul>
+<p>Labs Due in DropBox at 11:59 PM</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="lab1.html"><span class="std std-doc">Lab 1</span></a> M <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/lab1solution.do">lab1solution.do</a></p></li>
+<li><p><a class="reference internal" href="lab2.html"><span class="std std-doc">Lab 2</span></a> T <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/lab2solution.do">lab2solution.do</a></p></li>
+<li><p><a class="reference internal" href="lab3.html"><span class="std std-doc">Lab 3</span></a> W <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/lab3solution.do">lab3solution.do</a></p></li>
+<li><p><a class="reference internal" href="lab4.html"><span class="std std-doc">Lab 4</span></a> Th <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/lab4solution.do">lab4solution.do</a></p></li>
+<li><p><a class="reference internal" href="lab5.html"><span class="std std-doc">Lab 5</span></a> F</p></li>
+<li><p>Optional M (06/26/2023)</p></li>
+</ul>
+<p>Datasets used</p>
+<ul class="simple">
+<li><p><a class="reference download internal" download="" href="_downloads/34a8255f06036b44354b3c36c5583d7e/transplants.dta"><span class="xref download myst">transplants.dta</span></a></p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/transplants.txt">transplants.txt</a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/1dbcfe5183401a542fa4f336f624de75/donors.dta"><span class="xref download myst">donors.dta</span></a></p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/donors.txt">donors.txt</a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/f246ffb8c3fc8aad08fcc8b4d75aa2fb/donors_recipients.dta"><span class="xref download myst">donors_recipients.dta</span></a></p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/donors_recipients.txt">donors_recipients.txt</a></p></li>
+<li><p><a class="reference download internal" download="" href="_downloads/27a576323cb92ad0ff242e3ea525dbf8/tx_yr.dta"><span class="xref download myst">tx_yr.dta</span></a></p></li>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/tx_yr.txt">tx_yr.txt</a></p></li>
+</ul>
+<p>Supplemental do-files</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="lecture1do.html"><span class="std std-doc">lecture1.do</span></a></p></li>
+<li><p><a class="reference internal" href="lecture2do.html"><span class="std std-doc">lecture2.do</span></a></p></li>
+<li><p><a class="reference internal" href="lecture3do.html"><span class="std std-doc">lecture3.do</span></a></p></li>
+<li><p><a class="reference internal" href="#lecture4do.md"><span class="xref myst">lecture4.do</span></a>    <a class="reference internal" href="lec4demodo.html"><span class="std std-doc">lec4demo.do</span></a></p></li>
+<li><p><a class="reference internal" href="lecture5do.html"><span class="std std-doc">lecture5.do</span></a></p></li>
+</ul>
+<p>A <a class="reference internal" href="pvalue.html"><span class="std std-doc">note</span></a> on Stata 13</p>
+<p>Course <a class="reference external" href="https://courseevaluations.jhsph.edu/">evaluation</a></p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Last updated: 12:44 PM 06/23/2023</p>
+<ol class="arabic simple">
+<li><p>Video recording of Session 5 has gone live (see above)</p></li>
+<li><p>The passcode for the video recording is available at <a class="reference external" href="https://courseplus.jhu.edu/core/index.cfm/go/home/">CoursePlus &gt; Content &gt; Session 5</a></p></li>
+<li><p>Solution to labs 4 is available</p></li>
+<li><p>Please take a minute to complete your evaluation of this course. See link above</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">New!!!</span></code> I’ve included in the lecture notes the final program we created together in class</p></li>
+</ol>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chapter5.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">5. Graphs</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abimereki Muzaale
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

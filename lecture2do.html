@@ -1,0 +1,850 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lecture2do';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jhu-logo.jpeg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/jhu-logo.jpeg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. Overview, commands, syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. Return values, macros, programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flecture2do.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/lecture2do.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">capture log close</span>
+<span class="k">log</span> using lecture02<span class="m">.</span>log,<span class="k"> replace</span> text
+
+<span class="c1">//This log file contains most of the examples used in Lecture 2 of</span>
+<span class="c1">//Stata Programming and Data Management, along with additional explanations</span>
+<span class="c1">//and examples.</span>
+
+<span class="c1">//commented out &quot;version 12&quot; because I want to use some Stata 15 features</span>
+<span class="c1">//version 12 //I&#39;m using Stata 18, but some students may have earlier versions</span>
+<span class="k">clear</span> all <span class="c1">//clear all data from memory</span>
+<span class="k">macro drop</span> _all <span class="c1">//clear all macros in memory</span>
+<span class="k">set more</span> off   <span class="c1">//give output all at once (not one screenful at a time)</span>
+<span class="k">set</span> linesize <span class="m">80</span> <span class="c1">//maximum allowed width for output</span>
+
+<span class="c1">//open up transplants.dta</span>
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+
+<span class="c1">//a very brief overview of statistical commands</span>
+
+<span class="c1">//chi2</span>
+<span class="k">tab</span> dx gender, row
+<span class="k">tab</span> dx gender, row chi2
+
+<span class="c1">//exact</span>
+<span class="k">tab</span> abo gender<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">100</span>, row
+<span class="k">tab</span> abo gender<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">100</span>, row exact
+
+<span class="c1">//t test, 2 sample unpaired by group</span>
+<span class="k">ttest</span> age,<span class="k"> by</span>(prev)
+
+<span class="c1">//t test, 2 sample unpaired - comparing two variables</span>
+<span class="k">ttest</span> don_wgt_kg<span class="o">==</span>rec_wgt_kg, unpaired
+
+<span class="c1">//t test, 2 sample paired</span>
+<span class="k">ttest</span> don_wgt_kg<span class="o">==</span>rec_wgt_kg
+
+<span class="c1">//linear regression</span>
+<span class="k">regress</span> rec_wgt_kg rec_hgt
+
+<span class="k">regress</span> rec_wgt rec_hgt age gender
+
+<span class="c1">//logistic regression</span>
+<span class="k">logit</span> rec_work age
+<span class="k">logit</span> rec_work age gender 
+<span class="k">logistic</span> rec_work age
+<span class="k">logistic</span> rec_work age gender 
+
+
+<span class="c1">//review.</span>
+<span class="k">sum</span> age   <span class="c1">//get summary data for age variable</span>
+<span class="k">disp</span> <span class="s">&quot;variable&quot;</span> _col(<span class="m">20</span>) <span class="s">&quot;mean&quot;</span>
+<span class="k">disp</span> <span class="s">&quot;age&quot;</span> _col(<span class="m">20</span>) <span class="nf">r</span>(mean)  <span class="c1">//display mean age obtained from sum command</span>
+
+<span class="c1">//what else is available?</span>
+<span class="k">return list</span>
+<span class="k">disp</span> <span class="nf">r</span>(N)   <span class="c1">//# records with nonmissing age</span>
+<span class="k">disp</span> <span class="nx">%4.3f</span> <span class="nf">r</span>(mean)  <span class="c1">//mean</span>
+<span class="k">disp</span> <span class="nx">%4.3f</span> <span class="nf">r</span>(var)  <span class="c1">//variance</span>
+<span class="k">disp</span> <span class="nx">%4.3f</span> <span class="nf">r</span>(sd)  <span class="c1">//standard dev. Square root of variance</span>
+<span class="k">disp</span> <span class="nf">r</span>(min)  <span class="c1">//minimum</span>
+<span class="k">disp</span> <span class="nf">r</span>(max)  <span class="c1">//maximum</span>
+<span class="k">disp</span> <span class="nf">r</span>(sum) <span class="c1">//sum of all values for age</span>
+
+<span class="k">sum</span> age<span class="k"> if</span> abo<span class="o">==</span><span class="m">1</span> <span class="c1">//summarize age for a subset of data</span>
+<span class="k">return list</span>  <span class="c1">//everything is different; we&#39;re looking at patients with abo==1</span>
+<span class="k">disp</span> <span class="nf">r</span>(N)   <span class="c1">//Now we see a much smaller number of records</span>
+<span class="k">disp</span> <span class="nx">%4.3f</span> <span class="nf">r</span>(mean)  <span class="c1">//mean is different</span>
+<span class="k">disp</span> <span class="nx">%4.3f</span> <span class="nf">r</span>(var)  <span class="c1">//variance is different</span>
+<span class="c1">//etc</span>
+
+<span class="c1">//if we do sum, detail we get more returned data</span>
+<span class="k">return list</span>
+<span class="k">disp</span> <span class="nf">r</span>(skewness)  <span class="c1">//skewness</span>
+<span class="k">disp</span> <span class="nf">r</span>(p50)  <span class="c1">//median</span>
+<span class="k">disp</span> <span class="nf">r</span>(p25)  <span class="c1">//first quartile</span>
+<span class="k">disp</span> <span class="nf">r</span>(p75)  <span class="c1">//third quartile</span>
+
+<span class="c1">//another example of sum, detail, from the slides</span>
+<span class="k">sum</span> bmi, detail
+<span class="k">disp</span> <span class="s">&quot;median: &quot;</span> _col(<span class="m">12</span>) <span class="nf">r</span>(p50)
+<span class="k">disp</span> <span class="s">&quot;IQR: &quot;</span> _col(<span class="m">12</span>) <span class="nf">r</span>(p25) <span class="s">&quot;-&quot;</span> <span class="nf">r</span>(p75)
+<span class="k">disp</span> <span class="s">&quot;kurtosis: &quot;</span> _col(<span class="m">12</span>) <span class="nf">r</span>(kurtosis)
+
+<span class="c1">//more examples of r-class commands. </span>
+<span class="k">count if</span> age <span class="o">&lt;</span> <span class="m">45</span>   <span class="c1">//counts # patients with age &lt; 45</span>
+<span class="k">disp</span> <span class="nf">r</span>(N) <span class="s">&quot; young patients&quot;</span>
+
+<span class="k">tab</span> race abo, chi2   <span class="c1">//2-way table of ethnicity and ABO blood type</span>
+<span class="c1">//with chi-square test</span>
+<span class="k">disp</span> <span class="s">&quot;p-value: &quot;</span> <span class="nf">r</span>(p) <span class="c1">//display p value of chi2 test</span>
+
+<span class="k">sum</span> age
+<span class="k">assert</span> <span class="nf">inrange</span>(<span class="nf">r</span>(mean), <span class="m">45</span>, <span class="m">55</span>) <span class="c1">//assert that mean age is between 40 and 50.</span>
+<span class="c1">//so if mean age is 47, then we keep going. If mean age is 39, then there will</span>
+<span class="c1">//be an error and the script will stop.</span>
+
+<span class="k">tab</span> race abo, chi2
+<span class="k">assert</span> <span class="nf">r</span>(p) <span class="o">&lt;</span> <span class="m">0.05</span> <span class="c1">//check that there is a statistically significant </span>
+<span class="c1">//relationship between race and abo, per chi2 test</span>
+
+<span class="k">sum</span> age
+<span class="k">disp</span> <span class="s">&quot;Mean: &quot;</span> <span class="nf">r</span>(mean) <span class="s">&quot; years&quot;</span>  <span class="c1">//display mean age, in a sentence</span>
+
+<span class="k">sum</span> age
+<span class="k">disp</span> <span class="s">&quot;Mean: &quot;</span> <span class="nx">%4.0f</span> <span class="nf">r</span>(mean) <span class="s">&quot; years&quot;</span> <span class="c1">//dispay, formatted. </span>
+<span class="c1">//output: Mean: 50 years </span>
+<span class="c1">//the &quot;0&quot; of &quot;%4.0f&quot; means &quot;display zero digits after the decimal point&quot;</span>
+<span class="c1">//the &quot;4&quot; doesn&#39;t mean much - it just has to be any number higher than &quot;0&quot;</span>
+<span class="c1">//so %4.2f or %6.2f or %9.2f would display &quot;50.40 years&quot;</span>
+
+<span class="c1">//ereturn</span>
+<span class="k">regress</span> bmi gender age
+<span class="k">ereturn list</span>
+
+<span class="c1">//log likelihood</span>
+<span class="k">disp e</span>(ll)
+
+<span class="k">regress</span> <span class="c1">//&quot;replay&quot; the regression; show results again without re-computing</span>
+
+<span class="c1">//show the betas (regression coefficients)</span>
+<span class="k">disp</span> _b[gender]
+<span class="k">disp</span> _b[age]
+<span class="k">disp</span> _b[_cons]
+
+<span class="c1">//show several betas together</span>
+<span class="k">disp</span> <span class="s">&quot;estimated BMI: &quot;</span> <span class="nx">%3.2f</span> _b[_cons] <span class="s">&quot; + &quot;</span> <span class="nx">%3.2f</span> _b[age] <span class="cs">///</span>
+    <span class="s">&quot;*age (+ &quot;</span> _b[gender] <span class="s">&quot; if male)&quot;</span> 
+
+<span class="c1">//NOTE: for logistic regression, the beta is the *LOG of the odds ratio.</span>
+<span class="c1">//So to see the odds ratio you&#39;d say &quot;disp exp(_b[gender])&quot;</span>
+<span class="c1">//same thing for Cox (exponentiate to obtain hazard ratio), etc.</span>
+
+<span class="c1">//more examples of the exp() function to exponentiate</span>
+<span class="k">disp</span> <span class="nf">exp</span>(<span class="m">0</span>)  <span class="c1">//returns 1</span>
+<span class="k">disp</span> <span class="nf">exp</span>(<span class="m">1</span>)  <span class="c1">//returns 0</span>
+
+<span class="c1">//show the regression results again</span>
+<span class="k">regress</span>
+
+<span class="c1">//standard error matrix</span>
+<span class="k">disp</span> _se[gender]
+<span class="k">disp</span> _se[age]
+
+<span class="c1">//t statistic</span>
+<span class="k">disp</span> _b[gender]<span class="o">/</span>_se[gender]
+<span class="k">disp</span> _b[age]<span class="o">/</span>_se[age]
+
+<span class="c1">//Absolute value of t-statistic:</span>
+<span class="k">disp</span> <span class="nf">abs</span>(_b[gender]<span class="o">/</span>_se[gender]) <span class="c1">//function &quot;abs&quot; returns absolute value</span>
+
+<span class="c1">//a few more examples with &quot;abs&quot;</span>
+<span class="k">disp</span> <span class="nf">abs</span>(<span class="m">5</span>)
+<span class="k">disp</span> <span class="nf">abs</span>(<span class="o">-</span><span class="m">4</span>)
+<span class="k">disp</span> <span class="nf">abs</span>(<span class="m">0</span>)
+
+<span class="c1">//residual degrees of freedom from regression</span>
+<span class="c1">//(necessary for obtaining p value of t statistic)</span>
+<span class="k">disp e</span>(df_r)
+
+<span class="k">regress</span>
+<span class="c1">//p value</span>
+<span class="c1">//returns p value of t statistic abs(beta/se) with e(df_r) degrees of freedom</span>
+<span class="c1">//see &quot;help ttail&quot; for details</span>
+<span class="k">di</span> <span class="m">2</span><span class="o">*</span><span class="nf">ttail</span>(<span class="nf">e</span>(df_r), <span class="nf">abs</span>(_b[gender]<span class="o">/</span>_se[gender]))
+
+<span class="c1">//NOTE: for logistic regression or Cox regression, instead of using a </span>
+<span class="c1">//t statistic you use a Z statistic (normal distribution)</span>
+<span class="c1">//which would be this:</span>
+<span class="c1">//di 2*(1-normal(abs(_b[gender]/_se[gender])))</span>
+
+<span class="k">regress</span>
+<span class="c1">//lower and upper bound of confidence interval</span>
+<span class="k">disp</span> _b[gender] <span class="o">+</span> _se[gender]<span class="o">*</span><span class="nf">invttail</span>(<span class="nf">e</span>(df_r), <span class="m">0.975</span>)
+<span class="k">disp</span> _b[gender] <span class="o">+</span> _se[gender]<span class="o">*</span><span class="nf">invttail</span>(<span class="nf">e</span>(df_r), <span class="m">0.025</span>)
+
+<span class="c1">//NOTE: for logistic, Cox, etc. you would again use the normal distribution,</span>
+<span class="c1">//not the t distribution, to obtain confidence intervals. </span>
+<span class="c1">//And again you would exponentiate to obtain OR/HR etc</span>
+<span class="c1">//example: disp exp(_b[age]+invnormal(0.025)*_se[age]) //lower bound</span>
+<span class="c1">//example: disp exp(_b[age]+invnormal(0.975)*_se[age]) //upper bound</span>
+
+<span class="c1">//Stata 15.1: an easier way to do confidence intervals and p values</span>
+<span class="k">if</span> <span class="nf">c</span>(version) <span class="o">&gt;=</span> <span class="m">15.09</span> {
+<span class="k">    regress</span> bmi age
+<span class="k">    lincom</span> age
+<span class="k">    disp</span> <span class="nf">r</span>(p)
+<span class="k">    disp</span> <span class="nf">r</span>(lb) <span class="s">&quot; - &quot;</span> <span class="nf">r</span>(ub)
+
+<span class="k">    logit</span> rec_work age prev
+<span class="k">    lincom</span> prev
+<span class="k">    disp</span> <span class="nf">r</span>(p)
+    <span class="c1">//the coefficient is the log odds ratio, </span>
+    <span class="c1">//so let&#39;s see the 95% CI of the odds ratio</span>
+<span class="k">    disp</span> <span class="nf">exp</span>(<span class="nf">r</span>(lb)) <span class="s">&quot; - &quot;</span> <span class="nf">exp</span>(<span class="nf">r</span>(ub))
+}
+
+<span class="c1">//creturn examples. This information isn&#39;t as useful as return/ereturn</span>
+<span class="c1">//but it might come in handy</span>
+
+<span class="k">disp</span> <span class="nf">c</span>(current_date)
+<span class="k">disp</span> <span class="nf">c</span>(os)
+<span class="k">disp</span> <span class="nf">c</span>(pi)
+<span class="k">creturn list</span>
+
+<span class="c1">//local macros</span>
+<span class="c1">//there&#39;s also such a thing as a *global* macro </span>
+<span class="c1">//but let&#39;s worry about those later</span>
+<span class="k">local</span> a = <span class="m">4</span>  <span class="c1">//set macro a equal to 4</span>
+<span class="k">disp</span> <span class="nv">`a&#39;</span>   <span class="c1">//display the value of macro a</span>
+
+<span class="k">local</span> a <span class="m">4</span> <span class="c1">//another way to set the value of a macro</span>
+<span class="k">disp</span> <span class="nv">`a&#39;</span>
+
+<span class="k">local</span> a <span class="m">4</span> <span class="o">+</span> <span class="m">7</span>  <span class="c1">//this means, set a equal to &quot;4 + 7&quot;. </span>
+<span class="c1">//At this point, Stata doesn&#39;t actually compute what 4+7 is</span>
+
+<span class="k">disp</span> <span class="nv">`a&#39;</span><span class="o">*</span><span class="m">2</span>  <span class="c1">//becomes &quot;disp 4 + 7*2&quot; which is the same as 4+14 which is 18</span>
+
+<span class="k">local</span> a = <span class="m">4</span> <span class="o">+</span> <span class="m">7</span> <span class="c1">//the equals means, *COMPUTE* 4+7 and set a equal to the answer</span>
+<span class="k">disp</span> <span class="nv">`a&#39;</span><span class="o">*</span><span class="m">2</span>  <span class="c1">//becomes &quot;disp 11*2&quot; which is 22</span>
+
+
+<span class="c1">//another macro example</span>
+<span class="c1">//we want to display the mean age for males, and the mean age for females,</span>
+<span class="c1">//on the same line</span>
+<span class="k">quietly sum</span> age<span class="k"> if</span> gender<span class="o">==</span><span class="m">0</span>
+<span class="k">local</span> age_m = <span class="nf">r</span>(mean)  <span class="c1">//store mean age for males in macro &quot;age_m&quot;</span>
+<span class="k">quietly sum</span> age<span class="k"> if</span> gender<span class="o">==</span><span class="m">1</span>
+<span class="k">local</span> age_f = <span class="nf">r</span>(mean)  <span class="c1">//store mean age for females in macro &quot;age_f&quot;</span>
+<span class="k">disp</span> <span class="s">&quot;Mean age: &quot;</span> <span class="nx">%3.1f</span> <span class="nv">`age_m&#39;</span> <span class="s">&quot; (males) &quot;</span> <span class="nx">%3.1f</span> <span class="nv">`age_f&#39;</span> <span class="s">&quot; (females)&quot;</span>
+<span class="c1">//Note the use of formatting code %3.1f. </span>
+<span class="c1">//one digit to the right of the decimal point will be shown.</span>
+
+<span class="c1">//More macro examples</span>
+<span class="k">local</span> my_var age  <span class="c1">//my_var is a macro which equals &quot;age&quot;</span>
+<span class="k">disp</span> <span class="s">&quot;Here&#39;s a summary of </span><span class="nv">`my_var&#39;</span><span class="s">&quot;</span>  <span class="c1">//displays &quot;Here&#39;s a summary of age&quot;</span>
+<span class="k">sum</span> <span class="nv">`my_var&#39;</span> <span class="c1">//sumarizes age</span>
+
+<span class="k">local</span> my_command<span class="k"> summarize</span>  <span class="c1">//my_command is a macro which equals &quot;summarize&quot;</span>
+<span class="c1">//Stata sees &quot;summarize age, detail&quot;</span>
+<span class="nv">`my_command&#39;</span> <span class="nv">`my_var&#39;</span>, detail
+
+<span class="c1">//here are some additional macros not in the slides.</span>
+<span class="c1">//they are a bit more complex but they show how this macro thing works</span>
+<span class="k">local</span> mymacro<span class="k"> gen</span>
+<span class="k">sum</span> <span class="nv">`mymacro&#39;</span>der  <span class="c1">//Stata sees &quot;sum gender&quot;</span>
+
+<span class="k">local</span> macro1<span class="k"> ma</span>  <span class="c1">//macro1 is &quot;ma&quot;</span>
+<span class="k">local</span> macro2 age gender <span class="c1">//macro2 is &quot;age gender&quot;</span>
+<span class="k">sum</span> <span class="nv">``macro1&#39;cro2&#39;</span> 
+<span class="c1">//first, `macro1&#39; becomes &quot;ma&quot;</span>
+<span class="c1">//so ``macro1&#39;cro2&#39; becomes `macro2&#39;</span>
+<span class="c1">//next, `macro2&#39; becomes &quot;age gender&quot;</span>
+<span class="c1">//so &quot;sum `macro2&#39;&quot; becomes &quot;sum age gender&quot;</span>
+
+<span class="c1">//In this case, in_study defines a subpopulation of age&lt;45 and gender==male</span>
+<span class="c1">//and then we run several commands using this macro</span>
+<span class="c1">//if we later decide to include females instead, </span>
+<span class="c1">//all we have to do is change &quot;gender==0&quot; to &quot;gender==1&quot;</span>
+<span class="c1">//and everything will run on females instead of males</span>
+<span class="k">local</span> in_study<span class="k"> if</span> age<span class="o">&lt;</span><span class="m">45</span> <span class="o">&amp;</span> gender<span class="o">==</span><span class="m">0</span>
+<span class="k">sum</span> bmi <span class="nv">`in_study&#39;</span>
+<span class="k">sum</span> peak_pra <span class="nv">`in_study&#39;</span>
+<span class="k">regress</span> bmi age <span class="nv">`in_study&#39;</span>
+
+<span class="c1">//here, &quot;confounders&quot; refers to a set of three variables</span>
+<span class="c1">//you can imagine that we would do several different analyses </span>
+<span class="c1">//treating these variables the same.</span>
+<span class="c1">//if we change the list of confounders, we just have to change the macro</span>
+<span class="c1">//instead of changing every command</span>
+<span class="k">local</span> confounders age gender peak_pra
+<span class="k">regress</span> bmi wait_yrs <span class="nv">`confounders&#39;</span>
+
+
+<span class="c1">//review: quietly</span>
+<span class="c1">//run a regression. Don&#39;t print any output or error messages</span>
+<span class="k">quietly regress</span> bmi age
+
+<span class="c1">//a &quot;quietly block&quot;: run several commands without printing anything</span>
+<span class="k">quietly</span> {
+<span class="k">    gen</span> over40 = (age <span class="o">&gt;</span> <span class="m">40</span>)
+<span class="k">    count if</span> over40 <span class="o">==</span> <span class="m">1</span>
+<span class="k">    regress</span> bmi over40
+}
+
+<span class="k">drop</span> over40
+<span class="c1">//now, let&#39;s run several commands and only print output from the last one</span>
+<span class="k">quietly</span> {
+<span class="k">    gen</span> over40 = (age <span class="o">&gt;</span> <span class="m">40</span>)
+<span class="k">    sum</span> bmi<span class="k"> if</span> over40 <span class="o">==</span> <span class="m">1</span>
+<span class="k">    noisily di</span> <span class="s">&quot;mean BMI: &quot;</span> <span class="nx">%3.1f</span> <span class="nf">r</span>(mean)
+}
+
+<span class="c1">//which command. Show whether a command is built-in, or a stata .do file</span>
+<span class="k">which tab</span>
+<span class="k">which chelp</span>
+<span class="k">which gen</span>
+<span class="k">which regress</span>
+<span class="k">which help</span>
+<span class="k">which graph</span>
+
+<span class="c1">//define a program &quot;do_something&quot;</span>
+<span class="c1">//first, if the program already exists in memory, delete it</span>
+<span class="c1">//(NOTE: this is superfluous here, since line 9 says &quot;clear all&quot; which deletes</span>
+<span class="c1">//all programs in memory... but it&#39;s a good idea to do &quot;capture program drop&quot;</span>
+<span class="c1">//before any &quot;program define&quot;</span>
+<span class="k">capture program drop</span> do_something
+
+<span class="c1">//now, define the program. All it does is display &quot;It doesn&#39;t do much.&quot;</span>
+<span class="k">program</span> define do_something  <span class="c1">//create a program called do_something</span>
+<span class="k">    disp</span> <span class="s">&quot;It doesn&#39;t do much.&quot;</span>  <span class="c1">//here&#39;s what the program does.</span>
+<span class="k">end</span>  <span class="c1">//that&#39;s the end of the program definition</span>
+
+do_something
+
+<span class="k">capture program drop</span> do_something_else
+<span class="k">program</span> define do_something_else  <span class="c1">//create a program called do_something</span>
+<span class="k">    disp</span> <span class="s">&quot;One line is not enough.&quot;</span>
+<span class="k">    disp</span> <span class="s">&quot;So display two lines.&quot;</span>
+<span class="k">end</span>  <span class="c1">//that&#39;s the end of the program definition</span>
+
+do_something_else
+
+<span class="c1">//now for a program that actually does something useful.</span>
+<span class="c1">//NOTE: this would be more efficient with loops, but those come later</span>
+
+<span class="k">capture program drop</span> table1
+<span class="k">program</span> define table1
+<span class="k">    disp</span> <span class="s">&quot;Variable&quot;</span> _col(<span class="m">20</span>) <span class="s">&quot;mean (SD)&quot;</span> _col(<span class="m">40</span>) <span class="s">&quot;range&quot;</span>
+<span class="k">    quietly sum</span> age
+<span class="k">    disp</span> <span class="s">&quot;age&quot;</span> _col(<span class="m">20</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(mean) <span class="s">&quot; (&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(sd) <span class="s">&quot;)&quot;</span> <span class="cs">///</span>
+            _col(<span class="m">40</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(min) <span class="s">&quot;-&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(max)
+<span class="k">    quietly sum</span> wait_yrs
+<span class="k">    disp</span> <span class="s">&quot;wait_yrs&quot;</span> _col(<span class="m">20</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(mean) <span class="s">&quot; (&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(sd) <span class="s">&quot;)&quot;</span> <span class="cs">///</span>
+            _col(<span class="m">40</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(min) <span class="s">&quot;-&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(max)
+<span class="k">    quietly sum</span> bmi
+<span class="k">    disp</span> <span class="s">&quot;bmi&quot;</span> _col(<span class="m">20</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(mean) <span class="s">&quot; (&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(sd) <span class="s">&quot;)&quot;</span> <span class="cs">///</span>
+            _col(<span class="m">40</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(min) <span class="s">&quot;-&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(max)
+<span class="k">end</span>
+
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+table1
+
+<span class="k">log close</span> _all
+
+<span class="c1">//exit command. Within a .do file, it doesn&#39;t close Stata. It just stops </span>
+<span class="c1">//running the .do file</span>
+<span class="k">exit</span>
+</pre></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abimereki Muzaale
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lecture3do';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jhu-logo.jpeg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/jhu-logo.jpeg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. Overview, commands, syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. Return values, macros, programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flecture3do.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/lecture3do.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">capture log close</span>
+<span class="k">log</span> using lecture3<span class="m">.</span>log,<span class="k"> replace</span> text
+
+<span class="c1">//This log file contains most of the examples used in Lecture 3 of</span>
+<span class="c1">//Stata Programming and Data Management, along with additional explanations</span>
+<span class="c1">//and examples.</span>
+
+<span class="k">version</span> <span class="m">12</span> <span class="c1">//I&#39;m using Stata 15, but some students may have earlier versions</span>
+<span class="k">clear</span> all <span class="c1">//clear all data from memory</span>
+<span class="k">macro drop</span> _all <span class="c1">//clear all macros in memory</span>
+<span class="k">set more</span> off   <span class="c1">//give output all at once (not one screenful at a time)</span>
+<span class="k">set</span> linesize <span class="m">80</span> <span class="c1">//maximum allowed width for output</span>
+
+<span class="k">local</span> p = <span class="m">1</span><span class="o">/</span><span class="m">78</span>
+<span class="k">disp</span> <span class="nx">%3.2f</span> <span class="nv">`p&#39;</span>
+
+<span class="k">local</span> p = <span class="m">1</span><span class="o">/</span><span class="m">7778</span>
+<span class="k">disp</span> <span class="nx">%3.2f</span> <span class="nv">`p&#39;</span>
+
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+
+<span class="c1">//conditional if</span>
+<span class="k">if</span> _N <span class="o">&gt;</span> <span class="m">100</span> {
+<span class="k">    disp</span> <span class="s">&quot;Meh. That&#39;s a big dataset&quot;</span>
+}
+<span class="k">if</span> _N <span class="o">&gt;</span> <span class="m">10000</span> { 
+<span class="k">    disp</span> <span class="s">&quot;That&#39;s a huge dataset&quot;</span>
+}
+<span class="k">else</span> {
+<span class="k">    disp</span> <span class="s">&quot;Bah! Not so big.&quot;</span>
+}
+
+
+
+<span class="k">tab</span> dx gender, chi2
+<span class="k">if</span> <span class="nf">r</span>(p) <span class="o">&lt;</span> <span class="m">0.05</span> {
+<span class="k">    disp</span> <span class="s">&quot;p&lt;0.05&quot;</span>
+}
+<span class="k">else</span> {
+<span class="k">    disp</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(p)
+}
+
+<span class="k">count if</span> <span class="o">!</span><span class="nf">inlist</span>(rec_hcv_antibody, <span class="m">0</span>, <span class="m">1</span>, .)
+<span class="k">if</span> <span class="nf">r</span>(N) <span class="o">==</span> <span class="m">0</span> {
+<span class="k">    logistic</span> rec_hcv_antibody age
+}
+<span class="k">else</span> {
+<span class="k">    disp</span> <span class="s">&quot;Non-binary outcome. &quot;</span> <span class="cs">///</span>
+        <span class="s">&quot;can&#39;t do logistic regression&quot;</span>
+}
+
+<span class="c1">//note the line continuation ( ///) in the previous else-statement. </span>
+<span class="c1">//line continuations can be used to improve readibility of a do-file, but </span>
+<span class="c1">//they should not change functionality.</span>
+<span class="c1">//stata interprets &quot; ///&quot; as if the next line is on the same line</span>
+
+
+<span class="c1">//for loops.</span>
+<span class="k">forvalues</span> i = <span class="m">1</span><span class="o">/</span><span class="m">5</span> {  <span class="c1">//first time: create a macro i, set it equal to 1</span>
+<span class="k">    disp</span> <span class="nv">`i&#39;</span>        <span class="c1">//display macro i</span>
+}                  <span class="c1">//go back to the &quot;forvalues&quot; statement.</span>
+<span class="c1">//the second time, macro i will equal 2 and it will run again.</span>
+<span class="c1">//then it will go back and set i equal to 3 and run again</span>
+<span class="c1">//and then run a fourth time with i equal to 4</span>
+<span class="c1">//finally, it will run one last time with i equal to 5</span>
+<span class="c1">//then it will stop.</span>
+
+<span class="c1">//all the output from a &quot;forvalues&quot; loop is displayed together, because</span>
+<span class="c1">//Stata doesn&#39;t actually start running code in the loop until you type the</span>
+<span class="c1">//closing brace }. So if you have a bunch of &quot;disp&quot; statements and you want</span>
+<span class="c1">//all the display to appear together (instead of separately, after each </span>
+<span class="c1">//&quot;disp&quot; command in your code) you can put it all inside a loop that</span>
+<span class="c1">//only runs once.</span>
+
+<span class="c1">//another example of &quot;forvalues&quot;</span>
+<span class="k">forvalues</span> b = <span class="m">35</span><span class="o">/</span><span class="m">45</span> {
+<span class="k">    quietly count if</span> age<span class="o">&gt;=</span><span class="nv">`b&#39;</span> <span class="o">&amp;</span> age<span class="o">&lt;</span><span class="nv">`b&#39;</span><span class="o">+</span><span class="m">1</span>
+<span class="k">    disp</span> <span class="s">&quot;Age of </span><span class="nv">`b&#39;</span><span class="s">: &quot;</span> <span class="nf">r</span>(N) <span class="s">&quot; patients&quot;</span>
+}
+
+
+<span class="k">foreach</span> v of<span class="k"> varlist</span> age wait_yrs died {
+<span class="k">    if</span> <span class="nf">inlist</span>(<span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span>, <span class="s">&quot;age&quot;</span>,  <span class="s">&quot;wait_yrs&quot;</span>) {
+<span class="k">        quietly sum</span> <span class="nv">`v&#39;</span>
+<span class="k">        disp</span> <span class="s">&quot;Mean </span><span class="nv">`v&#39;</span><span class="s">: &quot;</span> _col(<span class="m">20</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(mean)
+    }
+<span class="k">    else</span> {
+<span class="k">        quietly sum</span> <span class="nv">`v&#39;</span>
+<span class="k">        disp</span> <span class="s">&quot;Percent </span><span class="nv">`v&#39;</span><span class="s">: &quot;</span> _col(<span class="m">20</span>) <span class="nx">%3.2f</span> <span class="m">100</span> <span class="o">*</span> <span class="nf">r</span>(mean) <span class="s">&quot;%&quot;</span>
+    }
+}
+
+<span class="c1">//foreach works like forvalues. Except that forvalues sets the macro</span>
+<span class="c1">//equal to a number which increases each time, and foreach sets the macro</span>
+<span class="c1">//equal to something from a list.</span>
+<span class="c1">//there are actually several varieties of foreach, but a useful one is </span>
+<span class="c1">//foreach... of varlist...</span>
+
+<span class="c1">//first time through the loop, macro v will equal &quot;age&quot;. Second time it will</span>
+<span class="c1">//equal &quot;wait_yrs&quot;. Third time it will equal &quot;died&quot;.</span>
+<span class="k">foreach</span> v of<span class="k"> varlist</span> age wait_yrs died { 
+<span class="k">    quietly sum</span> <span class="nv">`v&#39;</span> <span class="c1">//summarize whatever variable is referred to by &quot;v&quot;</span>
+<span class="k">    disp</span> <span class="s">&quot;Max </span><span class="nv">`v&#39;</span><span class="s">: &quot;</span> _col(<span class="m">10</span>) <span class="nf">r</span>(max) <span class="c1">//display maximum value</span>
+}
+
+
+<span class="c1">//example of foreach.. of varlist with if-statement</span>
+<span class="k">foreach</span> v of<span class="k"> varlist</span> age wait_yrs died {
+<span class="k">    if</span> <span class="nf">inlist</span>(<span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span>, <span class="s">&quot;age&quot;</span>,  <span class="s">&quot;wait_yrs&quot;</span>) {
+<span class="k">        quietly sum</span> <span class="nv">`v&#39;</span>
+<span class="k">        disp</span> <span class="s">&quot;Mean </span><span class="nv">`v&#39;</span><span class="s">: &quot;</span> _col(<span class="m">20</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(mean)
+    }
+<span class="k">    else</span> {
+<span class="k">        quietly sum</span> <span class="nv">`v&#39;</span>
+<span class="k">        disp</span> <span class="s">&quot;Percent </span><span class="nv">`v&#39;</span><span class="s">: &quot;</span> _col(<span class="m">20</span>) <span class="nx">%3.2f</span> <span class="m">100</span> <span class="o">*</span> <span class="nf">r</span>(mean) <span class="s">&quot;%&quot;</span>
+    }
+}
+
+<span class="c1">//table1 program from lecture 2</span>
+<span class="k">capture program drop</span> table1
+<span class="k">program</span> define table1
+<span class="k">    disp</span> <span class="s">&quot;Variable&quot;</span> _col(<span class="m">20</span>) <span class="s">&quot;mean (SD)&quot;</span> _col(<span class="m">40</span>) <span class="s">&quot;range&quot;</span>
+<span class="k">    quietly sum</span> age
+<span class="k">    disp</span> <span class="s">&quot;age&quot;</span> _col(<span class="m">20</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(mean) <span class="s">&quot; (&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(sd) <span class="s">&quot;)&quot;</span> <span class="cs">///</span>
+            _col(<span class="m">40</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(min) <span class="s">&quot;-&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(max)
+<span class="k">    quietly sum</span> wait_yrs
+<span class="k">    disp</span> <span class="s">&quot;wait_yrs&quot;</span> _col(<span class="m">20</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(mean) <span class="s">&quot; (&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(sd) <span class="s">&quot;)&quot;</span> <span class="cs">///</span>
+            _col(<span class="m">40</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(min) <span class="s">&quot;-&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(max)
+<span class="k">    quietly sum</span> bmi
+<span class="k">    disp</span> <span class="s">&quot;bmi&quot;</span> _col(<span class="m">20</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(mean) <span class="s">&quot; (&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(sd) <span class="s">&quot;)&quot;</span> <span class="cs">///</span>
+            _col(<span class="m">40</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(min) <span class="s">&quot;-&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(max)
+<span class="k">end</span>
+
+table1
+table1 age peak_pra
+
+<span class="c1">//add &quot;syntax varlist&quot; to control the list of variables</span>
+<span class="k">capture program drop</span> table1_v
+<span class="k">program</span> define table1_v
+<span class="k">    syntax varlist</span>
+    <span class="c1">//write out a nicely formatted table </span>
+    <span class="c1">//NOTE: could also write out with commas instead of spacing</span>
+    <span class="c1">//which would make it easier to import into Excel</span>
+<span class="k">    disp</span> <span class="s">&quot;Variable&quot;</span> _col(<span class="m">15</span>) <span class="s">&quot;mean(SD)&quot;</span> _col(<span class="m">30</span>) <span class="s">&quot;range&quot;</span>
+<span class="k">    foreach</span> v of<span class="k"> varlist</span> <span class="nv">`varlist&#39;</span> {
+<span class="k">        quietly sum</span> <span class="nv">`v&#39;</span>
+<span class="k">        disp</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="cs">///</span>
+            _col(<span class="m">15</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(mean) <span class="s">&quot;(&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(sd) <span class="s">&quot;)&quot;</span> <span class="cs">///</span>
+            _col(<span class="m">30</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(min) <span class="s">&quot;-&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(max)
+    }
+<span class="k">end</span>
+
+table1_v age wait_yrs rec_wgt_kg 
+
+<span class="c1">//demonstrate behavior of local macros inside programs</span>
+<span class="k">program</span> define varprogram
+<span class="k">    syntax varlist</span>  
+<span class="k">    disp</span> <span class="s">&quot;</span><span class="nv">`varlist&#39;</span><span class="s">&quot;</span>  <span class="c1">//displays the varlist macro</span>
+<span class="k">end</span>
+
+<span class="c1">//syntax varname: exactly one variable</span>
+<span class="k">program</span> define varfavorite
+<span class="k">    syntax</span> varname  
+<span class="k">    disp</span> <span class="s">&quot;My favorite variable is </span><span class="nv">`varlist&#39;</span><span class="s">&quot;</span>  <span class="c1">//displays the varlist macro</span>
+<span class="k">end</span>
+
+varfavorite fake_id
+
+varprogram fake_id
+<span class="k">disp</span> <span class="s">&quot;</span><span class="nv">`varlist&#39;</span><span class="s">&quot;</span>  <span class="c1">//displays nothing. Stata has forgotten the varlist macro</span>
+
+<span class="k">program</span> define macroprog
+<span class="k">    local</span> a=<span class="m">4</span>   <span class="c1">//define local macro a</span>
+<span class="k">    disp</span> <span class="s">&quot;</span><span class="nv">`a&#39;</span><span class="s">        </span><span class="nv">`b&#39;</span><span class="s">&quot;</span>  <span class="c1">//Stata knows macro a, but macro b is empty</span>
+<span class="k">end</span>
+<span class="k">local</span> b=<span class="m">3</span>   <span class="c1">//define local macro b</span>
+macroprog
+<span class="k">disp</span> <span class="s">&quot;</span><span class="nv">`a&#39;</span><span class="s">        </span><span class="nv">`b&#39;</span><span class="s">&quot;</span>  <span class="c1">//Stata knows macro b, but macro a is empty</span>
+
+
+<span class="k">program</span> define varprogram2
+<span class="k">    syntax</span> [varlist]   <span class="c1">//now, &quot;varlist&quot; is optional</span>
+<span class="k">    disp</span> <span class="s">&quot;</span><span class="nv">`varlist&#39;</span><span class="s">&quot;</span>
+<span class="k">end</span>
+
+
+varprogram2 fake_id
+varprogram2 
+
+<span class="k">program</span> define myif
+<span class="k">    syntax</span> [if]  <span class="c1">//accepts an optional &quot;if&quot; statement</span>
+<span class="k">    if</span> <span class="s">&quot;</span><span class="nv">`if&#39;</span><span class="s">&quot;</span> <span class="o">!=</span> <span class="s">&quot;&quot;</span> {  <span class="c1">//if there&#39;s something in the &quot;if&quot; statement...</span>
+<span class="k">        disp</span> <span class="s">&quot;</span><span class="nv">`if&#39;</span><span class="s">&quot;</span>    <span class="c1">//display it</span>
+    }
+<span class="k">    else</span> {
+<span class="k">        disp</span> <span class="s">&quot;No if statement&quot;</span>  <span class="c1">//otherwise, display this message</span>
+    }
+<span class="k">end</span>
+
+
+
+myif  <span class="c1">//displays &quot;no if statement&quot;</span>
+myif<span class="k"> if</span> age <span class="o">&gt;</span> <span class="m">35</span>  <span class="c1">//displays &quot;if age &gt; 35&quot;</span>
+
+<span class="k">capture program drop</span> countif
+<span class="k">program</span> define countif 
+<span class="k">    syntax if</span>
+<span class="k">    quietly count</span> <span class="nv">`if&#39;</span>
+<span class="k">    disp</span> <span class="s">&quot;total count is &quot;</span> <span class="nf">r</span>(N)
+<span class="k">end</span>
+
+
+
+
+<span class="k">capture program drop</span> table1_if
+<span class="k">program</span> define table1_if
+<span class="k">    syntax varlist</span> [if]
+    <span class="c1">//write out a nicely formatted table</span>
+<span class="k">    disp</span> <span class="s">&quot;Variable&quot;</span> _col(<span class="m">12</span>) <span class="s">&quot;mean(SD)&quot;</span> _col(<span class="m">25</span>) <span class="s">&quot;range&quot;</span>
+<span class="k">    foreach</span> v of<span class="k"> varlist</span> <span class="nv">`varlist&#39;</span> {
+<span class="k">        quietly sum</span> <span class="nv">`v&#39;</span> <span class="nv">`if&#39;</span> 
+<span class="k">        disp</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> _col(<span class="m">12</span>) <span class="nx">%3.2f</span> <span class="nf">r</span>(mean) <span class="s">&quot;(&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(sd) <span class="s">&quot;)&quot;</span> _col(<span class="m">25</span>) <span class="cs">///</span>
+            <span class="nx">%3.2f</span> <span class="nf">r</span>(min) <span class="s">&quot;-&quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(max)
+    }
+<span class="k">end</span>
+
+table1_if age peak_pra wait_yrs
+table1_if age peak_pra wait_yrs<span class="k"> if</span> race<span class="o">==</span><span class="m">1</span> <span class="c1">//summarize for only race==1</span>
+
+
+<span class="c1">//non-working program - as an example</span>
+<span class="k">capture program drop</span> tabyear0
+<span class="k">program</span> define tabyear0
+<span class="k">    syntax</span> varname
+<span class="k">    gen</span> year = <span class="nf">year</span>(<span class="nv">`varlist&#39;</span>)
+<span class="k">    tab</span> year
+<span class="k">end</span>
+
+<span class="c1">//here&#39;s how you *should* do it (using a temporary variable)</span>
+<span class="k">capture program drop</span> tabyear
+<span class="k">program</span> define tabyear
+<span class="k">    syntax</span> varname
+<span class="k">    tempvar</span> year  <span class="c1">//create a temporary variable called year</span>
+    <span class="c1">//use backquote-apostrophe to refer to the temporary variable (like a macro)</span>
+    <span class="c1">//NOTE: even if, by some chance, there&#39;s already a variable called &quot;year&quot;,</span>
+    <span class="c1">//this code will still work</span>
+<span class="k">    gen</span> <span class="nv">`year&#39;</span> = <span class="nf">year</span>(<span class="nv">`varlist&#39;</span>)
+<span class="k">    tab</span> <span class="nv">`year&#39;</span>
+    <span class="c1">//the temporary variable disappears automatically when the program is done</span>
+<span class="k">end</span>
+
+tabyear transplant_date
+tabyear end_date
+
+<span class="c1">//an example of what *not* to do when you want to temporarily alter the dataset</span>
+<span class="k">capture program drop</span> savesample0
+<span class="k">program</span> define savesample0
+    <span class="c1">//save random 10% of records</span>
+<span class="k">    sample</span> <span class="m">10</span> <span class="c1">//delete 90% of records!</span>
+<span class="k">    save</span> sample_data,<span class="k"> replace</span>
+<span class="k">end</span>
+
+<span class="c1">//here&#39;s how you should do it</span>
+<span class="k">capture program drop</span> savesample
+<span class="k">program</span> define savesample
+    <span class="c1">//save random 10% of records</span>
+<span class="k">    preserve</span>   <span class="c1">//save a temporary copy of the data</span>
+<span class="k">    sample</span> <span class="m">10</span> <span class="c1">//no worries</span>
+<span class="k">    save</span> sample_data ,<span class="k"> replace</span>
+    <span class="c1">//when the program reaches the end, the temporary copy is reloaded,</span>
+    <span class="c1">//undoing any changes</span>
+<span class="k">end</span>
+
+<span class="k">count</span>
+savesample
+<span class="k">count</span>
+
+<span class="c1">//combining several of the above techniques into a &quot;table1&quot; program</span>
+<span class="k">capture program drop</span> table1_nice
+<span class="k">program</span> define table1_nice
+<span class="k">    syntax varlist</span>  [if] 
+    <span class="c1">//if: specify records to include in analysis (optional)</span>
+    <span class="c1">//replace: overwrite log file if it exists (optional)</span>
+
+<span class="k">    preserve</span>
+<span class="k">    capture quietly keep</span> <span class="nv">`if&#39;</span> <span class="c1">//temporarily drop any records not required</span>
+
+
+<span class="k">    disp</span> <span class="s">&quot;Variable&quot;</span> _col(<span class="m">12</span>) <span class="s">&quot;mean(SD)&quot;</span> _col(<span class="m">25</span>) <span class="s">&quot;range&quot;</span>
+<span class="k">    foreach</span> v of<span class="k"> varlist</span> <span class="nv">`varlist&#39;</span> {
+<span class="k">        quietly sum</span> <span class="nv">`v&#39;</span> <span class="nv">`if&#39;</span>
+<span class="k">        disp</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> _col(<span class="m">12</span>) <span class="nx">%3.1f</span> <span class="nf">r</span>(mean) <span class="s">&quot;(&quot;</span> <span class="nx">%3.1f</span> <span class="nf">r</span>(sd) <span class="s">&quot;)&quot;</span> _col(<span class="m">25</span>) <span class="cs">///</span>
+            <span class="nx">%3.1f</span> <span class="nf">r</span>(min) <span class="s">&quot;-&quot;</span> <span class="nx">%3.1f</span> <span class="nf">r</span>(max)  
+    }
+<span class="k">end</span>
+
+<span class="c1">//run the new program using options and if</span>
+table1_nice age bmi wait_yr<span class="k"> if</span> age<span class="o">&gt;</span><span class="m">40</span> 
+
+
+<span class="c1">//extended macro functions</span>
+<span class="k">local</span> ll: variable<span class="k"> label</span> race
+<span class="k">disp</span> <span class="s">&quot;</span><span class="nv">`ll&#39;</span><span class="s">&quot;</span>   <span class="c1">//display &quot;Patient race&quot;</span>
+
+<span class="k">local</span> ll: variable<span class="k"> label</span> gender
+<span class="k">disp</span> <span class="s">&quot;</span><span class="nv">`ll&#39;</span><span class="s">&quot;</span>   <span class="c1">//nothing</span>
+
+<span class="k">sum</span> wait_yrs
+<span class="k">local</span> m1:<span class="k"> disp</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(mean)
+<span class="k">disp</span> <span class="s">&quot;</span><span class="nv">`m1&#39;</span><span class="s">&quot;</span>
+
+<span class="k">sum</span> wait_yrs
+<span class="k">local</span> m2:<span class="k"> di</span> <span class="s">&quot;Mean: &quot;</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(mean)
+<span class="k">display</span> <span class="s">&quot;</span><span class="nv">`m2&#39;</span><span class="s">&quot;</span>
+
+<span class="c1">//putexcel</span>
+
+<span class="k">version</span> <span class="m">13</span>  <span class="c1">//need Stata 13 or higher to use putexcel</span>
+
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+
+
+<span class="c1">//begin with putexcel set to specify the filename </span>
+putexcel<span class="k"> set</span> lecture3<span class="m">.</span>xlsx
+
+putexcel<span class="k"> set</span> lecture3,replace <span class="c1">//completely overwrites excel file</span>
+
+putexcel<span class="k"> set</span> lecture3,modify <span class="c1">//allows you to keep excel formatting</span>
+putexcel A1=(<span class="s">&quot;Variable&quot;</span>) B1=(<span class="s">&quot;Median (IQR)&quot;</span>) 
+
+<span class="c1">//age bmi peak_pra wait_yrs</span>
+<span class="k">sum</span> age, detail 
+
+<span class="c1">//extended macro for putexcel</span>
+<span class="k">local</span> med_iqr:<span class="k"> disp</span> <span class="nf">r</span>(p50) <span class="s">&quot; (&quot;</span> <span class="nf">r</span>(p25) <span class="s">&quot;-&quot;</span> <span class="nf">r</span>(p75) <span class="s">&quot;)&quot;</span>
+putexcel A2=(<span class="s">&quot;Age at transplant&quot;</span>) B2=(<span class="s">&quot;</span><span class="nv">`med_iqr&#39;</span><span class="s">&quot;</span>) <span class="c1">//can putexcel multiple cells</span>
+
+<span class="c1">//four variables</span>
+
+<span class="k">label var</span> age <span class="s">&quot;Age at transplant&quot;</span>
+<span class="k">label var</span> bmi <span class="s">&quot;BMI&quot;</span>
+<span class="k">label var</span> peak_pra <span class="s">&quot;Peak PRA&quot;</span>
+<span class="k">label var</span> wait_yrs <span class="s">&quot;Years on waitlist&quot;</span>
+
+<span class="k">local</span> row=<span class="m">2</span>
+<span class="k">foreach</span> v of<span class="k"> varlist</span> age bmi peak_pra wait_yrs {
+<span class="k">    sum</span> <span class="nv">`v&#39;</span>, detail
+<span class="k">    local</span> varlabel: variable<span class="k"> label</span> <span class="nv">`v&#39;</span>
+<span class="k">    local</span> med_iqr:<span class="k"> disp</span> <span class="nx">%3.1f</span> <span class="nf">r</span>(p50) <span class="s">&quot; (&quot;</span> <span class="nx">%3.1f</span> <span class="nf">r</span>(p25) <span class="s">&quot;-&quot;</span> <span class="nx">%3.1f</span> <span class="nf">r</span>(p75) <span class="s">&quot;)&quot;</span>
+    putexcel A<span class="nv">`row&#39;</span>=(<span class="s">&quot;</span><span class="nv">`varlabel&#39;</span><span class="s">&quot;</span>) B<span class="nv">`row&#39;</span>=(<span class="s">&quot;</span><span class="nv">`med_iqr&#39;</span><span class="s">&quot;</span>)
+<span class="k">    local</span> row = <span class="nv">`row&#39;</span> <span class="o">+</span> <span class="m">1</span>
+}
+
+<span class="k">log close</span>
+
+<span class="k">exit</span>
+</pre></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abimereki Muzaale
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

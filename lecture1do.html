@@ -1,0 +1,944 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lecture1do';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jhu-logo.jpeg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/jhu-logo.jpeg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. Overview, commands, syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. Return values, macros, programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flecture1do.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/lecture1do.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">capture log close</span> _all
+<span class="k">capture cmdlog close</span>
+<span class="k">log</span> using lecture01<span class="m">.</span>log,<span class="k"> replace</span> text
+
+<span class="c1">//This log file contains most of the examples used in Lecture 1 of</span>
+<span class="c1">//Stata Programming and Data Management, along with additional explanations</span>
+<span class="c1">//and examples.</span>
+
+<span class="k">version</span> <span class="m">12</span> <span class="c1">//I&#39;m using Stata 16, but some students may have earlier versions</span>
+<span class="k">clear</span> all <span class="c1">//clear all data from memory</span>
+<span class="k">macro drop</span> _all <span class="c1">//clear all macros in memory</span>
+<span class="k">set more</span> off   <span class="c1">//give output all at once (not one screenful at a time)</span>
+<span class="k">set</span> linesize <span class="m">80</span> <span class="c1">//maximum allowed width for output</span>
+ 
+<span class="c1">//logging</span>
+<span class="c1">//remember &quot;log using lecture01.txt, replace&quot; above</span>
+<span class="c1">// &quot;, replace&quot; = if the file exists, overwrite it</span>
+
+<span class="c1">//getting help</span>
+<span class="c1">//usually you won&#39;t have this in your .do file</span>
+<span class="c1">//instead you would type &quot;help [command]&quot; interactively</span>
+<span class="c1">//these examples use &quot;chelp&quot; and &quot;man&quot; which displays the help in the Stata</span>
+<span class="c1">//output window instead of popping up a new window</span>
+<span class="k">chelp generate</span>
+<span class="k">man generate</span>
+<span class="k">man</span> legend option <span class="c1">//show help for the legend option</span>
+
+<span class="c1">//some help files are not for a specific command - just general info</span>
+<span class="k">man</span> language 
+
+<span class="c1">//do some stuff</span>
+<span class="k">display</span> <span class="s">&quot;hello everybody&quot;</span>
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">summarize</span> wait_yrs age 
+<span class="k">tab</span> rec_hcv
+<span class="k">regress</span> wait_yrs age rec_hcv
+
+
+<span class="c1">//loading a data file into memory</span>
+<span class="k">use</span> transplants<span class="m">.</span>dta
+
+<span class="c1">//clear the memory before loading the file. NOTE: Stata can only have one</span>
+<span class="c1">//dataset at a time in memory. If you have changed the data since loading</span>
+<span class="c1">//it, then &quot;use transplants.dta&quot; will fail unless you specify the &quot;clear&quot; </span>
+<span class="c1">//option.</span>
+<span class="k">use</span> transplants<span class="m">.</span>dta,<span class="k"> clear</span>
+
+<span class="c1">//load only records from females (gender=1)</span>
+<span class="k">use</span> transplants<span class="k"> if</span> pretx_cmv<span class="o">==</span><span class="m">1</span>
+
+<span class="c1">//load only the first fifty records</span>
+<span class="k">use</span> transplants<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">50</span>
+
+<span class="c1">//load only certain variables</span>
+<span class="k">use</span> age gender rec_hcv_antibody wait_yrs fake_id using transplants
+
+<span class="c1">//more examples.</span>
+<span class="k">use</span> age dx using transplants  <span class="c1">//only age and diagnosis</span>
+<span class="k">use</span> transplants<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">50</span>,<span class="k"> clear</span> <span class="c1">//only the first 50 records</span>
+<span class="k">use</span> transplants<span class="k"> in</span> <span class="m">44</span>  <span class="c1">//only the 44th record</span>
+<span class="k">use</span> transplants<span class="k"> if</span> rec_work<span class="o">==</span><span class="m">1</span> <span class="c1">//only records of patients who work for an income</span>
+<span class="k">use</span> a<span class="o">*</span> p<span class="o">*</span> using transplants<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">100</span> <span class="c1">//all variables that the name starts</span>
+<span class="c1">// with A or P. Only the first 100 rows.</span>
+
+<span class="c1">//load the entire dataset now</span>
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+
+<span class="c1">//describe command</span>
+<span class="k">describe</span> <span class="c1">//describe all the variables</span>
+<span class="k">describe</span>, simple  <span class="c1">//just list all the variable names</span>
+
+<span class="c1">//don&#39;t list variable names. list some summary info about the file</span>
+<span class="k">describe</span>, short   
+
+<span class="k">describe</span> a<span class="o">*</span>   <span class="c1">//only variables that name starts with A</span>
+<span class="k">describe</span> using transplants<span class="m">.</span>dta  <span class="c1">//describe transplants.dta without loading </span>
+<span class="c1">// data into memory</span>
+
+<span class="k">rename</span> age a_very_long_variable_name
+<span class="k">describe</span>  <span class="c1">//note that the long name gets truncated</span>
+
+<span class="k">describe</span>, fullnames <span class="c1">//now the long name can be read</span>
+
+<span class="c1">//here&#39;s an interesting one. Make a dataset of variables!</span>
+<span class="c1">//lists the position order, name, type, and other information</span>
+<span class="k">describe</span>,<span class="k"> replace clear</span>
+
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+
+<span class="k">codebook</span> <span class="c1">//list codebook info: type, mean, range, etc</span>
+<span class="k">codebook</span> rec_education rec_work abo  <span class="c1">//do it for only a few variables</span>
+<span class="k">codebook</span> a<span class="o">*</span><span class="k"> e</span><span class="o">*</span>, compact <span class="c1">//compact format</span>
+<span class="k">codebook</span>, problems   <span class="c1">//ask Stata to identify problems with the dataset</span>
+<span class="c1">//codebook, problems is a good check, but don&#39;t let it substitute for your </span>
+<span class="c1">//judgment</span>
+
+<span class="k">list</span>  <span class="c1">//print all the data in memory</span>
+<span class="k">list</span> prev_ki wait_yrs<span class="k"> if</span> race<span class="o">==</span><span class="m">7</span>  <span class="c1">//list two variables  </span>
+<span class="c1">//(previous KT &amp; time on waitlist) for records that have race variable equal to 7</span>
+
+<span class="k">list</span> <span class="o">*</span>date<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">10</span> <span class="c1">//list all variables that the name ends with &quot;date&quot;. List</span>
+<span class="c1">//only the first ten observations.</span>
+
+<span class="c1">//by default, &quot;list&quot; draws these weird ASCII boxes around the data. Also</span>
+<span class="c1">//it lists a record # for each record. </span>
+<span class="c1">//list, clean&quot; gets rid of the boxes. &quot;list, noobs&quot; gets rid of record #s.</span>
+<span class="k">list</span> dx<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">10</span>, clean noobs
+
+<span class="c1">//usually, before displaying anything, list goes through the data to try</span>
+<span class="c1">//to determine how much width to give each variable for the display.</span>
+<span class="c1">//list, fast skips all that - handy for very large datasets</span>
+<span class="k">list</span> age, fast
+
+<span class="c1">//Count. </span>
+<span class="k">count</span>  <span class="c1">//display a count of all the records in memory</span>
+<span class="k">count if</span> rec_work<span class="o">==</span><span class="m">1</span>   <span class="c1">//display a count of records with &quot;race&quot; equal to 1</span>
+<span class="k">count if</span> rec_work <span class="o">!=</span> <span class="m">1</span>  <span class="c1">//records with race *not* equal to 1</span>
+<span class="k">count if</span> bmi<span class="o">&lt;</span><span class="m">20</span> | bmi <span class="o">&gt;</span> <span class="m">35</span>  <span class="c1">//records with BMI less than 20 or greater than 35</span>
+<span class="k">count if</span> bmi<span class="o">&gt;</span><span class="m">25</span> <span class="o">&amp;</span> bmi <span class="o">&lt;</span> <span class="m">30</span>  <span class="c1">//records with BMI greater than 25 and less than 30</span>
+<span class="k">count if</span> <span class="o">!</span>(age<span class="o">&gt;</span><span class="m">18</span>)    <span class="c1">//count if not (age&gt;18) - records with age 18 and under</span>
+
+<span class="k">count if</span> <span class="nf">inrange</span>(wait_yrs, <span class="m">4</span>, <span class="m">6</span>) <span class="c1">//records w BMI of 20, 25, or anything in between</span>
+<span class="k">count if</span> <span class="o">!</span><span class="nf">inlist</span>(gender, <span class="m">0</span>, <span class="m">1</span>)  <span class="c1">//gender equals either zero or 1</span>
+<span class="k">count if</span> <span class="o">!</span><span class="nf">inlist</span>(age, <span class="m">20</span>, <span class="m">30</span>, <span class="m">40</span>, <span class="m">50</span>)  <span class="c1">//age is 20 or 30 etc</span>
+
+<span class="c1">//Note: this line of code (commented out) does *NOT* work.</span>
+<span class="c1">//you&#39;re not allowed to have a space between &quot;inrange&quot; and the parenthesis.</span>
+<span class="c1">//count if inrange (bmi,20,25) //error!</span>
+
+
+<span class="c1">//Tabulate/tab.</span>
+<span class="k">tab</span> abo  <span class="c1">//1-way frequency table of variable &quot;abo&quot;</span>
+<span class="k">tab</span> abo rec_hcv  <span class="c1">//2-way table of &quot;abo&quot; and &quot;rec_hcv&quot;</span>
+<span class="k">tab</span> rec_hcv,<span class="k"> sum</span>(age) <span class="c1">//display mean, SD and frequency of age, by gender</span>
+<span class="k">tab</span> dx gender<span class="k"> if</span> age<span class="o">&lt;</span><span class="m">40</span> <span class="c1">//2-way table. Only for patients under age 40</span>
+
+<span class="c1">//more examples</span>
+<span class="k">tab</span> dx gender, row <span class="c1">//display row percentages</span>
+<span class="k">tab</span> dx gender, col nofreq <span class="c1">//column percentages. Also, *don&#39;t* display frequency</span>
+<span class="k">tab</span> dx gender, col nofreq chi2 <span class="c1">//add a chi-squared test</span>
+
+<span class="c1">//summarize/sum</span>
+
+<span class="k">sum</span> <span class="c1">//summarize all variables</span>
+<span class="k">sum</span> age wait_yrs  <span class="c1">//summarize only two variables</span>
+<span class="k">sum</span> age wait_yrs, detail <span class="c1">//give more detailed summary</span>
+
+<span class="c1">//missingness.</span>
+<span class="c1">//if data is not available for a record - maybe it wasn&#39;t obtained, maybe </span>
+<span class="c1">//it was recorded improperly, whatever - a variable can be set to a</span>
+<span class="c1">// *missing value* for that record.</span>
+<span class="c1">//one weird quirk of Stata is that a missing value is considered greater</span>
+<span class="c1">//than any finite number value.</span>
+
+<span class="k">count if</span> bmi <span class="o">&gt;</span> <span class="m">30</span>  <span class="c1">//so this is &quot;BMI &gt; 30, or missing BMI&quot;</span>
+<span class="k">count if</span> bmi <span class="o">&gt;</span> <span class="m">1000</span> <span class="c1">//this is &quot;BMI &gt; 1000, or missing&quot;</span>
+<span class="k">tab</span> bmi<span class="k"> if</span> bmi <span class="o">&gt;</span> <span class="m">1000</span>  <span class="c1">// *tab* command does not display missing values</span>
+<span class="k">tab</span> bmi<span class="k"> if</span> bmi <span class="o">&gt;</span> <span class="m">1000</span>, missing  <span class="c1">//Now tab displays missing values</span>
+<span class="k">count if</span> bmi <span class="o">==</span> .  <span class="c1">//the dot represents a missing value.</span>
+<span class="c1">//however, you have to be careful because there are actually several different</span>
+<span class="c1">//missing values. All of these are valid missing values: </span>
+<span class="c1">//    .    .a   .b    .c   .d                etc.</span>
+<span class="c1">//maybe you could set .a to mean &quot;missing, patient was not asked&quot;</span>
+<span class="c1">//.b could mean &quot;missing, patient did not know&quot;</span>
+<span class="c1">//.c could mean &quot;missing, data has not been entered yet&quot;</span>
+<span class="c1">//etc.</span>
+
+<span class="k">count if</span> bmi <span class="o">==</span> .a    <span class="c1">//checking for a different missing value</span>
+<span class="k">count if</span> <span class="nf">missing</span>(bmi)  <span class="c1">//this one counts _all_ missing values</span>
+
+<span class="c1">//generate / gen.</span>
+<span class="c1">//create new variable age_lastyear. Calculate it as current age minus 1</span>
+<span class="k">gen</span> age_lastyear=age<span class="m">-1</span> 
+
+<span class="c1">//create new variable any_college. Set to 1 if rec_education &gt;= 3, 0 otherwise</span>
+<span class="k">gen</span> any_college=(rec_educ<span class="o">&gt;=</span><span class="m">3</span>)
+
+
+<span class="c1">//create new variable youngman. Set to 1 if age&lt;40 and gender is 0;</span>
+<span class="c1">//otherwise set to 0 </span>
+<span class="k">gen</span> youngman=(age<span class="o">&lt;</span><span class="m">40</span>)<span class="o">&amp;</span>(gender<span class="o">==</span><span class="m">0</span>)
+
+<span class="c1">//more examples</span>
+<span class="k">gen</span> byte thin=(bmi<span class="o">&lt;</span><span class="m">22</span>) <span class="c1">//1 if BMI &lt; 22, 0 otherwise</span>
+
+<span class="c1">//if patient is female, age_f is the same as age. Otherwise it&#39;s missing</span>
+<span class="k">gen</span> age_f = age<span class="k"> if</span> gender<span class="o">==</span><span class="m">1</span>
+
+<span class="c1">//one way to make a spline. &quot;age&gt;40&quot; evaluates to 1 for patients over </span>
+<span class="c1">//age 40 and zero for everyone else. So for patients who are, say, 37,</span>
+<span class="c1">//this evaluates to 0*-3 which is zero. For patients who are age 59,</span>
+<span class="c1">//it evaluates to 1*(59-40) = 1*19 = 19.</span>
+<span class="k">gen</span> age_spline=(age<span class="o">&gt;</span><span class="m">40</span>)<span class="o">*</span>(age<span class="m">-40</span>)
+
+<span class="c1">//_n</span>
+<span class="k">gen</span> new_id = _n  <span class="c1">//new_id = current record number</span>
+<span class="k">gen</span> total_records = _N  <span class="c1">//total_records = count of records in the dataset</span>
+<span class="c1">//(same for all patients)</span>
+
+<span class="c1">//ranges from near zero for first record, to 1 for the last record</span>
+<span class="k">gen</span> percentile = <span class="m">100</span><span class="o">*</span>_n<span class="o">/</span>_N 
+
+
+<span class="c1">//sort and gsort. They are the same, except that with sort you can only</span>
+<span class="c1">//sort an ascending order (e.g. A-Z or 1-10) whereas gsort allows you to </span>
+<span class="c1">//sort in either ascending or *descending* order (e.g. Z-A or 10-1)</span>
+
+<span class="k">sort</span> age <span class="c1">//sort on age</span>
+<span class="k">sort</span> age dx <span class="c1">//sort first on age, then diagnosis</span>
+
+<span class="c1">//reverse sort on age, then gender, then reverse sort on ethnicity category</span>
+<span class="k">gsort</span> <span class="o">-</span>age dx <span class="o">-</span>race 
+
+
+<span class="c1">//drop most variables from the database. Keep only age, gender, BMI, </span>
+<span class="c1">//fake_id, and any variable whose name starts with e</span>
+<span class="k">keep</span> age gender bmi fake_id<span class="k"> e</span><span class="o">*</span>
+
+<span class="k">drop</span> end_date <span class="c1">//get rid of variable end_date</span>
+
+<span class="c1">//reload original dataset</span>
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+
+<span class="c1">//using &quot;keep&quot; and &quot;drop&quot; to drop records instead of variables</span>
+<span class="k">keep in</span> <span class="m">1</span><span class="o">/</span><span class="m">100</span>  <span class="c1">//keep only the first 100 records</span>
+<span class="k">drop if</span> wait_yrs <span class="o">&lt;</span> <span class="m">1</span>  <span class="c1">//drop everyone who was on waitlist for less than 1 year</span>
+<span class="k">keep if</span> prev_ki<span class="o">==</span><span class="m">1</span>  <span class="c1">//keep only those with previous kidney transplant</span>
+<span class="k">drop if</span> age<span class="o">&lt;</span><span class="m">18</span> <span class="o">&amp;</span> abo<span class="o">==</span><span class="m">2</span> <span class="c1">//drop people age&lt;18 with blood type B</span>
+
+<span class="c1">//reload original dataset</span>
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+
+<span class="c1">//replace: change the value of a variable</span>
+<span class="k">replace</span> prev=<span class="m">0</span>  <span class="c1">//prev now equals zero for all records</span>
+<span class="k">replace</span> wait_yrs=<span class="m">5</span><span class="k"> if</span> wait_yrs<span class="o">&gt;</span><span class="m">5</span>  <span class="c1">//wait_years now equals 5 if it was &gt; 5</span>
+<span class="k">replace</span> gender=gender<span class="m">+1</span>  <span class="c1">//gender was 0 or 1; now it&#39;s 1 or 2</span>
+
+<span class="c1">//change BMI to missing if it&#39;s out of range</span>
+<span class="k">replace</span> bmi = .<span class="k"> if</span> <span class="o">!</span><span class="nf">inrange</span>(bmi, <span class="m">18</span>,<span class="m">40</span>) 
+
+<span class="c1">//rename: rename a variable. Pretty straightforward</span>
+<span class="k">rename</span> age age_at_transplant
+<span class="k">rename</span> gender female
+
+<span class="c1">//reverse the above &quot;rename&quot;</span>
+<span class="k">rename</span> female gender 
+
+<span class="c1">//recode</span>
+<span class="k">recode</span> rec_education (<span class="m">3</span> <span class="m">4</span> <span class="m">5</span> = <span class="m">9</span>) <span class="c1">//any record with rec_education of 3, 4, or 5 changes to 9</span>
+
+<span class="k">recode</span> dx (<span class="m">1</span>=<span class="m">1</span>) (<span class="m">2</span>=<span class="m">2</span>) (<span class="o">*</span>=<span class="m">9</span>) <span class="c1">//any dx value other than 1 or 2 gets changed to 9</span>
+
+<span class="c1">//create new variable male. Any record that has gender=0, male=1 and vice versa</span>
+<span class="k">recode</span> gender (<span class="m">0</span>=<span class="m">1</span>) (<span class="m">1</span>=<span class="m">0</span>),<span class="k"> gen</span>(male)
+
+
+
+
+<span class="c1">//erase data in memory</span>
+<span class="k">clear</span>
+
+<span class="c1">//reload</span>
+<span class="k">use</span> transplants
+
+<span class="c1">//leaving &quot;save newfile&quot; commented out. Will cause an error if &quot;newfile&quot; exists</span>
+<span class="c1">//save newfile</span>
+
+<span class="c1">//overwrite &quot;newfile&quot; if it exists</span>
+<span class="k">save</span> newfile,<span class="k"> replace</span>
+
+<span class="k">save</span>,<span class="k"> replace</span> <span class="c1">//overwrite the current filename. Usually, you don&#39;t want to</span>
+<span class="c1">//do this in a .do file. You should keep the old file that was the source for</span>
+<span class="c1">//your data manipulation.</span>
+
+<span class="c1">//if you have Stata 11 or 12, save in Stata 10 format</span>
+
+<span class="c1">//commented out because it may not work if you&#39;re running Stata 10</span>
+<span class="c1">//saveold transplants_stata10</span>
+
+
+<span class="c1">//insheet.</span>
+<span class="c1">//these are all commented out because I didn&#39;t actually create all these</span>
+<span class="c1">//text files.</span>
+<span class="cm">/*</span>
+
+<span class="cm">import delimited textfile.txt</span>
+<span class="cm">import delimited text2.txt, clear</span>
+<span class="cm">import delimited text3.txt, delim(&quot; &quot;)</span>
+<span class="cm">import delimited text4.txt, delim(tab)</span>
+<span class="cm">import delimited text5.txt, varnames(1)</span>
+<span class="cm">import delimited text6.txt, varnames(nonames)</span>
+
+<span class="cm">import delimited using textfile.txt //pull in data from a text file.</span>
+<span class="cm">//Stata tries to make a reasonable guess as to what character is the</span>
+<span class="cm">// *delimiter* separating columns within a row.</span>
+
+<span class="cm">//import, but clear the memory first. If there&#39;s unsaved data in memory, and </span>
+<span class="cm">//you run import delimited, you&#39;ll get an error</span>
+<span class="cm">import delimited using text2.txt, clear</span>
+
+<span class="cm">//tell Stata that the delimiter is a comma</span>
+<span class="cm">import delimited using text3.txt, delimiter(&quot;,&quot;)</span>
+
+<span class="cm">//tell Stata the delimiter is a tab</span>
+<span class="cm">import delimited using text4.txt, delimiter(tab) </span>
+
+<span class="cm">import delimited using text5.txt, delimiter (&quot; &quot;)  //delimiter is a space</span>
+
+<span class="cm">//first row contains variable names, not data</span>
+<span class="cm">import delimited using text5.txt, varnames(1)</span>
+
+<span class="cm">//first row contains data, not variable names</span>
+<span class="cm">import delimited using text5.txt, nonames</span>
+
+<span class="cm">//here are other commands for importing data.</span>
+<span class="cm">//we won&#39;t go over these in detail; see the help file for each command,</span>
+<span class="cm">//, or type &quot;help import&quot;</span>
+<span class="cm">infile</span>
+<span class="cm">infix</span>
+<span class="cm">import excel using file.xlsx</span>
+<span class="cm">import sasxport using file.sas7bdat</span>
+<span class="cm">import odbc</span>
+<span class="cm">*/</span>
+
+<span class="c1">//display / disp</span>
+<span class="k">display</span> <span class="s">&quot;hi there&quot;</span>  <span class="c1">//print &quot;hi there&quot;</span>
+<span class="k">disp</span> <span class="m">4+7</span>  <span class="c1">//print &quot;11&quot;</span>
+<span class="k">sum</span> wait_yrs  <span class="c1">//summarize age</span>
+
+<span class="cm">/* </span>
+<span class="cm">print this:</span>
+<span class="cm">variable            mean</span>
+<span class="cm">*/</span>
+<span class="k">disp</span> <span class="s">&quot;Variable&quot;</span> _col(<span class="m">20</span>) <span class="s">&quot;mean&quot;</span> 
+
+<span class="cm">/*</span>
+<span class="cm">print this:</span>
+<span class="cm">Wait time          [mean wait_yrs obtained from &quot;sum&quot; command above]</span>
+<span class="cm">*/</span>
+<span class="k">disp</span> <span class="s">&quot;Wait time&quot;</span> _col(<span class="m">20</span>) <span class="nf">r</span>(mean)
+
+<span class="c1">//capture. Run a command, but if there&#39;s an error, don&#39;t display the error</span>
+
+<span class="k">capture sum</span> nonexistent_variable <span class="c1">//no output, since this variable does not exist</span>
+<span class="k">capture disp</span> <span class="m">4+3</span>   <span class="c1">//displays 7</span>
+<span class="k">capture disp</span> <span class="m">4</span><span class="o">+</span>    <span class="c1">//no output, since there would be an error</span>
+
+<span class="c1">//assert</span>
+<span class="c1">//if all ages are &lt; 100, nothing happens. If any age is &gt;= 100, Stata gives</span>
+<span class="c1">//an error and halts the script</span>
+<span class="k">assert</span> age <span class="o">&lt;</span> <span class="m">100</span><span class="k"> if</span> <span class="o">!</span><span class="nf">missing</span>(age)
+<span class="c1">//assert age &lt; 50  //commented out. However, if we ran this, we&#39;d get an error</span>
+<span class="k">assert</span> end_date <span class="o">&gt;=</span> transplant_date
+<span class="k">assert</span> <span class="nf">inlist</span>(gender, <span class="m">0</span>, <span class="m">1</span>)
+
+<span class="c1">//also commented out.</span>
+<span class="c1">//either one of these statements is useful. Since what&#39;s being asserted is </span>
+<span class="c1">//false, then the script will halt here if we uncomment one of these lines.</span>
+<span class="c1">//assert 2 &lt; 1</span>
+<span class="c1">//assert 0</span>
+
+<span class="c1">//quietly</span>
+<span class="c1">//run a command, but suppress output</span>
+<span class="k">quietly sum</span> wait_yrs  <span class="c1">//silently computes summary for wait_yrs</span>
+<span class="k">disp</span> <span class="s">&quot;Mean wait time: &quot;</span> <span class="nf">r</span>(mean)  <span class="c1">//we can display mean wait time calculated by &quot;sum wait_yrs&quot;</span>
+
+<span class="c1">//using &quot;quietly&quot; on several commands at once. Suppress all output.</span>
+<span class="k">quietly</span> {
+<span class="k">    sum</span> bmi
+<span class="k">    replace</span> bmi = .<span class="k"> if</span> bmi <span class="o">&gt;</span> <span class="nf">r</span>(mean)<span class="o">*</span><span class="m">3</span>
+}
+
+<span class="c1">//Comments</span>
+<span class="k">sum</span> age   <span class="c1">//here are my comments explaining what this command does</span>
+
+<span class="cm">/*</span>
+<span class="cm">Here is a multiline comment</span>
+<span class="cm">See? It&#39;s still a comment</span>
+<span class="cm">*/</span>
+
+<span class="k">sum</span> age, detail <span class="cm">/*multiline comments can just be on one line */</span>
+
+<span class="cm">* If the asterisk is the first character, the line is a comment</span>
+
+<span class="c1">//line continuation</span>
+<span class="c1">// type /// and two lines are run as a single command</span>
+<span class="k">describe</span> age rec_hcv pretx_cmv <span class="cs">///</span>
+    don_ecd
+
+
+<span class="k">recode</span> race <span class="cs">///</span>
+    (<span class="m">1</span>=<span class="m">1</span>) <span class="cs">///</span>
+    (<span class="m">2</span>=<span class="m">2</span>) <span class="cs">///</span>
+    (<span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="m">9</span> = <span class="m">9</span>)
+
+<span class="c1">//labels</span>
+<span class="k">describe</span> dx <span class="c1">//user has no idea what variable &quot;dx&quot; means</span>
+<span class="k">label var</span> dx <span class="s">&quot;kidney disease diagnosis&quot;</span> <span class="c1">//assign a label to the variable</span>
+<span class="k">describe</span> dx  <span class="c1">//now we can see the description</span>
+
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="c1">//making value labels.</span>
+
+
+<span class="k">tab</span> gender <span class="c1">//output is confusing; is &quot;1&quot; male or female?</span>
+
+<span class="k">label</span> define g_label <span class="m">0</span> <span class="s">&quot;0=Male&quot;</span> <span class="cs">///</span>
+    <span class="m">1</span> <span class="s">&quot;1=Female&quot;</span> 
+
+<span class="c1">//tell Stata to label values for variable &quot;race&quot; with label &quot;eth_label&quot;</span>
+<span class="k">label</span> values gender g_label
+<span class="c1">//NOTE: the data for &quot;race&quot; does not change, just the display</span>
+
+<span class="k">tab</span> gender <span class="c1">//much better</span>
+<span class="k">tab</span> gender, nolabel <span class="c1">//don&#39;t show label</span>
+
+<span class="c1">//recode+labels</span>
+<span class="k">recode</span> race (<span class="m">1</span>=<span class="m">0</span> <span class="s">&quot;Cauc&quot;</span>) <span class="cs">///</span>
+            (<span class="m">2</span>=<span class="m">1</span> <span class="s">&quot;AA&quot;</span>) <span class="cs">///</span>
+            (<span class="m">4</span>=<span class="m">2</span> <span class="s">&quot;Hisp/Latino&quot;</span>) <span class="cs">///</span>
+            (<span class="m">5</span><span class="o">/</span><span class="m">9</span>=<span class="m">3</span> <span class="s">&quot;Other&quot;</span>), <span class="cs">/// Discuss this with Sam</span>
+<span class="k">            gen</span>(race_cat)
+<span class="k">tab</span> race_cat
+
+<span class="c1">//preserve and restore</span>
+<span class="k">sum</span> age <span class="c1">//mean = 50 years</span>
+<span class="k">preserve</span> <span class="c1">//like setting a bookmark</span>
+<span class="k">drop if</span> age <span class="o">&lt;</span> <span class="m">50</span>
+<span class="k">sum</span> age <span class="c1">//mean = 61 years</span>
+<span class="k">restore</span> <span class="c1">//it&#39;s as if everything after the line &quot;preserve&quot; didn&#39;t happen</span>
+<span class="k">sum</span> age <span class="c1">//mean = 50 years</span>
+
+<span class="k">log close</span> _all
+
+<span class="c1">//exit command. Within a .do file, it doesn&#39;t close Stata. It just stops </span>
+<span class="c1">//running the .do file</span>
+<span class="k">exit</span>
+
+<span class="k">sum</span> age
+So you see, the <span class="s">&quot;sum age&quot;</span> command won&#39;t get<span class="k"> run</span>, since it&#39;s after <span class="s">&quot;exit&quot;</span>
+Also, what I&#39;m typing here isn&#39;t commented<span class="k"> out</span>, but since it comes after <span class="s">&quot;exit&quot;</span>,
+Stata doesn&#39;t process it
+</pre></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abimereki Muzaale
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

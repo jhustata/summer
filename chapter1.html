@@ -1,0 +1,995 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1. Overview, commands, syntax &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter1';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Return values, macros, programs" href="chapter2.html" />
+    <link rel="prev" title="Preface" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jhu-logo.jpeg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/jhu-logo.jpeg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Overview, commands, syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. Return values, macros, programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1. Overview, commands, syntax</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">1.1 Overview 🦀</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command">1.2 Command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">1.3 Syntax</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="overview-commands-syntax">
+<h1>1. Overview, commands, syntax<a class="headerlink" href="#overview-commands-syntax" title="Permalink to this heading">#</a></h1>
+<p>Please respond to the brief <code class="docutils literal notranslate"><span class="pre">entry</span> <span class="pre">survey</span></code> that helps us better understand what your needs might be on day one. I’ll launch it  on <a class="reference external" href="https://jhjhm.zoom.us/j/98481767907">zoom</a> for both the in-person and virtual attendees. The questions are listed here for your convenience. An identical <code class="docutils literal notranslate"><span class="pre">exit</span> <span class="pre">survey</span></code> will be launched on Friday to get a sense of what we’ve achieved over the five-day period.</p>
+<ol class="arabic simple">
+<li><p>How will you use Stata from 06/19/2023-06/23/2023?</p>
+<ul class="simple">
+<li><p>Locally on my laptop</p></li>
+<li><p>Remotely on another desktop or terminal</p></li>
+</ul>
+</li>
+<li><p>What operating system will you use locally or remotely?</p>
+<ul class="simple">
+<li><p>MacOSX</p></li>
+<li><p>Unix</p></li>
+<li><p>Windows</p></li>
+</ul>
+</li>
+<li><p>Do you have any experience using Stata, SAS, R, Python, or any other statistical software?</p>
+<ol class="arabic simple" start="0">
+<li><p><strong>No Experience.</strong> I have no prior experience with Stata and am unfamiliar with the software. Also, I have no experience with other statistical software such as SAS, R, Python, etc.</p></li>
+<li><p><strong>Basic Knowledge.</strong> I have a general understanding of basic commands but I require asistance to perform tasks.</p></li>
+<li><p><strong>Novice User.</strong> I am familiar with basic commands and can import data and do basic data cleaning. But I require guidance for more complex analyses.</p></li>
+<li><p><strong>Competent User.</strong> I am proficient in using Stata, SAS, R, Python, etc. for data exploration, descriptive statistics, basic inference (t-tests, chi-square tests), and regression</p></li>
+<li><p><strong>Advanced User.</strong> I can do multivariable regression and understand various statistical modeling options and techniques available in Stata, SAS, R, etc.</p></li>
+<li><p><strong>Expert User.</strong> I can write custom programs, macros, ado-files in Stata. Or I am an expert user of SAS, R, Python, etc. but have little to no experience with Stata.</p></li>
+</ol>
+</li>
+</ol>
+<section id="overview">
+<h2>1.1 Overview 🦀<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p><em>Ceci n’est pas une crabe</em></p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1">#import numpy as np</span>
+<span class="c1">#import sklearn as skl</span>
+<span class="c1"># </span>
+
+<span class="c1">#plt.figure(figsize=[2, 2])</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">550</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">550</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">960</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;syntax&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">950</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;ado&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">550</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">550</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;dta&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1900</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;excel&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;word&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;publish&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">950</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span> <span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">,</span><span class="s2">&quot;ado&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;syntax&quot;</span><span class="p">,</span> <span class="s2">&quot;do&quot;</span><span class="p">)])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;ado&quot;</span><span class="p">,</span> <span class="s2">&quot;command&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="s2">&quot;queue&quot;</span><span class="p">)</span> <span class="p">])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;excel&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;word&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;html&quot;</span><span class="p">)])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;dta&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;log&quot;</span><span class="p">)])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;dta&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;log&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;word&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">)])</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> 
+        <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">),</span> 
+        <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+        <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> 
+        <span class="n">node_size</span> <span class="o">=</span> <span class="mi">4500</span><span class="p">,</span>
+        <span class="n">node_color</span> <span class="o">=</span> <span class="s2">&quot;lightblue&quot;</span><span class="p">,</span>
+        <span class="n">linewidths</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">collections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s2">&quot;#000000&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/33bbe53bb3c153b21c1bc1d1faa8f4f131dc950a7156c514a9fa2ac5a52984c7.png" src="_images/33bbe53bb3c153b21c1bc1d1faa8f4f131dc950a7156c514a9fa2ac5a52984c7.png" />
+</div>
+</div>
+<p>We are going to distinguish between two fundamental perspectives in this class:</p>
+<ul class="simple">
+<li><p>System</p>
+<ul>
+<li><p>Native (stata application, support files, <code class="docutils literal notranslate"><span class="pre">.ado</span></code> files)</p>
+<ul>
+<li><p>If you type <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">help</span></code> into your command window you get something like: <code class="docutils literal notranslate"><span class="pre">/Applications/Stata/ado/base/h/help.ado</span></code></p></li>
+</ul>
+</li>
+<li><p>Third-party (typically <code class="docutils literal notranslate"><span class="pre">.ado</span></code> files)</p>
+<ul>
+<li><p>When I type <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">table1_afecdvi</span></code> I get <code class="docutils literal notranslate"><span class="pre">/Applications/Stata/ado/base/t/table1_afecdvi.ado</span></code></p></li>
+</ul>
+</li>
+<li><p>Your <code class="docutils literal notranslate"><span class="pre">.ado</span></code> files (you’ll learn to write &amp; install your own programs)</p>
+<ul>
+<li><p>Since you don’t have <code class="docutils literal notranslate"><span class="pre">table1_afecdvi.ado</span></code> installed you’ll get <code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">table1_afecdv</span> <span class="pre">not</span> <span class="pre">found</span> <span class="pre">as</span> <span class="pre">either</span> <span class="pre">built-in</span> <span class="pre">or</span> <span class="pre">ado-file</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>User</p>
+<ul>
+<li><p>Known</p>
+<ul>
+<li><p>Instructor</p></li>
+<li><p>Teaching assistants</p></li>
+<li><p>Students</p></li>
+<li><p>Collaborators</p></li>
+</ul>
+</li>
+<li><p>Unknown</p>
+<ul>
+<li><p>Anticipate (emphathize with different kinds of users)</p></li>
+<li><p>Share code (on GitHub, for instance)</p></li>
+<li><p>Care (user-friendly, annotated code)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">system</span></code> is the <u>Stata application</u> and its a simple noun. It is not <strike>STATA</strike>, which gives the impression of being an acronym. I presume you’ve all installed Stata onto your local machines. If not I presume you’ll be doing so very soon or you will be remotely accessing it. The <code class="docutils literal notranslate"><span class="pre">user</span></code> includes you, me, the teaching assistants, collaborators, or strangers.</p>
+<p>As a user, you will or have already downloaded and installed a system of programs, mostly ado-files, which form the foundation of all the commands you will be using in Stata. These are the <strong>native</strong> Stata system files.</p>
+<p>But soon you will begin to write your own Stata programs or <code class="docutils literal notranslate"><span class="pre">.ado</span></code> files and install them into the system folders (as I’ve done with <code class="docutils literal notranslate"><span class="pre">table1_afecdvi.ado</span></code>). Then, it will be helpful to think of your role as part of the system. In your new role as system, it will be helpful to anticipate the needs of the known and unknown future users of your program. This will call for <strong>empathy</strong> (anticipating user needs), <strong>sharing</strong> (your code with others), and <strong>caring</strong> (that its user-friendly).</p>
+<ul class="simple">
+<li><p>Installation</p>
+<ul>
+<li><p>Local</p>
+<ul>
+<li><p>MacOSX</p></li>
+<li><p>Unix</p></li>
+<li><p>Windows</p></li>
+</ul>
+</li>
+<li><p>Remote</p>
+<ul>
+<li><p>Desktop</p>
+<ul>
+<li><p>Windows</p></li>
+</ul>
+</li>
+<li><p>Cluster</p>
+<ul>
+<li><p>Unix/Terminal</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Local</p>
+<ul>
+<li><p><a class="reference external" href="https://www.stata.com/manuals13/gsw2.pdf#gsw2TheStatauserinterface">Menu</a></p>
+<ul>
+<li><p>file</p></li>
+<li><p>edit</p></li>
+<li><p>view</p></li>
+<li><p>data</p></li>
+<li><p>graphics</p></li>
+<li><p>statistics</p></li>
+<li><p>user</p></li>
+<li><p>window</p>
+<ul>
+<li><p>command ⌘ 1</p></li>
+<li><p>results ⌘ 2</p></li>
+<li><p>history ⌘ 3</p></li>
+<li><p>variables ⌘ 4</p></li>
+<li><p>properties ⌘ 5</p></li>
+<li><p>graph ⌘ 6</p></li>
+<li><p>viewer ⌘ 7</p></li>
+<li><p>editor ⌘ 8</p></li>
+<li><p>do-file ⌘ 9</p></li>
+<li><p>manager ⌘ 10</p></li>
+</ul>
+</li>
+<li><p>help</p></li>
+</ul>
+</li>
+<li><p>Command</p>
+<ul>
+<li><p>The very first <code class="docutils literal notranslate"><span class="pre">valid</span></code> word you type into the command window or on a line of code in a do file</p></li>
+<li><p>Rendered blue in color if its a <u>native</u> Stata command (on my machine)</p></li>
+<li><p>A <u>third-party</u> program/command appears white and may not work if you share your do file with others</p></li>
+<li><p>Your collaborators, TAs, and instructors must be warned about the need to first install such third-party programs</p></li>
+</ul>
+</li>
+<li><p>Syntax</p>
+<ul>
+<li><p>The arrangement of words after a Stata command</p></li>
+<li><p>Create well-formed instructions in Stata (i.e., the syntax of Stata)</p></li>
+<li><p>Other terms or synonyms include code, Stata code, code snippet.</p></li>
+</ul>
+</li>
+<li><p>Input</p>
+<ul>
+<li><p>Menu (<strong>see above:</strong> a menu-driven task outputs command and syntax in the results window)</p></li>
+<li><p>do files (Stata script with a sequence of commands; you can copy &amp; paste some from the results window)</p></li>
+<li><p>ado files (Stata script with a program or a series of programs for specific or general tasks)</p></li>
+</ul>
+</li>
+<li><p>Output/Results</p>
+<ul>
+<li><p>String</p>
+<ul>
+<li><p>text (e.g., <code class="docutils literal notranslate"><span class="pre">str49</span></code> below = string of 49 characters <u>including spaces</u>)</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">median</span> <span class="pre">age</span> <span class="pre">in</span> <span class="pre">this</span> <span class="pre">population</span> <span class="pre">is</span> <span class="pre">40</span> <span class="pre">years</span> <span class="pre">old</span></code></p></li>
+</ul>
+</li>
+<li><p>url</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">https://www.stata-press.com/data/r8</span></code></p></li>
+</ul>
+</li>
+<li><p>filepath</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">/users/d/desktop</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Numeric (types by range)</p>
+<ul>
+<li><p>integer</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">byte</span></code>: <span class="math notranslate nohighlight">\(-127\)</span> to <span class="math notranslate nohighlight">\(100\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: <span class="math notranslate nohighlight">\(-32767\)</span> to <span class="math notranslate nohighlight">\(32740\)</span></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">long</span></code>: <span class="math notranslate nohighlight">\(\pm   2\)</span> billion</p></li>
+</ul>
+</li>
+<li><p>decimal</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span></code>: <span class="math notranslate nohighlight">\(\pm   10^{38}\)</span> billion</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">double</span></code>: <span class="math notranslate nohighlight">\(\pm   10^{307}\)</span> billion</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1">#plt.figure(figsize=[2, 2])</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">960</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;numeric&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="o">-</span><span class="mi">250</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">250</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;filepath&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">250</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;long&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="o">-</span><span class="mi">960</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;int&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1400</span><span class="p">,</span> <span class="o">-</span><span class="mi">960</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;byte&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3500</span><span class="p">,</span> <span class="o">-</span><span class="mi">960</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;float&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2400</span><span class="p">,</span> <span class="o">-</span><span class="mi">960</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;double&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4500</span><span class="p">,</span> <span class="o">-</span><span class="mi">960</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span> <span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;string&quot;</span><span class="p">)])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;text&quot;</span><span class="p">),(</span><span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">)</span> <span class="p">,(</span><span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;filepath&quot;</span><span class="p">)])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;numeric&quot;</span><span class="p">,</span><span class="s2">&quot;byte&quot;</span><span class="p">),(</span><span class="s2">&quot;numeric&quot;</span><span class="p">,</span><span class="s2">&quot;float&quot;</span><span class="p">),(</span><span class="s2">&quot;numeric&quot;</span><span class="p">,</span><span class="s2">&quot;double&quot;</span><span class="p">),(</span><span class="s2">&quot;numeric&quot;</span><span class="p">,</span><span class="s2">&quot;int&quot;</span><span class="p">)])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;numeric&quot;</span><span class="p">,</span><span class="s2">&quot;long&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;numeric&quot;</span><span class="p">)])</span>
+
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> 
+        <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">),</span> 
+        <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+        <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> 
+        <span class="n">node_size</span> <span class="o">=</span> <span class="mi">4500</span><span class="p">,</span>
+        <span class="n">node_color</span> <span class="o">=</span> <span class="s2">&quot;lightblue&quot;</span><span class="p">,</span>
+        <span class="n">linewidths</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">collections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s2">&quot;#000000&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/01ffaa33d89dff7ad66ea9b318e0512dca7085e29c740e64c15bbea38f55e5ef.png" src="_images/01ffaa33d89dff7ad66ea9b318e0512dca7085e29c740e64c15bbea38f55e5ef.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Embed</p>
+<ul>
+<li><p>Results window</p></li>
+<li><p>Graph</p></li>
+<li><p>File: excel, log, dta, word, <a class="reference internal" href="dyndoc.html"><span class="std std-doc">html</span></a>, etc.</p></li>
+</ul>
+</li>
+<li><p>Publish/<a class="reference external" href="https://en.wikipedia.org/wiki/Markup_language">Markup</a></p>
+<ul>
+<li><p>Self (e.g., GitHub)</p></li>
+<li><p>Journal (e.g. JAMA)</p></li>
+<li><p>Commercial (e.g. Pfizer Ad)</p></li>
+</ul>
+</li>
+</ul>
+<p>Let’s use a simple example to illustrate some of the terms we’ve introduced:</p>
+<ul class="simple">
+<li><p>Menu</p>
+<ul>
+<li><p>file &gt; example datasets &gt; lifeexp.dta &gt; use</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sysuse</span> <span class="pre">lifeexp.dta</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">webuse</span> <span class="pre">lifeexp.dta</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">https://www.stata-press.com/data/r8/lifeexp.dta</span></code></p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>do file</p>
+<ul>
+<li><p>Importing data</p></li>
+<li><p>Exploring data</p></li>
+<li><p>Analyzing data</p></li>
+<li><p>Outputing results</p></li>
+</ul>
+</li>
+<li><p>ado file</p>
+<ul>
+<li><p>basis of Stata commands</p></li>
+</ul>
+</li>
+<li><p>etc.</p></li>
+</ul>
+</section>
+<section id="command">
+<h2>1.2 Command<a class="headerlink" href="#command" title="Permalink to this heading">#</a></h2>
+<p>Let’s instruct Stata to import some data:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">webuse</span> lifeexp,<span class="k"> clear</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> webuse</span> lifeexp,<span class="k"> clear</span>
+(Life expectancy, <span class="m">1998</span>)
+
+. 
+</pre></div>
+</div>
+<p>The results window has some output informing us that we’ve imported Life expectancy data from 1998. Now let’s explore these imported data:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">display</span> <span class="nf">c</span>(N) 
+<span class="k">display</span> <span class="nf">c</span>(k)
+<span class="k">describe</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> display</span> <span class="nf">c</span>(N) 
+<span class="m">68</span>
+
+.<span class="k"> display</span> <span class="nf">c</span>(k)
+<span class="m">6</span>
+
+.<span class="k"> describe</span> 
+
+Contains data from https:<span class="o">//</span>www<span class="m">.</span>stata<span class="o">-</span>press<span class="m">.</span>com<span class="o">/</span>data<span class="o">/</span>r18<span class="o">/</span>lifeexp<span class="m">.</span>dta
+Observations:            <span class="m">68</span>                  Life expectancy, <span class="m">1998</span>
+Variables:                <span class="m">6</span>                  <span class="m">26</span> Mar <span class="m">2022</span> <span class="m">09</span>:<span class="m">40</span>
+(_dta has<span class="k"> notes</span>)
+		
+Variable      Storage   Display    Value
+name           <span class="k"> type</span>   <span class="k"> format</span>    <span class="k"> label</span>      Variable<span class="k"> label</span>
+		
+region          byte    <span class="nx">%16.0g</span>     region     Region
+country         str28   <span class="nx">%28s</span>                  Country
+popgrowth       float   <span class="nx">%9.0g</span>               <span class="o">*</span> Avg. annual % growth
+lexp            byte    <span class="nx">%9.0g</span>               <span class="o">*</span> Life expectancy at birth
+gnppc           float   <span class="nx">%9.0g</span>               <span class="o">*</span> GNP per capita
+safewater       byte    <span class="nx">%9.0g</span>               <span class="o">*</span> Safe water
+<span class="c1">* indicated variables have	notes</span>
+		
+Sorted<span class="k"> by</span>: 
+
+. 
+</pre></div>
+</div>
+<p>By now you should be quick to point out that <code class="docutils literal notranslate"><span class="pre">display</span></code> is a command. To better understand what this command does, you can type <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">display</span></code> in the command window. If you do so, you’ll learn the following:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>[P]<span class="k"> display</span>	<span class="o">--</span>	Display strings and values of<span class="k"> scalar</span> expressions
+			(View complete PDF manual entry)
+</pre></div>
+</div>
+<p>We’ve already discussed (see <strong>output</strong> above) <u>string</u> and <u>numeric</u> values as the two types of output we will be dealing with in Stata. So the <code class="docutils literal notranslate"><span class="pre">display</span></code> command displays, as it were, these <strong>values</strong> based on the specific syntax you provide</p>
+<p>Output values will typically have two properties:</p>
+<ul class="simple">
+<li><p>Name (e.g. <code class="docutils literal notranslate"><span class="pre">c(N)</span></code> and <code class="docutils literal notranslate"><span class="pre">c(k)</span></code>)</p></li>
+<li><p>Content (i.e., number of observations and number of variables)</p></li>
+</ul>
+<p>Such values as we will learn tomorrow are called <u>macros</u>. In this given example, these are system-defined macros. And as you might have already guessed, there are also user-defined macros. More on this tomorrow!</p>
+<p>For now, let’s perform a basic analysis on our imported data to learn a little more about syntax and output:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">webuse</span> lifeexp,<span class="k"> clear</span> 
+<span class="k">encode</span> country,<span class="k"> gen</span>(Country)
+<span class="k">twoway scatter</span> lexp Country, xscale(off)
+<span class="k">graph</span> export lexp_bycountry<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> webuse</span> lifeexp,<span class="k"> clear</span> 
+(Life expectancy, <span class="m">1998</span>)
+
+.<span class="k"> encode</span> country,<span class="k"> gen</span>(Country)
+
+.<span class="k"> twoway scatter</span> lexp Country, xscale(off)
+
+.<span class="k"> graph</span> export lexp_bycountry<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Desktop<span class="o">/</span>lexp_bycountry<span class="m">.</span>png saved<span class="k"> as</span> PNG<span class="k"> format</span>
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/lexp_bycountry.png" /></p>
+</section>
+<section id="syntax">
+<h2>1.3 Syntax<a class="headerlink" href="#syntax" title="Permalink to this heading">#</a></h2>
+<p>A few commands are useful on their own:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">chelp</span>
+<span class="k">pwd</span>
+</pre></div>
+</div>
+<p>To name but a few. But the vast majority of commands will only work in context of the appropriate syntax. In this example below, the command <code class="docutils literal notranslate"><span class="pre">clear</span></code> is useful on its own. But <code class="docutils literal notranslate"><span class="pre">set</span></code> only becomes useful with additional syntax. Here we have <code class="docutils literal notranslate"><span class="pre">obs</span> <span class="pre">1000</span></code>, instructing Stata to create an empty dataset with 1000 observations. The command <code class="docutils literal notranslate"><span class="pre">generate</span></code> with syntax <code class="docutils literal notranslate"><span class="pre">bmi=rnormal(28,5)</span></code> then instructs Stata to create a new variable <code class="docutils literal notranslate"><span class="pre">bmi</span></code> in a simulation of a random sampling process with replacement, 1000 times over, from a population with mean bmi of 28 and standard deviation of 5. Stata is then instructed to create a histogram of these simulated bmi sample and save the figure as a .PNG image. Hopefully this clarifies what a Stata command is and what syntax is. Together these make up Stata code.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k"> clear</span> 
+<span class="k"> set</span> obs <span class="m">1000</span>
+<span class="k"> generate</span> bmi=<span class="nf">rnormal</span>(<span class="m">28</span>,<span class="m">5</span>)
+<span class="k"> histogram</span> bmi, normal
+<span class="k"> graph</span> export bmi<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>. <span class="k"> clear</span> 
+
+. <span class="k"> set</span> obs <span class="m">1000</span>
+Number of observations (_N) was <span class="m">0</span>, now <span class="m">1</span>,<span class="m">000</span>.
+
+. <span class="k"> generate</span> bmi=<span class="nf">rnormal</span>(<span class="m">28</span>,<span class="m">5</span>)
+
+. <span class="k"> histogram</span> bmi, normal
+(bin=<span class="m">29</span>, start=<span class="m">13.457429</span>, width=.<span class="m">99248317</span>)
+
+. <span class="k"> graph</span> export bmi<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Desktop<span class="o">/</span>bmi<span class="m">.</span>png saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/bmi.png" /></p>
+<p>In the above example the very first <code class="docutils literal notranslate"><span class="pre">valid</span></code> word is a command and is rendered blue on my machine but purple in this book. If you type any random word that has no corresponding ado-file, you’ll get an error message. Notice also that since its not a native Stata command, it appears black (or white), but not purple.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>myfirstprogram
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>. myfirstprogram
+command myfirstprogram is unrecognized
+<span class="nf">r</span>(<span class="m">199</span>);
+
+. 
+</pre></div>
+</div>
+<p>The words that come after the command might be further commands or subcommands. If so, they’ll also be rendered blue on my machine. The ones that appear in white or black (dark or light mode) are either third-party programs/commands or they are part of the Stata syntax. By the end of tomorrow you’ll be writing your first program (which becomes a Stata command). And by Wednesday you’ll be adding requirements for syntax, which introduces <u>user-defined</u> input.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Preface</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chapter2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2. Return values, macros, programs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">1.1 Overview 🦀</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#command">1.2 Command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax">1.3 Syntax</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abimereki Muzaale
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

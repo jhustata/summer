@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lecture5do';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jhu-logo.jpeg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/jhu-logo.jpeg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. Overview, commands, syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. Return values, macros, programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flecture5do.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/lecture5do.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">clear</span> all
+<span class="k">capture log close</span>
+<span class="k">log</span> using lecture5,<span class="k"> replace</span> text
+
+<span class="c1">//commands corresponding to lecture 5 of the Summer Epi Stata class</span>
+
+<span class="k">set more</span> off
+
+
+<span class="c1">//histograms</span>
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+
+
+<span class="c1">//basic histogram (density histogram)</span>
+<span class="k">hist</span> bmi
+
+<span class="c1">//specify that each bar of the histogram covers an interval of two units</span>
+<span class="k">hist</span> bmi, width(<span class="m">2</span>)
+
+<span class="c1">//specify age interval of two years, and start the graph at age 0</span>
+<span class="k">hist</span> bmi, width(<span class="m">2</span>) start(<span class="m">0</span>)
+
+<span class="c1">//specify that we want ten bars</span>
+<span class="k">hist</span> bmi, bin(<span class="m">10</span>)
+
+<span class="c1">//specify that we want a *fraction* histogram (height of 0.1=10% of all values)</span>
+<span class="k">hist</span> rec_wgt_kg, fraction width(<span class="m">2</span>)
+
+<span class="k">hist</span> rec_wgt_kg, fraction width(<span class="m">10</span>)
+
+<span class="c1">//a *percent* histogram (height of 10 = 10% of all values)</span>
+<span class="k">hist</span> rec_wgt_kg, percent width(<span class="m">2</span>)
+<span class="k">hist</span> rec_wgt_kg, percent width(<span class="m">10</span>)
+
+<span class="c1">//a *frequency* histogram (height = # of records represented by one bar)</span>
+<span class="k">hist</span> rec_wgt_kg, freq width(<span class="m">2</span>)
+<span class="k">hist</span> rec_wgt_kg, freq width(<span class="m">10</span>)
+
+<span class="c1">//illustrating hist, discrete discrete</span>
+<span class="k">hist</span> dx <span class="c1">//each bar is &lt; 1 diagnosis - histogram looks weird</span>
+<span class="k">hist</span> dx, discrete <span class="c1">//1 bar per diagnosis</span>
+
+
+
+<span class="c1">//scatter plots</span>
+<span class="k">use</span> donors,<span class="k"> clear</span>
+<span class="k">graph twoway scatter</span> don_wgt don_hgt
+
+<span class="c1">//abbreviation</span>
+<span class="k">twoway scatter</span> don_wgt don_hgt
+<span class="k">tw sc</span> don_wgt don_hgt
+
+
+<span class="c1">//line plots</span>
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">bys</span> age:<span class="k"> egen</span> mean_ecd =<span class="k"> mean</span>(don_ecd)
+<span class="k">egen</span> age_tag = tag(age)
+	
+<span class="c1">//just need one observation for each age</span>
+<span class="k">graph twoway line</span> mean_ecd age<span class="k"> if</span> age_tag<span class="o">==</span><span class="m">1</span>
+
+<span class="c1">//The following code makes the dataset tx_yr.dta</span>
+<span class="c1">//remove the comment braces to run the code and create tx_yr.dta</span>
+
+<span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">gen</span> int yr = <span class="nf">year</span>(transplant_date)
+<span class="k">gen</span> byte<span class="k"> n</span>=<span class="m">1</span>
+<span class="k">rename</span> gender female
+<span class="k">rename</span> don_ecd ecd
+<span class="k">gen</span> over70 = (age<span class="o">&gt;</span><span class="m">70</span>)
+<span class="k">gen</span> unknown_disease  = dx<span class="o">==</span><span class="m">9</span>
+<span class="k">gen</span> hypertensive = dx<span class="o">==</span><span class="m">4</span>
+<span class="k">gen</span> diabetes = dx<span class="o">==</span><span class="m">2</span>
+<span class="k">gen</span> not_working = <span class="nf">cond</span>(rec_work <span class="o">==</span> <span class="m">0</span>,<span class="m">1</span>,<span class="m">0</span>)
+<span class="k">collapse</span> (sum) not_working<span class="k"> n</span> hypertensive unknown_disease diabetes ecd female rec_hcv_antibody over70 ,<span class="k"> by</span>(yr)
+<span class="k">gen</span> int male=n<span class="o">-</span>female
+<span class="k">gen</span> int scd =<span class="k"> n</span><span class="o">-</span>ecd
+<span class="k">gen total</span>=<span class="k"> n</span> 
+<span class="k">lab var total</span> <span class="s">&quot;Total Num. of Recipients&quot;</span>
+<span class="k">lab var</span> not_working <span class="s">&quot;Num. Unemployed Recipients&quot;</span>
+<span class="k">lab var</span> yr <span class="s">&quot;Transplant Year&quot;</span>
+<span class="k">lab var</span> rec_hcv <span class="s">&quot;Number HCV+ Recipients&quot;</span>
+<span class="k">lab var</span> over70 <span class="s">&quot;Number Recips. Over 70 Years Old&quot;</span> 
+<span class="k">save</span> tx_yr,<span class="k"> replace</span>
+
+<span class="k">use</span> tx_yr<span class="m">.</span>dta,<span class="k"> clear</span>
+<span class="k">desc</span>
+
+<span class="c1">//show various kinds of graph in their simplest form</span>
+<span class="k">graph twoway line n</span> yr  <span class="c1">//line graph</span>
+<span class="k">graph twoway</span> connected<span class="k"> n</span> yr  <span class="c1">//connected graph</span>
+<span class="k">graph twoway</span> area<span class="k"> n</span> yr  <span class="c1">//area graph</span>
+<span class="k">graph twoway</span> bar<span class="k"> n</span> yr  <span class="c1">//bar graph</span>
+<span class="k">graph twoway scatter</span> ecd scd  <span class="c1">//scatter plot</span>
+<span class="k">graph twoway</span> function y=x<span class="o">^</span><span class="m">2+2</span>  <span class="c1">//function</span>
+
+<span class="c1">//range() option for function</span>
+<span class="k">graph twoway</span> function y=x<span class="o">^</span><span class="m">2+2</span>,<span class="k"> range</span> (<span class="m">1</span> <span class="m">10</span>)  <span class="c1">//function</span>
+<span class="k">graph twoway</span> function y=x<span class="o">^</span><span class="m">2+2</span>,<span class="k"> range</span>(yr)
+
+<span class="c1">//graphing more than one Y variable</span>
+<span class="k">graph twoway line</span> ecd scd yr
+<span class="k">graph twoway line n</span> ecd scd yr
+<span class="k">graph twoway</span> area ecd scd yr <span class="c1">//ecd area is hidden by scd area</span>
+<span class="k">graph twoway</span> area scd ecd yr <span class="c1">//now ecd area shows, since it&#39;s drawn second</span>
+<span class="k">graph twoway</span> bar  scd ecd yr 
+
+<span class="c1">//overlaying several plots</span>
+<span class="k">graph twoway line n</span> yr || connected male female yr
+
+<span class="c1">//another way of writing the same thing, using /// to continue the same</span>
+<span class="c1">//command on two lines</span>
+<span class="k">graph twoway line n</span> yr || <span class="cs">///</span>
+    connected male female yr
+
+<span class="c1">//overlay observed data with linear regression fit</span>
+<span class="k">regress n</span> yr
+<span class="k">graph twoway line n</span> yr <span class="cs">///</span>
+  || function y=_b[_cons]<span class="o">+</span>_b[yr]<span class="o">*</span>x,<span class="k"> range</span>(yr)
+
+
+<span class="c1">//illustrate that you can combine lots of plots in one graph</span>
+<span class="k">graph twoway line</span> female yr <span class="cs">///</span>
+  ||<span class="k"> line</span> male yr <span class="cs">///</span>
+  ||<span class="k"> line</span> scd yr <span class="cs">///</span>
+  ||<span class="k"> line</span> ecd yr <span class="cs">///</span>
+  ||<span class="k"> line n</span> yr
+
+<span class="c1">//of course, you could make the same graph with</span>
+<span class="c1">//graph twoway line female male scd ecd n yr</span>
+
+<span class="c1">//xscale/yscale</span>
+<span class="k">graph twoway line n</span> yr, yscale(range(<span class="m">0</span>)) <span class="c1">//range of Y axis includes zero</span>
+<span class="k">graph twoway line n</span> yr, yscale(range(<span class="m">0</span> <span class="m">400</span>)) <span class="c1">//Y axis range includes 0 and 400</span>
+
+<span class="c1">//specify ranges for both X and Y axes</span>
+<span class="k">graph twoway line n</span> yr, xscale(range(<span class="m">2018</span>)) 
+
+<span class="k">graph twoway line</span> female yr, yscale(log) <span class="c1">//write Y axis on a log scale</span>
+<span class="k">graph twoway line</span> female yr, xscale(reverse) <span class="c1">//reverse the X axis - mirror image</span>
+<span class="k">graph twoway line</span> female yr, xscale(off) yscale(off) <span class="c1">//suppress axes entirely</span>
+
+<span class="c1">//combining several scale options</span>
+<span class="c1">//this graph doesn&#39;t look great. For the variables that we&#39;re using for this</span>
+<span class="c1">//exercise, the default Stata axes look pretty good. But this illustrates</span>
+<span class="c1">//that you can combine as many scale options as you want.</span>
+<span class="k">graph twoway line</span> ecd yr, xscale(off) yscale(log<span class="k"> range</span>(<span class="m">1</span>) reverse)
+
+<span class="c1">//graph label options</span>
+<span class="c1">//Pick &quot;approximately four&quot; nice values based on axis range</span>
+<span class="k">graph twoway line n</span> yr, yscale(range(<span class="m">0</span>)) ylabel(#<span class="m">4</span>)
+
+<span class="c1">//label minimum and maximum values</span>
+<span class="k">graph twoway line n</span> yr, yscale(range(<span class="m">0</span>)) ylabel(minmax)
+
+<span class="c1">//start at 0, and go in increments of 10 up to 110</span>
+<span class="k">graph twoway line n</span> yr, yscale(range(<span class="m">0</span>)) ylabel(<span class="m">0</span>(<span class="m">50</span>)<span class="m">250</span>)
+
+<span class="c1">//add &quot;ticks&quot; (small vertical line) every unlabeled year in X axis</span>
+<span class="k">graph twoway line n</span> yr, yscale(range(<span class="m">0</span>)) ylabel(<span class="m">0</span>(<span class="m">50</span>)<span class="m">250</span>) xtick(<span class="m">2006</span>(<span class="m">1</span>)<span class="m">2015</span>)
+
+<span class="c1">//axis titles</span>
+<span class="c1">//DDKT = deceased donor kidney transplant</span>
+<span class="k">graph twoway line n</span> yr, xtitle(<span class="s">&quot;Calendar year&quot;</span>) ytitle(<span class="s">&quot;DDKT&quot;</span>) ylabel(<span class="m">0</span>(<span class="m">50</span>)<span class="m">250</span>)
+
+
+<span class="c1">//graph titles</span>
+<span class="k">graph twoway line n</span> yr, title(<span class="s">&quot;Transplants per year&quot;</span>) ylabel(<span class="m">0</span>(<span class="m">50</span>)<span class="m">250</span>)
+
+<span class="c1">//title and subtitle</span>
+<span class="k">graph twoway line n</span> yr, title(<span class="s">&quot;Transplants per year&quot;</span>) ylabel(<span class="m">0</span>(<span class="m">50</span>)<span class="m">250</span>) <span class="cs">///</span>
+    subtitle(<span class="s">&quot;2006-2015&quot;</span>) 
+
+<span class="c1">//note and caption options</span>
+<span class="k">graph twoway line n</span> yr, title(<span class="s">&quot;title&quot;</span>) subtitle(<span class="s">&quot;subtitle&quot;</span>) <span class="cs">///</span>
+<span class="k">  note</span>(<span class="s">&quot;note&quot;</span>) caption(<span class="s">&quot;caption&quot;</span>)
+  
+  
+<span class="c1">//legend options</span>
+<span class="c1">//put the legend inside the graph</span>
+<span class="k">graph twoway line</span> male female yr, legend(ring(<span class="m">0</span>)) 
+
+<span class="c1">//put the legend inside the graph, in upper-left corner (&quot;eleven o&#39;clock&quot;)</span>
+<span class="k">graph twoway line</span> male female yr, legend(ring(<span class="m">0</span>) pos(<span class="m">11</span>)) 
+
+<span class="c1">//put the legend inside the graph, in lower-right corner (&quot;five o&#39;clock&quot;)</span>
+<span class="k">graph twoway line</span> male female yr, legend(ring(<span class="m">0</span>) pos(<span class="m">5</span>)) 
+
+<span class="c1">//put the legend at 5:00 - change Y range so it fits</span>
+<span class="k">graph twoway line</span> male female yr, legend(ring(<span class="m">0</span>) pos(<span class="m">5</span>)) yscale(range(<span class="m">0</span>))
+
+<span class="c1">//put the different legend &quot;keys&quot; in one column</span>
+<span class="k">graph twoway line</span> male female yr, legend(ring(<span class="m">0</span>) pos(<span class="m">5</span>) cols(<span class="m">1</span>)) 
+
+<span class="c1">//change the order of the &quot;keys&quot;</span>
+<span class="c1">//in this case, you just could do &quot;twoway line female male yr&quot;</span>
+<span class="c1">//but order() is really handy when you have complicated graphs containing</span>
+<span class="c1">//multiple types of plot</span>
+<span class="k">graph twoway line</span> male female yr, legend(ring(<span class="m">0</span>) pos(<span class="m">5</span>) <span class="k"> order</span>(<span class="m">2</span> <span class="m">1</span>)) 
+<span class="k">graph twoway line</span> male female yr, legend(ring(<span class="m">0</span>) pos(<span class="m">5</span>) cols(<span class="m">1</span>)<span class="k"> order</span>(<span class="m">2</span> <span class="m">1</span>)) 
+
+<span class="c1">//print the legend for males but not females</span>
+<span class="c1">// (&quot;order&quot;) suppresses legend for anything that&#39;s not included)</span>
+<span class="k">graph twoway line</span> male female yr, legend(ring(<span class="m">0</span>) pos(<span class="m">5</span>) cols(<span class="m">1</span>)<span class="k"> order</span>(<span class="m">1</span>)) 
+
+<span class="c1">//legend labels</span>
+<span class="k">graph twoway line</span> male female yr, <span class="cs">///</span>
+    legend(ring(<span class="m">0</span>) pos(<span class="m">5</span>) cols(<span class="m">1</span>)<span class="k"> label</span>(<span class="m">1</span> <span class="s">&quot;Men&quot;</span>)<span class="k"> label</span>(<span class="m">2</span> <span class="s">&quot;Women&quot;</span>))
+
+<span class="c1">//force legend to print (when it normally wouldn&#39;t)</span>
+<span class="k">graph twoway line n</span> yr, legend(on)
+
+<span class="c1">//force legend *NOT* to print (when it normally would)</span>
+<span class="k">graph twoway line</span> male female yr, legend(off)
+
+<span class="c1">//line options</span>
+<span class="k">twoway line n</span> yr, xline(<span class="m">2007</span>)
+<span class="k">twoway line n</span> yr, yline(<span class="m">200</span>)
+
+<span class="c1">//text option</span>
+<span class="c1">//add the text &quot;policy change&quot; at y=300 x=2007 on the graph</span>
+<span class="k">twoway line n</span> yr, xline(<span class="m">2007</span>) text(<span class="m">200</span> <span class="m">2007</span> <span class="s">&quot;Policy change&quot;</span>)
+
+<span class="k">twoway line n</span> yr, ylabel(<span class="m">0</span>(<span class="m">50</span>)<span class="m">250</span>) text(<span class="m">225</span> <span class="m">2014</span> <span class="s">&quot;Local peak in 2014&quot;</span>)
+
+<span class="c1">//twoway line options</span>
+<span class="c1">//sort</span>
+<span class="c1">//first, we have to *UN*sort</span>
+
+<span class="k">sort n</span>
+<span class="k">list</span>, clean noobs
+
+<span class="c1">//display unsorted graph</span>
+<span class="k">twoway line n</span> yr, ylabel(<span class="m">0</span>(<span class="m">100</span>)<span class="m">400</span>)
+
+<span class="c1">//now display the graph with the line drawn properly</span>
+<span class="k">twoway line n</span> yr, ylabel(<span class="m">0</span>(<span class="m">100</span>)<span class="m">400</span>)<span class="k"> sort</span> 
+
+<span class="c1">//options for drawing the line: line color</span>
+<span class="k">twoway line</span>  scd ecd yr, lcolor(green yellow) ylabel(<span class="m">0</span>(<span class="m">50</span>)<span class="m">200</span>)<span class="k"> sort</span>
+
+<span class="c1">//line thickness</span>
+<span class="k">twoway line</span> scd ecd  yr, lwidth(thick thick)<span class="k"> sort</span>
+<span class="c1">//valid thicknesses are:</span>
+<span class="c1">//vvthin vthin thin medthin medium medthick thick vthick vvthick vvvthick </span>
+
+
+<span class="c1">//line pattern</span>
+<span class="k">twoway line</span> scd ecd yr, lpattern(solid dash)<span class="k"> sort</span>
+<span class="c1">//valid patterns are:</span>
+<span class="c1">//solid dash dot dash_dot shortdash shortdash_dot longdash longdash_dot blank </span>
+
+<span class="c1">//scatter plot options</span>
+<span class="k">use</span> transplants<span class="m">.</span>dta,<span class="k"> clear</span>
+<span class="k">keep if</span> peak_pra <span class="o">&lt;=</span> <span class="m">10</span>
+<span class="k">graph twoway scatter</span> peak_pra age
+
+<span class="c1">//add jitter (random noise)</span>
+<span class="k">graph twoway scatter</span> peak_pra age, jitter(<span class="m">2</span>)
+
+<span class="k">graph twoway scatter</span> bmi age<span class="k"> if</span> gender<span class="o">==</span><span class="m">0</span>, mcolor(orange) <span class="cs">///</span>
+ ||<span class="k"> scatter</span> bmi age<span class="k"> if</span> gender<span class="o">==</span><span class="m">1</span>, mcolor(black)
+
+<span class="c1">//marker symbol</span>
+<span class="k">graph twoway scatter</span> bmi age<span class="k"> if</span> gender<span class="o">==</span><span class="m">0</span>, msymbol(D) <span class="cs">///</span>
+    ||<span class="k"> scatter</span> bmi age<span class="k"> if</span> gender<span class="o">==</span><span class="m">1</span>, msymbol(<span class="o">+</span>)
+
+<span class="c1">//marker size</span>
+<span class="k">graph twoway scatter</span> bmi age<span class="k"> if</span> gender<span class="o">==</span><span class="m">0</span>, msize(small) <span class="cs">///</span>
+    ||<span class="k"> scatter</span> bmi age<span class="k"> if</span> gender<span class="o">==</span><span class="m">1</span>, msize(large)
+<span class="c1">//valid sizes:</span>
+<span class="c1">// tiny vsmall small medsmall medium medlarge large vlarge huge </span>
+
+<span class="c1">//graph bar</span>
+<span class="k">use</span> transplants<span class="m">.</span>dta,clear
+<span class="k">graph</span> bar (mean) bmi ,over(race) 
+<span class="k">graph</span> bar (mean) bmi ,over(race,<span class="k"> label</span>(angle(<span class="m">45</span>)))
+<span class="k">graph</span> bar (mean) bmi age ,over(race,<span class="k"> label</span>(angle(<span class="m">45</span>)))
+<span class="k">graph</span> bar (median) bmi age ,over(race,<span class="k"> label</span>(angle(<span class="m">45</span>)))
+
+
+<span class="c1">//graph box</span>
+<span class="k">graph</span> box bmi age,over(rec_education,label(angle(<span class="m">45</span>)))
+<span class="k">graph</span> box bmi,over(prev_ki) over(rec_hcv)
+
+<span class="c1">//create label so that it shows up on graph</span>
+<span class="k">label</span> define prev_ki_label <span class="m">0</span> <span class="s">&quot;First time KT&quot;</span> <span class="m">1</span> <span class="s">&quot;Previous KT&quot;</span>
+<span class="k">label</span> values prev_ki prev_ki_label
+<span class="k">graph</span> box age,over(prev_ki) over(rec_hcv) b1title(Recipient HCV and Previous KT)
+
+<span class="c1">//saving a graph as a Stata .gph file</span>
+<span class="k">graph save</span> bmi_plot<span class="m">.</span>gph,<span class="k"> replace</span>
+
+<span class="c1">//exporting a graph to .PNG (for putting in a document)</span>
+<span class="k">graph</span> export bmi_plot<span class="m">.</span>png,<span class="k"> replace</span>
+<span class="k">graph</span> export bmi_plot<span class="m">.</span>png,<span class="k"> replace</span> width(<span class="m">2400</span>) <span class="c1">//saves with more pixels</span>
+
+
+
+
+
+<span class="k">log close</span>
+</pre></div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Abimereki Muzaale
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,8 +1,8 @@
 # Preface
 
-Welcome to the [340.600](https://www.jhsph.edu/courses/course/36824/2023/340.600.11/stata-programming) Summer Institute Course in Stata Programming!
+Welcome to the [340.600](https://publichealth.jhu.edu/course/41687) Summer Institute Course in Stata Programming!
 
-This class will be offered in a hybrid-format to cater to both those who will be in-person at the Bloomberg School Wolfe **E2014** (Sommer Hall) and those who will be joining us virtually (Zoom [link](https://jhjhm.zoom.us/j/98481767907)). In-person attendees are encouraged to also log into zoom, which allows students to share code and to collectively `debug`. Students last summer described this as one of the best aspects of their learning experience. 
+This class will be offered in a hybrid-format to cater to both those who will be in-person at the Bloomberg School Wolfe **W3031** and those who will be joining us virtually (Zoom [link](https://us06web.zoom.us/j/86492592698)). In-person attendees are encouraged to also log into zoom, which allows students to share code and to collectively `debug`. Students last summer described this as one of the best aspects of their learning experience. 
 
 By contrast, exclusively in-person class formats without the zoom option make it difficult for students to articulate the issues they might be confronting. This makes collective troubleshooting a nightmare. 
 

@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Day 1: Introduction to Stata Programming &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'day1-deepseek';</script>
+    <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/jhu-logo.png" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/jhu-logo.png" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. Overview, commands, syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. Return values, macros, programs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/day1-deepseek.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/day1-deepseek.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Day 1: Introduction to Stata Programming</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graduate-level-course">Graduate Level Course</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-class-survey">Pre-Class Survey</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stata-fundamentals">1. Stata Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-vs-user-perspective">System vs. User Perspective</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stata-interface-components">2. Stata Interface Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menu-structure">Menu Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-windows">Key Windows</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commands-and-syntax">3. Commands and Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-stata-code">Anatomy of Stata Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#command-types">Command Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-data">4. Working with Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-dataset">Example Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-types">Output Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-exercise">5. Practical Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-basic-analysis">Task 1: Basic Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-simulation">Task 2: Simulation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-errors">6. Common Errors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unrecognized-command">Unrecognized Command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-tips">Troubleshooting Tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">7. Key Takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="day-1-introduction-to-stata-programming">
+<h1>Day 1: Introduction to Stata Programming<a class="headerlink" href="#day-1-introduction-to-stata-programming" title="Permalink to this heading">#</a></h1>
+<section id="graduate-level-course">
+<h2>Graduate Level Course<a class="headerlink" href="#graduate-level-course" title="Permalink to this heading">#</a></h2>
+<section id="learning-objectives">
+<h3>Learning Objectives:<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Understand Stata’s interface and basic workflow</p></li>
+<li><p>Learn fundamental Stata commands and syntax</p></li>
+<li><p>Distinguish between different types of Stata output</p></li>
+<li><p>Begin developing good programming practices</p></li>
+</ol>
+</section>
+</section>
+<section id="pre-class-survey">
+<h2>Pre-Class Survey<a class="headerlink" href="#pre-class-survey" title="Permalink to this heading">#</a></h2>
+<p>Please complete the brief entry survey to help us tailor the course to your needs:</p>
+<p><a class="reference external" href="https://jhjhm.zoom.us/j/98481767907">Launch Survey on Zoom</a></p>
+<p><strong>Survey Questions:</strong></p>
+<ol class="arabic simple">
+<li><p>How will you use Stata this week?</p>
+<ul class="simple">
+<li><p>Locally on my laptop</p></li>
+<li><p>Remotely on another desktop or terminal</p></li>
+</ul>
+</li>
+<li><p>What operating system will you use?</p>
+<ul class="simple">
+<li><p>MacOS</p></li>
+<li><p>Unix</p></li>
+<li><p>Windows</p></li>
+</ul>
+</li>
+<li><p>What is your experience level with statistical software?</p>
+<ul class="simple">
+<li><p>No Experience</p></li>
+<li><p>Basic Knowledge</p></li>
+<li><p>Novice User</p></li>
+<li><p>Competent User</p></li>
+<li><p>Advanced User</p></li>
+<li><p>Expert User</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="stata-fundamentals">
+<h2>1. Stata Fundamentals<a class="headerlink" href="#stata-fundamentals" title="Permalink to this heading">#</a></h2>
+<section id="system-vs-user-perspective">
+<h3>System vs. User Perspective<a class="headerlink" href="#system-vs-user-perspective" title="Permalink to this heading">#</a></h3>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>graph TD
+    A[System] --&gt; B[Native Stata]
+    A --&gt; C[Third-party .ado files]
+    A --&gt; D[Your .ado files]
+    
+    E[User] --&gt; F[Known Users]
+    E --&gt; G[Unknown Users]
+</pre></div>
+</div>
+<p>Key points:</p>
+<ul class="simple">
+<li><p><strong>System</strong>: The Stata application and its components (not STATA, which is incorrect)</p></li>
+<li><p><strong>User</strong>: You, TAs, collaborators, or future users of your code</p></li>
+<li><p><strong>Empathy</strong>: Anticipate user needs when writing programs</p></li>
+<li><p><strong>Sharing</strong>: Make your code accessible to others</p></li>
+<li><p><strong>Caring</strong>: Write user-friendly, well-documented code</p></li>
+</ul>
+</section>
+</section>
+<section id="stata-interface-components">
+<h2>2. Stata Interface Components<a class="headerlink" href="#stata-interface-components" title="Permalink to this heading">#</a></h2>
+<section id="menu-structure">
+<h3>Menu Structure<a class="headerlink" href="#menu-structure" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Menu Item</p></th>
+<th class="head"><p>Key Functions</p></th>
+<th class="head"><p>Shortcut (Mac)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>File</p></td>
+<td><p>Open/save datasets</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Edit</p></td>
+<td><p>Copy/paste commands</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Data</p></td>
+<td><p>Manage variables</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Graphics</p></td>
+<td><p>Create visualizations</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Statistics</p></td>
+<td><p>Run analyses</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Window</p></td>
+<td><p>Toggle panels</p></td>
+<td><p>⌘1-⌘10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="key-windows">
+<h3>Key Windows<a class="headerlink" href="#key-windows" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Command (⌘1)</p></li>
+<li><p>Results (⌘2)</p></li>
+<li><p>History (⌘3)</p></li>
+<li><p>Variables (⌘4)</p></li>
+<li><p>Do-file Editor (⌘9)</p></li>
+</ol>
+</section>
+</section>
+<section id="commands-and-syntax">
+<h2>3. Commands and Syntax<a class="headerlink" href="#commands-and-syntax" title="Permalink to this heading">#</a></h2>
+<section id="anatomy-of-stata-code">
+<h3>Anatomy of Stata Code<a class="headerlink" href="#anatomy-of-stata-code" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>command [varlist] [if] [in] [, options]
+</pre></div>
+</div>
+<p><strong>Example:</strong></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">summarize</span> age<span class="k"> if</span> gender <span class="o">==</span> <span class="m">1</span>, detail
+</pre></div>
+</div>
+</section>
+<section id="command-types">
+<h3>Command Types<a class="headerlink" href="#command-types" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Native Stata commands</strong>: Blue in command window</p></li>
+<li><p><strong>Third-party commands</strong>: White (may need installation)</p></li>
+<li><p><strong>User-written commands</strong>: Your own .ado files</p></li>
+</ol>
+<p>Try this basic command:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">display</span> <span class="s">&quot;Hello Stata Programmers!&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="working-with-data">
+<h2>4. Working with Data<a class="headerlink" href="#working-with-data" title="Permalink to this heading">#</a></h2>
+<section id="example-dataset">
+<h3>Example Dataset<a class="headerlink" href="#example-dataset" title="Permalink to this heading">#</a></h3>
+<p>Let’s explore the life expectancy dataset:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">webuse</span> lifeexp,<span class="k"> clear</span>
+<span class="k">describe</span>
+</pre></div>
+</div>
+</section>
+<section id="output-types">
+<h3>Output Types<a class="headerlink" href="#output-types" title="Permalink to this heading">#</a></h3>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>graph TD
+    Results --&gt; String
+    Results --&gt; Numeric
+    String --&gt; Text
+    String --&gt; URL
+    String --&gt; Filepath
+    Numeric --&gt; Integer
+    Numeric --&gt; Decimal
+    Integer --&gt; byte
+    Integer --&gt; int
+    Integer --&gt; long
+    Decimal --&gt; float
+    Decimal --&gt; double
+</pre></div>
+</div>
+</section>
+</section>
+<section id="practical-exercise">
+<h2>5. Practical Exercise<a class="headerlink" href="#practical-exercise" title="Permalink to this heading">#</a></h2>
+<section id="task-1-basic-analysis">
+<h3>Task 1: Basic Analysis<a class="headerlink" href="#task-1-basic-analysis" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">webuse</span> lifeexp,<span class="k"> clear</span>
+<span class="k">encode</span> country,<span class="k"> gen</span>(Country)
+<span class="k">twoway scatter</span> lexp Country, xscale(off)
+<span class="k">graph</span> export lexp_bycountry<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+</section>
+<section id="task-2-simulation">
+<h3>Task 2: Simulation<a class="headerlink" href="#task-2-simulation" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">clear</span>
+<span class="k">set</span> obs <span class="m">1000</span>
+<span class="k">generate</span> bmi = <span class="nf">rnormal</span>(<span class="m">28</span>, <span class="m">5</span>)
+<span class="k">histogram</span> bmi, normal
+<span class="k">graph</span> export bmi<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="common-errors">
+<h2>6. Common Errors<a class="headerlink" href="#common-errors" title="Permalink to this heading">#</a></h2>
+<section id="unrecognized-command">
+<h3>Unrecognized Command<a class="headerlink" href="#unrecognized-command" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>myfirstprogram
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="n">myfirstprogram</span> <span class="ow">is</span> <span class="n">unrecognized</span>
+<span class="n">r</span><span class="p">(</span><span class="mi">199</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting-tips">
+<h3>Troubleshooting Tips<a class="headerlink" href="#troubleshooting-tips" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Check command spelling</p></li>
+<li><p>Verify required packages are installed</p></li>
+<li><p>Review syntax documentation (<code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">commandname</span></code>)</p></li>
+</ol>
+</section>
+</section>
+<section id="key-takeaways">
+<h2>7. Key Takeaways<a class="headerlink" href="#key-takeaways" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Stata has a consistent command syntax structure</p></li>
+<li><p>Distinguish between native and user-written commands</p></li>
+<li><p>Output can be strings or numeric values</p></li>
+<li><p>Always document your code for future users</p></li>
+</ul>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Install any third-party commands needed for tomorrow</p></li>
+<li><p>Review basic Stata commands using <code class="docutils literal notranslate"><span class="pre">help</span></code></p></li>
+<li><p>Bring questions about today’s material</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#graduate-level-course">Graduate Level Course</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-class-survey">Pre-Class Survey</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stata-fundamentals">1. Stata Fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-vs-user-perspective">System vs. User Perspective</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stata-interface-components">2. Stata Interface Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#menu-structure">Menu Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-windows">Key Windows</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#commands-and-syntax">3. Commands and Syntax</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-stata-code">Anatomy of Stata Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#command-types">Command Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-data">4. Working with Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-dataset">Example Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-types">Output Types</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-exercise">5. Practical Exercise</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-1-basic-analysis">Task 1: Basic Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#task-2-simulation">Task 2: Simulation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-errors">6. Common Errors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unrecognized-command">Unrecognized Command</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-tips">Troubleshooting Tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">7. Key Takeaways</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Abimereki Muzaale
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

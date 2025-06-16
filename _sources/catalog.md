@@ -1,4 +1,4 @@
-## Catalog of Commands
+# Catalog of Commands
 
 ***Before running any sample codes, please run this line of command in Stata***
 

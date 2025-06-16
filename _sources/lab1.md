@@ -15,10 +15,17 @@ Write Stata commands to answer the following questions about the dataset [transp
 5. What are the mean ages at transplant for male and female recipients? (<u>Hint</u>: consider `tab`, `sum`) (Variable: `gender` 0=Male, 1 = Female).        
      
 ## Part 2
+
+```{admonition} Supplementary Notes
+:class: notes
+
+Here’s a **terse yet sharp [summary](./lab1_part2_notes.md) of Part 2**, tailored for prepping you for this section. It assumes you're a bit under-prepared but willing to execute if shown the essence.
+
+```
      
-6. Generate a variable called `age_categories` that is 0 for children (ages<18), 1 for adults (18-60), and 2 for senior citizens (>60). What is the mean number of years patients spent on the waitlist in each age group? (<u>Hint</u>: consider `tab`, `sum`)  
-7. Type the command describe to see a list of all variables. Which ones don’t have a variable label? Write code to give a variable label to all variables that don’t yet have one. Then run describe again to show the labeled variables.
-8. Variable `abo` represents blood type and is coded as 1=A, 2=B, 3=AB, 4=O. Variable `prev` represents whether the patient has had a previous transplant and is coded 0=No, 1=Yes. Create a value label for `prev`. Put the command `tab abo prev` in your script, to produce the following output (with XXX filled in):     
+1. Generate a variable called `age_categories` that is 0 for children (ages<18), 1 for adults (18-60), and 2 for senior citizens (>60). What is the mean number of years patients spent on the waitlist in each age group? (<u>Hint</u>: consider `tab`, `sum`)  
+2. Type the command describe to see a list of all variables. Which ones don’t have a variable label? Write code to give a variable label to all variables that don’t yet have one. Then run describe again to show the labeled variables.
+3. Variable `abo` represents blood type and is coded as 1=A, 2=B, 3=AB, 4=O. Variable `prev` represents whether the patient has had a previous transplant and is coded 0=No, 1=Yes. Create a value label for `prev`. Put the command `tab abo prev` in your script, to produce the following output (with XXX filled in):     
 
 ```stata
 . tab abo prev 

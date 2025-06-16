@@ -185,7 +185,7 @@
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="chapter1.html">📘 Collaborative Stata programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1 📘 Collaborative Stata programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. Return values, macros, programs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
@@ -369,7 +369,11 @@ document.write(`
 </section>
 <section id="part-2">
 <h2>Part 2<a class="headerlink" href="#part-2" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple" start="6">
+<div class="notes admonition">
+<p class="admonition-title">Supplementary Notes</p>
+<p>Here’s a <strong>terse yet sharp <a class="reference internal" href="lab1_part2_notes.html"><span class="std std-doc">summary</span></a> of Part 2</strong>, tailored for prepping you for this section. It assumes you’re a bit under-prepared but willing to execute if shown the essence.</p>
+</div>
+<ol class="arabic simple">
 <li><p>Generate a variable called <code class="docutils literal notranslate"><span class="pre">age_categories</span></code> that is 0 for children (ages&lt;18), 1 for adults (18-60), and 2 for senior citizens (&gt;60). What is the mean number of years patients spent on the waitlist in each age group? (<u>Hint</u>: consider <code class="docutils literal notranslate"><span class="pre">tab</span></code>, <code class="docutils literal notranslate"><span class="pre">sum</span></code>)</p></li>
 <li><p>Type the command describe to see a list of all variables. Which ones don’t have a variable label? Write code to give a variable label to all variables that don’t yet have one. Then run describe again to show the labeled variables.</p></li>
 <li><p>Variable <code class="docutils literal notranslate"><span class="pre">abo</span></code> represents blood type and is coded as 1=A, 2=B, 3=AB, 4=O. Variable <code class="docutils literal notranslate"><span class="pre">prev</span></code> represents whether the patient has had a previous transplant and is coded 0=No, 1=Yes. Create a value label for <code class="docutils literal notranslate"><span class="pre">prev</span></code>. Put the command <code class="docutils literal notranslate"><span class="pre">tab</span> <span class="pre">abo</span> <span class="pre">prev</span></code> in your script, to produce the following output (with XXX filled in):</p></li>

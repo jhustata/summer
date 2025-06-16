@@ -355,14 +355,14 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="preface">
 <h1>Preface<a class="headerlink" href="#preface" title="Permalink to this heading">#</a></h1>
 <p>Welcome to the <a class="reference external" href="https://publichealth.jhu.edu/course/41687">340.600</a> Summer Institute Course in Stata Programming!</p>
-<p>This class will be offered in a hybrid-format to cater to both those who will be in-person at the Bloomberg School Wolfe <strong>W3031</strong> and those who will be joining us virtually (Zoom <a class="reference external" href="https://us06web.zoom.us/j/86492592698">link</a>). In-person attendees are encouraged to also log into zoom, which allows students to share code and to collectively <code class="docutils literal notranslate"><span class="pre">debug</span></code>. Students last summer described this as one of the best aspects of their learning experience.</p>
+<p>This class will be offered in a hybrid-format to cater to both those who will be in-person at the Bloomberg School (Wolfe <strong>W3031</strong>) and those who will be joining us virtually (Zoom <a class="reference external" href="https://us06web.zoom.us/j/86492592698">link</a>). In-person attendees are encouraged to also log into zoom, which allows students to share code and to collectively <code class="docutils literal notranslate"><span class="pre">debug</span></code>. Students in previous summers described this as one of the best aspects of their learning experience.</p>
 <p>By contrast, exclusively in-person class formats without the zoom option make it difficult for students to articulate the issues they might be confronting. This makes collective troubleshooting a nightmare.</p>
 <p>Our class will be structured as follows:</p>
 <ul class="simple">
 <li><p>8:30-10:15 lecture</p></li>
 <li><p>10:15-10:45 lab</p></li>
-<li><p>10:45-10:50 break</p></li>
-<li><p>10:50-11:50 lecture</p></li>
+<li><p>10:45-11:00 break</p></li>
+<li><p>11:00-11:50 lecture</p></li>
 <li><p>11:50-12:20 lab</p></li>
 </ul>
 <p>Evaluation of your progress will be done on a daily basis:</p>
@@ -372,12 +372,17 @@ document.write(`
 <li><p>We encourage you to do the in-class labs even if you’re not taking the class for credit</p></li>
 <li><p>Everyone who turns in every lab + the final assignment (on time) will get an A or a B</p></li>
 </ul>
-<p>For <strong>general</strong> inquiries about Course logistics, Homework submission, etc., please use the <a class="reference external" href="https://courseplus.jhu.edu/core/index.cfm/go/home/">CoursePlus Discussion Forum</a>. For confidential matters (e.g., grades), <a class="reference external" href="https://jhustata.github.io/summer/quickrefs">email your course team</a> directly.</p>
-<p>Join our new <a class="reference external" href="https://github.com/jhustata/summer/discussions">Stata-focused discussion community on GitHub</a> for all your code-related queries! Whether you’re looking to share snippets, troubleshoot issues with your peers, or dive into broader discussions within the Hopkins Stata community, GitHub is your go-to platform. Don’t have a GitHub account yet? No worries—it’s quick and easy to <a class="reference external" href="https://github.com/join">sign up</a>. This platform not only facilitates collaboration with your classmates and instructors but also connects you to the wider Stata-using community at Hopkins even after completion of this course. Get ready to enhance your coding journey by tapping into the collective wisdom and insights available right at your fingertips.</p>
-<p>Sharing code on the GitHub discussion forum is straightforward. Simply enclose your code snippet or an entire <code class="docutils literal notranslate"><span class="pre">.do</span></code> file’s contents within triple <a class="reference external" href="https://jhustata.github.io/basic/chapter1.html#homework">backquotes</a> for syntax highlighting, like this:</p>
+<p>For <strong>general</strong> inquiries about Course logistics, Homework submission, etc., please use the <a class="reference external" href="https://courseplus.jhu.edu/core/index.cfm/go/home/">CoursePlus Discussion Forum</a>. For confidential matters (e.g., grades), <a class="reference external" href="https://jhustata.github.io/summer/quickrefs#your-instructor">email your course team</a> directly.</p>
+<p>Join our <a class="reference external" href="https://github.com/jhustata/summer/discussions">Stata-focused discussion community on GitHub</a> for all your code-related queries! Whether you’re looking to share snippets, troubleshoot issues with your peers, or dive into broader discussions within the Hopkins Stata community, GitHub is your go-to platform. Don’t have a GitHub account yet? No worries—it’s quick and easy to <a class="reference external" href="https://github.com/join">sign up</a>. This platform not only facilitates collaboration with your classmates and instructors but also connects you to the wider Stata-using community at Hopkins even after completion of this course. Get ready to enhance your coding journey by tapping into the collective wisdom and insights available right at your fingertips.</p>
+<p>Sharing code on the GitHub discussion forum is straightforward. Simply enclose your code snippet or an entire <code class="docutils literal notranslate"><span class="pre">.do</span></code> file’s contents within triple backquotes for syntax highlighting, like this:</p>
 <p>```stata<br />
 copy &amp; paste your code snippet here<br />
 ```</p>
+<p>If you are not sure where the <code class="docutils literal notranslate"><span class="pre">backquote</span></code> is, its to the left of “1” on most keyboards. The forwardquote is to the left of “return” on a Mac. You need to get familiar with these quotes, since they’ll be used to specify “macros” throughout this class and your programming life. While using a .do file, the use of a back quote will automatically generate a forward quote to enclose the specified macro as seen below.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">di</span> <span class="nv">`c(N)&#39;</span>
+</pre></div>
+</div>
+<p><img alt="" src="https://media.istockphoto.com/id/168823323/photo/modern-laptop-computer-keyboard.jpg?s=2048x2048&amp;w=is&amp;k=20&amp;c=1EUUYqgTO1bRR5wqebm56g5xV4R69LKcK5LQtSwbnd8=" /></p>
 <p>You don’t need to upload <code class="docutils literal notranslate"><span class="pre">.do</span></code> files. For Python or R code, just replace “stata” with “python” or “r” respectively. This syntax highlighting enhances readability, making it easier for peers to understand your code. This is why we prefer GitHub for discussing code-related queries over CoursePlus. Feel free to mix your explanations with code snippets to better illustrate your points.</p>
 <p>Zoom etiquette is straightforward: all participants will be muted except the lecturer. Feel free to ask questions via chat, which we’ll monitor regularly. <strong>During class, labs, and homework attempts</strong>, post questions and comments the <a class="reference external" href="https://github.com/jhustata/summer/discussions">Stata-focused discussion community on GitHub</a> for peer reference. While we aim to record lectures, live attendance is recommended when possible.</p>
 <p>Regarding academic integrity, we encourage the use of small code snippets from books, the internet, or peers, provided they’re cited, as shown below:</p>

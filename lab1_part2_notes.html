@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Lab 4 &#8212; Stata Programming</title>
+    <title>6️⃣ Categorize by Age, Summarize Wait Time &#8212; Stata Programming</title>
   
   
   
@@ -61,9 +61,7 @@
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lab4_answerkey';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lab1_part2_notes';</script>
     <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -247,7 +245,7 @@
       
       
       
-      <li><a href="_sources/lab4_answerkey.md" target="_blank"
+      <li><a href="_sources/lab1_part2_notes.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -331,7 +329,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 4</h1>
+    <h1>6️⃣ Categorize by Age, Summarize Wait Time</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -341,8 +339,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">6️⃣ Categorize by Age, Summarize Wait Time</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#label-variables-with-no-label">7️⃣ Label Variables with No Label</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#add-labels-crosstab-abo-prev">8️⃣ Add Labels + Crosstab ABO × PREV</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#who-bmi-categories">9️⃣ WHO BMI Categories</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#list-eldest-patients-over-80">🔟 List Eldest Patients Over 80</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#final-tip">Final Tip:</a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -353,176 +357,64 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-4">
-<h1>Lab 4<a class="headerlink" href="#lab-4" title="Permalink to this heading">#</a></h1>
-<section id="part-1">
-<h2>Part 1<a class="headerlink" href="#part-1" title="Permalink to this heading">#</a></h2>
-<p>Write a .do file which imports <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/transplants.txt">transplants.txt</a> and performs the data management/exploratory data analysis tasks described below using the slides we have discussed in class. Your .do file (lab4_lastname.do) and must create a log file (lab4_lastname.log). This file will contain your answers for both part 1 and part 2 of today’s lab. Your .do file should follow conventions for .do file structure described in class. Do <strong>not</strong> submit your log files as part of the assignment.</p>
-<ol class="arabic simple">
-<li><p>Create a new variable called <code class="docutils literal notranslate"><span class="pre">ctr_volume</span></code> that contains the transplant center volume (total number of transplants performed in each transplant center). The transplant center can be identified by <code class="docutils literal notranslate"><span class="pre">ctr_id</span></code>.</p></li>
-</ol>
-<p><code class="docutils literal notranslate"><span class="pre">Just</span> <span class="pre">make</span> <span class="pre">sure</span> <span class="pre">that</span> <span class="pre">they</span> <span class="pre">did</span> <span class="pre">it</span></code></p>
-<ol class="arabic simple" start="2">
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">summarize,</span> <span class="pre">detail</span></code> to show the distribution of <code class="docutils literal notranslate"><span class="pre">ctr_volume</span></code>. For question 2, you should analyze one observation per center, not one observation per transplant recipient. (<u>Hint</u>: Tagging can help with this)</p></li>
-</ol>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>      Percentiles      Smallest
- <span class="m">1</span>%            <span class="m">8</span>              <span class="m">8</span>
- <span class="m">5</span>%            <span class="m">8</span>              <span class="m">8</span>
-<span class="m">10</span>%           <span class="m">26</span>             <span class="m">26</span>       Obs                  <span class="m">25</span>
-<span class="m">25</span>%           <span class="m">61</span>             <span class="m">54</span>       Sum of Wgt.          <span class="m">25</span>
-
-<span class="m">50</span>%           <span class="m">79</span>                      Mean                 <span class="m">80</span>
-                        Largest       Std. Dev.      <span class="m">34.17358</span>
-<span class="m">75</span>%          <span class="m">105</span>            <span class="m">116</span>
-<span class="m">90</span>%          <span class="m">127</span>            <span class="m">127</span>       Variance       <span class="m">1167.833</span>
-<span class="m">95</span>%          <span class="m">128</span>            <span class="m">128</span>       Skewness      <span class="o">-</span>.<span class="m">5265107</span>
-<span class="m">99</span>%          <span class="m">128</span>            <span class="m">128</span>       Kurtosis       <span class="m">2.662681</span>
+  <section id="categorize-by-age-summarize-wait-time">
+<h1>6️⃣ Categorize by Age, Summarize Wait Time<a class="headerlink" href="#categorize-by-age-summarize-wait-time" title="Permalink to this heading">#</a></h1>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> age_categories = .
+<span class="k">replace</span> age_categories = <span class="m">0</span><span class="k"> if</span> age <span class="o">&lt;</span> <span class="m">18</span>
+<span class="k">replace</span> age_categories = <span class="m">1</span><span class="k"> if</span> <span class="nf">inrange</span>(age, <span class="m">18</span>, <span class="m">60</span>)
+<span class="k">replace</span> age_categories = <span class="m">2</span><span class="k"> if</span> age <span class="o">&gt;</span> <span class="m">60</span>
+<span class="k">tab</span> age_categories,<span class="k"> sum</span>(wait_yrs)
 </pre></div>
 </div>
-<ol class="arabic simple" start="3">
-<li><p>Generate a variable called <code class="docutils literal notranslate"><span class="pre">unknown</span></code> which is a 1 for all patients whose cause of end-stage renal disease (ESRD) is unknown/uncertain/blank (<code class="docutils literal notranslate"><span class="pre">extended_dgn</span></code> = “ESRD UNKNOWN ETIOLOGY”, “ESRD OF UNCERTAIN ETIOLOGY”, etc.) and a zero for all other patients. Display the following sentence:</p></li>
-</ol>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>xxx of <span class="m">2000</span> patients (yy<span class="m">.</span>y%) have<span class="k"> an</span> unknown cause of ESRD.
-</pre></div>
-</div>
-<p>Except fill in the correct numbers.</p>
-<p><code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">count</span> <span class="pre">was</span> <span class="pre">893</span> <span class="pre">but</span> <span class="pre">this</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">all</span> <span class="pre">over</span> <span class="pre">the</span> <span class="pre">map.</span> <span class="pre">Just</span> <span class="pre">give</span> <span class="pre">credit</span> <span class="pre">if</span> <span class="pre">they</span> <span class="pre">made</span> <span class="pre">a</span> <span class="pre">reasonable</span> <span class="pre">effort</span></code></p>
-<ol class="arabic simple" start="4">
-<li><p>How many patients died within six months of their transplant (died==1 and transplant date falls ≤ 180 days before end date)? Display the following sentence:</p></li>
-</ol>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>xxx of <span class="m">2000</span> patients (yy<span class="m">.</span>y%) died within <span class="m">6</span> months of their transplant date.
-</pre></div>
-</div>
-<p>Except fill in the correct numbers.</p>
-<p><code class="docutils literal notranslate"><span class="pre">46/2.3%</span></code></p>
-<ol class="arabic simple" start="5">
-<li><p>For each blood type, what is the mean waiting time for a transplant? (variable: wait_yrs) What is the median waiting time for a transplant? Use egen, tagging, and list to display the blood type, mean wait time, and median wait time of each blood type so that only one record is displayed per blood type.</p></li>
-</ol>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>     abo      meanw    medianw  
-     <span class="m">1</span>=A   <span class="m">1.989718</span>    <span class="m">1.57974</span>  
-     <span class="m">2</span>=B   <span class="m">2.609568</span>   <span class="m">2.253251</span>  
-    <span class="m">3</span>=AB   <span class="m">1.414879</span>   <span class="m">1.045859</span>  
-     <span class="m">4</span>=O   <span class="m">2.649108</span>   <span class="m">2.313484</span>  
-</pre></div>
-</div>
-<p>Lab 4 Part 2</p>
-<ol class="arabic simple" start="6">
-<li><p>Create a variable called <code class="docutils literal notranslate"><span class="pre">over50</span></code> which is a 1 for any recipient age &gt;50 and 0 for everyone else. Draw a survival curve stratified by over50.</p></li>
-</ol>
-<p><strong>Q:</strong> I have a Stata dataset with transplant_date as a string in DMY format. how may I convert it to a standard date (i.e. 0=01jan1960)?</p>
-<p><strong>chatGPT:</strong> To convert a string variable representing dates in the “DMY” format to a standard date format in Stata, you can use the following steps:</p>
-<p><span class="math notranslate nohighlight">\(\vdots\)</span></p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> transplant_date_num = <span class="nf">date</span>(transplant_date, <span class="s">&quot;DMY&quot;</span>)
-<span class="k">format</span> transplant_date_std <span class="nx">%td</span>
-</pre></div>
-</div>
-<p><strong>Q:</strong> Danke</p>
-<p><strong>chatGPT:</strong> Gern geschehen! Wenn Sie weitere Fragen haben, stehe ich Ihnen gerne zur Verfügung.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>import delimited https:<span class="o">//</span>raw<span class="m">.</span>githubusercontent<span class="m">.</span>com<span class="o">/</span>jhustata<span class="o">/</span>livre<span class="o">/</span>main<span class="o">/</span>transplants<span class="m">.</span>txt,<span class="k"> clear</span> 
-<span class="k">g</span> over50=age<span class="o">&gt;</span><span class="m">50</span><span class="k"> if</span> <span class="o">!</span><span class="nf">missing</span>(age)
-<span class="k">g</span> transplant_date_num = <span class="nf">date</span>(transplant_date, <span class="s">&quot;DMY&quot;</span>)
-<span class="k">format</span> transplant_date_num <span class="nx">%td</span> 
-<span class="k">format</span> end_date <span class="nx">%td</span> 
-<span class="k">order</span> transplant_date_num end_date
-<span class="k">stset</span> end_date,origin(transplant_date_num) entry(transplant_date_num) fail(died) scale(<span class="m">365.25</span>)
-<span class="k">sts graph</span>,<span class="k"> by</span>(over50)
-<span class="k">graph</span> export lab4q7<span class="m">.</span>png,<span class="k"> replace</span>  
-</pre></div>
-</div>
-<p><img alt="" src="_images/lab4q7.png" /></p>
-<ol class="arabic simple" start="7">
-<li><p>Is the difference in post-transplant survival by over50 statistically significant (p&gt;0.05)? Write one of the following sentences:</p></li>
-</ol>
-<p><code class="docutils literal notranslate"><span class="pre">There</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">statistically</span> <span class="pre">significant</span> <span class="pre">difference</span> <span class="pre">in</span> <span class="pre">survival</span> <span class="pre">by</span> <span class="pre">age</span> <span class="pre">category</span> <span class="pre">(p&lt;0.05)</span></code></p>
-<p>or</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>There is<span class="k"> no</span> statistically significant difference<span class="k"> in</span> survival<span class="k"> by</span> age category (p=<span class="m">0.</span>x)
-</pre></div>
-</div>
-<ol class="arabic simple" start="8">
-<li><p>Run a Cox regression on over50 (command <code class="docutils literal notranslate"><span class="pre">stcox</span> <span class="pre">over50</span></code>). Print this sentence:</p></li>
-</ol>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>Hazard<span class="k"> ratio</span>: x<span class="m">.</span>xx (<span class="m">95</span>% CI y<span class="m">.</span>yy<span class="o">-</span>z<span class="m">.</span>zz) 
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">3.44</span> <span class="pre">(2.50-4.76)</span></code></p>
-<p>Except fill in the correct values.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>
-use transplants, clear
-
-//q1, 10pt
-bys ctr_id: gen ctr_volume= _N  
-
-//q2, 10pt
-bys ctr_id: gen tx_id = _n
-egen ctr_tag = tag(ctr_id )
-
-summarize ctr_volume if ctr_tag==1, detail 
-
-//q3, 20pt  ; give a full 20 to any N&gt;800
-tab extended_dgn  
-gen unknown=0 
-
-replace unknown=1 if regexm(ext, &quot;UNCERTAIN&quot;) | regexm(ext, &quot;BLANK&quot;) | regexm(ext, &quot;NO REPORT&quot;) | regexm(ext, &quot;^NOT SPECI&quot;) | regexm(ext, &quot;NA$&quot;) | regexm(ext, &quot;UNK&quot;) | regexm(ext, &quot;UNCLEAR&quot;) | regexm(ext, &quot;UNDET&quot;) | regexm(ext, &quot;U$&quot;) | regexm(ext, &quot;OTHER&quot;) | regexm(ext, &quot;ETIOLOGY$&quot;) | regexm(ext, &quot;COMPLEX CAUSES&quot;) | regexm(ext, &quot;UNOS 999&quot;) | regexm(ext, &quot;UKNOWN&quot;)  
-tab extended_dgn unknown
-tab unknown
-count if unknown==1
-display r(N)
-disp (r(N)/(_N)*100)
-disp r(N) &quot; of 2000 patients (&quot; %2.1f (r(N)/(_N)*100) &quot;%) have an unknown cause of ESRD.&quot;
-
-//q4, 10pt
-format end_date %tdnn/dd/CCYY
-gen died_180=0
-replace died_180=1 if died==1 &amp; ( end_date- transplant_date&lt;=180)  
-count if died_180==1  
-display r(N)  
-disp (r(N)/(_N)*100)  
-disp r(N) &quot; of 2000 patients (&quot; %2.1f (r(N)/(_N)*100) &quot;%) died within 6 months of their transplant date.&quot;  
-
-//q5, 10pt 
-sort abo  
-egen abotag = tag(abo)  
-bys abo: egen mean_time = mean(wait_yrs)  
-bys abo: egen median_time = median(wait_yrs)  
-list abo mean_time median_time if abotag==1, noobs  
-
-
-//q6, 10pt
-gen over50=0  
-replace over50=1 if age&gt;50
-assert age!=.
-stset end_date, origin(transplant_date) failure(died==1) scale (365.25)  
-sts graph, by(over50) t
-
-//q7, 15pt 
-sts test over50   
-scalar p=(1-chi2(r(df), r(chi2)))  
-if p &lt; 0.05 {  
-    disp &quot;There is a statistically significant difference in survival by age category (p&lt;0.05)&quot;
-}
-if p &gt; 0.05 {
-    disp &quot;There is no statistically significant difference in survival by age category (p=&quot; p &quot;)&quot;
-}
-
-//q8, 15pt
-qui stcox over50  
-
-if c(version) &lt; 16 {
-	disp &quot;Hazard ratio:  &quot; %3.2f exp(_b[over50]) &quot; (95% CI &quot; /// 
-	                       %3.2f exp(_b[over50]+invnormal(0.025)*_se[over50]) ///
-					   &quot;-&quot; %3.2f exp(_b[over50]+invnormal(0.975)*_se[over50]) &quot;)&quot;
-}
-else {
-	qui lincom over50 
-	disp &quot;Hazard ratio:  &quot; %3.2f exp(r(estimate)) &quot; (95% CI &quot; ///
-	                       %3.2f exp(r(lb)) ///
-					   &quot;-&quot; %3.2f exp(r(ub)) &quot;)&quot;
-}
-
-
-</pre></div>
-</div>
+<hr class="docutils" />
 </section>
+<section id="label-variables-with-no-label">
+<h1>7️⃣ Label Variables with No Label<a class="headerlink" href="#label-variables-with-no-label" title="Permalink to this heading">#</a></h1>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">describe</span>
+<span class="c1">// manually check vars without labels</span>
+<span class="k">label</span> variable <span class="o">&lt;</span>varname<span class="o">&gt;</span> <span class="s">&quot;Descriptive label&quot;</span>
+<span class="k">describe</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="add-labels-crosstab-abo-prev">
+<h1>8️⃣ Add Labels + Crosstab ABO × PREV<a class="headerlink" href="#add-labels-crosstab-abo-prev" title="Permalink to this heading">#</a></h1>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">label</span> define prevlbl <span class="m">0</span> <span class="s">&quot;No&quot;</span> <span class="m">1</span> <span class="s">&quot;Yes&quot;</span>
+<span class="k">label</span> values prev prevlbl
+<span class="k">tab</span> abo prev
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="who-bmi-categories">
+<h1>9️⃣ WHO BMI Categories<a class="headerlink" href="#who-bmi-categories" title="Permalink to this heading">#</a></h1>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> bmi_whocat = .
+<span class="k">replace</span> bmi_whocat = <span class="m">1</span><span class="k"> if</span> bmi <span class="o">&lt;</span> <span class="m">18.5</span>
+<span class="k">replace</span> bmi_whocat = <span class="m">2</span><span class="k"> if</span> bmi <span class="o">&gt;=</span> <span class="m">18.5</span> <span class="o">&amp;</span> bmi <span class="o">&lt;=</span> <span class="m">25</span>
+<span class="k">replace</span> bmi_whocat = <span class="m">3</span><span class="k"> if</span> bmi <span class="o">&gt;</span> <span class="m">25</span> <span class="o">&amp;</span> bmi <span class="o">&lt;=</span> <span class="m">30</span>
+<span class="k">replace</span> bmi_whocat = <span class="m">4</span><span class="k"> if</span> bmi <span class="o">&gt;</span> <span class="m">30</span> <span class="o">&amp;</span> bmi <span class="o">&lt;=</span> <span class="m">40</span>
+<span class="k">label</span> define bmilbl <span class="m">1</span> <span class="s">&quot;underweight&quot;</span> <span class="m">2</span> <span class="s">&quot;normal&quot;</span> <span class="m">3</span> <span class="s">&quot;overweight&quot;</span> <span class="m">4</span> <span class="s">&quot;obese&quot;</span>
+<span class="k">label</span> values bmi_whocat bmilbl
+<span class="k">tab</span> bmi_whocat
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="list-eldest-patients-over-80">
+<h1>🔟 List Eldest Patients Over 80<a class="headerlink" href="#list-eldest-patients-over-80" title="Permalink to this heading">#</a></h1>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">list</span> id age<span class="k"> if</span> age <span class="o">&gt;</span> <span class="m">80</span>,<span class="k"> sort</span>(age <span class="o">-</span>age)
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="final-tip">
+<h1>Final Tip:<a class="headerlink" href="#final-tip" title="Permalink to this heading">#</a></h1>
+<p><strong>Run everything from your <code class="docutils literal notranslate"><span class="pre">.do</span></code> file</strong> using:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">do</span> lab1_part2<span class="m">.</span>do
+</pre></div>
+</div>
+<p>Get clean output. Comment your code. Organize it by question. You’ll thank yourself later.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -571,8 +463,14 @@ else {
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">6️⃣ Categorize by Age, Summarize Wait Time</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#label-variables-with-no-label">7️⃣ Label Variables with No Label</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#add-labels-crosstab-abo-prev">8️⃣ Add Labels + Crosstab ABO × PREV</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#who-bmi-categories">9️⃣ WHO BMI Categories</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#list-eldest-patients-over-80">🔟 List Eldest Patients Over 80</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#final-tip">Final Tip:</a></li>
 </ul>
+
   </nav></div>
 
 </div></div>

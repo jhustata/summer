@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Lab 4 &#8212; Stata Programming</title>
+    <title>📘 Day 1: Foundations of Collaborative Stata Programming &#8212; Stata Programming</title>
   
   
   
@@ -61,9 +61,7 @@
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'lab4_answerkey';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'day1-gpt-take2';</script>
     <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -239,6 +237,37 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/day1-gpt-take2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-download-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
     <i class="fas fa-download"></i>
@@ -247,7 +276,7 @@
       
       
       
-      <li><a href="_sources/lab4_answerkey.md" target="_blank"
+      <li><a href="_sources/day1-gpt-take2.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -257,7 +286,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -331,7 +360,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 4</h1>
+    <h1>📘 Day 1: Foundations of Collaborative Stata Programming</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -341,7 +370,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">🎯 Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-directories-matter">📂 Why Directories Matter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-level-vs-stata-level">🔧 System-Level vs. Stata-Level</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-project-structure">🏗️ Example Project Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-os-agnostic-code">🖥️ Writing OS-Agnostic Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection-questions">🤔 Reflection Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">🧑🏾‍💻 Assignment</a></li>
 </ul>
             </nav>
         </div>
@@ -353,175 +388,108 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-4">
-<h1>Lab 4<a class="headerlink" href="#lab-4" title="Permalink to this heading">#</a></h1>
-<section id="part-1">
-<h2>Part 1<a class="headerlink" href="#part-1" title="Permalink to this heading">#</a></h2>
-<p>Write a .do file which imports <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/transplants.txt">transplants.txt</a> and performs the data management/exploratory data analysis tasks described below using the slides we have discussed in class. Your .do file (lab4_lastname.do) and must create a log file (lab4_lastname.log). This file will contain your answers for both part 1 and part 2 of today’s lab. Your .do file should follow conventions for .do file structure described in class. Do <strong>not</strong> submit your log files as part of the assignment.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="day-1-foundations-of-collaborative-stata-programming">
+<h1>📘 Day 1: Foundations of Collaborative Stata Programming<a class="headerlink" href="#day-1-foundations-of-collaborative-stata-programming" title="Permalink to this heading">#</a></h1>
+<section id="objectives">
+<h2>🎯 Objectives<a class="headerlink" href="#objectives" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Understand the importance of directory structure for collaboration and reproducibility</p></li>
+<li><p>Learn key system-level and Stata-specific commands for working with files</p></li>
+<li><p>Write OS-agnostic, path-sensitive Stata code</p></li>
+<li><p>Think like a collaborator: your code should run for someone else without edits</p></li>
+</ul>
+</section>
+<section id="why-directories-matter">
+<h2>📂 Why Directories Matter<a class="headerlink" href="#why-directories-matter" title="Permalink to this heading">#</a></h2>
+<p>Modern data work — especially in collaborative settings — depends on clean, predictable organization. Your folder structure is not just a container, it’s a map others will rely on.</p>
+<p>A good structure:</p>
+<ul class="simple">
+<li><p>Saves time (and money, if using compute credits)</p></li>
+<li><p>Reduces errors in file paths</p></li>
+<li><p>Builds trust with collaborators and co-authors</p></li>
+</ul>
+</section>
+<section id="system-level-vs-stata-level">
+<h2>🔧 System-Level vs. Stata-Level<a class="headerlink" href="#system-level-vs-stata-level" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Change folder</p></td>
+<td><p>System-level</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cd</span></code>, <code class="docutils literal notranslate"><span class="pre">mkdir</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Read/write data</p></td>
+<td><p>Stata</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">use</span></code>, <code class="docutils literal notranslate"><span class="pre">save</span></code>, <code class="docutils literal notranslate"><span class="pre">export</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Automate folder creation</p></td>
+<td><p>Both</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mkdir</span></code> before <code class="docutils literal notranslate"><span class="pre">graph</span> <span class="pre">export</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="example-project-structure">
+<h2>🏗️ Example Project Structure<a class="headerlink" href="#example-project-structure" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>project/
+├── data/           # .dta files
+├── output/         # Graphs, tables, logs
+├── code/           # .do files
+├── notes/          # README, protocols
+└── master.do       # Runs everything
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">// Set root and create folder</span>
+<span class="k">cd</span> <span class="s">&quot;~/Documents/project/&quot;</span>
+<span class="k">mkdir</span> output
+
+<span class="c1">// Load a dataset</span>
+<span class="k">use</span> <span class="s">&quot;data/sample.dta&quot;</span>,<span class="k"> clear</span>
+
+<span class="c1">// Save a graph</span>
+<span class="k">graph twoway scatter</span> y x
+<span class="k">graph</span> export <span class="s">&quot;output/scatterplot.png&quot;</span>,<span class="k"> replace</span>
+</pre></div>
+</div>
+</section>
+<section id="writing-os-agnostic-code">
+<h2>🖥️ Writing OS-Agnostic Code<a class="headerlink" href="#writing-os-agnostic-code" title="Permalink to this heading">#</a></h2>
+<p>Different collaborators may use Windows, Mac, or Linux. Paths differ (<code class="docutils literal notranslate"><span class="pre">\</span></code> vs <code class="docutils literal notranslate"><span class="pre">/</span></code>). You can detect the OS using Stata’s system variable <code class="docutils literal notranslate"><span class="pre">c(os)</span></code>:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">di</span> <span class="nf">c</span>(os)
+
+<span class="k">if</span> <span class="nf">c</span>(os) <span class="o">==</span> <span class="s">&quot;Windows&quot;</span> {
+<span class="k">    use</span> data\transplants,<span class="k"> clear</span>
+<span class="k">    list</span> age<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">10</span>
+}
+<span class="k">else</span> {
+<span class="k">    use</span> data<span class="o">/</span>transplants,<span class="k"> clear</span>
+<span class="k">    list</span> age<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">10</span>
+}
+</pre></div>
+</div>
+</section>
+<section id="reflection-questions">
+<h2>🤔 Reflection Questions<a class="headerlink" href="#reflection-questions" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Create a new variable called <code class="docutils literal notranslate"><span class="pre">ctr_volume</span></code> that contains the transplant center volume (total number of transplants performed in each transplant center). The transplant center can be identified by <code class="docutils literal notranslate"><span class="pre">ctr_id</span></code>.</p></li>
+<li><p>Could a non-Stata user run your code without opening it?</p></li>
+<li><p>Can you describe your folder layout to a collaborator in one sentence?</p></li>
+<li><p>Are your outputs stored in predictable, clean locations?</p></li>
 </ol>
-<p><code class="docutils literal notranslate"><span class="pre">Just</span> <span class="pre">make</span> <span class="pre">sure</span> <span class="pre">that</span> <span class="pre">they</span> <span class="pre">did</span> <span class="pre">it</span></code></p>
-<ol class="arabic simple" start="2">
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">summarize,</span> <span class="pre">detail</span></code> to show the distribution of <code class="docutils literal notranslate"><span class="pre">ctr_volume</span></code>. For question 2, you should analyze one observation per center, not one observation per transplant recipient. (<u>Hint</u>: Tagging can help with this)</p></li>
-</ol>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>      Percentiles      Smallest
- <span class="m">1</span>%            <span class="m">8</span>              <span class="m">8</span>
- <span class="m">5</span>%            <span class="m">8</span>              <span class="m">8</span>
-<span class="m">10</span>%           <span class="m">26</span>             <span class="m">26</span>       Obs                  <span class="m">25</span>
-<span class="m">25</span>%           <span class="m">61</span>             <span class="m">54</span>       Sum of Wgt.          <span class="m">25</span>
-
-<span class="m">50</span>%           <span class="m">79</span>                      Mean                 <span class="m">80</span>
-                        Largest       Std. Dev.      <span class="m">34.17358</span>
-<span class="m">75</span>%          <span class="m">105</span>            <span class="m">116</span>
-<span class="m">90</span>%          <span class="m">127</span>            <span class="m">127</span>       Variance       <span class="m">1167.833</span>
-<span class="m">95</span>%          <span class="m">128</span>            <span class="m">128</span>       Skewness      <span class="o">-</span>.<span class="m">5265107</span>
-<span class="m">99</span>%          <span class="m">128</span>            <span class="m">128</span>       Kurtosis       <span class="m">2.662681</span>
-</pre></div>
-</div>
-<ol class="arabic simple" start="3">
-<li><p>Generate a variable called <code class="docutils literal notranslate"><span class="pre">unknown</span></code> which is a 1 for all patients whose cause of end-stage renal disease (ESRD) is unknown/uncertain/blank (<code class="docutils literal notranslate"><span class="pre">extended_dgn</span></code> = “ESRD UNKNOWN ETIOLOGY”, “ESRD OF UNCERTAIN ETIOLOGY”, etc.) and a zero for all other patients. Display the following sentence:</p></li>
-</ol>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>xxx of <span class="m">2000</span> patients (yy<span class="m">.</span>y%) have<span class="k"> an</span> unknown cause of ESRD.
-</pre></div>
-</div>
-<p>Except fill in the correct numbers.</p>
-<p><code class="docutils literal notranslate"><span class="pre">My</span> <span class="pre">count</span> <span class="pre">was</span> <span class="pre">893</span> <span class="pre">but</span> <span class="pre">this</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">all</span> <span class="pre">over</span> <span class="pre">the</span> <span class="pre">map.</span> <span class="pre">Just</span> <span class="pre">give</span> <span class="pre">credit</span> <span class="pre">if</span> <span class="pre">they</span> <span class="pre">made</span> <span class="pre">a</span> <span class="pre">reasonable</span> <span class="pre">effort</span></code></p>
-<ol class="arabic simple" start="4">
-<li><p>How many patients died within six months of their transplant (died==1 and transplant date falls ≤ 180 days before end date)? Display the following sentence:</p></li>
-</ol>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>xxx of <span class="m">2000</span> patients (yy<span class="m">.</span>y%) died within <span class="m">6</span> months of their transplant date.
-</pre></div>
-</div>
-<p>Except fill in the correct numbers.</p>
-<p><code class="docutils literal notranslate"><span class="pre">46/2.3%</span></code></p>
-<ol class="arabic simple" start="5">
-<li><p>For each blood type, what is the mean waiting time for a transplant? (variable: wait_yrs) What is the median waiting time for a transplant? Use egen, tagging, and list to display the blood type, mean wait time, and median wait time of each blood type so that only one record is displayed per blood type.</p></li>
-</ol>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>     abo      meanw    medianw  
-     <span class="m">1</span>=A   <span class="m">1.989718</span>    <span class="m">1.57974</span>  
-     <span class="m">2</span>=B   <span class="m">2.609568</span>   <span class="m">2.253251</span>  
-    <span class="m">3</span>=AB   <span class="m">1.414879</span>   <span class="m">1.045859</span>  
-     <span class="m">4</span>=O   <span class="m">2.649108</span>   <span class="m">2.313484</span>  
-</pre></div>
-</div>
-<p>Lab 4 Part 2</p>
-<ol class="arabic simple" start="6">
-<li><p>Create a variable called <code class="docutils literal notranslate"><span class="pre">over50</span></code> which is a 1 for any recipient age &gt;50 and 0 for everyone else. Draw a survival curve stratified by over50.</p></li>
-</ol>
-<p><strong>Q:</strong> I have a Stata dataset with transplant_date as a string in DMY format. how may I convert it to a standard date (i.e. 0=01jan1960)?</p>
-<p><strong>chatGPT:</strong> To convert a string variable representing dates in the “DMY” format to a standard date format in Stata, you can use the following steps:</p>
-<p><span class="math notranslate nohighlight">\(\vdots\)</span></p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> transplant_date_num = <span class="nf">date</span>(transplant_date, <span class="s">&quot;DMY&quot;</span>)
-<span class="k">format</span> transplant_date_std <span class="nx">%td</span>
-</pre></div>
-</div>
-<p><strong>Q:</strong> Danke</p>
-<p><strong>chatGPT:</strong> Gern geschehen! Wenn Sie weitere Fragen haben, stehe ich Ihnen gerne zur Verfügung.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>import delimited https:<span class="o">//</span>raw<span class="m">.</span>githubusercontent<span class="m">.</span>com<span class="o">/</span>jhustata<span class="o">/</span>livre<span class="o">/</span>main<span class="o">/</span>transplants<span class="m">.</span>txt,<span class="k"> clear</span> 
-<span class="k">g</span> over50=age<span class="o">&gt;</span><span class="m">50</span><span class="k"> if</span> <span class="o">!</span><span class="nf">missing</span>(age)
-<span class="k">g</span> transplant_date_num = <span class="nf">date</span>(transplant_date, <span class="s">&quot;DMY&quot;</span>)
-<span class="k">format</span> transplant_date_num <span class="nx">%td</span> 
-<span class="k">format</span> end_date <span class="nx">%td</span> 
-<span class="k">order</span> transplant_date_num end_date
-<span class="k">stset</span> end_date,origin(transplant_date_num) entry(transplant_date_num) fail(died) scale(<span class="m">365.25</span>)
-<span class="k">sts graph</span>,<span class="k"> by</span>(over50)
-<span class="k">graph</span> export lab4q7<span class="m">.</span>png,<span class="k"> replace</span>  
-</pre></div>
-</div>
-<p><img alt="" src="_images/lab4q7.png" /></p>
-<ol class="arabic simple" start="7">
-<li><p>Is the difference in post-transplant survival by over50 statistically significant (p&gt;0.05)? Write one of the following sentences:</p></li>
-</ol>
-<p><code class="docutils literal notranslate"><span class="pre">There</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">statistically</span> <span class="pre">significant</span> <span class="pre">difference</span> <span class="pre">in</span> <span class="pre">survival</span> <span class="pre">by</span> <span class="pre">age</span> <span class="pre">category</span> <span class="pre">(p&lt;0.05)</span></code></p>
-<p>or</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>There is<span class="k"> no</span> statistically significant difference<span class="k"> in</span> survival<span class="k"> by</span> age category (p=<span class="m">0.</span>x)
-</pre></div>
-</div>
-<ol class="arabic simple" start="8">
-<li><p>Run a Cox regression on over50 (command <code class="docutils literal notranslate"><span class="pre">stcox</span> <span class="pre">over50</span></code>). Print this sentence:</p></li>
-</ol>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>Hazard<span class="k"> ratio</span>: x<span class="m">.</span>xx (<span class="m">95</span>% CI y<span class="m">.</span>yy<span class="o">-</span>z<span class="m">.</span>zz) 
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">3.44</span> <span class="pre">(2.50-4.76)</span></code></p>
-<p>Except fill in the correct values.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>
-use transplants, clear
-
-//q1, 10pt
-bys ctr_id: gen ctr_volume= _N  
-
-//q2, 10pt
-bys ctr_id: gen tx_id = _n
-egen ctr_tag = tag(ctr_id )
-
-summarize ctr_volume if ctr_tag==1, detail 
-
-//q3, 20pt  ; give a full 20 to any N&gt;800
-tab extended_dgn  
-gen unknown=0 
-
-replace unknown=1 if regexm(ext, &quot;UNCERTAIN&quot;) | regexm(ext, &quot;BLANK&quot;) | regexm(ext, &quot;NO REPORT&quot;) | regexm(ext, &quot;^NOT SPECI&quot;) | regexm(ext, &quot;NA$&quot;) | regexm(ext, &quot;UNK&quot;) | regexm(ext, &quot;UNCLEAR&quot;) | regexm(ext, &quot;UNDET&quot;) | regexm(ext, &quot;U$&quot;) | regexm(ext, &quot;OTHER&quot;) | regexm(ext, &quot;ETIOLOGY$&quot;) | regexm(ext, &quot;COMPLEX CAUSES&quot;) | regexm(ext, &quot;UNOS 999&quot;) | regexm(ext, &quot;UKNOWN&quot;)  
-tab extended_dgn unknown
-tab unknown
-count if unknown==1
-display r(N)
-disp (r(N)/(_N)*100)
-disp r(N) &quot; of 2000 patients (&quot; %2.1f (r(N)/(_N)*100) &quot;%) have an unknown cause of ESRD.&quot;
-
-//q4, 10pt
-format end_date %tdnn/dd/CCYY
-gen died_180=0
-replace died_180=1 if died==1 &amp; ( end_date- transplant_date&lt;=180)  
-count if died_180==1  
-display r(N)  
-disp (r(N)/(_N)*100)  
-disp r(N) &quot; of 2000 patients (&quot; %2.1f (r(N)/(_N)*100) &quot;%) died within 6 months of their transplant date.&quot;  
-
-//q5, 10pt 
-sort abo  
-egen abotag = tag(abo)  
-bys abo: egen mean_time = mean(wait_yrs)  
-bys abo: egen median_time = median(wait_yrs)  
-list abo mean_time median_time if abotag==1, noobs  
-
-
-//q6, 10pt
-gen over50=0  
-replace over50=1 if age&gt;50
-assert age!=.
-stset end_date, origin(transplant_date) failure(died==1) scale (365.25)  
-sts graph, by(over50) t
-
-//q7, 15pt 
-sts test over50   
-scalar p=(1-chi2(r(df), r(chi2)))  
-if p &lt; 0.05 {  
-    disp &quot;There is a statistically significant difference in survival by age category (p&lt;0.05)&quot;
-}
-if p &gt; 0.05 {
-    disp &quot;There is no statistically significant difference in survival by age category (p=&quot; p &quot;)&quot;
-}
-
-//q8, 15pt
-qui stcox over50  
-
-if c(version) &lt; 16 {
-	disp &quot;Hazard ratio:  &quot; %3.2f exp(_b[over50]) &quot; (95% CI &quot; /// 
-	                       %3.2f exp(_b[over50]+invnormal(0.025)*_se[over50]) ///
-					   &quot;-&quot; %3.2f exp(_b[over50]+invnormal(0.975)*_se[over50]) &quot;)&quot;
-}
-else {
-	qui lincom over50 
-	disp &quot;Hazard ratio:  &quot; %3.2f exp(r(estimate)) &quot; (95% CI &quot; ///
-	                       %3.2f exp(r(lb)) ///
-					   &quot;-&quot; %3.2f exp(r(ub)) &quot;)&quot;
-}
-
-
-</pre></div>
-</div>
+</section>
+<section id="assignment">
+<h2>🧑🏾‍💻 Assignment<a class="headerlink" href="#assignment" title="Permalink to this heading">#</a></h2>
+<p>Create your own project folder with this layout:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data/</span></code> – include a sample <code class="docutils literal notranslate"><span class="pre">.dta</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output/</span></code> – save a log and graph</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">code/</span></code> – write your <code class="docutils literal notranslate"><span class="pre">master.do</span></code> that automates loading, analyzing, exporting</p></li>
+</ul>
 </section>
 </section>
 
@@ -571,7 +539,13 @@ else {
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1">Part 1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">🎯 Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-directories-matter">📂 Why Directories Matter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-level-vs-stata-level">🔧 System-Level vs. Stata-Level</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-project-structure">🏗️ Example Project Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-os-agnostic-code">🖥️ Writing OS-Agnostic Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reflection-questions">🤔 Reflection Questions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">🧑🏾‍💻 Assignment</a></li>
 </ul>
   </nav></div>
 

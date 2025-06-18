@@ -1,0 +1,697 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>📘 Stata Lecture Notes – Preparing for Lab 3 &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter3-alt';</script>
+    <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logos-vertical.jpg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/logos-vertical.jpg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">📘 Collaborative Stata Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">🔁 <em>Macros and the Art of Memory</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">⚙️ Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/chapter3-alt.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter3-alt.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>📘 Stata Lecture Notes – Preparing for Lab 3</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-logic-chi-square">🔹 1. Conditional Logic + Chi-Square</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-clean-binary-variables">🔹 2. Creating Clean Binary Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-translate-real-world-conditions-into-clean-0-1-variables">Goal: Translate real-world conditions into clean 0/1 variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression-and-interpreting-odds-ratios">🔹 3. Logistic Regression and Interpreting Odds Ratios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-a-program-to-display-odds-ratios-in-a-clean-format">🔁 4. Writing a <code class="docutils literal notranslate"><span class="pre">program</span></code> to Display Odds Ratios in a Clean Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-loop-basic-loop-over-fixed-variables"><code class="docutils literal notranslate"><span class="pre">table_loop</span></code> — Basic Loop Over Fixed Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalizing-the-program-with-syntax-varlist">🧰 5. Generalizing the Program with <code class="docutils literal notranslate"><span class="pre">syntax</span> <span class="pre">varlist</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-varlist-flexible-version"><code class="docutils literal notranslate"><span class="pre">table_varlist</span></code> – Flexible Version</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles-macros-and-variable-creation">📊 6. Percentiles, Macros, and Variable Creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exporting-a-clean-regression-table-to-excel">📤 7. Exporting a Clean Regression Table to Excel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-of-lecture-recap-stretch">🧠 End of Lecture: Recap + Stretch</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="stata-lecture-notes-preparing-for-lab-3">
+<h1>📘 Stata Lecture Notes – Preparing for Lab 3<a class="headerlink" href="#stata-lecture-notes-preparing-for-lab-3" title="Permalink to this heading">#</a></h1>
+<p><strong>Session Length</strong>: ~4 hours
+<strong>Goal</strong>: Students should confidently use <code class="docutils literal notranslate"><span class="pre">if/else</span></code>, create binary variables, write simple <code class="docutils literal notranslate"><span class="pre">programs</span></code>, loop over variable lists, and export regression tables.</p>
+<hr class="docutils" />
+<section id="conditional-logic-chi-square">
+<h2>🔹 1. Conditional Logic + Chi-Square<a class="headerlink" href="#conditional-logic-chi-square" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>💡 <em>Stata can be taught to speak in complete English sentences — when you know how to control the logic.</em></p>
+</div></blockquote>
+<p><strong>Concepts Covered:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tabulate</span> <span class="pre">var1</span> <span class="pre">var2,</span> <span class="pre">chi2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scalar</span></code>, <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">list</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">display</span></code>, <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">else</span></code></p></li>
+</ul>
+<section id="example">
+<h3>Example:<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants<span class="m">.</span>dta,<span class="k"> clear</span>
+
+<span class="k">tabulate</span> rec_work gender, chi2
+
+<span class="k">scalar</span> p = <span class="nf">r</span>(p)
+
+<span class="k">if</span> p <span class="o">&lt;</span> <span class="m">0.05</span> {
+<span class="k">    display</span> <span class="s">&quot;Question 1: Working for income is associated with gender, p = &quot;</span> <span class="nx">%5.3f</span> p
+}
+<span class="k">else</span> {
+<span class="k">    display</span> <span class="s">&quot;Question 1: Working for income is NOT associated with gender, p = &quot;</span> <span class="nx">%5.3f</span> p
+}
+</pre></div>
+</div>
+<blockquote>
+<div><p>✅ <strong>Skills Gained</strong>: How to retrieve and use the p-value from a test using <code class="docutils literal notranslate"><span class="pre">scalar</span></code> and <code class="docutils literal notranslate"><span class="pre">if/else</span></code>.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="creating-clean-binary-variables">
+<h2>🔹 2. Creating Clean Binary Variables<a class="headerlink" href="#creating-clean-binary-variables" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>🧠 <em>Binary variables are the currency of logistic regression. You must be able to define your own currency.</em></p>
+</div></blockquote>
+<section id="goal-translate-real-world-conditions-into-clean-0-1-variables">
+<h3>Goal: Translate real-world conditions into clean 0/1 variables<a class="headerlink" href="#goal-translate-real-world-conditions-into-clean-0-1-variables" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> hypertensive = (dx <span class="o">==</span> <span class="m">4</span>)
+
+<span class="k">gen</span> college = <span class="cs">///</span>
+    <span class="nf">inlist</span>(educ, <span class="m">4</span>, <span class="m">5</span>, <span class="m">6</span>)  <span class="c1">// any college, associates, bachelors, grad</span>
+
+<span class="k">gen</span> male = (gender <span class="o">==</span> <span class="m">1</span>)   <span class="c1">// assuming 1=male, 2=female</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>✳️ Tip: Use <code class="docutils literal notranslate"><span class="pre">label</span> <span class="pre">define</span></code> and <code class="docutils literal notranslate"><span class="pre">label</span> <span class="pre">values</span></code> to keep your binary variables readable.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="logistic-regression-and-interpreting-odds-ratios">
+<h2>🔹 3. Logistic Regression and Interpreting Odds Ratios<a class="headerlink" href="#logistic-regression-and-interpreting-odds-ratios" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">logistic</span> hypertensive age bmi college male
+</pre></div>
+</div>
+<p>Then get readable odds ratios:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">estimates</span> store model1
+esttab model1, eform
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="writing-a-program-to-display-odds-ratios-in-a-clean-format">
+<h2>🔁 4. Writing a <code class="docutils literal notranslate"><span class="pre">program</span></code> to Display Odds Ratios in a Clean Format<a class="headerlink" href="#writing-a-program-to-display-odds-ratios-in-a-clean-format" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>🔄 <em>You don’t want to copy/paste regression output. Make Stata do it for you.</em></p>
+</div></blockquote>
+<section id="table-loop-basic-loop-over-fixed-variables">
+<h3><code class="docutils literal notranslate"><span class="pre">table_loop</span></code> — Basic Loop Over Fixed Variables<a class="headerlink" href="#table-loop-basic-loop-over-fixed-variables" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">program</span> define table_loop
+<span class="k">    foreach var in</span> age bmi college male {
+<span class="k">        quietly logistic</span> hypertensive <span class="nv">`var&#39;</span>
+<span class="k">        local</span> or = <span class="nf">exp</span>(_b[<span class="nv">`var&#39;</span>])
+<span class="k">        local</span> lb = <span class="nf">exp</span>(_b[<span class="nv">`var&#39;</span>] <span class="o">-</span> <span class="m">1.96</span> <span class="o">*</span> _se[<span class="nv">`var&#39;</span>])
+<span class="k">        local</span> ub = <span class="nf">exp</span>(_b[<span class="nv">`var&#39;</span>] <span class="o">+</span> <span class="m">1.96</span> <span class="o">*</span> _se[<span class="nv">`var&#39;</span>])
+<span class="k">        display</span> <span class="s">&quot;</span><span class="nv">`var&#39;</span><span class="s">&quot;</span> _col(<span class="m">15</span>) <span class="nx">%4.2f</span> <span class="nv">`or&#39;</span> <span class="s">&quot; (&quot;</span> <span class="nx">%4.2f</span> <span class="nv">`lb&#39;</span> <span class="s">&quot; - &quot;</span> <span class="nx">%4.2f</span> <span class="nv">`ub&#39;</span> <span class="s">&quot;)&quot;</span>
+    }
+<span class="k">end</span>
+
+table_loop
+</pre></div>
+</div>
+<blockquote>
+<div><p>✅ <strong>Skills Gained</strong>: Using coefficient and standard error to build a confidence interval manually.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="generalizing-the-program-with-syntax-varlist">
+<h2>🧰 5. Generalizing the Program with <code class="docutils literal notranslate"><span class="pre">syntax</span> <span class="pre">varlist</span></code><a class="headerlink" href="#generalizing-the-program-with-syntax-varlist" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>🔧 <em>Now that they’ve seen it hardcoded, time to teach them how to generalize it with <code class="docutils literal notranslate"><span class="pre">syntax</span> <span class="pre">varlist</span></code>.</em></p>
+</div></blockquote>
+<section id="table-varlist-flexible-version">
+<h3><code class="docutils literal notranslate"><span class="pre">table_varlist</span></code> – Flexible Version<a class="headerlink" href="#table-varlist-flexible-version" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">program</span> define table_varlist
+<span class="k">    syntax varlist</span>
+<span class="k">    display</span> <span class="s">&quot;Regression table (Question 3)&quot;</span>
+<span class="k">    foreach var</span> of<span class="k"> varlist</span> <span class="nv">`varlist&#39;</span> {
+<span class="k">        quietly logistic</span> hypertensive <span class="nv">`var&#39;</span>
+<span class="k">        local</span> or = <span class="nf">exp</span>(_b[<span class="nv">`var&#39;</span>])
+<span class="k">        local</span> lb = <span class="nf">exp</span>(_b[<span class="nv">`var&#39;</span>] <span class="o">-</span> <span class="m">1.96</span> <span class="o">*</span> _se[<span class="nv">`var&#39;</span>])
+<span class="k">        local</span> ub = <span class="nf">exp</span>(_b[<span class="nv">`var&#39;</span>] <span class="o">+</span> <span class="m">1.96</span> <span class="o">*</span> _se[<span class="nv">`var&#39;</span>])
+<span class="k">        display</span> <span class="s">&quot;</span><span class="nv">`var&#39;</span><span class="s">&quot;</span> _col(<span class="m">15</span>) <span class="nx">%4.2f</span> <span class="nv">`or&#39;</span> <span class="s">&quot; (&quot;</span> <span class="nx">%4.2f</span> <span class="nv">`lb&#39;</span> <span class="s">&quot; - &quot;</span> <span class="nx">%4.2f</span> <span class="nv">`ub&#39;</span> <span class="s">&quot;)&quot;</span>
+    }
+<span class="k">end</span>
+
+table_varlist age bmi college male
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="percentiles-macros-and-variable-creation">
+<h2>📊 6. Percentiles, Macros, and Variable Creation<a class="headerlink" href="#percentiles-macros-and-variable-creation" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>📈 <em>How do you make a variable that depends on the 75th percentile of another?</em></p>
+</div></blockquote>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">summarize</span> rec_hgt_cm, detail
+<span class="k">scalar</span> p75 = <span class="nf">r</span>(p75)
+<span class="k">gen</span> tall = (rec_hgt_cm <span class="o">&gt;=</span> p75)
+<span class="k">label</span> variable tall <span class="s">&quot;Height ≥ 75th percentile&quot;</span>
+</pre></div>
+</div>
+<p>Other variables:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> white = (race <span class="o">==</span> <span class="m">1</span>) <span class="c1">// assuming 1 = white</span>
+<span class="k">gen</span> age_10y = age <span class="o">/</span> <span class="m">10</span>
+<span class="k">label</span> variable age_10y <span class="s">&quot;Age (per 10y)&quot;</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="exporting-a-clean-regression-table-to-excel">
+<h2>📤 7. Exporting a Clean Regression Table to Excel<a class="headerlink" href="#exporting-a-clean-regression-table-to-excel" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>📤 <em>Professional tables come from <code class="docutils literal notranslate"><span class="pre">putexcel</span></code>.</em></p>
+</div></blockquote>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">logistic</span> tall age_10y rec_wgt_kg gender white
+
+putexcel<span class="k"> set</span> lab3_output<span class="m">.</span>xlsx,<span class="k"> replace</span>
+putexcel A1 = (<span class="s">&quot;Variable&quot;</span>) B1 = (<span class="s">&quot;OR (95% CI)&quot;</span>)
+
+<span class="k">foreach var in</span> age_10y rec_wgt_kg gender white {
+<span class="k">    local</span> or = <span class="nf">exp</span>(_b[<span class="nv">`var&#39;</span>])
+<span class="k">    local</span> lb = <span class="nf">exp</span>(_b[<span class="nv">`var&#39;</span>] <span class="o">-</span> <span class="m">1.96</span> <span class="o">*</span> _se[<span class="nv">`var&#39;</span>])
+<span class="k">    local</span> ub = <span class="nf">exp</span>(_b[<span class="nv">`var&#39;</span>] <span class="o">+</span> <span class="m">1.96</span> <span class="o">*</span> _se[<span class="nv">`var&#39;</span>])
+<span class="k">    local ci</span> = <span class="nf">string</span>(<span class="nv">`or&#39;</span>, <span class="s">&quot;%4.2f&quot;</span>) <span class="o">+</span> <span class="s">&quot; (&quot;</span> <span class="o">+</span> <span class="cs">///</span>
+                <span class="nf">string</span>(<span class="nv">`lb&#39;</span>, <span class="s">&quot;%4.2f&quot;</span>) <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">+</span> <span class="cs">///</span>
+                <span class="nf">string</span>(<span class="nv">`ub&#39;</span>, <span class="s">&quot;%4.2f&quot;</span>) <span class="o">+</span> <span class="s">&quot;)&quot;</span>
+    putexcel A<span class="nv">`=_n+1&#39;</span> = <span class="s">&quot;</span><span class="nv">`var&#39;</span><span class="s">&quot;</span> B<span class="nv">`=_n+1&#39;</span> = <span class="s">&quot;</span><span class="nv">`ci&#39;</span><span class="s">&quot;</span>
+}
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="end-of-lecture-recap-stretch">
+<h2>🧠 End of Lecture: Recap + Stretch<a class="headerlink" href="#end-of-lecture-recap-stretch" title="Permalink to this heading">#</a></h2>
+<p><strong>By now, they can:</strong></p>
+<ul class="simple">
+<li><p>Use conditional logic to control output</p></li>
+<li><p>Define 0/1 variables cleanly</p></li>
+<li><p>Run logistic models and interpret ORs</p></li>
+<li><p>Write flexible <code class="docutils literal notranslate"><span class="pre">program</span></code>s that loop</p></li>
+<li><p>Export clean tables to Excel</p></li>
+</ul>
+<blockquote>
+<div><p>🧪 <strong>Stretch challenge (optional)</strong>: Try making <code class="docutils literal notranslate"><span class="pre">table_varlist</span></code> also accept the outcome variable as a parameter.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-logic-chi-square">🔹 1. Conditional Logic + Chi-Square</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-clean-binary-variables">🔹 2. Creating Clean Binary Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goal-translate-real-world-conditions-into-clean-0-1-variables">Goal: Translate real-world conditions into clean 0/1 variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression-and-interpreting-odds-ratios">🔹 3. Logistic Regression and Interpreting Odds Ratios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-a-program-to-display-odds-ratios-in-a-clean-format">🔁 4. Writing a <code class="docutils literal notranslate"><span class="pre">program</span></code> to Display Odds Ratios in a Clean Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-loop-basic-loop-over-fixed-variables"><code class="docutils literal notranslate"><span class="pre">table_loop</span></code> — Basic Loop Over Fixed Variables</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalizing-the-program-with-syntax-varlist">🧰 5. Generalizing the Program with <code class="docutils literal notranslate"><span class="pre">syntax</span> <span class="pre">varlist</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-varlist-flexible-version"><code class="docutils literal notranslate"><span class="pre">table_varlist</span></code> – Flexible Version</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles-macros-and-variable-creation">📊 6. Percentiles, Macros, and Variable Creation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exporting-a-clean-regression-table-to-excel">📤 7. Exporting a Clean Regression Table to Excel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-of-lecture-recap-stretch">🧠 End of Lecture: Recap + Stretch</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Vincent Jin & Abimereki Muzaale
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

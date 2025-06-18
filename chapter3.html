@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Loops and program syntax &#8212; Stata Programming</title>
+    <title>⚙️ Loops and program syntax &#8212; Stata Programming</title>
   
   
   
@@ -187,7 +187,7 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chapter1.html">📘 Collaborative Stata Programming</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter2.html">🔁 <em>Macros and the Art of Memory</em></a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Loops and program syntax</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">⚙️ Loops and program syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Quick References</a></li>
@@ -360,7 +360,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>3. Loops and program syntax</h1>
+    <h1>⚙️ Loops and program syntax</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -370,17 +370,45 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loops">3.1 Loops</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-numeric-values">3.1.1 Over numeric values</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-string-values">3.1.2 Over string values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-learning-philosophy">Key Learning Philosophy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-understanding-macros">Part 1: Understanding Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-macro">What is a Macro?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-macros">Types of Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#local-macros">Local Macros</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#global-macros">Global Macros</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#program-syntax">3.2 program syntax</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#myfirst">3.2.1 myfirst</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mysecond">3.2.2 mysecond</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mythird">3.2.3 mythird</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#myfourth">3.2.4. myfourth</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#myfifth">3.2.5. myfifth</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-flexibility">Macro Flexibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-persistence-and-scope">Macro Persistence and Scope</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-cross-platform-programming-with-macros">Part 2: Cross-Platform Programming with Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slash-issue-problem">The Slash Issue Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-use-macros-for-os-detection">Solution: Use Macros for OS Detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-understanding-loops">Part 3: Understanding Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-loop">What is a Loop?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-establish-a-loop-in-stata">How to Establish a Loop in Stata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-elements-of-a-loop">Key Elements of a Loop</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-practical-loop-examples">Part 4: Practical Loop Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-1-display-information-multiple-times">Target 1: Display Information Multiple Times</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#without-loop">Without Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-loop-much-more-efficient">With Loop (Much More Efficient!)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-learning-stata-programming">Best Practices for Learning Stata Programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#professional-development-approach">Professional Development Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effective-learning-strategies">Effective Learning Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-programming-skills">Building Your Programming Skills</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways-for-graduate-students">Key Takeaways for Graduate Students</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps-for-continued-learning">Next Steps for Continued Learning</a></li>
 </ul>
 </li>
 </ul>
@@ -395,591 +423,191 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="loops-and-program-syntax">
-<h1>3. Loops and program syntax<a class="headerlink" href="#loops-and-program-syntax" title="Permalink to this heading">#</a></h1>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="c1">#import numpy as np</span>
-<span class="c1">#import sklearn as skl</span>
-<span class="c1"># </span>
-
-<span class="c1">#plt.figure(figsize=[2, 2])</span>
-<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">550</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">550</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">960</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;syntax&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">950</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;ado&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">550</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">550</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;dta&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1900</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;excel&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;word&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;publish&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">950</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span> <span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">,</span><span class="s2">&quot;ado&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;syntax&quot;</span><span class="p">,</span> <span class="s2">&quot;do&quot;</span><span class="p">)])</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;ado&quot;</span><span class="p">,</span> <span class="s2">&quot;command&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="s2">&quot;queue&quot;</span><span class="p">)</span> <span class="p">])</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;excel&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;word&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;html&quot;</span><span class="p">)])</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;dta&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;log&quot;</span><span class="p">)])</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;dta&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;log&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;word&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">)])</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> 
-        <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">),</span> 
-        <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
-        <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> 
-        <span class="n">node_size</span> <span class="o">=</span> <span class="mi">4500</span><span class="p">,</span>
-        <span class="n">node_color</span> <span class="o">=</span> <span class="s2">&quot;lightblue&quot;</span><span class="p">,</span>
-        <span class="n">linewidths</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">collections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s2">&quot;#000000&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<h1>⚙️ Loops and program syntax<a class="headerlink" href="#loops-and-program-syntax" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="chapter3-old.html"><span class="std std-doc">Old</span></a> notes</p></li>
+<li><p><a class="reference internal" href="chapter3-alt.html"><span class="std std-doc">Alt</span></a> notes (for Stata 13)</p></li>
+</ul>
+<section id="key-learning-philosophy">
+<h2>Key Learning Philosophy<a class="headerlink" href="#key-learning-philosophy" title="Permalink to this heading">#</a></h2>
+<p><strong>Important Perspective</strong>: We cannot exhaust the number of Stata commands available - there are simply too many, and it’s not worth your time to memorize them all. Instead, focus on mastering the fundamental programming concepts that will make you efficient and effective.</p>
+<p><strong>Core Focus</strong>: Macros and loops are by far the central part of Stata programming. These are the tools that will transform you from a basic Stata user into a sophisticated programmer.</p>
+</section>
+<hr class="docutils" />
+<section id="part-1-understanding-macros">
+<h2>Part 1: Understanding Macros<a class="headerlink" href="#part-1-understanding-macros" title="Permalink to this heading">#</a></h2>
+<section id="what-is-a-macro">
+<h3>What is a Macro?<a class="headerlink" href="#what-is-a-macro" title="Permalink to this heading">#</a></h3>
+<p>A macro is a way to store and reuse information in Stata. Think of it as a container that holds either:</p>
+<ul class="simple">
+<li><p><strong>Temporary information</strong> (local macros)</p></li>
+<li><p><strong>Persistent information</strong> (global macros)</p></li>
+</ul>
+</section>
+<section id="types-of-macros">
+<h3>Types of Macros<a class="headerlink" href="#types-of-macros" title="Permalink to this heading">#</a></h3>
+<section id="local-macros">
+<h4>Local Macros<a class="headerlink" href="#local-macros" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Exist only within the current session/program</p></li>
+<li><p>Syntax: <code class="docutils literal notranslate"><span class="pre">local</span> <span class="pre">macro_name</span> <span class="pre">=</span> <span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">local</span> <span class="pre">macro_name</span> <span class="pre">&quot;some</span> <span class="pre">string&quot;</span></code></p></li>
+<li><p>Called using: <code class="docutils literal notranslate"><span class="pre">macro_name'</span></code> (note the backtick and apostrophe)</p></li>
+</ul>
+</section>
+<section id="global-macros">
+<h4>Global Macros<a class="headerlink" href="#global-macros" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Persist across sessions and programs</p></li>
+<li><p>Syntax: <code class="docutils literal notranslate"><span class="pre">global</span> <span class="pre">macro_name</span> <span class="pre">:</span> <span class="pre">di</span> <span class="pre">&quot;some</span> <span class="pre">string&quot;</span></code></p></li>
+<li><p>Called using: <code class="docutils literal notranslate"><span class="pre">$macro_name</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="macro-flexibility">
+<h3>Macro Flexibility<a class="headerlink" href="#macro-flexibility" title="Permalink to this heading">#</a></h3>
+<p>The way we assign string values to macros is highly flexible - it’s not just for strings! You can use macros for:</p>
+<ul class="simple">
+<li><p>Numbers and calculations</p></li>
+<li><p>Variable names</p></li>
+<li><p>Command options</p></li>
+<li><p>File paths</p></li>
+<li><p>Complex expressions</p></li>
+</ul>
+<p><strong>Pro Tip</strong>: Use <code class="docutils literal notranslate"><span class="pre">help</span> <span class="pre">local</span></code> to discover the full range of possibilities.</p>
+</section>
+<section id="macro-persistence-and-scope">
+<h3>Macro Persistence and Scope<a class="headerlink" href="#macro-persistence-and-scope" title="Permalink to this heading">#</a></h3>
+<p><strong>Key Concept</strong>: Understanding which macros are redefined when new commands are executed, and which remain unchanged.</p>
+<ul class="simple">
+<li><p><strong>Refreshed with commands</strong>: <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">ereturn</span> <span class="pre">list</span></code></p></li>
+<li><p><strong>Remains constant and defined system-wide</strong>: <code class="docutils literal notranslate"><span class="pre">creturn</span> <span class="pre">list</span></code></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-2-cross-platform-programming-with-macros">
+<h2>Part 2: Cross-Platform Programming with Macros<a class="headerlink" href="#part-2-cross-platform-programming-with-macros" title="Permalink to this heading">#</a></h2>
+<section id="the-slash-issue-problem">
+<h3>The Slash Issue Problem<a class="headerlink" href="#the-slash-issue-problem" title="Permalink to this heading">#</a></h3>
+<p>Different operating systems use different directory separators:</p>
+<ul class="simple">
+<li><p><strong>MacOS</strong>: <code class="docutils literal notranslate"><span class="pre">/</span></code> (forward slash)</p></li>
+<li><p><strong>Windows</strong>: <code class="docutils literal notranslate"><span class="pre">\</span></code> (backslash)</p></li>
+</ul>
+</section>
+<section id="solution-use-macros-for-os-detection">
+<h3>Solution: Use Macros for OS Detection<a class="headerlink" href="#solution-use-macros-for-os-detection" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">// Example - use macros to address the slash issue in different OS</span>
+<span class="k">if</span> (<span class="s">&quot;</span><span class="nv">`c(os)&#39;</span><span class="s">&quot;</span> <span class="o">==</span> <span class="s">&quot;MacOSX&quot;</span>) {
+<span class="k">    global</span> slash :<span class="k"> di</span> <span class="s">&quot;/&quot;</span>
+}
+<span class="k">else if</span> (<span class="s">&quot;</span><span class="nv">`c(os)&#39;</span><span class="s">&quot;</span> <span class="o">==</span> <span class="s">&quot;Windows&quot;</span>) {
+<span class="k">    global</span> slash :<span class="k"> di</span> <span class="s">&quot;</span><span class="se">\&quot;</span>
+}
 </pre></div>
 </div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="_images/cf897162df8cde377a32eb942eea0152ade328c27161cecc7805ebaa9c2a1742.png" src="_images/cf897162df8cde377a32eb942eea0152ade328c27161cecc7805ebaa9c2a1742.png" />
-</div>
-</div>
-<p>By now you should be aware that our key ambitions are to:</p>
+<p>This approach makes your code portable across different operating systems.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="part-3-understanding-loops">
+<h2>Part 3: Understanding Loops<a class="headerlink" href="#part-3-understanding-loops" title="Permalink to this heading">#</a></h2>
+<section id="what-is-a-loop">
+<h3>What is a Loop?<a class="headerlink" href="#what-is-a-loop" title="Permalink to this heading">#</a></h3>
+<p>There are many definitions, but here’s a practical understanding:</p>
+<p><strong>Loops are certain chunks of code that are consecutively executed until a designated end has been reached.</strong></p>
+<p><strong>Every single execution in the loop is called an iteration of the loop.</strong></p>
+</section>
+<section id="how-to-establish-a-loop-in-stata">
+<h3>How to Establish a Loop in Stata<a class="headerlink" href="#how-to-establish-a-loop-in-stata" title="Permalink to this heading">#</a></h3>
+<p><strong>Basic Approaches</strong>:</p>
 <ol class="arabic simple">
-<li><p>Learn the commands and syntax that generate output, typically for statistical inference</p></li>
-<li><p>Identify the names of the <code class="docutils literal notranslate"><span class="pre">c()</span></code>, <code class="docutils literal notranslate"><span class="pre">r()</span></code>, or <code class="docutils literal notranslate"><span class="pre">e()</span></code> class <u>system-defined</u> macros that define key parameters in our output</p></li>
-<li><p>Format these values to fit aesthetic, publication, or editorial criteria and save them as <u>user-defined</u> macros</p></li>
-<li><p>Embed the macros into text, graph, or file (.xlsx, .log, .dta, .docx, .html)</p></li>
-<li><p>Achieve these aims in a workflow that is automated, collaborative, open, reproducible, legible, user-friendly, and therefore <strong>rigorous</strong></p></li>
+<li><p><strong>forvalues</strong> - to loop through a certain range of values</p></li>
+<li><p><strong>foreach</strong> - to loop through a certain list</p></li>
+<li><p><strong>while</strong> - to loop until a certain condition is satisfied/unsatisfied</p></li>
 </ol>
-<p>Today we are going to focus on commands and syntax that exponentially increase our efficiency in coding, a key step towards automation. One way to achieve this is by learning about loops. The other is by writing flexible programs that are driven by user-defined inputs.</p>
-<section id="loops">
-<h2>3.1 Loops<a class="headerlink" href="#loops" title="Permalink to this heading">#</a></h2>
-<section id="over-numeric-values">
-<h3>3.1.1 Over numeric values<a class="headerlink" href="#over-numeric-values" title="Permalink to this heading">#</a></h3>
-<p>Take this code snippet for instance</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">forvalues</span> i = <span class="m">1</span><span class="o">/</span><span class="m">26</span> {
-<span class="k">    di</span> <span class="nv">`i&#39;</span>
-}
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> forvalues</span> i =	<span class="m">1</span><span class="o">/</span><span class="m">26</span>	{
-<span class="m">2</span>.    <span class="k"> di</span> <span class="nv">`i&#39;</span>
-<span class="m">3</span>. }
-<span class="m">1</span>
-<span class="m">2</span>
-<span class="m">3</span>
-<span class="m">4</span>
-<span class="m">5</span>
-<span class="m">6</span>
-<span class="m">7</span>
-<span class="m">8</span>
-<span class="m">9</span>
-<span class="m">10</span>
-<span class="m">11</span>
-<span class="m">12</span>
-<span class="m">13</span>
-<span class="m">14</span>
-<span class="m">15</span>
-<span class="m">16</span>
-<span class="m">17</span>
-<span class="m">18</span>
-<span class="m">19</span>
-<span class="m">20</span>
-<span class="m">21</span>
-<span class="m">22</span>
-<span class="m">23</span>
-<span class="m">24</span>
-<span class="m">25</span>
-<span class="m">26</span>
-
-. 
-</pre></div>
-</div>
-<p><img alt="" src="_images/forvalues_chatGPT.png" /></p>
-<p>And take this one:</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
-<span class="k">foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span> {
-<span class="k">	di</span> <span class="nv">`v&#39;</span>
-}
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> transplants,<span class="k"> clear</span>
-
-.<span class="k"> foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span>	{
-<span class="m">2</span>.        <span class="k"> di</span> <span class="nv">`v&#39;</span>
-<span class="m">3</span>. }
-<span class="m">1</span>
-<span class="m">12</span>
-<span class="m">18551.324</span>
-<span class="m">177</span>
-<span class="m">79</span>
-<span class="m">2</span>
-<span class="m">0</span>
-<span class="m">9</span>
-<span class="m">4</span>
-<span class="m">157.48</span>
-<span class="m">69.58</span>
-<span class="m">28</span>
-<span class="m">0</span>
-<span class="m">56</span>
-<span class="m">28</span>
-<span class="m">20421.895</span>
-<span class="m">0</span>
-<span class="m">1</span>
-<span class="m">5.1937032</span>
-<span class="m">4</span>
-<span class="m">1</span>
-<span class="m">0</span>
-<span class="m">0</span>
-<span class="m">1</span>
-<span class="m">1</span>
-REFLUX NEPHROPATHY
-
-. 
-</pre></div>
-</div>
-<p><img alt="" src="_images/forvalues2_chatGPT.png" /></p>
 </section>
-<section id="over-string-values">
-<h3>3.1.2 Over string values<a class="headerlink" href="#over-string-values" title="Permalink to this heading">#</a></h3>
-<p>Let’s make a subtle modification to the code snippet above:</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
-<span class="k">foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span> {
-<span class="k">	di</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span>
-}
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> transplants,<span class="k"> clear</span>
-
-.<span class="k"> foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span>	{
-<span class="m">2</span>.        <span class="k"> di</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span>
-<span class="m">3</span>. }
-fake_id
-ctr_id
-transplant_date
-don_hgt_cm
-don_wgt_kg
-don_cod
-don_ecd
-dx
-race
-rec_hgt_cm
-rec_wgt_kg
-bmi
-prev_ki
-age
-peak_pra
-end_date
-died
-tx_failed
-wait_yrs
-abo
-gender
-rec_hcv_antibody
-rec_work
-pretx_cmv
-rec_education
-extended_dgn
-
-. 
-</pre></div>
-</div>
-<p>The code you provided loads a dataset named “transplants” and then iterates over all the variables in that dataset using a foreach loop.</p>
-<p>Within each iteration of the loop, the di command is used to display the name of the current variable v.</p>
-<p>Based on the output you provided, it seems that the dataset “transplants” contains a list of variable names. The code successfully printed the names of each variable in the dataset, with one variable name displayed per line. The variable names include “fake_id”, “ctr_id”, “transplant_date”, “don_hgt_cm”, “don_wgt_kg”, and so on.</p>
-<p>The code snippet you provided successfully displays the names of the variables in the dataset “transplants”.</p>
-<p>– chatGPT</p>
-<p>What is the output:code ratio in these two examples I’ve given? Might that be a crude metric of efficiency?</p>
-<p>Consider the following code snippet:</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
-<span class="k">foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span> {
-<span class="k">	if</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">!=</span> <span class="s">&quot;died&quot;</span> | <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">!=</span><span class="s">&quot;extended_dgn&quot;</span> {
-<span class="k">	    capture logistic</span> died <span class="nv">`v&#39;</span>
-<span class="k">	    capture lincom</span> <span class="nv">`v&#39;</span>
-<span class="k">	    scalar</span> p = <span class="nf">r</span>(p)
-<span class="k">	    di</span> <span class="s">&quot;p-value for </span><span class="nv">`v&#39;</span><span class="s"> : &quot;</span> p 	
-	}
-<span class="k">	else</span> {
-<span class="k">		di</span> <span class="s">&quot; &quot;</span>
-	}
-	
-	
-}
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> transplants,<span class="k"> clear</span>
-
-.<span class="k"> foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span> {
-<span class="m">2</span>.        <span class="k"> if</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">!=</span> <span class="s">&quot;died&quot;</span>  <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">!=</span><span class="s">&quot;extended_dgn&quot;</span>	{
-<span class="m">3</span>.            <span class="k"> capture logistic</span> died <span class="nv">`v&#39;</span>
-<span class="m">4</span>.            <span class="k"> capture lincom</span> <span class="nv">`v&#39;</span>
-<span class="m">5</span>.            <span class="k"> scalar</span> p = <span class="nf">r</span>(p)
-<span class="m">6</span>.            <span class="k"> di</span> <span class="s">&quot;p-value for </span><span class="nv">`v&#39;</span><span class="s"> : &quot;</span> p   
-<span class="m">7</span>.         }
-<span class="m">8</span>.        <span class="k"> else</span> {
-<span class="m">9</span>.                <span class="k"> di</span> <span class="s">&quot; &quot;</span>
-<span class="m">10</span>.         }
-<span class="m">11</span>.         
-.         
-. }
-p<span class="o">-</span>value<span class="k"> for</span> fake_id : .<span class="m">46371117</span>
-p<span class="o">-</span>value<span class="k"> for</span> ctr_id : .<span class="m">52178434</span>
-p<span class="o">-</span>value<span class="k"> for</span> transplant_date : <span class="m">2.926e-24</span>
-p<span class="o">-</span>value<span class="k"> for</span> don_hgt_cm : .<span class="m">93751316</span>
-p<span class="o">-</span>value<span class="k"> for</span> don_wgt_kg : .<span class="m">49371195</span>
-p<span class="o">-</span>value<span class="k"> for</span> don_cod : .<span class="m">25255576</span>
-p<span class="o">-</span>value<span class="k"> for</span> don_ecd : <span class="m">6.736e-13</span>
-p<span class="o">-</span>value<span class="k"> for</span> dx : .<span class="m">00894634</span>
-p<span class="o">-</span>value<span class="k"> for</span> race : .<span class="m">00028468</span>
-p<span class="o">-</span>value<span class="k"> for</span> rec_hgt_cm : .<span class="m">01878141</span>
-p<span class="o">-</span>value<span class="k"> for</span> rec_wgt_kg : .<span class="m">10279242</span>
-p<span class="o">-</span>value<span class="k"> for</span> bmi : .<span class="m">67785746</span>
-p<span class="o">-</span>value<span class="k"> for</span> prev_ki : .<span class="m">02051579</span>
-p<span class="o">-</span>value<span class="k"> for</span> age : <span class="m">1.648e-20</span>
-p<span class="o">-</span>value<span class="k"> for</span> peak_pra : .<span class="m">02585959</span>
-p<span class="o">-</span>value<span class="k"> for</span> end_date : <span class="m">2.891e-63</span>
-p<span class="o">-</span>value<span class="k"> for</span> died : .
-p<span class="o">-</span>value<span class="k"> for</span> tx_failed : .
-p<span class="o">-</span>value<span class="k"> for</span> wait_yrs : .<span class="m">49225994</span>
-p<span class="o">-</span>value<span class="k"> for</span> abo : .<span class="m">03522145</span>
-p<span class="o">-</span>value<span class="k"> for</span> gender : .<span class="m">10388923</span>
-p<span class="o">-</span>value<span class="k"> for</span> rec_hcv_antibody : .<span class="m">02039008</span>
-p<span class="o">-</span>value<span class="k"> for</span> rec_work : .<span class="m">00018548</span>
-p<span class="o">-</span>value<span class="k"> for</span> pretx_cmv : .<span class="m">17525206</span>
-p<span class="o">-</span>value<span class="k"> for</span> rec_education : .<span class="m">47738727</span>
-p<span class="o">-</span>value<span class="k"> for</span> extended_dgn : .
-</pre></div>
-</div>
-<p><img alt="" src="_images/chatGPT1.png" /></p>
-<p><img alt="" src="_images/chatgpt4.png" /></p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">local</span> decimal_format <span class="s">&quot;%.2f&quot;</span>
-
-<span class="k">foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span> {
-<span class="k">    if</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">!=</span> <span class="s">&quot;died&quot;</span> <span class="o">&amp;</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">!=</span> <span class="s">&quot;extended_dgn&quot;</span> {
-<span class="k">        capture logistic</span> died <span class="nv">`v&#39;</span>
-<span class="k">        capture lincom</span> <span class="nv">`v&#39;</span>
-<span class="k">        scalar</span> p = <span class="nf">r</span>(p)
-<span class="k">        </span>
-<span class="k">        local</span> p_value_label <span class="s">&quot;&quot;</span>
-<span class="k">        </span>
-<span class="k">        if</span> p <span class="o">&lt;</span> <span class="m">0.01</span> {
-<span class="k">            local</span> p_value_label <span class="s">&quot;p&lt;0.01&quot;</span>
-        }
-<span class="k">        else if</span> p <span class="o">&lt;=</span> <span class="m">0.05</span> {
-<span class="k">            local</span> p_value_label <span class="nf">string</span>(<span class="nf">round</span>(p, <span class="m">0.01</span>))
-        }
-<span class="k">        else</span> {
-<span class="k">            local</span> p_value_label <span class="nf">string</span>(<span class="nf">round</span>(p, <span class="m">0.1</span>))
-        }
-<span class="k">        </span>
-<span class="k">        di</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s"> : &quot;</span> <span class="nv">`p_value_label&#39;</span>
-    }
-<span class="k">    else</span> {
-<span class="k">        di</span> <span class="s">&quot; &quot;</span>
-    }
-}
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> local</span> decimal_format <span class="s">&quot;%.2f&quot;</span>
-
-. 
-.<span class="k"> foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span> {
-<span class="m">2</span>.    <span class="k"> if</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">!=</span> <span class="s">&quot;died&quot;</span> <span class="o">&amp;</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">!=</span> <span class="s">&quot;extended_dgn&quot;</span> {
-<span class="m">3</span>.        <span class="k"> capture logistic</span> died <span class="nv">`v&#39;</span>
-<span class="m">4</span>.        <span class="k"> capture lincom</span> <span class="nv">`v&#39;</span>
-<span class="m">5</span>.        <span class="k"> scalar</span> p = <span class="nf">r</span>(p)
-<span class="m">6</span>.         
-.        <span class="k"> local</span> p_value_label <span class="s">&quot;&quot;</span>
-<span class="m">7</span>.         
-.        <span class="k"> if</span> p <span class="o">&lt;</span> <span class="m">0.01</span> {
-<span class="m">8</span>.            <span class="k"> local</span> p_value_label <span class="s">&quot;p&lt;0.01&quot;</span>
-<span class="m">9</span>.         }
-<span class="m">10</span>.        <span class="k"> else if</span> p <span class="o">&lt;=</span> <span class="m">0.05</span> {
-<span class="m">11</span>.            <span class="k"> local</span> p_value_label <span class="nf">string</span>(<span class="nf">round</span>(p, <span class="m">0.01</span>))
-<span class="m">12</span>.         }
-<span class="m">13</span>.        <span class="k"> else</span> {
-<span class="m">14</span>.            <span class="k"> local</span> p_value_label <span class="nf">string</span>(<span class="nf">round</span>(p, <span class="m">0.1</span>))
-<span class="m">15</span>.         }
-<span class="m">16</span>.         
-.        <span class="k"> di</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s"> : &quot;</span> <span class="nv">`p_value_label&#39;</span>
-<span class="m">17</span>.     }
-<span class="m">18</span>.    <span class="k"> else</span> {
-<span class="m">19</span>.        <span class="k"> di</span> <span class="s">&quot; &quot;</span>
-<span class="m">20</span>.     }
-<span class="m">21</span>. }
-fake_id : .<span class="m">5</span>
-ctr_id : .<span class="m">5</span>
-transplant_date : <span class="m">1</span>
-don_hgt_cm : .<span class="m">9</span>
-don_wgt_kg : .<span class="m">5</span>
-don_cod : .<span class="m">3</span>
-don_ecd : <span class="m">1</span>
-dx : <span class="m">1</span>
-race : <span class="m">1</span>
-rec_hgt_cm : .<span class="m">02</span>
-rec_wgt_kg : .<span class="m">1</span>
-bmi : .<span class="m">7</span>
-prev_ki : .<span class="m">02</span>
-age : <span class="m">1</span>
-peak_pra : .<span class="m">03</span>
-end_date : <span class="m">1</span>
-
-tx_failed : .
-wait_yrs : .<span class="m">5</span>
-abo : .<span class="m">04</span>
-gender : .<span class="m">1</span>
-rec_hcv_antibody : .<span class="m">02</span>
-rec_work : <span class="m">1</span>
-pretx_cmv : .<span class="m">2</span>
-rec_education : .<span class="m">5</span>
-</pre></div>
-</div>
-<p><img alt="" src="_images/chatGPT6.png" /></p>
-<p>And so you can use AI as an assistant or copilot for labs, work, and fun:</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
-
-<span class="k">local</span> decimal_format <span class="s">&quot;%.2f&quot;</span>
-
-<span class="c1">// Create an empty Excel file</span>
-putexcel<span class="k"> set</span> results<span class="m">.</span>xlsx,<span class="k"> replace</span>
-
-<span class="c1">// Write variable names and formatted p-values to Excel</span>
-putexcel A1 = <span class="s">&quot;Variable&quot;</span> B1 = <span class="s">&quot;p-value&quot;</span>
-
-<span class="k">local</span> row = <span class="m">2</span>
-<span class="k">foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span> {
-<span class="k">    if</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">!=</span> <span class="s">&quot;died&quot;</span> <span class="o">&amp;</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">!=</span> <span class="s">&quot;extended_dgn&quot;</span> {
-<span class="k">        capture logistic</span> died <span class="nv">`v&#39;</span>
-<span class="k">        capture lincom</span> <span class="nv">`v&#39;</span>
-<span class="k">        scalar</span> p = <span class="nf">r</span>(p)
-<span class="k">        </span>
-<span class="k">        local</span> p_value_label <span class="s">&quot;&quot;</span>
-<span class="k">        </span>
-<span class="k">        if</span> p <span class="o">&lt;</span> <span class="m">0.01</span> {
-<span class="k">            local</span> p_value_label <span class="s">&quot;p&lt;0.01&quot;</span>
-        }
-<span class="k">        else if</span> p <span class="o">&lt;=</span> <span class="m">0.05</span> {
-<span class="k">            local</span> p_value_label:<span class="k"> di</span> <span class="nx">%3.2f</span> p
-        }
-<span class="k">        else</span> {
-<span class="k">            local</span> p_value_label:<span class="k"> di</span> <span class="nx">%2.1f</span> p
-        }
-        
-        putexcel A<span class="nv">`row&#39;</span> = <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span>
-        putexcel B<span class="nv">`row&#39;</span> = <span class="s">&quot;</span><span class="nv">`p_value_label&#39;</span><span class="s">&quot;</span> 
-<span class="k">        </span>
-<span class="k">        local</span> row = <span class="nv">`row&#39;</span> <span class="o">+</span> <span class="m">1</span>
-    }
-}
-
-<span class="c1">// Save and close the Excel file</span>
-putexcel<span class="k"> close</span>
-</pre></div>
-</div>
-<p>Let’s build our skills even further by introducing some powerful and new commands:</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
-<span class="k">foreach</span> v of<span class="k"> varlist</span> <span class="o">*</span> {
-<span class="k">	qui ds</span>, has(type string)
-<span class="k">	if</span> <span class="nf">r</span>(varlist) <span class="o">==</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> {
-<span class="k">		 di</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s"> is a string&quot;</span>
-	}
-<span class="k">	else if</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s">&quot;</span> <span class="o">==</span> <span class="s">&quot;died&quot;</span> {
-<span class="k">		di</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s"> is the outcome&quot;</span>
-	}
-<span class="k">	else</span> {
-<span class="k">		di</span> <span class="s">&quot;</span><span class="nv">`v&#39;</span><span class="s"> is numeric&quot;</span>
-<span class="k">		logistic</span> died <span class="nv">`v&#39;</span>
-<span class="k">		di</span> _b[<span class="nv">`v&#39;</span>]
-	}
-	
-}
-</pre></div>
-</div>
-<p>Based on the code you provided, it appears that you want to iterate over each variable in the “transplants” dataset and perform different actions based on whether the variable is numeric, string, or the outcome variable “died”. Additionally, for numeric variables, you want to fit a logistic regression model and display the coefficient.</p>
-<p>This code snippet checks whether the variable is a string or the outcome variable “died” using the ds command. If it is a string, it displays a message indicating that it is a string variable. If it is the outcome variable “died”, it displays a message indicating that it is the outcome variable. If it is a numeric variable, it fits a logistic regression model with “died” as the dependent variable and v as the independent variable. It then displays the coefficient of v using _b[v’]`.</p>
-<p>– chatGPT (because I don’t enjoy annotating my code!!!)</p>
+<section id="key-elements-of-a-loop">
+<h3>Key Elements of a Loop<a class="headerlink" href="#key-elements-of-a-loop" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Loop defining keywords</strong> (forvalues/foreach/while)</p></li>
+<li><p><strong>A name of the macro</strong> used to store the changing values</p></li>
+<li><p><strong>Brackets</strong> to define the loop’s scope</p></li>
+</ol>
 </section>
 </section>
-<section id="program-syntax">
-<h2>3.2 program syntax<a class="headerlink" href="#program-syntax" title="Permalink to this heading">#</a></h2>
-<p>We wrote our first program on Monday and today we should build on that foundation.</p>
-<section id="myfirst">
-<h3>3.2.1 myfirst<a class="headerlink" href="#myfirst" title="Permalink to this heading">#</a></h3>
-<p>Remember the program? The quickest way to locate it among the sytem ado-files is as follows:</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">which</span> myfirst
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> which</span> myfirst
-<span class="o">/</span>Applications<span class="o">/</span>Stata<span class="o">/</span>ado<span class="o">/</span>base<span class="o">/</span>m<span class="o">/</span>myfirst<span class="m">.</span>ado
-
-. 
-</pre></div>
-</div>
-<p>Here it is:</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">program</span> define myfirst
-<span class="k">   display</span> <span class="s">&quot;Hello, class!&quot;</span>
-<span class="k">end</span> 
-
-myfirst
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>. myfirst
-Hello,<span class="k"> class</span><span class="o">!</span>
-
-. 
+<hr class="docutils" />
+<section id="part-4-practical-loop-examples">
+<h2>Part 4: Practical Loop Examples<a class="headerlink" href="#part-4-practical-loop-examples" title="Permalink to this heading">#</a></h2>
+<section id="target-1-display-information-multiple-times">
+<h3>Target 1: Display Information Multiple Times<a class="headerlink" href="#target-1-display-information-multiple-times" title="Permalink to this heading">#</a></h3>
+<p>Let’s say we want to display the string “Hello World” for 5 times.</p>
+<section id="without-loop">
+<h4>Without Loop<a class="headerlink" href="#without-loop" title="Permalink to this heading">#</a></h4>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">di</span> <span class="s">&quot;Hello World&quot;</span>
+<span class="k">di</span> <span class="s">&quot;Hello World&quot;</span>
+<span class="k">di</span> <span class="s">&quot;Hello World&quot;</span>
+<span class="k">di</span> <span class="s">&quot;Hello World&quot;</span>
+<span class="k">di</span> <span class="s">&quot;Hello World&quot;</span>
 </pre></div>
 </div>
 </section>
-<section id="mysecond">
-<h3>3.2.2 mysecond<a class="headerlink" href="#mysecond" title="Permalink to this heading">#</a></h3>
-<p>Consider the following program. No, its not your second. We are going to use it as a springboard for many other programs. This Program enables a user with Stata versions before 16 (i.e., c(version) &lt; 17) to extract macros for beta p-values and 95%CI after a regression. W</p>
-<p>While troubleshooting, we learned yesterday that Stata version 15 and earlier return only r(estimate) and r(se) after <code class="docutils literal notranslate"><span class="pre">regression</span></code> and <code class="docutils literal notranslate"><span class="pre">lincom</span></code> commands. So might we be able to provide the additional macros including p-values and 95%CI via a program we write?</p>
-<p>The answer is an emphatic yes! And here is such a program. I lay it out here just so you can test it. But we will gradually build our skills from a simple premise to this level of sophistication.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">capture program drop</span> stata13
-<span class="k">program</span> define stata13
-<span class="k">    syntax varlist</span>,<span class="k"> test</span>(numlist)
-<span class="k">	</span>
-<span class="k">	local</span> y:<span class="k"> di</span> <span class="nf">word</span>(<span class="s">&quot;</span><span class="nv">`varlist&#39;</span><span class="s">&quot;</span>,<span class="m">1</span>)
-<span class="k">	if</span> <span class="nv">`test&#39;</span> <span class="o">==</span> <span class="m">1</span> {
-<span class="k">		di in</span> red <span class="s">&quot;The outcome can&#39;t be tested!&quot;</span>
-<span class="k">		exit</span> <span class="m">340</span>
-	}
-<span class="k">	noi logistic</span> <span class="nv">`varlist&#39;</span>
-<span class="k">	local</span> x<span class="nv">`test&#39;</span>:<span class="k"> di</span> <span class="nf">word</span>(<span class="s">&quot;</span><span class="nv">`varlist&#39;</span><span class="s">&quot;</span>,<span class="nv">`test&#39;</span>)	
-	cls
-<span class="k">	scalar</span> z = _b[<span class="nv">`x`test&#39;&#39;</span>]<span class="o">/</span>_se[<span class="nv">`x`test&#39;&#39;</span>]
-<span class="k">	noi di</span> <span class="s">&quot;z statistic for </span><span class="nv">`x`test&#39;&#39;</span><span class="s">: &quot;</span> z
-<span class="k">	scalar</span> p = <span class="m">2</span><span class="o">*</span>(<span class="m">1</span><span class="o">-</span><span class="nf">normal</span>(<span class="nf">abs</span>(z)))
-<span class="k">	noi di</span> <span class="s">&quot;p-value for </span><span class="nv">`x`test&#39;&#39;</span><span class="s">: &quot;</span> p 
-<span class="k">	di</span> <span class="s">&quot;lower bound of 95% CI for </span><span class="nv">`x`test&#39;&#39;</span><span class="s">: &quot;</span> <span class="nf">exp</span>(_b[<span class="nv">`x`test&#39;&#39;</span>]<span class="o">+</span><span class="nf">invnormal</span>(<span class="m">0.025</span>) <span class="o">*</span> _se[<span class="nv">`x`test&#39;&#39;</span>])
-<span class="k">	di</span> <span class="s">&quot;upper bound of 95% CI for </span><span class="nv">`x`test&#39;&#39;</span><span class="s">: &quot;</span> <span class="nf">exp</span>(_b[<span class="nv">`x`test&#39;&#39;</span>]<span class="o">+</span><span class="nf">invnormal</span>(<span class="m">0.975</span>) <span class="o">*</span> _se[<span class="nv">`x`test&#39;&#39;</span>])	
-<span class="k">	lincom</span> <span class="nv">`x`test&#39;&#39;</span>
-
-<span class="k">end</span> 
-
-<span class="k">use</span> transplants,<span class="k"> clear</span> 
-stata13 died prev age gender race dx bmi peak_pra don_ecd wait_yrs,<span class="k"> test</span>(<span class="m">4</span>)
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> transplants,<span class="k"> clear</span> 
-
-. stata13 died prev age gender race dx bmi peak_pra don_ecd wait_yrs,<span class="k"> test</span>(<span class="m">4</span>)
-
-Logistic regression                                     Number of obs =  <span class="m">1</span>,<span class="m">518</span>
-                                                        LR <span class="nf">chi2</span>(<span class="m">9</span>)    = <span class="m">114.86</span>
-                                                        Prob <span class="o">&gt;</span> chi2   = <span class="m">0.0000</span>
-Log likelihood = <span class="o">-</span><span class="m">518.87252</span>                             Pseudo R2     = <span class="m">0.0996</span>
-
-<span class="o">------------------------------------------------------------------------------</span>
-        died | Odds<span class="k"> ratio</span>   Std.<span class="k"> err</span>.      z    P<span class="o">&gt;</span>|z|     [<span class="m">95</span>%<span class="k"> conf</span>. interval]
-<span class="o">-------------+----------------------------------------------------------------</span>
-     prev_ki |    .<span class="m">941235</span>   .<span class="m">3097531</span>    <span class="o">-</span><span class="m">0.18</span>   <span class="m">0.854</span>     .<span class="m">4938263</span>    <span class="m">1.793998</span>
-         age |   <span class="m">1.052174</span>   .<span class="m">0078088</span>     <span class="m">6.85</span>   <span class="m">0.000</span>      <span class="m">1.03698</span>    <span class="m">1.067591</span>
-      gender |   .<span class="m">8965847</span>   .<span class="m">1610239</span>    <span class="o">-</span><span class="m">0.61</span>   <span class="m">0.543</span>     .<span class="m">6305479</span>    <span class="m">1.274866</span>
-        race |   .<span class="m">8689853</span>   .<span class="m">0496138</span>    <span class="o">-</span><span class="m">2.46</span>   <span class="m">0.014</span>     .<span class="m">7769875</span>     .<span class="m">971876</span>
-          dx |   <span class="m">1.036562</span>   .<span class="m">0277149</span>     <span class="m">1.34</span>   <span class="m">0.179</span>     .<span class="m">9836403</span>    <span class="m">1.092331</span>
-         bmi |   .<span class="m">9869627</span>   .<span class="m">0165649</span>    <span class="o">-</span><span class="m">0.78</span>   <span class="m">0.434</span>     .<span class="m">9550244</span>    <span class="m">1.019969</span>
-    peak_pra |   .<span class="m">9989866</span>   .<span class="m">0034624</span>    <span class="o">-</span><span class="m">0.29</span>   <span class="m">0.770</span>     .<span class="m">9922234</span>    <span class="m">1.005796</span>
-     don_ecd |   <span class="m">1.775691</span>   .<span class="m">3403014</span>     <span class="m">3.00</span>   <span class="m">0.003</span>     <span class="m">1.219662</span>    <span class="m">2.585208</span>
-    wait_yrs |   .<span class="m">9609635</span>   .<span class="m">0432799</span>    <span class="o">-</span><span class="m">0.88</span>   <span class="m">0.377</span>     .<span class="m">8797726</span>    <span class="m">1.049647</span>
-       _cons |   .<span class="m">0143836</span>   .<span class="m">0095138</span>    <span class="o">-</span><span class="m">6.41</span>   <span class="m">0.000</span>     .<span class="m">0039342</span>    .<span class="m">0525873</span>
-<span class="o">------------------------------------------------------------------------------</span>
-Note: _cons<span class="k"> estimates</span> baseline odds.
-z statistic<span class="k"> for</span> gender: <span class="o">-</span>.<span class="m">60781897</span>
-p<span class="o">-</span>value<span class="k"> for</span> gender: .<span class="m">54330755</span>
-lower bound of <span class="m">95</span>% CI<span class="k"> for</span> gender: .<span class="m">63054792</span>
-upper bound of <span class="m">95</span>% CI<span class="k"> for</span> gender: <span class="m">1.2748661</span>
-
- ( <span class="m">1</span>)  [died]gender = <span class="m">0</span>
-
-<span class="o">------------------------------------------------------------------------------</span>
-        died | Odds<span class="k"> ratio</span>   Std.<span class="k"> err</span>.      z    P<span class="o">&gt;</span>|z|     [<span class="m">95</span>%<span class="k"> conf</span>. interval]
-<span class="o">-------------+----------------------------------------------------------------</span>
-         (<span class="m">1</span>) |   .<span class="m">8965847</span>   .<span class="m">1610239</span>    <span class="o">-</span><span class="m">0.61</span>   <span class="m">0.543</span>     .<span class="m">6305479</span>    <span class="m">1.274866</span>
-<span class="o">------------------------------------------------------------------------------</span>
-</pre></div>
-</div>
-<p>Let our second program extract the <code class="docutils literal notranslate"><span class="pre">syntax</span> <span class="pre">varlist</span></code> code that has been introduced</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">capture program drop</span> mysecond
-<span class="k">program</span> define my second
-<span class="k">     syntax varlist</span>
-<span class="k">     di</span> <span class="s">&quot;This is my second program&quot;</span>
-<span class="k">end</span>
-
-mysecond
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> capture program drop</span> mysecond
-
-.<span class="k"> program</span> define mysecond
-<span class="m">1</span>.     <span class="k"> syntax varlist</span>
-<span class="m">2</span>.     <span class="k"> di</span> <span class="s">&quot;This is my second	program&quot;</span>
-<span class="m">3</span>.<span class="k"> end</span>
-
-. 
-. mysecond
-<span class="k">varlist</span> required
-<span class="nf">r</span>(<span class="m">100</span>);
+<section id="with-loop-much-more-efficient">
+<h4>With Loop (Much More Efficient!)<a class="headerlink" href="#with-loop-much-more-efficient" title="Permalink to this heading">#</a></h4>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">forvalues</span> i = <span class="m">1</span><span class="o">/</span><span class="m">5</span> {
+<span class="k">    di</span> <span class="s">&quot;Hello World&quot;</span>
+}
 </pre></div>
 </div>
 </section>
-<section id="mythird">
-<h3>3.2.3 mythird<a class="headerlink" href="#mythird" title="Permalink to this heading">#</a></h3>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">capture program drop</span> mythird
-<span class="k">program</span> define mysecond
-<span class="k">     syntax varlist</span>
-<span class="k">	 qui logistic</span> <span class="nv">`varlist&#39;</span>
-<span class="k">     di</span> <span class="s">&quot;This is my third program&quot;</span>
-<span class="k">	 </span>
-<span class="k">end</span>
-
-<span class="k">use</span> transplants,<span class="k"> clear</span>
-mythird died gender
-</pre></div>
-</div>
 </section>
-<section id="myfourth">
-<h3>3.2.4. myfourth<a class="headerlink" href="#myfourth" title="Permalink to this heading">#</a></h3>
-<p>capture program drop myfourth
-program define myfourth
-syntax varlist
-qui logistic `varlist’
-di e(cmdline)</p>
-<p>end</p>
-<p>use transplants, clear
-mytfourth died gender</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> capture program drop</span> mythird
-
-.<span class="k"> program</span> define mythird
-<span class="m">1</span>.     <span class="k"> syntax varlist</span>
-<span class="m">2</span>.         <span class="k"> qui logistic</span> <span class="nv">`varlist&#39;</span>
-<span class="m">3</span>.     <span class="k"> di e</span>(cmdline) 
-<span class="m">4</span>.          
-.<span class="k"> end</span>
-
-. 
-.<span class="k"> use</span> transplants,<span class="k"> clear</span>
-
-. mythird died gender
-<span class="k">logistic</span> died gender
-
-. 
-<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
-
-. 
-</pre></div>
-</div>
 </section>
-<section id="myfifth">
-<h3>3.2.5. myfifth<a class="headerlink" href="#myfifth" title="Permalink to this heading">#</a></h3>
+<hr class="docutils" />
+<section id="best-practices-for-learning-stata-programming">
+<h2>Best Practices for Learning Stata Programming<a class="headerlink" href="#best-practices-for-learning-stata-programming" title="Permalink to this heading">#</a></h2>
+<section id="professional-development-approach">
+<h3>Professional Development Approach<a class="headerlink" href="#professional-development-approach" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Use .do files</strong> for all your work - this is the professional standard</p></li>
+<li><p><strong>Focus on practical applications</strong> - learn concepts through real-world examples</p></li>
+<li><p><strong>Develop systematic habits</strong> - consistent approach to coding and documentation</p></li>
+</ul>
+</section>
+<section id="effective-learning-strategies">
+<h3>Effective Learning Strategies<a class="headerlink" href="#effective-learning-strategies" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Annotation</strong>: Always comment your code to explain what each section does</p></li>
+<li><p><strong>Live Testing</strong>: Run and modify code iteratively to understand behavior</p></li>
+<li><p><strong>Reproducible Workflow</strong>: Build code that others (and future you) can understand and run</p></li>
+</ol>
+</section>
+<section id="building-your-programming-skills">
+<h3>Building Your Programming Skills<a class="headerlink" href="#building-your-programming-skills" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Save and organize your code examples for future reference</p></li>
+<li><p>Create a personal library of useful macros and loop structures</p></li>
+<li><p>Practice translating repetitive tasks into efficient programmatic solutions</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="key-takeaways-for-graduate-students">
+<h2>Key Takeaways for Graduate Students<a class="headerlink" href="#key-takeaways-for-graduate-students" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Don’t memorize commands</strong> - focus on understanding programming logic</p></li>
+<li><p><strong>Master macros and loops</strong> - these are your power tools</p></li>
+<li><p><strong>Think about portability</strong> - write code that works across different systems</p></li>
+<li><p><strong>Practice with .do files</strong> - this is how professionals work</p></li>
+<li><p><strong>Use loops to avoid repetition</strong> - if you’re copying and pasting code, there’s probably a loop solution</p></li>
+</ol>
+<section id="next-steps-for-continued-learning">
+<h3>Next Steps for Continued Learning<a class="headerlink" href="#next-steps-for-continued-learning" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Practice the examples and concepts covered in these notes</p></li>
+<li><p>Experiment with different types of loops in your own data projects</p></li>
+<li><p>Start incorporating macros into your regular Stata workflow</p></li>
+<li><p>Build a personal collection of useful code snippets and templates</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -1048,17 +676,45 @@ mytfourth died gender</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loops">3.1 Loops</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-numeric-values">3.1.1 Over numeric values</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#over-string-values">3.1.2 Over string values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-learning-philosophy">Key Learning Philosophy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-understanding-macros">Part 1: Understanding Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-macro">What is a Macro?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-macros">Types of Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#local-macros">Local Macros</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#global-macros">Global Macros</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#program-syntax">3.2 program syntax</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#myfirst">3.2.1 myfirst</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mysecond">3.2.2 mysecond</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mythird">3.2.3 mythird</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#myfourth">3.2.4. myfourth</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#myfifth">3.2.5. myfifth</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-flexibility">Macro Flexibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-persistence-and-scope">Macro Persistence and Scope</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-cross-platform-programming-with-macros">Part 2: Cross-Platform Programming with Macros</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slash-issue-problem">The Slash Issue Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-use-macros-for-os-detection">Solution: Use Macros for OS Detection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-understanding-loops">Part 3: Understanding Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-loop">What is a Loop?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-establish-a-loop-in-stata">How to Establish a Loop in Stata</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-elements-of-a-loop">Key Elements of a Loop</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-4-practical-loop-examples">Part 4: Practical Loop Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target-1-display-information-multiple-times">Target 1: Display Information Multiple Times</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#without-loop">Without Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#with-loop-much-more-efficient">With Loop (Much More Efficient!)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-learning-stata-programming">Best Practices for Learning Stata Programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#professional-development-approach">Professional Development Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#effective-learning-strategies">Effective Learning Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-your-programming-skills">Building Your Programming Skills</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways-for-graduate-students">Key Takeaways for Graduate Students</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps-for-continued-learning">Next Steps for Continued Learning</a></li>
 </ul>
 </li>
 </ul>

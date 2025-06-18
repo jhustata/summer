@@ -1,0 +1,969 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Return values, macros, programs &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter2-old';</script>
+    <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logos-vertical.jpg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/logos-vertical.jpg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">📘 Collaborative Stata Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">🔁 <em>Stata Macros: The Essential Guide</em> — <em>Code, Cognition, and the Art of Memory</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/chapter2-old.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter2-old.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2. Return values, macros, programs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xlsx">2.1 xlsx</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log">2.2 log</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dta">2.3 dta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docx">2.4 docx</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putdocx">2.4.1. Putdocx</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dyndoc">2.4.2. dyndoc</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#author-md-mph">Author, MD MPH</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#html">2.5 html</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-embed-stata-results-in-html">2.5.1. How to embed Stata results in .html</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Author, MD MPH</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="return-values-macros-programs">
+<h1>2. Return values, macros, programs<a class="headerlink" href="#return-values-macros-programs" title="Permalink to this heading">#</a></h1>
+<p>Let’s briefly recap what we covered yesterday</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1">#import numpy as np</span>
+<span class="c1">#import sklearn as skl</span>
+<span class="c1"># </span>
+
+<span class="c1">#plt.figure(figsize=[2, 2])</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">550</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">550</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">960</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;syntax&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">950</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;ado&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">550</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">550</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;dta&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1900</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;excel&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;word&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;publish&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">950</span><span class="p">))</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span> <span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">,</span><span class="s2">&quot;ado&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;syntax&quot;</span><span class="p">,</span> <span class="s2">&quot;do&quot;</span><span class="p">)])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;ado&quot;</span><span class="p">,</span> <span class="s2">&quot;command&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="s2">&quot;queue&quot;</span><span class="p">)</span> <span class="p">])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;excel&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;word&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;html&quot;</span><span class="p">)])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;dta&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;log&quot;</span><span class="p">)])</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;dta&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;log&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;word&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">)])</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> 
+        <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">),</span> 
+        <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+        <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> 
+        <span class="n">node_size</span> <span class="o">=</span> <span class="mi">4500</span><span class="p">,</span>
+        <span class="n">node_color</span> <span class="o">=</span> <span class="s2">&quot;lightblue&quot;</span><span class="p">,</span>
+        <span class="n">linewidths</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">collections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s2">&quot;#000000&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/33bbe53bb3c153b21c1bc1d1faa8f4f131dc950a7156c514a9fa2ac5a52984c7.png" src="_images/33bbe53bb3c153b21c1bc1d1faa8f4f131dc950a7156c514a9fa2ac5a52984c7.png" />
+</div>
+</div>
+<p>Results/Output</p>
+<ul class="simple">
+<li><p>A sequence or queue of instructions <code class="docutils literal notranslate"><span class="pre">commands</span> <span class="pre">+</span> <span class="pre">syntax</span> <span class="pre">=</span> <span class="pre">code</span></code> given to Stata via a do-file will generate results</p></li>
+<li><p><u>Never</u> include results in your do-file when you share your work in this class and with future collaborators</p></li>
+<li><p>Due diligence in the <code class="docutils literal notranslate"><span class="pre">open-science</span></code> enterprise demands that others <code class="docutils literal notranslate"><span class="pre">reproduce</span></code> your results and findings</p></li>
+<li><p>Your duty is to share <u>only</u> the <code class="docutils literal notranslate"><span class="pre">input</span></code>, and ours is to reproduce your <code class="docutils literal notranslate"><span class="pre">output</span></code> so as to fullfil our shared Credo</p></li>
+<li><p>Please share your do-files and any third-party ado-files, if at all your script or do-file relies on third-party programs</p></li>
+</ul>
+<p>Display/Files</p>
+<ul class="simple">
+<li><p>.xlsx</p></li>
+<li><p>.log</p></li>
+<li><p>.dta</p></li>
+<li><p>.docx</p></li>
+<li><p><a class="reference external" href="https://jhustata.github.io/livre/dyndoc.html">.html</a></p></li>
+</ul>
+<section id="xlsx">
+<h2>2.1 xlsx<a class="headerlink" href="#xlsx" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span> 
+putexcel<span class="k"> set</span> table1,<span class="k"> replace</span>
+putexcel A1=<span class="s">&quot;Table 1. Demographic and clinical characteristics of kidney transplant recipients&quot;</span>
+putexcel B1=<span class="s">&quot;N=</span><span class="nv">`c(N)&#39;</span><span class="s">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="log">
+<h2>2.2 log<a class="headerlink" href="#log" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">log</span> using chi2<span class="m">.</span>log,<span class="k"> replace</span> 
+<span class="k">use</span> transplants
+<span class="k">tab</span> dx gender, row  chi2
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> tab</span> dx gender, row  chi2
+
+<span class="o">+----------------+</span>
+Key            
+<span class="o">------------------</span>
+frequency    
+row percentage 
+<span class="o">+----------------+</span>
+
+Primary            gender
+Diagnosis      |    <span class="m">0</span>    |    <span class="m">1</span>	    | Total
+<span class="o">---------------+---------+----------+------</span>			
+<span class="m">1</span>=Glomerular   |  <span class="m">237</span>    |    <span class="m">187</span>   |	 <span class="m">424</span> 
+               |  <span class="m">55.90</span>  |   <span class="m">44.10</span>  | <span class="m">100.00</span> 
+<span class="o">---------------+---------+----------+------</span>			
+<span class="m">2</span>=Diabetes     | <span class="m">60</span>      |  <span class="m">37</span>	    | <span class="m">97</span> 
+               | <span class="m">61.86</span>   |  <span class="m">38.14</span>   | <span class="m">100.00</span> 
+<span class="o">---------------+---------+----------+------</span>			
+<span class="m">3</span>=PKD          | <span class="m">81</span>      |  <span class="m">66</span>	    | <span class="m">147</span> 
+               | <span class="m">55.10</span>   |  <span class="m">44.90</span>   | <span class="m">100.00</span> 
+<span class="o">---------------+---------+----------+------</span>			
+<span class="m">4</span>=Hypertensive | <span class="m">316</span>     |  <span class="m">176</span>	    | <span class="m">492</span> 
+               | <span class="m">64.23</span>   |  <span class="m">35.77</span>   | <span class="m">100.00</span> 
+<span class="o">---------------+---------+----------+------</span>		
+<span class="m">5</span>=Renovascular | <span class="m">24</span>      |  <span class="m">15</span>	    | <span class="m">39</span> 
+               | <span class="m">61.54</span>   |  <span class="m">38.46</span>   | <span class="m">100.00</span> 
+<span class="o">---------------+---------+----------+------</span>			
+<span class="m">6</span>=Congenital   | <span class="m">46</span>      |  <span class="m">22</span>	    | <span class="m">68</span> 
+               | <span class="m">67.65</span>   |  <span class="m">32.35</span>   | <span class="m">100.00</span> 
+<span class="o">---------------+---------+----------+------</span>				
+<span class="m">7</span>=Tubulo       | <span class="m">32</span>      |  <span class="m">35</span>	    | <span class="m">67</span> 
+               | <span class="m">47.76</span>   |  <span class="m">52.24</span>   | <span class="m">100.00</span> 
+<span class="o">---------------+---------+----------+------</span>			
+<span class="m">8</span>=Neoplasm     | <span class="m">8</span>       |  <span class="m">5</span>	    | <span class="m">13</span> 
+               | <span class="m">61.54</span>   |  <span class="m">38.46</span>   | <span class="m">100.00</span> 
+<span class="o">---------------+---------+----------+------</span>			
+<span class="m">9</span>=Other        | <span class="m">421</span>     |  <span class="m">232</span>	    | <span class="m">653</span> 
+               | <span class="m">64.47</span>   |  <span class="m">35.53</span>   | <span class="m">100.00</span> 
+<span class="o">---------------+---------+----------+------</span>			
+Total          | <span class="m">1</span>,<span class="m">225</span>   |  <span class="m">775</span>     | <span class="m">2</span>,<span class="m">000</span> 
+               | <span class="m">61.25</span>   |  <span class="m">38.75</span>   | <span class="m">100.00</span> 
+
+Pearson <span class="nf">chi2</span>(<span class="m">8</span>) =  <span class="m">18.4805</span>	Pr	= <span class="m">0.018</span>
+
+. 
+</pre></div>
+</div>
+<p>If you review your log-file you’ll find results similar to those above. But these are not in the typical format seen in peer-reviewed work. For instance, p-values are usually reported in a format that depends on their exact value:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">return list</span> 
+<span class="k">qui</span> {
+<span class="k">    if</span> <span class="nf">r</span>(p) <span class="o">&lt;</span> <span class="m">0.01</span> {
+<span class="k">	   local</span> p:<span class="k"> di</span> <span class="s">&quot;p &lt; 0.01&quot;</span>
+    }
+<span class="k">    else if</span> <span class="nf">inrange</span>(<span class="nf">r</span>(p),<span class="m">0.01</span>,<span class="m">0.05</span>) {
+<span class="k">	   local</span> p:<span class="k"> di</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(p)
+    }
+<span class="k">    else</span> {
+<span class="k">	   local</span> p:<span class="k"> di</span> <span class="nx">%2.1f</span> <span class="nf">r</span>(p)
+    }
+<span class="k">	noi di</span> <span class="s">&quot;p = </span><span class="nv">`p&#39;</span><span class="s">&quot;</span>
+}
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> return list</span> 
+
+scalars:
+<span class="nf">r</span>(N) =  <span class="m">2000</span>
+<span class="nf">r</span>(r) =  <span class="m">9</span>
+<span class="nf">r</span>(c) =  <span class="m">2</span>
+<span class="nf">r</span>(chi2) =  <span class="m">18.48047641017726</span>
+<span class="nf">r</span>(p) =  .<span class="m">0178990677414798</span>
+
+.<span class="k"> qui</span> {
+p = <span class="m">0.02</span>
+</pre></div>
+</div>
+<p>We’ll stop here for purposes of introducing the log-file as one of the file formats used to store output and results from analyes. Let’s close the file now.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">log close</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> log close</span>
+name:  <span class="o">&lt;</span>unnamed<span class="o">&gt;</span>
+<span class="k">log</span>:  <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Desktop<span class="o">/</span>chi2<span class="m">.</span>log
+<span class="k">log type</span>:  text
+closed<span class="k"> on</span>:  <span class="m">20</span> Jun <span class="m">2023</span>, <span class="m">05</span>:<span class="m">46</span>:<span class="m">13</span>
+	
+
+<span class="o">--------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/chi2.log">chi2.log</a></p>
+</section>
+<section id="dta">
+<h2>2.3 dta<a class="headerlink" href="#dta" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>cls
+<span class="k">clear</span> 
+<span class="k">postutil clear</span> 
+<span class="k">postfile</span> pp str80 a <span class="nf">float</span>(b c) using output<span class="m">.</span>dta,<span class="k"> replace</span> 
+<span class="k">post</span> pp (<span class="s">&quot;1&quot;</span>) (<span class="m">24.4</span>) (<span class="m">123</span>)
+<span class="k">post</span> pp (<span class="s">&quot;2&quot;</span>) (<span class="m">31.5</span>) (<span class="m">164</span>)
+<span class="k">post</span> pp (<span class="s">&quot;3&quot;</span>) (<span class="m">29.0</span>) (<span class="m">118</span>)
+<span class="k">postclose</span> pp
+
+<span class="k">use</span> output,<span class="k"> clear</span> 
+<span class="k">list</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> clear</span> 
+
+.<span class="k"> postutil clear</span> 
+
+.<span class="k"> postfile</span> pp str80 a <span class="nf">float</span>(b	c)	using	output<span class="m">.</span>dta,<span class="k">	replace</span> 
+
+.<span class="k"> post</span> pp (<span class="s">&quot;1&quot;</span>) (<span class="m">24.4</span>) (<span class="m">123</span>)
+
+.<span class="k"> post</span> pp (<span class="s">&quot;2&quot;</span>) (<span class="m">31.5</span>) (<span class="m">164</span>)
+
+.<span class="k"> post</span> pp (<span class="s">&quot;3&quot;</span>) (<span class="m">29.0</span>) (<span class="m">118</span>)
+
+.<span class="k"> postclose</span> pp
+
+. 
+.<span class="k"> use</span> output,<span class="k"> clear</span> 
+
+.<span class="k"> list</span> 
+
+
+    a      b     c 
+__________________
+<span class="m">1</span>.  <span class="m">1</span>   <span class="m">24.4</span>   <span class="m">123</span> 
+<span class="m">2</span>.  <span class="m">2</span>   <span class="m">31.5</span>   <span class="m">164</span> 
+<span class="m">3</span>.  <span class="m">3</span>     <span class="m">29</span>   <span class="m">118</span> 
+
+
+
+. 
+<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
+
+. 
+</pre></div>
+</div>
+</section>
+<section id="docx">
+<h2>2.4 docx<a class="headerlink" href="#docx" title="Permalink to this heading">#</a></h2>
+<p>We may embed Stata results in a .docx file in two very distinct ways:</p>
+<ul class="simple">
+<li><p>putdocx</p></li>
+<li><p>dyndoc</p></li>
+</ul>
+<section id="putdocx">
+<h3>2.4.1. Putdocx<a class="headerlink" href="#putdocx" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>putdocx begin (Tell Stata you want to create a Word doc)</p></li>
+<li><p>putdocx text etc. (Define the contents of the Word doc you will create)</p></li>
+<li><p>putdocx save (Actually create the Word doc and write it to disk)</p></li>
+</ul>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>putdocx<span class="k"> clear</span>
+putdocx begin
+putdocx paragraph
+putdocx text (<span class="s">&quot;How to embed Stata results in .docx&quot;</span>)
+putdocx paragraph
+putdocx text (<span class="s">&quot;Author, MD MPH&quot;</span>)
+putdocx paragraph
+putdocx text (<span class="s">&quot;Background. A user downloads and installs a system of program files, mostly ado-files, which form the foundation of most of the commands used in Stata Programming. Using those commands and additional syntax written out sequentially in a do-file, the user creates well-formed instruction to Stata called a do-file script. Once the user runs this script, results are generated and displayed in the results window, in a graph, or in a format (.xlsx, .log, .dta, .docx, .md, LaTeX, .html, etc). The .docx file format is of specific interest to us right now. To illustrate how this may be achieved in Stata, we hereby introduce the putdocx command.&quot;</span>)
+putdocx paragraph
+putdocx text (<span class="s">&quot;Methods. We created a do-file and populated it with this abstract using plain text. Results that might be numeric, string, alphanumeric, or formatted as macros are manually embeded in the text. We then saved this document using the file extension .do; however, any text file extension will work (.txt, .md, .do, etc). In the key analysis, Y = b0 + b1X, where Y is life expectancy at birth in years, the outcome or dependent variable; X is the country, the predictor or independent variable being tested.&quot;</span>)
+putdocx paragraph
+putdocx text (<span class="s">&quot;Results. We identified the newly created .html file in our folder and opened it to compare its format to this markdown file. And we saw all that we had made, and behold, it was very good. Ghastly macros in the original markdown language now appeared as neatly formatted results. There were 68 observations and 6 observations in the analyzed dataset. Average life expectancy of all countries, b0, was 72 years. Difference in life expectancy among adjacent countries, b1, showed no trend or pattern and was 0.002 year, essentially zero, and p=0.95&quot;</span>)
+putdocx paragraph
+putdocx text (<span class="s">&quot;Conclusion. In walking you through syntax, do-file creation, queued commands, generated results, through to embedding neatly formatted output in .html, we believe you now have a solid sense of all that Stata has to offer you. These ideas can be generalized to embedding results in .xlsx, .log, .dta, .docx, etc.&quot;</span>)
+putdocx<span class="k"> save</span> myfirst<span class="m">.</span>docx,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p>Author, MD MPH</p>
+<p>Background. A user downloads and installs a system of program files, mostly ado-files, which form the foundation of most of the commands used in Stata Programming. Using those commands and additional syntax written out sequentially in a do-file, the user creates well-formed instruction to Stata called a do- file script. Once the user runs this script, results are generated and displayed in the results window, in a graph, or in a format (.xlsx, .log, .dta, .docx, .md, LaTeX, .html, etc). The .docx file format is of specific interest to us right now. To illustrate how this may be achieved in Stata, we hereby introduce the putdocx command.</p>
+<p>Methods. We created a do-file and populated it with this abstract using plain text. Results that might be numeric, string, alphanumeric, or formatted as macros are manually embeded in the text. We then saved this document using the file extension .do; however, any text file extension will work (.txt, .md, .do, etc). In the key analysis, Y = b0 + b1X, where Y is life expectancy at birth in years, the outcome or dependent variable; X is the country, the predictor or independent variable being tested.</p>
+<p>Results. We identified the newly created .html file in our folder and opened it to compare its format to this markdown file. And we saw all that we had made, and behold, it was very good. Ghastly macros in the original markdown language now appeared as neatly formatted results. There were 68 observations and 6 observations in the analyzed dataset. Average life expectancy of all countries, b0, was 72 years. Difference in life expectancy among adjacent countries, b1, showed no trend or pattern and was 0.002 year, essentially zero, and p=0.95</p>
+<p>Conclusion. In walking you through syntax, do-file creation, queued commands, generated results, through to embedding neatly formatted output in .html, we believe you now have a solid sense of all that Stata has to offer you. These ideas can be generalized to embedding results in .xlsx, .log, .dta, .docx, etc.</p>
+</section>
+<section id="dyndoc">
+<h3>2.4.2. dyndoc<a class="headerlink" href="#dyndoc" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Identical to the .html approach discussed in the next section</p></li>
+<li><p>But has some caveats that we will discuss</p></li>
+<li><p>Word documents are not able to render LaTeX format</p></li>
+</ul>
+<section id="author-md-mph">
+<h4>Author, MD MPH<a class="headerlink" href="#author-md-mph" title="Permalink to this heading">#</a></h4>
+<p><strong>Background:</strong>
+A <u>user</u> downloads and installs a <u>system</u> of program files, mostly ado-files, which form the foundation of most of the commands
+used in Stata Programming. Using those commands and additional syntax written out sequentially in a do-file, the user creates
+well-formed instruction to Stata called a do-file script. Once the user runs this script, results are generated and displayed
+in the results window, in a graph, or in a format (<code class="docutils literal notranslate"><span class="pre">.xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">.log</span></code>, <code class="docutils literal notranslate"><span class="pre">.dta</span></code>, <code class="docutils literal notranslate"><span class="pre">.docx</span></code>, <code class="docutils literal notranslate"><span class="pre">.md</span></code>, <code class="docutils literal notranslate"><span class="pre">LaTeX</span></code>, <code class="docutils literal notranslate"><span class="pre">.html</span></code>, etc). The <code class="docutils literal notranslate"><span class="pre">.docx</span></code> file format is of specific
+interest since its the one of the most widely used word processors. To illustrate how this may be achieved in Stata, we hereby introduce the <code class="docutils literal notranslate"><span class="pre">dyndoc</span></code>
+command.</p>
+<p><strong>Methods:</strong>
+We created a <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/filename.do">do-file</a> and populated it with this abstract using <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">markdown</a> language. Anything
+in this document that is not ordinary text including <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_version:</span> <span class="pre">2&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_do:nooutput&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/dd_do&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_display:</span> <span class="pre">c(N)&gt;&gt;</span></code> is a
+<a class="reference external" href="https://en.wikipedia.org/wiki/Markup_language#:~:text=A%20markup%20language%20is%20a,content%20to%20facilitate%20automated%20processing.">markup</a>.
+Results that might be numeric, string, alphanumeric, or formatted as macros are embeded at these markedup points. We then saved this
+document using the file extension .do; however, any text file extension will work (.txt, .md, .do, etc). To the <code class="docutils literal notranslate"><span class="pre">pwd</span></code> where we saved
+this text file, we added a cascading style sheet <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/stmarkdown.css">stmarkdown.css</a> and <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/header.txt">header.txt</a> to enhance the aesthetic of our .html file. Finally, we typed the
+following command into the Stata command window: <code class="docutils literal notranslate"><span class="pre">dyndoc</span> <span class="pre">filename.do,</span> <span class="pre">saving(filename.docx)</span> <span class="pre">replace</span></code>. In the key analysis, <span class="math notranslate nohighlight">\(Y  = \beta_0   +  \beta_1 X\)</span>, where <span class="math notranslate nohighlight">\(Y\)</span> is life expectancy at birth in years, the outcome or dependent variable; <span class="math notranslate nohighlight">\(X\)</span> is the country, the predictor or independent variable being tested.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> webuse</span> lifeexp,<span class="k"> clear</span> 
+(Life expectancy, <span class="m">1998</span>)
+
+.<span class="k"> encode</span> country,<span class="k"> gen</span>(Country)
+
+.<span class="k"> quietly sum</span> lexp
+
+.<span class="k"> qui local</span> lexp_mean:<span class="k"> di</span> <span class="nx">%3.0f</span> <span class="nf">r</span>(mean) 
+
+.<span class="k"> quietly sum</span> Country
+
+.<span class="k"> qui local</span> Country_mean:<span class="k"> di</span> <span class="nf">r</span>(mean)  
+
+.<span class="k"> twoway scatter</span> lexp Country, <span class="cs">///</span>
+<span class="o">&gt;</span>    xscale(off) <span class="cs">///</span>
+<span class="o">&gt;</span>    yline(<span class="nv">`lexp_mean&#39;</span>, <span class="cs">///</span>
+<span class="o">&gt;</span>       lc(red) <span class="cs">///</span>
+<span class="o">&gt;</span>       lp(dash) <span class="cs">///</span>
+<span class="o">&gt;</span>    ) <span class="cs">///</span>
+<span class="o">&gt;</span>    text(<span class="nv">`lexp_mean&#39;</span> <span class="nv">`Country_mean&#39;</span> <span class="s">&quot;Mean life expectancy among countries&quot;</span>)
+
+.<span class="k"> graph</span> export lexp_bycountry<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Desktop<span class="o">/</span>lexp_bycountry<span class="m">.</span>png saved<span class="k"> as</span> PNG<span class="k"> format</span>
+
+. 
+<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/lexp_bycountry.png" /></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> qui</span> {
+
+.
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> display</span> <span class="nf">c</span>(N) 
+<span class="m">68</span>
+
+.<span class="k"> display</span> <span class="nf">c</span>(k)  
+<span class="m">6</span>
+
+.<span class="k"> list in</span> <span class="m">1</span><span class="o">/</span><span class="m">5</span>  
+
+						
+    region	            country	    popgro<span class="o">~</span>h	 lexp	    gnppc  safewa<span class="o">~</span>r	
+						
+<span class="m">1</span>.  Europe <span class="o">&amp;</span> C. Asia	Albania	       <span class="m">1.2</span>	        <span class="m">72</span>	    <span class="m">810</span>	    <span class="m">76</span>	
+<span class="m">2</span>.  Europe <span class="o">&amp;</span> C. Asia	Armenia	       <span class="m">1.1</span>	        <span class="m">74</span>	    <span class="m">460</span>	    .	
+<span class="m">3</span>.  Europe <span class="o">&amp;</span> C. Asia	Austria	       .<span class="m">4</span>	        <span class="m">79</span>	    <span class="m">26830</span>   .	
+<span class="m">4</span>.  Europe <span class="o">&amp;</span> C. Asia	Azerbaijan    <span class="m">1.4</span>	        <span class="m">71</span>	    <span class="m">480</span>	    .	
+<span class="m">5</span>.  Europe <span class="o">&amp;</span> C. Asia	Belarus	       .<span class="m">3</span>	        <span class="m">68</span>	    <span class="m">2180</span>    .	
+						
+
+. 
+<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
+
+. 
+</pre></div>
+</div>
+<p><strong>Results:</strong>
+We identified the newly created .html file in our folder and opened it to compare its format to this markdown file. And we saw all that
+we had made, and behold, it was very good. Ghastly macros in the original markdown language now appeared as neatly formatted
+results. There were 68 observations and 6 observations in the analyzed dataset. Average life expectancy of all countries, <span class="math notranslate nohighlight">\(\beta_0\)</span>, was 72 years. Difference in life expectancy among <u>adjacent</u> countries, <span class="math notranslate nohighlight">\(\beta_1\)</span>, showed no trend or pattern and was 0.002 year, essentially <span class="math notranslate nohighlight">\(zero\)</span>, and <span class="math notranslate nohighlight">\(p = .95\)</span></p>
+<p><strong>Conclusions:</strong>
+In walking you through syntax, do-file creation, queued commands, generated results, through to embedding neatly formatted output in
+.html, we believe you now have a solid sense of all that Stata has to offer you. These ideas can be generalized to embedding results
+in .xlsx, .log, .dta, .docx, etc.</p>
+</section>
+</section>
+</section>
+<section id="html">
+<h2>2.5 html<a class="headerlink" href="#html" title="Permalink to this heading">#</a></h2>
+<section id="how-to-embed-stata-results-in-html">
+<h3>2.5.1. How to embed Stata results in .html<a class="headerlink" href="#how-to-embed-stata-results-in-html" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="id1">
+<h3>Author, MD MPH<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p><strong>Background:</strong>
+A <u>user</u> downloads and installs a <u>system</u> of program files, mostly ado-files, which form the foundation of most of the commands
+used in Stata Programming. Using those commands and additional syntax written out sequentially in a do-file, the user creates
+well-formed instruction to Stata called a do-file script. Once the user runs this script, results are generated and displayed
+in the results window, in a graph, or in a format (<code class="docutils literal notranslate"><span class="pre">.xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">.log</span></code>, <code class="docutils literal notranslate"><span class="pre">.dta</span></code>, <code class="docutils literal notranslate"><span class="pre">.docx</span></code>, <code class="docutils literal notranslate"><span class="pre">.md</span></code>, <code class="docutils literal notranslate"><span class="pre">LaTeX</span></code>, <code class="docutils literal notranslate"><span class="pre">.html</span></code>, etc). The <code class="docutils literal notranslate"><span class="pre">.html</span></code> file format is of specific
+interest since its the pathway to self-publication. To illustrate how this may be achieved in Stata, we hereby introduce the <code class="docutils literal notranslate"><span class="pre">dyndoc</span></code>
+command.</p>
+<p><strong>Methods:</strong>
+We created a <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/filename.do">do-file</a> and populated it with this abstract using <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">markdown</a> language. Anything
+in this document that is not ordinary text including <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_version:</span> <span class="pre">2&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_do:nooutput&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/dd_do&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_display:</span> <span class="pre">c(N)&gt;&gt;</span></code> is a
+<a class="reference external" href="https://en.wikipedia.org/wiki/Markup_language#:~:text=A%20markup%20language%20is%20a,content%20to%20facilitate%20automated%20processing.">markup</a>.
+Results that might be numeric, string, alphanumeric, or formatted as macros are embeded at these markedup points. We then saved this
+document using the file extension .do; however, any text file extension will work (.txt, .md, .do, etc). To the <code class="docutils literal notranslate"><span class="pre">pwd</span></code> where we saved
+this text file, we added a cascading style sheet <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/stmarkdown.css">stmarkdown.css</a> and <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/header.txt">header.txt</a> to enhance the aesthetic of our .html file. Finally, we typed the
+following command into the Stata command window: <code class="docutils literal notranslate"><span class="pre">dyndoc</span> <span class="pre">filename.do,</span> <span class="pre">saving(filename.html)</span> <span class="pre">replace</span></code>. In the key analysis, <span class="math notranslate nohighlight">\(Y  = \beta_0   +  \beta_1 X\)</span>, where <span class="math notranslate nohighlight">\(Y\)</span> is life expectancy at birth in years, the outcome or dependent variable; <span class="math notranslate nohighlight">\(X\)</span> is the country, the predictor or independent variable being tested.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> webuse</span> lifeexp,<span class="k"> clear</span> 
+(Life expectancy, <span class="m">1998</span>)
+
+.<span class="k"> encode</span> country,<span class="k"> gen</span>(Country)
+
+.<span class="k"> quietly sum</span> lexp
+
+.<span class="k"> qui local</span> lexp_mean:<span class="k"> di</span> <span class="nx">%3.0f</span> <span class="nf">r</span>(mean) 
+
+.<span class="k"> quietly sum</span> Country
+
+.<span class="k"> qui local</span> Country_mean:<span class="k"> di</span> <span class="nf">r</span>(mean)  
+
+.<span class="k"> twoway scatter</span> lexp Country, <span class="cs">///</span>
+<span class="o">&gt;</span>    xscale(off) <span class="cs">///</span>
+<span class="o">&gt;</span>    yline(<span class="nv">`lexp_mean&#39;</span>, <span class="cs">///</span>
+<span class="o">&gt;</span>       lc(red) <span class="cs">///</span>
+<span class="o">&gt;</span>       lp(dash) <span class="cs">///</span>
+<span class="o">&gt;</span>    ) <span class="cs">///</span>
+<span class="o">&gt;</span>    text(<span class="nv">`lexp_mean&#39;</span> <span class="nv">`Country_mean&#39;</span> <span class="s">&quot;Mean life expectancy among countries&quot;</span>)
+
+.<span class="k"> graph</span> export lexp_bycountry<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Desktop<span class="o">/</span>lexp_bycountry<span class="m">.</span>png saved<span class="k"> as</span> PNG<span class="k"> format</span>
+
+. 
+<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/lexp_bycountry.png" /></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> qui</span> {
+
+.
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> display</span> <span class="nf">c</span>(N) 
+<span class="m">68</span>
+
+.<span class="k"> display</span> <span class="nf">c</span>(k)  
+<span class="m">6</span>
+
+.<span class="k"> list in</span> <span class="m">1</span><span class="o">/</span><span class="m">5</span>  
+
+						
+    region	            country	    popgro<span class="o">~</span>h	 lexp	    gnppc  safewa<span class="o">~</span>r	
+						
+<span class="m">1</span>.  Europe <span class="o">&amp;</span> C. Asia	Albania	       <span class="m">1.2</span>	        <span class="m">72</span>	    <span class="m">810</span>	    <span class="m">76</span>	
+<span class="m">2</span>.  Europe <span class="o">&amp;</span> C. Asia	Armenia	       <span class="m">1.1</span>	        <span class="m">74</span>	    <span class="m">460</span>	    .	
+<span class="m">3</span>.  Europe <span class="o">&amp;</span> C. Asia	Austria	       .<span class="m">4</span>	        <span class="m">79</span>	    <span class="m">26830</span>   .	
+<span class="m">4</span>.  Europe <span class="o">&amp;</span> C. Asia	Azerbaijan    <span class="m">1.4</span>	        <span class="m">71</span>	    <span class="m">480</span>	    .	
+<span class="m">5</span>.  Europe <span class="o">&amp;</span> C. Asia	Belarus	       .<span class="m">3</span>	        <span class="m">68</span>	    <span class="m">2180</span>    .	
+						
+
+. 
+<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
+
+. 
+</pre></div>
+</div>
+<p><strong>Results:</strong>
+We identified the newly created .html file in our folder and opened it to compare its format to this markdown file. And we saw all that
+we had made, and behold, it was very good. Ghastly macros in the original markdown language now appeared as neatly formatted
+results. There were 68 observations and 6 observations in the analyzed dataset. Average life expectancy of all countries, <span class="math notranslate nohighlight">\(\beta_0\)</span>, was 72 years. Difference in life expectancy among <u>adjacent</u> countries, <span class="math notranslate nohighlight">\(\beta_1\)</span>, showed no trend or pattern and was 0.002 year, essentially <span class="math notranslate nohighlight">\(zero\)</span>, and <span class="math notranslate nohighlight">\(p = .95\)</span></p>
+<p><strong>Conclusions:</strong>
+In walking you through syntax, do-file creation, queued commands, generated results, through to embedding neatly formatted output in
+.html, we believe you now have a solid sense of all that Stata has to offer you. These ideas can be generalized to embedding results
+in .xlsx, .log, .dta, .docx, etc.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xlsx">2.1 xlsx</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log">2.2 log</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dta">2.3 dta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docx">2.4 docx</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putdocx">2.4.1. Putdocx</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dyndoc">2.4.2. dyndoc</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#author-md-mph">Author, MD MPH</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#html">2.5 html</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-embed-stata-results-in-html">2.5.1. How to embed Stata results in .html</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Author, MD MPH</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Abimereki Muzaale
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

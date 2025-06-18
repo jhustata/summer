@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2. Return values, macros, programs &#8212; Stata Programming</title>
+    <title>🔁 Stata Macros: The Essential Guide — Code, Cognition, and the Art of Memory &#8212; Stata Programming</title>
   
   
   
@@ -61,8 +61,6 @@
     <script src="_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter2';</script>
     <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -188,7 +186,7 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chapter1.html">📘 Collaborative Stata Programming</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Return values, macros, programs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">🔁 <em>Stata Macros: The Essential Guide</em> — <em>Code, Cognition, and the Art of Memory</em></a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
@@ -362,7 +360,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2. Return values, macros, programs</h1>
+    <h1>🔁 Stata Macros: The Essential Guide — Code, Cognition, and the Art of Memory</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -372,22 +370,44 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xlsx">2.1 xlsx</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log">2.2 log</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dta">2.3 dta</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docx">2.4 docx</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putdocx">2.4.1. Putdocx</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dyndoc">2.4.2. dyndoc</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#author-md-mph">Author, MD MPH</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-macro">🌀 What is a Macro?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-macros-sacred">❤️ Why Are Macros Sacred?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reusability">1. 🔁 <strong>Code Reusability</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-temporal-logic">2. 🕰️ <strong>Dynamic Temporal Logic</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-prevention">3. 🛡️ <strong>Error Prevention</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-elegance">4. ⚖️ <strong>Conditional Elegance</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-macros-with-discipline">🧠 <em>How to Use Macros with Discipline</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-vs-global-scope-is-philosophy">Local vs Global: Scope is Philosophy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#html">2.5 html</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-embed-stata-results-in-html">2.5.1. How to embed Stata results in .html</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Author, MD MPH</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-style-clean-code-is-clean-thought">🎯 Macro Style: Clean Code is Clean Thought</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components-of-a-macro">🧩 Components of a Macro</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#name-the-handle">1. <strong>Name</strong> — The handle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-the-contents">2. <strong>Value</strong> — The contents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scope-local-or-global">3. <strong>Scope</strong> — Local or global</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-string-number-list-expression">4. <strong>Type</strong> — String, number, list, expression</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencing-rules">📌 Referencing Rules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-origins-where-they-come-from">🔍 Macro Origins: Where They Come From</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-definition">1. ✍️ <strong>Manual Definition</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-constants-c-class">2. 📜 <strong>System Constants (<code class="docutils literal notranslate"><span class="pre">c()</span></code> class)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#command-results-r-class">3. 📦 <strong>Command Results (<code class="docutils literal notranslate"><span class="pre">r()</span></code> class)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-results-e-class">4. 📊 <strong>Estimation Results (<code class="docutils literal notranslate"><span class="pre">e()</span></code> class)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computed-on-the-fly">5. 🧮 <strong>Computed On-the-Fly</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-triumvirate-return-creturn-and-ereturn">🧭 The Triumvirate: <code class="docutils literal notranslate"><span class="pre">return</span></code>, <code class="docutils literal notranslate"><span class="pre">creturn</span></code>, and <code class="docutils literal notranslate"><span class="pre">ereturn</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#return-list-the-moments-echo">🔁 <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">list</span></code> — <em>The Moment’s Echo</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creturn-list-the-introspective-core">🧘 <code class="docutils literal notranslate"><span class="pre">creturn</span> <span class="pre">list</span></code> — <em>The Introspective Core</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ereturn-list-the-archive-of-estimation">📜 <code class="docutils literal notranslate"><span class="pre">ereturn</span> <span class="pre">list</span></code> — <em>The Archive of Estimation</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triumvirate-in-motion">🗂️ Triumvirate in Motion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-quick-reference-the-portable-codex">🗺️ Macro Quick Reference — <em>The Portable Codex</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-word">🧘 Final Word</a></li>
 </ul>
             </nav>
         </div>
@@ -399,461 +419,280 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="return-values-macros-programs">
-<h1>2. Return values, macros, programs<a class="headerlink" href="#return-values-macros-programs" title="Permalink to this heading">#</a></h1>
-<p>Let’s briefly recap what we covered yesterday</p>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="c1">#import numpy as np</span>
-<span class="c1">#import sklearn as skl</span>
-<span class="c1"># </span>
-
-<span class="c1">#plt.figure(figsize=[2, 2])</span>
-<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">550</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">550</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">960</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;syntax&quot;</span><span class="p">,</span>  <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">950</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;ado&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">550</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">550</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span> <span class="p">)</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;dta&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1900</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;excel&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;word&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1900</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="o">-</span><span class="mi">475</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;publish&quot;</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">950</span><span class="p">))</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([</span> <span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">,</span><span class="s2">&quot;ado&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;syntax&quot;</span><span class="p">,</span> <span class="s2">&quot;do&quot;</span><span class="p">)])</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;ado&quot;</span><span class="p">,</span> <span class="s2">&quot;command&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="s2">&quot;queue&quot;</span><span class="p">)</span> <span class="p">])</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;excel&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;word&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;html&quot;</span><span class="p">)])</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;dta&quot;</span><span class="p">),(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span><span class="s2">&quot;log&quot;</span><span class="p">)])</span>
-<span class="n">G</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">([(</span><span class="s2">&quot;dta&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;log&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;excel&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;word&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">),(</span><span class="s2">&quot;html&quot;</span><span class="p">,</span><span class="s2">&quot;publish&quot;</span><span class="p">)])</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> 
-        <span class="n">nx</span><span class="o">.</span><span class="n">get_node_attributes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">),</span> 
-        <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
-        <span class="n">font_weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> 
-        <span class="n">node_size</span> <span class="o">=</span> <span class="mi">4500</span><span class="p">,</span>
-        <span class="n">node_color</span> <span class="o">=</span> <span class="s2">&quot;lightblue&quot;</span><span class="p">,</span>
-        <span class="n">linewidths</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">collections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s2">&quot;#000000&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="stata-macros-the-essential-guide-code-cognition-and-the-art-of-memory">
+<h1>🔁 <em>Stata Macros: The Essential Guide</em> — <em>Code, Cognition, and the Art of Memory</em><a class="headerlink" href="#stata-macros-the-essential-guide-code-cognition-and-the-art-of-memory" title="Permalink to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="what-is-a-macro">
+<h2>🌀 What is a <a class="reference external" href="https://claude.ai/public/artifacts/2a5372c2-523f-4d8b-bfff-793d50ceec8f">Macro</a>?<a class="headerlink" href="#what-is-a-macro" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="chapter2-old.html"><span class="std std-doc">Old</span></a> version</p></li>
+<li><p><a class="reference internal" href="chapter2-alt.html"><span class="std std-doc">Alt</span></a> version</p></li>
+</ul>
+<p>A <strong>macro</strong> is not just a variable—it’s a name-bound spell, a <em>container of intent</em>. It stores strings, numbers, lists, or expressions for later invocation.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">local</span> age <span class="m">25</span>
+<span class="k">global</span> study <span class="s">&quot;Heart Disease Research&quot;</span>
 </pre></div>
 </div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="_images/33bbe53bb3c153b21c1bc1d1faa8f4f131dc950a7156c514a9fa2ac5a52984c7.png" src="_images/33bbe53bb3c153b21c1bc1d1faa8f4f131dc950a7156c514a9fa2ac5a52984c7.png" />
-</div>
-</div>
-<p>Results/Output</p>
+<p>When referenced, a macro doesn’t execute—it <em>whispers its contents</em> into the void.</p>
 <ul class="simple">
-<li><p>A sequence or queue of instructions <code class="docutils literal notranslate"><span class="pre">commands</span> <span class="pre">+</span> <span class="pre">syntax</span> <span class="pre">=</span> <span class="pre">code</span></code> given to Stata via a do-file will generate results</p></li>
-<li><p><u>Never</u> include results in your do-file when you share your work in this class and with future collaborators</p></li>
-<li><p>Due diligence in the <code class="docutils literal notranslate"><span class="pre">open-science</span></code> enterprise demands that others <code class="docutils literal notranslate"><span class="pre">reproduce</span></code> your results and findings</p></li>
-<li><p>Your duty is to share <u>only</u> the <code class="docutils literal notranslate"><span class="pre">input</span></code>, and ours is to reproduce your <code class="docutils literal notranslate"><span class="pre">output</span></code> so as to fullfil our shared Credo</p></li>
-<li><p>Please share your do-files and any third-party ado-files, if at all your script or do-file relies on third-party programs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">age</span></code> ⇒ <code class="docutils literal notranslate"><span class="pre">25</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">study</span></code> ⇒ <code class="docutils literal notranslate"><span class="pre">&quot;Heart</span> <span class="pre">Disease</span> <span class="pre">Research&quot;</span></code></p></li>
 </ul>
-<p>Display/Files</p>
-<ul class="simple">
-<li><p>.xlsx</p></li>
-<li><p>.log</p></li>
-<li><p>.dta</p></li>
-<li><p>.docx</p></li>
-<li><p><a class="reference external" href="https://jhustata.github.io/livre/dyndoc.html">.html</a></p></li>
-</ul>
-<section id="xlsx">
-<h2>2.1 xlsx<a class="headerlink" href="#xlsx" title="Permalink to this heading">#</a></h2>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span> 
-putexcel<span class="k"> set</span> table1,<span class="k"> replace</span>
-putexcel A1=<span class="s">&quot;Table 1. Demographic and clinical characteristics of kidney transplant recipients&quot;</span>
-putexcel B1=<span class="s">&quot;N=</span><span class="nv">`c(N)&#39;</span><span class="s">&quot;</span>
+<p><strong>Think:</strong> Macros = reusable echoes of thought.</p>
+</section>
+<hr class="docutils" />
+<section id="why-are-macros-sacred">
+<h2>❤️ Why Are Macros Sacred?<a class="headerlink" href="#why-are-macros-sacred" title="Permalink to this heading">#</a></h2>
+<section id="code-reusability">
+<h3>1. 🔁 <strong>Code Reusability</strong><a class="headerlink" href="#code-reusability" title="Permalink to this heading">#</a></h3>
+<p>Write once, invoke forever.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">local varlist</span> <span class="s">&quot;age gender income education&quot;</span>
+<span class="k">summarize</span> <span class="nv">`varlist&#39;</span>
+<span class="k">regress</span> outcome <span class="nv">`varlist&#39;</span>
 </pre></div>
 </div>
 </section>
-<section id="log">
-<h2>2.2 log<a class="headerlink" href="#log" title="Permalink to this heading">#</a></h2>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">log</span> using chi2<span class="m">.</span>log,<span class="k"> replace</span> 
-<span class="k">use</span> transplants
-<span class="k">tab</span> dx gender, row  chi2
+<section id="dynamic-temporal-logic">
+<h3>2. 🕰️ <strong>Dynamic Temporal Logic</strong><a class="headerlink" href="#dynamic-temporal-logic" title="Permalink to this heading">#</a></h3>
+<p>Macros adapt to the present moment.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">local</span> today = <span class="nf">date</span>(<span class="s">&quot;</span><span class="nv">`c(current_date)&#39;</span><span class="s">&quot;</span>, <span class="s">&quot;DMY&quot;</span>)
+<span class="k">local</span> filename <span class="s">&quot;analysis_</span><span class="nv">`today&#39;</span><span class="s">.dta&quot;</span>
+<span class="k">save</span> <span class="s">&quot;</span><span class="nv">`filename&#39;</span><span class="s">&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> tab</span> dx gender, row  chi2
-
-<span class="o">+----------------+</span>
-Key            
-<span class="o">------------------</span>
-frequency    
-row percentage 
-<span class="o">+----------------+</span>
-
-Primary            gender
-Diagnosis      |    <span class="m">0</span>    |    <span class="m">1</span>	    | Total
-<span class="o">---------------+---------+----------+------</span>			
-<span class="m">1</span>=Glomerular   |  <span class="m">237</span>    |    <span class="m">187</span>   |	 <span class="m">424</span> 
-               |  <span class="m">55.90</span>  |   <span class="m">44.10</span>  | <span class="m">100.00</span> 
-<span class="o">---------------+---------+----------+------</span>			
-<span class="m">2</span>=Diabetes     | <span class="m">60</span>      |  <span class="m">37</span>	    | <span class="m">97</span> 
-               | <span class="m">61.86</span>   |  <span class="m">38.14</span>   | <span class="m">100.00</span> 
-<span class="o">---------------+---------+----------+------</span>			
-<span class="m">3</span>=PKD          | <span class="m">81</span>      |  <span class="m">66</span>	    | <span class="m">147</span> 
-               | <span class="m">55.10</span>   |  <span class="m">44.90</span>   | <span class="m">100.00</span> 
-<span class="o">---------------+---------+----------+------</span>			
-<span class="m">4</span>=Hypertensive | <span class="m">316</span>     |  <span class="m">176</span>	    | <span class="m">492</span> 
-               | <span class="m">64.23</span>   |  <span class="m">35.77</span>   | <span class="m">100.00</span> 
-<span class="o">---------------+---------+----------+------</span>		
-<span class="m">5</span>=Renovascular | <span class="m">24</span>      |  <span class="m">15</span>	    | <span class="m">39</span> 
-               | <span class="m">61.54</span>   |  <span class="m">38.46</span>   | <span class="m">100.00</span> 
-<span class="o">---------------+---------+----------+------</span>			
-<span class="m">6</span>=Congenital   | <span class="m">46</span>      |  <span class="m">22</span>	    | <span class="m">68</span> 
-               | <span class="m">67.65</span>   |  <span class="m">32.35</span>   | <span class="m">100.00</span> 
-<span class="o">---------------+---------+----------+------</span>				
-<span class="m">7</span>=Tubulo       | <span class="m">32</span>      |  <span class="m">35</span>	    | <span class="m">67</span> 
-               | <span class="m">47.76</span>   |  <span class="m">52.24</span>   | <span class="m">100.00</span> 
-<span class="o">---------------+---------+----------+------</span>			
-<span class="m">8</span>=Neoplasm     | <span class="m">8</span>       |  <span class="m">5</span>	    | <span class="m">13</span> 
-               | <span class="m">61.54</span>   |  <span class="m">38.46</span>   | <span class="m">100.00</span> 
-<span class="o">---------------+---------+----------+------</span>			
-<span class="m">9</span>=Other        | <span class="m">421</span>     |  <span class="m">232</span>	    | <span class="m">653</span> 
-               | <span class="m">64.47</span>   |  <span class="m">35.53</span>   | <span class="m">100.00</span> 
-<span class="o">---------------+---------+----------+------</span>			
-Total          | <span class="m">1</span>,<span class="m">225</span>   |  <span class="m">775</span>     | <span class="m">2</span>,<span class="m">000</span> 
-               | <span class="m">61.25</span>   |  <span class="m">38.75</span>   | <span class="m">100.00</span> 
-
-Pearson <span class="nf">chi2</span>(<span class="m">8</span>) =  <span class="m">18.4805</span>	Pr	= <span class="m">0.018</span>
-
-. 
+</section>
+<section id="error-prevention">
+<h3>3. 🛡️ <strong>Error Prevention</strong><a class="headerlink" href="#error-prevention" title="Permalink to this heading">#</a></h3>
+<p>Macros protect you from typos and repetition.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">global</span> datapath <span class="s">&quot;/Users/researcher/data&quot;</span>
+<span class="k">use</span> <span class="s">&quot;</span><span class="vg">$datapath</span><span class="s">/study1.dta&quot;</span>
 </pre></div>
 </div>
-<p>If you review your log-file you’ll find results similar to those above. But these are not in the typical format seen in peer-reviewed work. For instance, p-values are usually reported in a format that depends on their exact value:</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">return list</span> 
-<span class="k">qui</span> {
-<span class="k">    if</span> <span class="nf">r</span>(p) <span class="o">&lt;</span> <span class="m">0.01</span> {
-<span class="k">	   local</span> p:<span class="k"> di</span> <span class="s">&quot;p &lt; 0.01&quot;</span>
-    }
-<span class="k">    else if</span> <span class="nf">inrange</span>(<span class="nf">r</span>(p),<span class="m">0.01</span>,<span class="m">0.05</span>) {
-<span class="k">	   local</span> p:<span class="k"> di</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(p)
-    }
-<span class="k">    else</span> {
-<span class="k">	   local</span> p:<span class="k"> di</span> <span class="nx">%2.1f</span> <span class="nf">r</span>(p)
-    }
-<span class="k">	noi di</span> <span class="s">&quot;p = </span><span class="nv">`p&#39;</span><span class="s">&quot;</span>
+</section>
+<section id="conditional-elegance">
+<h3>4. ⚖️ <strong>Conditional Elegance</strong><a class="headerlink" href="#conditional-elegance" title="Permalink to this heading">#</a></h3>
+<p>Even logic can be laced with grace.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">local n</span> = _N
+<span class="k">if</span> <span class="nv">`n&#39;</span> <span class="o">&lt;</span> <span class="m">100</span> {
+<span class="k">    display</span> <span class="s">&quot;Warning: Small sample size (</span><span class="nv">`n&#39;</span><span class="s">)&quot;</span>
 }
 </pre></div>
 </div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> return list</span> 
-
-scalars:
-<span class="nf">r</span>(N) =  <span class="m">2000</span>
-<span class="nf">r</span>(r) =  <span class="m">9</span>
-<span class="nf">r</span>(c) =  <span class="m">2</span>
-<span class="nf">r</span>(chi2) =  <span class="m">18.48047641017726</span>
-<span class="nf">r</span>(p) =  .<span class="m">0178990677414798</span>
-
-.<span class="k"> qui</span> {
-p = <span class="m">0.02</span>
-</pre></div>
-</div>
-<p>We’ll stop here for purposes of introducing the log-file as one of the file formats used to store output and results from analyes. Let’s close the file now.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">log close</span> 
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> log close</span>
-name:  <span class="o">&lt;</span>unnamed<span class="o">&gt;</span>
-<span class="k">log</span>:  <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Desktop<span class="o">/</span>chi2<span class="m">.</span>log
-<span class="k">log type</span>:  text
-closed<span class="k"> on</span>:  <span class="m">20</span> Jun <span class="m">2023</span>, <span class="m">05</span>:<span class="m">46</span>:<span class="m">13</span>
-	
-
-<span class="o">--------------------------------------------------------------</span>
-</pre></div>
-</div>
-<p><a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/chi2.log">chi2.log</a></p>
 </section>
-<section id="dta">
-<h2>2.3 dta<a class="headerlink" href="#dta" title="Permalink to this heading">#</a></h2>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>cls
-<span class="k">clear</span> 
-<span class="k">postutil clear</span> 
-<span class="k">postfile</span> pp str80 a <span class="nf">float</span>(b c) using output<span class="m">.</span>dta,<span class="k"> replace</span> 
-<span class="k">post</span> pp (<span class="s">&quot;1&quot;</span>) (<span class="m">24.4</span>) (<span class="m">123</span>)
-<span class="k">post</span> pp (<span class="s">&quot;2&quot;</span>) (<span class="m">31.5</span>) (<span class="m">164</span>)
-<span class="k">post</span> pp (<span class="s">&quot;3&quot;</span>) (<span class="m">29.0</span>) (<span class="m">118</span>)
-<span class="k">postclose</span> pp
-
-<span class="k">use</span> output,<span class="k"> clear</span> 
-<span class="k">list</span> 
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> clear</span> 
-
-.<span class="k"> postutil clear</span> 
-
-.<span class="k"> postfile</span> pp str80 a <span class="nf">float</span>(b	c)	using	output<span class="m">.</span>dta,<span class="k">	replace</span> 
-
-.<span class="k"> post</span> pp (<span class="s">&quot;1&quot;</span>) (<span class="m">24.4</span>) (<span class="m">123</span>)
-
-.<span class="k"> post</span> pp (<span class="s">&quot;2&quot;</span>) (<span class="m">31.5</span>) (<span class="m">164</span>)
-
-.<span class="k"> post</span> pp (<span class="s">&quot;3&quot;</span>) (<span class="m">29.0</span>) (<span class="m">118</span>)
-
-.<span class="k"> postclose</span> pp
-
-. 
-.<span class="k"> use</span> output,<span class="k"> clear</span> 
-
-.<span class="k"> list</span> 
-
-
-    a      b     c 
-__________________
-<span class="m">1</span>.  <span class="m">1</span>   <span class="m">24.4</span>   <span class="m">123</span> 
-<span class="m">2</span>.  <span class="m">2</span>   <span class="m">31.5</span>   <span class="m">164</span> 
-<span class="m">3</span>.  <span class="m">3</span>     <span class="m">29</span>   <span class="m">118</span> 
-
-
-
-. 
-<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
-
-. 
-</pre></div>
-</div>
 </section>
-<section id="docx">
-<h2>2.4 docx<a class="headerlink" href="#docx" title="Permalink to this heading">#</a></h2>
-<p>We may embed Stata results in a .docx file in two very distinct ways:</p>
+<hr class="docutils" />
+<section id="how-to-use-macros-with-discipline">
+<h2>🧠 <em>How to Use Macros with Discipline</em><a class="headerlink" href="#how-to-use-macros-with-discipline" title="Permalink to this heading">#</a></h2>
+<section id="local-vs-global-scope-is-philosophy">
+<h3>Local vs Global: Scope is Philosophy<a class="headerlink" href="#local-vs-global-scope-is-philosophy" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>putdocx</p></li>
-<li><p>dyndoc</p></li>
+<li><p><strong>Local</strong> (<code class="docutils literal notranslate"><span class="pre">local</span> <span class="pre">name</span> <span class="pre">value</span></code>) → Context-bound, ephemeral</p></li>
+<li><p><strong>Global</strong> (<code class="docutils literal notranslate"><span class="pre">global</span> <span class="pre">name</span> <span class="pre">value</span></code>) → Environment-wide, persistent</p></li>
 </ul>
-<section id="putdocx">
-<h3>2.4.1. Putdocx<a class="headerlink" href="#putdocx" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">local</span> controls <span class="s">&quot;age gender income&quot;</span>
+<span class="k">local</span> method <span class="s">&quot;robust&quot;</span>
+<span class="k">regress</span> outcome treatment <span class="nv">`controls&#39;</span>, <span class="nv">`method&#39;</span>
+
+<span class="k">global</span> project_dir <span class="s">&quot;/Users/researcher/cardiology_study&quot;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Use <strong>local</strong> unless you <em>must</em> go <strong>global</strong>. Treat globals like salt—not sugar.</p>
+</div></blockquote>
+</section>
+</section>
+<hr class="docutils" />
+<section id="macro-style-clean-code-is-clean-thought">
+<h2>🎯 Macro Style: Clean Code is Clean Thought<a class="headerlink" href="#macro-style-clean-code-is-clean-thought" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">// ✅ Good</span>
+<span class="k">local</span> baseline_controls <span class="s">&quot;age gender race education&quot;</span>
+<span class="k">local</span> model1_vars <span class="s">&quot;treatment </span><span class="nv">`baseline_controls&#39;</span><span class="s">&quot;</span>
+<span class="k">local</span> model2_vars <span class="s">&quot;</span><span class="nv">`model1_vars&#39;</span><span class="s"> comorbidities&quot;</span>
+
+<span class="c1">// ❌ Bad</span>
+<span class="k">local</span> x <span class="s">&quot;age gender race education&quot;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Rule of thumb: <em>If future-you can’t read it, rewrite it now.</em></p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="components-of-a-macro">
+<h2>🧩 Components of a Macro<a class="headerlink" href="#components-of-a-macro" title="Permalink to this heading">#</a></h2>
+<section id="name-the-handle">
+<h3>1. <strong>Name</strong> — The handle<a class="headerlink" href="#name-the-handle" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="value-the-contents">
+<h3>2. <strong>Value</strong> — The contents<a class="headerlink" href="#value-the-contents" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="scope-local-or-global">
+<h3>3. <strong>Scope</strong> — Local or global<a class="headerlink" href="#scope-local-or-global" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="type-string-number-list-expression">
+<h3>4. <strong>Type</strong> — String, number, list, expression<a class="headerlink" href="#type-string-number-list-expression" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">local</span> filename <span class="s">&quot;data_analysis&quot;</span>
+<span class="k">local</span> sample_size <span class="m">1000</span>
+<span class="k">local</span> mean_age = (<span class="m">25</span> <span class="o">+</span> <span class="m">30</span> <span class="o">+</span> <span class="m">35</span>)<span class="o">/</span><span class="m">3</span>
+<span class="k">local</span> covariates age gender income
+<span class="k">local</span> n_obs = _N
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="referencing-rules">
+<h2>📌 Referencing Rules<a class="headerlink" href="#referencing-rules" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">// Local</span>
+<span class="nv">`macroname&#39;</span>
+
+<span class="c1">// Global</span>
+<span class="vg">$macroname</span> or <span class="vg">${macroname}</span>
+
+<span class="c1">// Example</span>
+<span class="k">local</span> city <span class="s">&quot;Baltimore&quot;</span>
+<span class="k">display</span> <span class="s">&quot;Welcome to </span><span class="nv">`city&#39;</span><span class="s">&quot;</span>     <span class="c1">// Welcome to Baltimore</span>
+
+<span class="k">global</span> state <span class="s">&quot;Maryland&quot;</span>
+<span class="k">display</span> <span class="s">&quot;State: </span><span class="vg">$state</span><span class="s">&quot;</span>         <span class="c1">// State: Maryland</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="macro-origins-where-they-come-from">
+<h2>🔍 Macro Origins: Where They Come From<a class="headerlink" href="#macro-origins-where-they-come-from" title="Permalink to this heading">#</a></h2>
+<section id="manual-definition">
+<h3>1. ✍️ <strong>Manual Definition</strong><a class="headerlink" href="#manual-definition" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">local</span> author <span class="s">&quot;Dr. Smith&quot;</span>
+<span class="k">global alpha</span> <span class="m">0.05</span>
+</pre></div>
+</div>
+</section>
+<section id="system-constants-c-class">
+<h3>2. 📜 <strong>System Constants (<code class="docutils literal notranslate"><span class="pre">c()</span></code> class)</strong><a class="headerlink" href="#system-constants-c-class" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">local</span> today <span class="s">&quot;</span><span class="nv">`c(current_date)&#39;</span><span class="s">&quot;</span>
+<span class="k">local version</span> <span class="s">&quot;</span><span class="nv">`c(stata_version)&#39;</span><span class="s">&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="command-results-r-class">
+<h3>3. 📦 <strong>Command Results (<code class="docutils literal notranslate"><span class="pre">r()</span></code> class)</strong><a class="headerlink" href="#command-results-r-class" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">summarize</span> age
+<span class="k">local</span> mean_age = <span class="nf">r</span>(mean)
+</pre></div>
+</div>
+</section>
+<section id="estimation-results-e-class">
+<h3>4. 📊 <strong>Estimation Results (<code class="docutils literal notranslate"><span class="pre">e()</span></code> class)</strong><a class="headerlink" href="#estimation-results-e-class" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">regress</span> income education
+<span class="k">local</span> rsq =<span class="k"> e</span>(r2)
+</pre></div>
+</div>
+</section>
+<section id="computed-on-the-fly">
+<h3>5. 🧮 <strong>Computed On-the-Fly</strong><a class="headerlink" href="#computed-on-the-fly" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">count if</span> <span class="nf">missing</span>(income)
+<span class="k">local</span> missing_pct = (<span class="nf">r</span>(N)<span class="o">/</span>_N) <span class="o">*</span> <span class="m">100</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="the-triumvirate-return-creturn-and-ereturn">
+<h2>🧭 The Triumvirate: <code class="docutils literal notranslate"><span class="pre">return</span></code>, <code class="docutils literal notranslate"><span class="pre">creturn</span></code>, and <code class="docutils literal notranslate"><span class="pre">ereturn</span></code><a class="headerlink" href="#the-triumvirate-return-creturn-and-ereturn" title="Permalink to this heading">#</a></h2>
+<section id="return-list-the-moments-echo">
+<h3>🔁 <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">list</span></code> — <em>The Moment’s Echo</em><a class="headerlink" href="#return-list-the-moments-echo" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p><em>“What just happened?”</em></p>
+</div></blockquote>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">tab</span> gender, chi2
+<span class="k">return list</span>
+</pre></div>
+</div>
+<p><strong>Think:</strong> Transient truth—<code class="docutils literal notranslate"><span class="pre">r()</span></code> holds the results of the <em>last command</em>.</p>
+</section>
+<hr class="docutils" />
+<section id="creturn-list-the-introspective-core">
+<h3>🧘 <code class="docutils literal notranslate"><span class="pre">creturn</span> <span class="pre">list</span></code> — <em>The Introspective Core</em><a class="headerlink" href="#creturn-list-the-introspective-core" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p><em>“Who am I? Where am I?”</em></p>
+</div></blockquote>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">creturn list</span>
+</pre></div>
+</div>
+<p><strong>Think:</strong> System-level constants—<code class="docutils literal notranslate"><span class="pre">c()</span></code> is the self-knowledge of Stata.</p>
+</section>
+<hr class="docutils" />
+<section id="ereturn-list-the-archive-of-estimation">
+<h3>📜 <code class="docutils literal notranslate"><span class="pre">ereturn</span> <span class="pre">list</span></code> — <em>The Archive of Estimation</em><a class="headerlink" href="#ereturn-list-the-archive-of-estimation" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p><em>“What did the model discover?”</em></p>
+</div></blockquote>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">regress</span> income education
+<span class="k">ereturn list</span>
+</pre></div>
+</div>
+<p><strong>Think:</strong> <code class="docutils literal notranslate"><span class="pre">e()</span></code> is the historical ledger of your estimation journey.</p>
+</section>
+<hr class="docutils" />
+<section id="triumvirate-in-motion">
+<h3>🗂️ Triumvirate in Motion<a class="headerlink" href="#triumvirate-in-motion" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">regress</span> income education      <span class="c1">// e()</span>
+<span class="k">summarize</span> income              <span class="c1">// r()</span>
+<span class="k">display</span> <span class="s">&quot;</span><span class="nv">`c(username)&#39;</span><span class="s">&quot;</span>      <span class="c1">// c()</span>
+
+<span class="k">local mean</span> = <span class="nf">r</span>(mean)
+<span class="k">local</span> rsq =<span class="k"> e</span>(r2)
+<span class="k">local</span> user = <span class="s">&quot;</span><span class="nv">`c(username)&#39;</span><span class="s">&quot;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>🧠 Mnemonic:
+<strong>r</strong> = Recent
+<strong>c</strong> = Constants
+<strong>e</strong> = Estimation</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Hierarchy of Memory:</strong></p>
+</div></blockquote>
 <ul class="simple">
-<li><p>putdocx begin (Tell Stata you want to create a Word doc)</p></li>
-<li><p>putdocx text etc. (Define the contents of the Word doc you will create)</p></li>
-<li><p>putdocx save (Actually create the Word doc and write it to disk)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r()</span></code> dies with the next command</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">e()</span></code> persists until the next regression</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c()</span></code> is eternal (until reboot)</p></li>
 </ul>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>putdocx<span class="k"> clear</span>
-putdocx begin
-putdocx paragraph
-putdocx text (<span class="s">&quot;How to embed Stata results in .docx&quot;</span>)
-putdocx paragraph
-putdocx text (<span class="s">&quot;Author, MD MPH&quot;</span>)
-putdocx paragraph
-putdocx text (<span class="s">&quot;Background. A user downloads and installs a system of program files, mostly ado-files, which form the foundation of most of the commands used in Stata Programming. Using those commands and additional syntax written out sequentially in a do-file, the user creates well-formed instruction to Stata called a do-file script. Once the user runs this script, results are generated and displayed in the results window, in a graph, or in a format (.xlsx, .log, .dta, .docx, .md, LaTeX, .html, etc). The .docx file format is of specific interest to us right now. To illustrate how this may be achieved in Stata, we hereby introduce the putdocx command.&quot;</span>)
-putdocx paragraph
-putdocx text (<span class="s">&quot;Methods. We created a do-file and populated it with this abstract using plain text. Results that might be numeric, string, alphanumeric, or formatted as macros are manually embeded in the text. We then saved this document using the file extension .do; however, any text file extension will work (.txt, .md, .do, etc). In the key analysis, Y = b0 + b1X, where Y is life expectancy at birth in years, the outcome or dependent variable; X is the country, the predictor or independent variable being tested.&quot;</span>)
-putdocx paragraph
-putdocx text (<span class="s">&quot;Results. We identified the newly created .html file in our folder and opened it to compare its format to this markdown file. And we saw all that we had made, and behold, it was very good. Ghastly macros in the original markdown language now appeared as neatly formatted results. There were 68 observations and 6 observations in the analyzed dataset. Average life expectancy of all countries, b0, was 72 years. Difference in life expectancy among adjacent countries, b1, showed no trend or pattern and was 0.002 year, essentially zero, and p=0.95&quot;</span>)
-putdocx paragraph
-putdocx text (<span class="s">&quot;Conclusion. In walking you through syntax, do-file creation, queued commands, generated results, through to embedding neatly formatted output in .html, we believe you now have a solid sense of all that Stata has to offer you. These ideas can be generalized to embedding results in .xlsx, .log, .dta, .docx, etc.&quot;</span>)
-putdocx<span class="k"> save</span> myfirst<span class="m">.</span>docx,<span class="k"> replace</span>
-</pre></div>
-</div>
-<p>Author, MD MPH</p>
-<p>Background. A user downloads and installs a system of program files, mostly ado-files, which form the foundation of most of the commands used in Stata Programming. Using those commands and additional syntax written out sequentially in a do-file, the user creates well-formed instruction to Stata called a do- file script. Once the user runs this script, results are generated and displayed in the results window, in a graph, or in a format (.xlsx, .log, .dta, .docx, .md, LaTeX, .html, etc). The .docx file format is of specific interest to us right now. To illustrate how this may be achieved in Stata, we hereby introduce the putdocx command.</p>
-<p>Methods. We created a do-file and populated it with this abstract using plain text. Results that might be numeric, string, alphanumeric, or formatted as macros are manually embeded in the text. We then saved this document using the file extension .do; however, any text file extension will work (.txt, .md, .do, etc). In the key analysis, Y = b0 + b1X, where Y is life expectancy at birth in years, the outcome or dependent variable; X is the country, the predictor or independent variable being tested.</p>
-<p>Results. We identified the newly created .html file in our folder and opened it to compare its format to this markdown file. And we saw all that we had made, and behold, it was very good. Ghastly macros in the original markdown language now appeared as neatly formatted results. There were 68 observations and 6 observations in the analyzed dataset. Average life expectancy of all countries, b0, was 72 years. Difference in life expectancy among adjacent countries, b1, showed no trend or pattern and was 0.002 year, essentially zero, and p=0.95</p>
-<p>Conclusion. In walking you through syntax, do-file creation, queued commands, generated results, through to embedding neatly formatted output in .html, we believe you now have a solid sense of all that Stata has to offer you. These ideas can be generalized to embedding results in .xlsx, .log, .dta, .docx, etc.</p>
-</section>
-<section id="dyndoc">
-<h3>2.4.2. dyndoc<a class="headerlink" href="#dyndoc" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Identical to the .html approach discussed in the next section</p></li>
-<li><p>But has some caveats that we will discuss</p></li>
-<li><p>Word documents are not able to render LaTeX format</p></li>
-</ul>
-<section id="author-md-mph">
-<h4>Author, MD MPH<a class="headerlink" href="#author-md-mph" title="Permalink to this heading">#</a></h4>
-<p><strong>Background:</strong>
-A <u>user</u> downloads and installs a <u>system</u> of program files, mostly ado-files, which form the foundation of most of the commands
-used in Stata Programming. Using those commands and additional syntax written out sequentially in a do-file, the user creates
-well-formed instruction to Stata called a do-file script. Once the user runs this script, results are generated and displayed
-in the results window, in a graph, or in a format (<code class="docutils literal notranslate"><span class="pre">.xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">.log</span></code>, <code class="docutils literal notranslate"><span class="pre">.dta</span></code>, <code class="docutils literal notranslate"><span class="pre">.docx</span></code>, <code class="docutils literal notranslate"><span class="pre">.md</span></code>, <code class="docutils literal notranslate"><span class="pre">LaTeX</span></code>, <code class="docutils literal notranslate"><span class="pre">.html</span></code>, etc). The <code class="docutils literal notranslate"><span class="pre">.docx</span></code> file format is of specific
-interest since its the one of the most widely used word processors. To illustrate how this may be achieved in Stata, we hereby introduce the <code class="docutils literal notranslate"><span class="pre">dyndoc</span></code>
-command.</p>
-<p><strong>Methods:</strong>
-We created a <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/filename.do">do-file</a> and populated it with this abstract using <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">markdown</a> language. Anything
-in this document that is not ordinary text including <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_version:</span> <span class="pre">2&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_do:nooutput&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/dd_do&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_display:</span> <span class="pre">c(N)&gt;&gt;</span></code> is a
-<a class="reference external" href="https://en.wikipedia.org/wiki/Markup_language#:~:text=A%20markup%20language%20is%20a,content%20to%20facilitate%20automated%20processing.">markup</a>.
-Results that might be numeric, string, alphanumeric, or formatted as macros are embeded at these markedup points. We then saved this
-document using the file extension .do; however, any text file extension will work (.txt, .md, .do, etc). To the <code class="docutils literal notranslate"><span class="pre">pwd</span></code> where we saved
-this text file, we added a cascading style sheet <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/stmarkdown.css">stmarkdown.css</a> and <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/header.txt">header.txt</a> to enhance the aesthetic of our .html file. Finally, we typed the
-following command into the Stata command window: <code class="docutils literal notranslate"><span class="pre">dyndoc</span> <span class="pre">filename.do,</span> <span class="pre">saving(filename.docx)</span> <span class="pre">replace</span></code>. In the key analysis, <span class="math notranslate nohighlight">\(Y  = \beta_0   +  \beta_1 X\)</span>, where <span class="math notranslate nohighlight">\(Y\)</span> is life expectancy at birth in years, the outcome or dependent variable; <span class="math notranslate nohighlight">\(X\)</span> is the country, the predictor or independent variable being tested.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> webuse</span> lifeexp,<span class="k"> clear</span> 
-(Life expectancy, <span class="m">1998</span>)
-
-.<span class="k"> encode</span> country,<span class="k"> gen</span>(Country)
-
-.<span class="k"> quietly sum</span> lexp
-
-.<span class="k"> qui local</span> lexp_mean:<span class="k"> di</span> <span class="nx">%3.0f</span> <span class="nf">r</span>(mean) 
-
-.<span class="k"> quietly sum</span> Country
-
-.<span class="k"> qui local</span> Country_mean:<span class="k"> di</span> <span class="nf">r</span>(mean)  
-
-.<span class="k"> twoway scatter</span> lexp Country, <span class="cs">///</span>
-<span class="o">&gt;</span>    xscale(off) <span class="cs">///</span>
-<span class="o">&gt;</span>    yline(<span class="nv">`lexp_mean&#39;</span>, <span class="cs">///</span>
-<span class="o">&gt;</span>       lc(red) <span class="cs">///</span>
-<span class="o">&gt;</span>       lp(dash) <span class="cs">///</span>
-<span class="o">&gt;</span>    ) <span class="cs">///</span>
-<span class="o">&gt;</span>    text(<span class="nv">`lexp_mean&#39;</span> <span class="nv">`Country_mean&#39;</span> <span class="s">&quot;Mean life expectancy among countries&quot;</span>)
-
-.<span class="k"> graph</span> export lexp_bycountry<span class="m">.</span>png,<span class="k"> replace</span> 
-<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Desktop<span class="o">/</span>lexp_bycountry<span class="m">.</span>png saved<span class="k"> as</span> PNG<span class="k"> format</span>
-
-. 
-<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
-
-. 
-</pre></div>
-</div>
-<p><img alt="" src="_images/lexp_bycountry.png" /></p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> qui</span> {
-
-.
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> display</span> <span class="nf">c</span>(N) 
-<span class="m">68</span>
-
-.<span class="k"> display</span> <span class="nf">c</span>(k)  
-<span class="m">6</span>
-
-.<span class="k"> list in</span> <span class="m">1</span><span class="o">/</span><span class="m">5</span>  
-
-						
-    region	            country	    popgro<span class="o">~</span>h	 lexp	    gnppc  safewa<span class="o">~</span>r	
-						
-<span class="m">1</span>.  Europe <span class="o">&amp;</span> C. Asia	Albania	       <span class="m">1.2</span>	        <span class="m">72</span>	    <span class="m">810</span>	    <span class="m">76</span>	
-<span class="m">2</span>.  Europe <span class="o">&amp;</span> C. Asia	Armenia	       <span class="m">1.1</span>	        <span class="m">74</span>	    <span class="m">460</span>	    .	
-<span class="m">3</span>.  Europe <span class="o">&amp;</span> C. Asia	Austria	       .<span class="m">4</span>	        <span class="m">79</span>	    <span class="m">26830</span>   .	
-<span class="m">4</span>.  Europe <span class="o">&amp;</span> C. Asia	Azerbaijan    <span class="m">1.4</span>	        <span class="m">71</span>	    <span class="m">480</span>	    .	
-<span class="m">5</span>.  Europe <span class="o">&amp;</span> C. Asia	Belarus	       .<span class="m">3</span>	        <span class="m">68</span>	    <span class="m">2180</span>    .	
-						
-
-. 
-<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
-
-. 
-</pre></div>
-</div>
-<p><strong>Results:</strong>
-We identified the newly created .html file in our folder and opened it to compare its format to this markdown file. And we saw all that
-we had made, and behold, it was very good. Ghastly macros in the original markdown language now appeared as neatly formatted
-results. There were 68 observations and 6 observations in the analyzed dataset. Average life expectancy of all countries, <span class="math notranslate nohighlight">\(\beta_0\)</span>, was 72 years. Difference in life expectancy among <u>adjacent</u> countries, <span class="math notranslate nohighlight">\(\beta_1\)</span>, showed no trend or pattern and was 0.002 year, essentially <span class="math notranslate nohighlight">\(zero\)</span>, and <span class="math notranslate nohighlight">\(p = .95\)</span></p>
-<p><strong>Conclusions:</strong>
-In walking you through syntax, do-file creation, queued commands, generated results, through to embedding neatly formatted output in
-.html, we believe you now have a solid sense of all that Stata has to offer you. These ideas can be generalized to embedding results
-in .xlsx, .log, .dta, .docx, etc.</p>
 </section>
 </section>
-</section>
-<section id="html">
-<h2>2.5 html<a class="headerlink" href="#html" title="Permalink to this heading">#</a></h2>
-<section id="how-to-embed-stata-results-in-html">
-<h3>2.5.1. How to embed Stata results in .html<a class="headerlink" href="#how-to-embed-stata-results-in-html" title="Permalink to this heading">#</a></h3>
-</section>
-<section id="id1">
-<h3>Author, MD MPH<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<p><strong>Background:</strong>
-A <u>user</u> downloads and installs a <u>system</u> of program files, mostly ado-files, which form the foundation of most of the commands
-used in Stata Programming. Using those commands and additional syntax written out sequentially in a do-file, the user creates
-well-formed instruction to Stata called a do-file script. Once the user runs this script, results are generated and displayed
-in the results window, in a graph, or in a format (<code class="docutils literal notranslate"><span class="pre">.xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">.log</span></code>, <code class="docutils literal notranslate"><span class="pre">.dta</span></code>, <code class="docutils literal notranslate"><span class="pre">.docx</span></code>, <code class="docutils literal notranslate"><span class="pre">.md</span></code>, <code class="docutils literal notranslate"><span class="pre">LaTeX</span></code>, <code class="docutils literal notranslate"><span class="pre">.html</span></code>, etc). The <code class="docutils literal notranslate"><span class="pre">.html</span></code> file format is of specific
-interest since its the pathway to self-publication. To illustrate how this may be achieved in Stata, we hereby introduce the <code class="docutils literal notranslate"><span class="pre">dyndoc</span></code>
-command.</p>
-<p><strong>Methods:</strong>
-We created a <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/filename.do">do-file</a> and populated it with this abstract using <a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">markdown</a> language. Anything
-in this document that is not ordinary text including <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_version:</span> <span class="pre">2&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_do:nooutput&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;/dd_do&gt;&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_display:</span> <span class="pre">c(N)&gt;&gt;</span></code> is a
-<a class="reference external" href="https://en.wikipedia.org/wiki/Markup_language#:~:text=A%20markup%20language%20is%20a,content%20to%20facilitate%20automated%20processing.">markup</a>.
-Results that might be numeric, string, alphanumeric, or formatted as macros are embeded at these markedup points. We then saved this
-document using the file extension .do; however, any text file extension will work (.txt, .md, .do, etc). To the <code class="docutils literal notranslate"><span class="pre">pwd</span></code> where we saved
-this text file, we added a cascading style sheet <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/stmarkdown.css">stmarkdown.css</a> and <a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/header.txt">header.txt</a> to enhance the aesthetic of our .html file. Finally, we typed the
-following command into the Stata command window: <code class="docutils literal notranslate"><span class="pre">dyndoc</span> <span class="pre">filename.do,</span> <span class="pre">saving(filename.html)</span> <span class="pre">replace</span></code>. In the key analysis, <span class="math notranslate nohighlight">\(Y  = \beta_0   +  \beta_1 X\)</span>, where <span class="math notranslate nohighlight">\(Y\)</span> is life expectancy at birth in years, the outcome or dependent variable; <span class="math notranslate nohighlight">\(X\)</span> is the country, the predictor or independent variable being tested.</p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> webuse</span> lifeexp,<span class="k"> clear</span> 
-(Life expectancy, <span class="m">1998</span>)
+<hr class="docutils" />
+<section id="macro-quick-reference-the-portable-codex">
+<h2>🗺️ Macro Quick Reference — <em>The Portable Codex</em><a class="headerlink" href="#macro-quick-reference-the-portable-codex" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define</span>
+<span class="k">local</span> name <span class="s">&quot;value&quot;</span>
+<span class="k">global</span> name <span class="s">&quot;value&quot;</span>
 
-.<span class="k"> encode</span> country,<span class="k"> gen</span>(Country)
+<span class="c1">// Use</span>
+<span class="nv">`localname&#39;</span>
+<span class="vg">$globalname</span>
 
-.<span class="k"> quietly sum</span> lexp
+<span class="c1">// Capture Results</span>
+<span class="k">local mean</span> = <span class="nf">r</span>(mean)
+<span class="k">local</span> user = <span class="s">&quot;</span><span class="nv">`c(username)&#39;</span><span class="s">&quot;</span>
+<span class="k">local</span> rsq =<span class="k"> e</span>(r2)
 
-.<span class="k"> qui local</span> lexp_mean:<span class="k"> di</span> <span class="nx">%3.0f</span> <span class="nf">r</span>(mean) 
+<span class="c1">// Inspect</span>
+<span class="k">macro list</span>
 
-.<span class="k"> quietly sum</span> Country
-
-.<span class="k"> qui local</span> Country_mean:<span class="k"> di</span> <span class="nf">r</span>(mean)  
-
-.<span class="k"> twoway scatter</span> lexp Country, <span class="cs">///</span>
-<span class="o">&gt;</span>    xscale(off) <span class="cs">///</span>
-<span class="o">&gt;</span>    yline(<span class="nv">`lexp_mean&#39;</span>, <span class="cs">///</span>
-<span class="o">&gt;</span>       lc(red) <span class="cs">///</span>
-<span class="o">&gt;</span>       lp(dash) <span class="cs">///</span>
-<span class="o">&gt;</span>    ) <span class="cs">///</span>
-<span class="o">&gt;</span>    text(<span class="nv">`lexp_mean&#39;</span> <span class="nv">`Country_mean&#39;</span> <span class="s">&quot;Mean life expectancy among countries&quot;</span>)
-
-.<span class="k"> graph</span> export lexp_bycountry<span class="m">.</span>png,<span class="k"> replace</span> 
-<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Desktop<span class="o">/</span>lexp_bycountry<span class="m">.</span>png saved<span class="k"> as</span> PNG<span class="k"> format</span>
-
-. 
-<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
-
-. 
+<span class="c1">// Reset</span>
+<span class="k">macro drop</span> _all
 </pre></div>
 </div>
-<p><img alt="" src="_images/lexp_bycountry.png" /></p>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> qui</span> {
-
-.
-</pre></div>
-</div>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> display</span> <span class="nf">c</span>(N) 
-<span class="m">68</span>
-
-.<span class="k"> display</span> <span class="nf">c</span>(k)  
-<span class="m">6</span>
-
-.<span class="k"> list in</span> <span class="m">1</span><span class="o">/</span><span class="m">5</span>  
-
-						
-    region	            country	    popgro<span class="o">~</span>h	 lexp	    gnppc  safewa<span class="o">~</span>r	
-						
-<span class="m">1</span>.  Europe <span class="o">&amp;</span> C. Asia	Albania	       <span class="m">1.2</span>	        <span class="m">72</span>	    <span class="m">810</span>	    <span class="m">76</span>	
-<span class="m">2</span>.  Europe <span class="o">&amp;</span> C. Asia	Armenia	       <span class="m">1.1</span>	        <span class="m">74</span>	    <span class="m">460</span>	    .	
-<span class="m">3</span>.  Europe <span class="o">&amp;</span> C. Asia	Austria	       .<span class="m">4</span>	        <span class="m">79</span>	    <span class="m">26830</span>   .	
-<span class="m">4</span>.  Europe <span class="o">&amp;</span> C. Asia	Azerbaijan    <span class="m">1.4</span>	        <span class="m">71</span>	    <span class="m">480</span>	    .	
-<span class="m">5</span>.  Europe <span class="o">&amp;</span> C. Asia	Belarus	       .<span class="m">3</span>	        <span class="m">68</span>	    <span class="m">2180</span>    .	
-						
-
-. 
-<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
-
-. 
-</pre></div>
-</div>
-<p><strong>Results:</strong>
-We identified the newly created .html file in our folder and opened it to compare its format to this markdown file. And we saw all that
-we had made, and behold, it was very good. Ghastly macros in the original markdown language now appeared as neatly formatted
-results. There were 68 observations and 6 observations in the analyzed dataset. Average life expectancy of all countries, <span class="math notranslate nohighlight">\(\beta_0\)</span>, was 72 years. Difference in life expectancy among <u>adjacent</u> countries, <span class="math notranslate nohighlight">\(\beta_1\)</span>, showed no trend or pattern and was 0.002 year, essentially <span class="math notranslate nohighlight">\(zero\)</span>, and <span class="math notranslate nohighlight">\(p = .95\)</span></p>
-<p><strong>Conclusions:</strong>
-In walking you through syntax, do-file creation, queued commands, generated results, through to embedding neatly formatted output in
-.html, we believe you now have a solid sense of all that Stata has to offer you. These ideas can be generalized to embedding results
-in .xlsx, .log, .dta, .docx, etc.</p>
 </section>
+<hr class="docutils" />
+<section id="final-word">
+<h2>🧘 Final Word<a class="headerlink" href="#final-word" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p><em>“A macro is a mnemonic mirror—a reflection of the logic you’ll return to tomorrow. So make it readable. Make it sing.”</em></p>
+</div></blockquote>
+<p>Let this guide be both a keyboard map and a philosophical compass as you wander deeper into the forest of Stata. The language may be rigid, but your use of it doesn’t have to be.</p>
 </section>
 </section>
 
@@ -921,22 +760,44 @@ in .xlsx, .log, .dta, .docx, etc.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xlsx">2.1 xlsx</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log">2.2 log</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dta">2.3 dta</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docx">2.4 docx</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putdocx">2.4.1. Putdocx</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dyndoc">2.4.2. dyndoc</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#author-md-mph">Author, MD MPH</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-macro">🌀 What is a Macro?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-are-macros-sacred">❤️ Why Are Macros Sacred?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-reusability">1. 🔁 <strong>Code Reusability</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-temporal-logic">2. 🕰️ <strong>Dynamic Temporal Logic</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-prevention">3. 🛡️ <strong>Error Prevention</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-elegance">4. ⚖️ <strong>Conditional Elegance</strong></a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-macros-with-discipline">🧠 <em>How to Use Macros with Discipline</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-vs-global-scope-is-philosophy">Local vs Global: Scope is Philosophy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#html">2.5 html</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-embed-stata-results-in-html">2.5.1. How to embed Stata results in .html</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Author, MD MPH</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-style-clean-code-is-clean-thought">🎯 Macro Style: Clean Code is Clean Thought</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components-of-a-macro">🧩 Components of a Macro</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#name-the-handle">1. <strong>Name</strong> — The handle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-the-contents">2. <strong>Value</strong> — The contents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scope-local-or-global">3. <strong>Scope</strong> — Local or global</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#type-string-number-list-expression">4. <strong>Type</strong> — String, number, list, expression</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#referencing-rules">📌 Referencing Rules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-origins-where-they-come-from">🔍 Macro Origins: Where They Come From</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-definition">1. ✍️ <strong>Manual Definition</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-constants-c-class">2. 📜 <strong>System Constants (<code class="docutils literal notranslate"><span class="pre">c()</span></code> class)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#command-results-r-class">3. 📦 <strong>Command Results (<code class="docutils literal notranslate"><span class="pre">r()</span></code> class)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-results-e-class">4. 📊 <strong>Estimation Results (<code class="docutils literal notranslate"><span class="pre">e()</span></code> class)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computed-on-the-fly">5. 🧮 <strong>Computed On-the-Fly</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-triumvirate-return-creturn-and-ereturn">🧭 The Triumvirate: <code class="docutils literal notranslate"><span class="pre">return</span></code>, <code class="docutils literal notranslate"><span class="pre">creturn</span></code>, and <code class="docutils literal notranslate"><span class="pre">ereturn</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#return-list-the-moments-echo">🔁 <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">list</span></code> — <em>The Moment’s Echo</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creturn-list-the-introspective-core">🧘 <code class="docutils literal notranslate"><span class="pre">creturn</span> <span class="pre">list</span></code> — <em>The Introspective Core</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ereturn-list-the-archive-of-estimation">📜 <code class="docutils literal notranslate"><span class="pre">ereturn</span> <span class="pre">list</span></code> — <em>The Archive of Estimation</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#triumvirate-in-motion">🗂️ Triumvirate in Motion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macro-quick-reference-the-portable-codex">🗺️ Macro Quick Reference — <em>The Portable Codex</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-word">🧘 Final Word</a></li>
 </ul>
   </nav></div>
 

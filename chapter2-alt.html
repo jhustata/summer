@@ -1,0 +1,829 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 2: Return Values, Macros, and Output Programs &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter2-alt';</script>
+    <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logos-vertical.jpg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/logos-vertical.jpg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">📘 Collaborative Stata Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">🔁 <em>Stata Macros: The Essential Guide</em> — <em>Code, Cognition, and the Art of Memory</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/chapter2-alt.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter2-alt.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 2: Return Values, Macros, and Output Programs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-output-management">2.1 Introduction to Output Management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-files-session-documentation">2.2 Log Files: Session Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-managing-log-files">2.2.1 Creating and Managing Log Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-chi-square-analysis">2.2.2 Practical Example: Chi-Square Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-return-values">2.2.3 Working with Return Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#professional-p-value-formatting">2.2.4 Professional P-Value Formatting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-datasets-programmatically-dta-files">2.3 Creating Datasets Programmatically (.dta files)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-postfile-system">2.3.1 The Postfile System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-postfile-workflow">2.3.2 Basic Postfile Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-document-generation">2.4 Dynamic Document Generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-putdocx">2.4.1 Introduction to putdocx</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-document-structure">2.4.2 Basic Document Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#professional-academic-format">2.4.3 Professional Academic Format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-output-html-generation">2.5 Advanced Output: HTML Generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-html-documents">2.5.1 Dynamic HTML Documents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-integration">2.5.2 Markdown Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-notation">2.5.3 Mathematical Notation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-and-integration">2.6 Best Practices and Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-recommendations">2.6.1 Workflow Recommendations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-assurance">2.6.2 Quality Assurance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-applications">2.6.3 Advanced Applications</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">2.7 Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-exercises">2.8 Practice Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-2-return-values-macros-and-output-programs">
+<h1>Chapter 2: Return Values, Macros, and Output Programs<a class="headerlink" href="#chapter-2-return-values-macros-and-output-programs" title="Permalink to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<p>By the end of this chapter, students will be able to:</p>
+<ul class="simple">
+<li><p>Create and manage log files for documenting Stata sessions</p></li>
+<li><p>Access and manipulate return values from statistical commands</p></li>
+<li><p>Format p-values according to academic publication standards</p></li>
+<li><p>Create and save datasets programmatically using postfile</p></li>
+<li><p>Generate professional documents in multiple formats (.docx, .html, .dta)</p></li>
+<li><p>Embed dynamic results in academic manuscripts</p></li>
+</ul>
+<hr class="docutils" />
+<ul class="simple">
+<li><p>Macros can be embedded in any of the output formats covered in <a class="reference external" href="https://claude.ai/public/artifacts/46c58b50-f634-4065-b39a-304fcd692457">this</a> chapter</p>
+<ul>
+<li><p>But, first, what are macros?</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="introduction-to-output-management">
+<h2>2.1 Introduction to Output Management<a class="headerlink" href="#introduction-to-output-management" title="Permalink to this heading">#</a></h2>
+<p>Statistical analysis is only as valuable as its documentation and presentation. Stata provides multiple pathways for capturing, formatting, and presenting results. This chapter introduces three fundamental approaches:</p>
+<ol class="arabic simple">
+<li><p><strong>Log files</strong> - Session documentation and result capture</p></li>
+<li><p><strong>Dataset creation</strong> - Programmatic data generation and storage</p></li>
+<li><p><strong>Dynamic documents</strong> - Automated report generation with embedded results</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="log-files-session-documentation">
+<h2>2.2 Log Files: Session Documentation<a class="headerlink" href="#log-files-session-documentation" title="Permalink to this heading">#</a></h2>
+<section id="creating-and-managing-log-files">
+<h3>2.2.1 Creating and Managing Log Files<a class="headerlink" href="#creating-and-managing-log-files" title="Permalink to this heading">#</a></h3>
+<p>Log files serve as permanent records of your Stata session, capturing both commands and their output. This is essential for reproducible research and debugging.</p>
+<p><strong>Basic Syntax:</strong></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">log</span> using filename<span class="m">.</span>log,<span class="k"> replace</span>
+<span class="c1">// Your analysis commands here</span>
+<span class="k">log close</span>
+</pre></div>
+</div>
+<p><strong>Key Points:</strong></p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">replace</span></code> option overwrites existing log files</p></li>
+<li><p>Log files capture everything displayed in the Results window</p></li>
+<li><p>Always close log files when finished to ensure proper saving</p></li>
+</ul>
+</section>
+<section id="practical-example-chi-square-analysis">
+<h3>2.2.2 Practical Example: Chi-Square Analysis<a class="headerlink" href="#practical-example-chi-square-analysis" title="Permalink to this heading">#</a></h3>
+<p>Consider this analysis of transplant diagnoses by gender:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">log</span> using chi2<span class="m">.</span>log,<span class="k"> replace</span> 
+<span class="k">use</span> transplants
+<span class="k">tab</span> dx gender, row chi2
+</pre></div>
+</div>
+<p><strong>Interpreting the Output:</strong></p>
+<ul class="simple">
+<li><p>The crosstab shows frequency and row percentages</p></li>
+<li><p>Pearson chi-square test: χ²(8) = 18.48, p = 0.018</p></li>
+<li><p>Results suggest significant association between diagnosis and gender</p></li>
+</ul>
+</section>
+<section id="working-with-return-values">
+<h3>2.2.3 Working with Return Values<a class="headerlink" href="#working-with-return-values" title="Permalink to this heading">#</a></h3>
+<p>After running statistical commands, Stata stores results in memory that can be accessed programmatically.</p>
+<p><strong>Viewing Return Values:</strong></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">return list</span>
+</pre></div>
+</div>
+<p><strong>Common Return Values:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">r(N)</span></code> - Number of observations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r(chi2)</span></code> - Chi-square statistic</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r(p)</span></code> - P-value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r(r)</span></code> - Number of rows</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r(c)</span></code> - Number of columns</p></li>
+</ul>
+</section>
+<section id="professional-p-value-formatting">
+<h3>2.2.4 Professional P-Value Formatting<a class="headerlink" href="#professional-p-value-formatting" title="Permalink to this heading">#</a></h3>
+<p>Academic publications require specific p-value formatting conventions. Here’s a professional approach:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">return list</span> 
+<span class="k">qui</span> {
+<span class="k">    if</span> <span class="nf">r</span>(p) <span class="o">&lt;</span> <span class="m">0.01</span> {
+<span class="k">        local</span> p:<span class="k"> di</span> <span class="s">&quot;p &lt; 0.01&quot;</span>
+    }
+<span class="k">    else if</span> <span class="nf">inrange</span>(<span class="nf">r</span>(p),<span class="m">0.01</span>,<span class="m">0.05</span>) {
+<span class="k">        local</span> p:<span class="k"> di</span> <span class="nx">%3.2f</span> <span class="nf">r</span>(p)
+    }
+<span class="k">    else</span> {
+<span class="k">        local</span> p:<span class="k"> di</span> <span class="nx">%2.1f</span> <span class="nf">r</span>(p)
+    }
+<span class="k">    noi di</span> <span class="s">&quot;p = </span><span class="nv">`p&#39;</span><span class="s">&quot;</span>
+}
+</pre></div>
+</div>
+<p><strong>Formatting Rules:</strong></p>
+<ul class="simple">
+<li><p>p &lt; 0.01: Report as “p &lt; 0.01”</p></li>
+<li><p>0.01 ≤ p &lt; 0.05: Report to 2 decimal places</p></li>
+<li><p>p ≥ 0.05: Report to 1 decimal place</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="creating-datasets-programmatically-dta-files">
+<h2>2.3 Creating Datasets Programmatically (.dta files)<a class="headerlink" href="#creating-datasets-programmatically-dta-files" title="Permalink to this heading">#</a></h2>
+<section id="the-postfile-system">
+<h3>2.3.1 The Postfile System<a class="headerlink" href="#the-postfile-system" title="Permalink to this heading">#</a></h3>
+<p>The postfile system allows you to create datasets programmatically, which is useful for:</p>
+<ul class="simple">
+<li><p>Storing simulation results</p></li>
+<li><p>Creating summary tables</p></li>
+<li><p>Building datasets from computed values</p></li>
+</ul>
+</section>
+<section id="basic-postfile-workflow">
+<h3>2.3.2 Basic Postfile Workflow<a class="headerlink" href="#basic-postfile-workflow" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>cls
+<span class="k">clear</span> 
+<span class="k">postutil clear</span> 
+<span class="k">postfile</span> pp str80 a <span class="nf">float</span>(b c) using output<span class="m">.</span>dta,<span class="k"> replace</span> 
+<span class="k">post</span> pp (<span class="s">&quot;1&quot;</span>) (<span class="m">24.4</span>) (<span class="m">123</span>)
+<span class="k">post</span> pp (<span class="s">&quot;2&quot;</span>) (<span class="m">31.5</span>) (<span class="m">164</span>)
+<span class="k">post</span> pp (<span class="s">&quot;3&quot;</span>) (<span class="m">29.0</span>) (<span class="m">118</span>)
+<span class="k">postclose</span> pp
+
+<span class="k">use</span> output,<span class="k"> clear</span> 
+<span class="k">list</span>
+</pre></div>
+</div>
+<p><strong>Command Breakdown:</strong></p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">postfile</span></code> - Define the structure and filename</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">post</span></code> - Add observations to the dataset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">postclose</span></code> - Finalize and save the dataset</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use</span></code> - Load the created dataset for verification</p></li>
+</ol>
+<p><strong>Variable Types:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">str80</span></code> - String variable with maximum 80 characters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span></code> - Numeric variable with floating-point precision</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="dynamic-document-generation">
+<h2>2.4 Dynamic Document Generation<a class="headerlink" href="#dynamic-document-generation" title="Permalink to this heading">#</a></h2>
+<section id="introduction-to-putdocx">
+<h3>2.4.1 Introduction to putdocx<a class="headerlink" href="#introduction-to-putdocx" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">putdocx</span></code> command enables creation of Microsoft Word documents with embedded Stata results, facilitating professional report generation.</p>
+</section>
+<section id="basic-document-structure">
+<h3>2.4.2 Basic Document Structure<a class="headerlink" href="#basic-document-structure" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>putdocx<span class="k"> clear</span>
+putdocx begin
+putdocx paragraph
+putdocx text (<span class="s">&quot;Document Title&quot;</span>)
+putdocx paragraph
+putdocx text (<span class="s">&quot;Author Information&quot;</span>)
+<span class="c1">// Add content...</span>
+putdocx<span class="k"> save</span> document<span class="m">.</span>docx,<span class="k"> replace</span>
+</pre></div>
+</div>
+</section>
+<section id="professional-academic-format">
+<h3>2.4.3 Professional Academic Format<a class="headerlink" href="#professional-academic-format" title="Permalink to this heading">#</a></h3>
+<p>The example demonstrates creating a research abstract with embedded results:</p>
+<p><strong>Document Sections:</strong></p>
+<ul class="simple">
+<li><p><strong>Background</strong> - Context and rationale</p></li>
+<li><p><strong>Methods</strong> - Analytical approach and data description</p></li>
+<li><p><strong>Results</strong> - Key findings with embedded statistics</p></li>
+<li><p><strong>Conclusions</strong> - Implications and generalizations</p></li>
+</ul>
+<p><strong>Key Features:</strong></p>
+<ul class="simple">
+<li><p>Plain text integration with statistical results</p></li>
+<li><p>Professional formatting for academic submission</p></li>
+<li><p>Reproducible document generation</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="advanced-output-html-generation">
+<h2>2.5 Advanced Output: HTML Generation<a class="headerlink" href="#advanced-output-html-generation" title="Permalink to this heading">#</a></h2>
+<section id="dynamic-html-documents">
+<h3>2.5.1 Dynamic HTML Documents<a class="headerlink" href="#dynamic-html-documents" title="Permalink to this heading">#</a></h3>
+<p>HTML output enables web-based publication and sharing of results. The <code class="docutils literal notranslate"><span class="pre">dyndoc</span></code> command processes markdown-formatted do-files into HTML documents.</p>
+<p><strong>Workflow:</strong></p>
+<ol class="arabic simple">
+<li><p>Create a do-file with markdown formatting</p></li>
+<li><p>Add CSS styling files for aesthetics</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">dyndoc</span> <span class="pre">filename.do,</span> <span class="pre">saving(filename.html)</span> <span class="pre">replace</span></code></p></li>
+</ol>
+</section>
+<section id="markdown-integration">
+<h3>2.5.2 Markdown Integration<a class="headerlink" href="#markdown-integration" title="Permalink to this heading">#</a></h3>
+<p><strong>Special Markup Elements:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_version:</span> <span class="pre">2&gt;&gt;</span></code> - Document version specification</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_do:nooutput&gt;&gt;</span></code> - Execute code without showing output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;&lt;/dd_do&gt;&gt;</span></code> - End code block</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;&lt;dd_display:</span> <span class="pre">c(N)&gt;&gt;</span></code> - Display system values</p></li>
+</ul>
+</section>
+<section id="mathematical-notation">
+<h3>2.5.3 Mathematical Notation<a class="headerlink" href="#mathematical-notation" title="Permalink to this heading">#</a></h3>
+<p>HTML documents support LaTeX mathematical notation:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y = \beta_0 + \beta_1 X\)</span> - Inline equations</p></li>
+<li><p>Subscripts and Greek letters render properly</p></li>
+<li><p>Professional mathematical presentation</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="best-practices-and-integration">
+<h2>2.6 Best Practices and Integration<a class="headerlink" href="#best-practices-and-integration" title="Permalink to this heading">#</a></h2>
+<section id="workflow-recommendations">
+<h3>2.6.1 Workflow Recommendations<a class="headerlink" href="#workflow-recommendations" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Always use log files</strong> for session documentation</p></li>
+<li><p><strong>Store intermediate results</strong> using postfile when appropriate</p></li>
+<li><p><strong>Format p-values consistently</strong> using conditional logic</p></li>
+<li><p><strong>Choose output format</strong> based on final use:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.log</span></code> for session records</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.dta</span></code> for data storage</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.docx</span></code> for traditional manuscripts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.html</span></code> for web publication</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="quality-assurance">
+<h3>2.6.2 Quality Assurance<a class="headerlink" href="#quality-assurance" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Verify results</strong> by examining created files</p></li>
+<li><p><strong>Test formatting</strong> before final production</p></li>
+<li><p><strong>Maintain consistent</strong> naming conventions</p></li>
+<li><p><strong>Document your process</strong> for reproducibility</p></li>
+</ul>
+</section>
+<section id="advanced-applications">
+<h3>2.6.3 Advanced Applications<a class="headerlink" href="#advanced-applications" title="Permalink to this heading">#</a></h3>
+<p>These techniques can be extended to:</p>
+<ul class="simple">
+<li><p>Automated report generation</p></li>
+<li><p>Batch processing of multiple datasets</p></li>
+<li><p>Integration with version control systems</p></li>
+<li><p>Custom table and figure generation</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2>2.7 Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<p>This chapter introduced three fundamental approaches to managing Stata output:</p>
+<ol class="arabic simple">
+<li><p><strong>Log files</strong> provide comprehensive session documentation</p></li>
+<li><p><strong>Postfile systems</strong> enable programmatic dataset creation</p></li>
+<li><p><strong>Dynamic documents</strong> automate professional report generation</p></li>
+</ol>
+<p>These tools form the foundation for reproducible research and professional statistical reporting. Master these techniques to enhance your analytical workflow and improve the quality of your statistical communications.</p>
+</section>
+<hr class="docutils" />
+<section id="practice-exercises">
+<h2>2.8 Practice Exercises<a class="headerlink" href="#practice-exercises" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Create a log file documenting a basic descriptive analysis</p></li>
+<li><p>Build a dataset using postfile containing summary statistics</p></li>
+<li><p>Generate a Word document with embedded statistical results</p></li>
+<li><p>Format p-values from multiple statistical tests using conditional logic</p></li>
+<li><p>Create an HTML report with mathematical notation and embedded graphs</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-output-management">2.1 Introduction to Output Management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-files-session-documentation">2.2 Log Files: Session Documentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-and-managing-log-files">2.2.1 Creating and Managing Log Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-chi-square-analysis">2.2.2 Practical Example: Chi-Square Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-return-values">2.2.3 Working with Return Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#professional-p-value-formatting">2.2.4 Professional P-Value Formatting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-datasets-programmatically-dta-files">2.3 Creating Datasets Programmatically (.dta files)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-postfile-system">2.3.1 The Postfile System</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-postfile-workflow">2.3.2 Basic Postfile Workflow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-document-generation">2.4 Dynamic Document Generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-putdocx">2.4.1 Introduction to putdocx</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-document-structure">2.4.2 Basic Document Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#professional-academic-format">2.4.3 Professional Academic Format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-output-html-generation">2.5 Advanced Output: HTML Generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-html-documents">2.5.1 Dynamic HTML Documents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-integration">2.5.2 Markdown Integration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-notation">2.5.3 Mathematical Notation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-and-integration">2.6 Best Practices and Integration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-recommendations">2.6.1 Workflow Recommendations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quality-assurance">2.6.2 Quality Assurance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-applications">2.6.3 Advanced Applications</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">2.7 Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-exercises">2.8 Practice Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Abimereki Muzaale
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

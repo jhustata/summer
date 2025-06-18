@@ -1,4 +1,4 @@
-# Preface
+# 🎓 Preface
 
 Welcome to the [340.600](https://publichealth.jhu.edu/course/41687) Summer Institute Course in Stata Programming!
 

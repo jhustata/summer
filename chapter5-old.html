@@ -1,0 +1,1219 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5. 📊 Graphs &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter5-old';</script>
+    <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logos-vertical.jpg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/logos-vertical.jpg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    🎓 Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. 🧠 Collaborative Stata Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. ✍️ <em>Macros and the Art of Memory</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. 🔁 Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. 🗃️ Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. 📊 Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">📌 Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/chapter5-old.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter5-old.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5. 📊 Graphs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">5.1  histogram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density">5.1.1 density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fraction">5.1.2 fraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percent">5.1.3 percent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency">5.1.4 frequency</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete">5.1.5 discrete</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#addplot">5.1.6 addplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scheme">5.1.7 scheme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal">5.1.8 normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#twoway">5.2 twoway</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter">5.2.1 scatter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#line">5.2.2 line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connected">5.2.3 connected</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#area">5.2.4 area</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bar">5.2.5 bar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function">5.2.6 function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#y">5.3 y</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overlay">5.4 overlay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#axis">5.5 axis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scale">5.5.1 scale()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#program">5.6 program</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="graphs">
+<h1>5. 📊 Graphs<a class="headerlink" href="#graphs" title="Permalink to this heading">#</a></h1>
+<p>Visualizing data</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">capture log close</span> _all
+<span class="k">log</span> using creturn_list<span class="m">.</span>log,<span class="k"> replace</span> 
+<span class="k">creturn list</span>
+<span class="k">log close</span>  
+</pre></div>
+</div>
+<p><a class="reference external" href="https://raw.githubusercontent.com/jhustata/livre/main/creturn_list.log">creturn_list.log</a></p>
+<p>When you search the above output for <code class="docutils literal notranslate"><span class="pre">scheme</span></code> you’ll find the follow:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>Graphics settings
+
+    <span class="o">----------------------------------------------------------------------------------------------------</span>
+            <span class="nf">c</span>(graphics) = <span class="s">&quot;on&quot;</span>                       (set graphics)
+              <span class="nf">c</span>(scheme) = <span class="s">&quot;stcolor&quot;</span>                  (set scheme)
+          <span class="nf">c</span>(printcolor) = <span class="s">&quot;asis&quot;</span>                     (set printcolor)
+           <span class="nf">c</span>(copycolor) = <span class="s">&quot;asis&quot;</span>                     (set copycolor)
+       <span class="nf">c</span>(maxbezierpath) = <span class="m">0</span>                          (set maxbezierpath)
+       <span class="nf">c</span>(min_graphsize) = <span class="m">1</span>                          (region_options)
+       <span class="nf">c</span>(max_graphsize) = <span class="m">100</span>                        (region_options)
+    <span class="o">----------------------------------------------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>My machine has <code class="docutils literal notranslate"><span class="pre">c(version)</span> <span class="pre">==</span> <span class="pre">18</span></code> and the default is <code class="docutils literal notranslate"><span class="pre">stcolor</span></code>. The world-renowned, <em>sui generis</em>,  Stata <code class="docutils literal notranslate"><span class="pre">s2color</span></code> has finally been abandoned</p>
+<p>But if I wish to reproduce that classic Stata graphical output I might change my color scheme:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">webuse</span> lifeexp,<span class="k"> clear</span>
+<span class="k">hist</span> lexp
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">webuse</span> lifeexp,<span class="k"> clear</span>
+<span class="k">hist</span> lexp
+<span class="k">graph</span> export lexp_stcolor<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/lexp_stcolor.png" /></p>
+<p>That’s my default. So lets see what it looks like on virtually all versions of Stata before 18:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> webuse</span> lifeexp,<span class="k"> clear</span>
+(Life expectancy, <span class="m">1998</span>)
+
+.<span class="k"> di</span> <span class="nf">c</span>(scheme)
+stcolor
+
+.<span class="k"> hist</span> lexp, scheme(s2color)
+(bin=<span class="m">8</span>, start=<span class="m">54</span>, width=<span class="m">3.125</span>)
+
+.<span class="k"> di</span> <span class="nf">c</span>(scheme)
+stcolor
+
+.<span class="k"> graph</span> export lexp_s2color<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>lexp_s2color<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/lexp_s2color.png" /></p>
+<p>I think the above output clarifies what the <code class="docutils literal notranslate"><span class="pre">c</span></code> in <code class="docutils literal notranslate"><span class="pre">c(scheme)</span></code> refers to: a constant default, even when I change the output parameter.</p>
+<p>So lets reset my default:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">set</span> scheme s2color
+<span class="k">webuse</span> lifeexp
+<span class="k">di</span> <span class="nf">c</span>(scheme)
+<span class="k">hist</span> lexp
+<span class="k">graph</span> export lexp_setscheme<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> set</span> scheme s2color
+
+.<span class="k"> webuse</span> lifeexp
+(Life expectancy, <span class="m">1998</span>)
+
+.<span class="k"> di</span> <span class="nf">c</span>(scheme)
+s2color
+
+.<span class="k"> hist</span> lexp
+(bin=<span class="m">8</span>, start=<span class="m">54</span>, width=<span class="m">3.125</span>)
+
+.<span class="k"> graph</span> export lexp_setscheme<span class="m">.</span>png,<span class="k"> replace</span>
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>lexp_setscheme<span class="m">.</span>png	saved<span class="k">	as</span>	PNG
+<span class="k">format</span>
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/lexp_setscheme.png" /></p>
+<p>How may one restore the default <code class="docutils literal notranslate"><span class="pre">c(scheme)</span></code>?</p>
+<p><img alt="" src="_images/set_scheme_default.png" /></p>
+<p>So lets see if that works:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">set</span> scheme default
+<span class="k">di</span> <span class="nf">c</span>(N)
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> set</span> scheme default
+scheme default not found
+<span class="nf">r</span>(<span class="m">111</span>);
+</pre></div>
+</div>
+<p>That did not work. And after a Google search (chatGPT hasn’t yet been trained on data from a post Stata18 world!), I found nothing.</p>
+<p>So I’ll just invoke my prior knowledge:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">set</span> scheme stcolor
+<span class="k">di</span> <span class="nf">c</span>(scheme)
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> set</span> scheme stcolor
+
+.<span class="k"> di</span> <span class="nf">c</span>(scheme)
+stcolor
+
+. 
+</pre></div>
+</div>
+<section id="histogram">
+<h2>5.1  histogram<a class="headerlink" href="#histogram" title="Permalink to this heading">#</a></h2>
+<p>Univariable: distribution</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">hist</span> bmi
+<span class="k">graph</span> export bmi<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> transplants,<span class="k"> clear</span>
+
+.<span class="k"> hist</span> bmi
+(bin=<span class="m">32</span>, start=<span class="m">17</span>, width=.<span class="m">71875</span>)
+
+.<span class="k"> graph</span> export bmi<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>bmi<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/bmi.png" /></p>
+<ul class="simple">
+<li><p>32 bars</p></li>
+<li><p>First bar is BMI 17-17.71875</p></li>
+<li><p>Each one represents 0.71875 BMI units</p></li>
+</ul>
+</section>
+<section id="density">
+<h2>5.1.1 density<a class="headerlink" href="#density" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> bmi, width(<span class="m">2</span>)
+<span class="k">graph</span> export bmi2<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> hist</span> bmi, width(<span class="m">2</span>)
+(bin=<span class="m">12</span>, start=<span class="m">17</span>, width=<span class="m">2</span>)
+
+.<span class="k"> graph</span> export bmi2<span class="m">.</span>png,<span class="k"> replace</span>
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>bmi2<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/bmi2.png" /></p>
+<ul class="simple">
+<li><p>12 bars</p></li>
+<li><p>First bar is BMI 17-19</p></li>
+<li><p>Each on repesents 2 BMI units</p></li>
+</ul>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> bmi, bin(<span class="m">500</span>) start(<span class="m">0</span>) 
+<span class="k">graph</span> export bmi_bin500<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> hist</span> bmi, bin(<span class="m">500</span>) start(<span class="m">0</span>) 
+(bin=<span class="m">500</span>, start=<span class="m">0</span>, width=.<span class="m">08</span>)
+
+.<span class="k"> graph</span> export bmi_bin500<span class="m">.</span>png,<span class="k"> replace</span>
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>bmi_bin500<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/bmi_bin500.png" /></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> bmi, width(<span class="m">2</span>) start(<span class="m">0</span>)
+<span class="k">graph</span> export bmi3<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> hist</span> bmi, width(<span class="m">2</span>) start(<span class="m">0</span>)
+(bin=<span class="m">20</span>, start=<span class="m">0</span>, width=<span class="m">2</span>)
+
+.<span class="k"> graph</span> export bmi3<span class="m">.</span>png,<span class="k"> replace</span>
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>bmi3<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>20 bars</p></li>
+<li><p>First bar is BMI 0-2</p></li>
+<li><p>Each one represents 2 units</p></li>
+</ul>
+<p><img alt="" src="_images/bmi3.png" /></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">hist</span> bmi, bin(<span class="m">10</span>)
+<span class="k">graph</span> export bmi_bin10<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> transplants,<span class="k"> clear</span>
+
+.<span class="k"> hist</span> bmi, bin(<span class="m">10</span>)
+(bin=<span class="m">10</span>, start=<span class="m">17</span>, width=<span class="m">2.3</span>)
+
+.<span class="k"> graph</span> export bmi_bin10<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>bmi_bin10<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/bmi_bin10.png" /></p>
+<ul class="simple">
+<li><p>10 bars</p></li>
+</ul>
+<p>Four flavors of the <code class="docutils literal notranslate"><span class="pre">histogram</span></code> command:</p>
+<ul class="simple">
+<li><p>density (default)</p></li>
+<li><p>fraction</p></li>
+<li><p>percent</p></li>
+<li><p>frequency</p></li>
+</ul>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">hist</span> age, addplot(kdensity age)
+<span class="k">graph</span> export hist_kdensity<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> transplants,<span class="k"> clear</span>
+
+.<span class="k"> hist</span> age, addplot(kdensity age)
+(bin=<span class="m">33</span>, start=<span class="m">0</span>, width=<span class="m">2.5757576</span>)
+
+.<span class="k"> graph</span> export hist_kdensity<span class="m">.</span>png,<span class="k"> replace</span>
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>hist_kdensity<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/hist_kdensity.png" /></p>
+</section>
+<section id="fraction">
+<h2>5.1.2 fraction<a class="headerlink" href="#fraction" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> rec_wgt_kkg, fraction
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> hist</span> rec_wgt_kg, fraction
+(bin=<span class="m">32</span>, start=<span class="m">9.67</span>, width=<span class="m">4.5596875</span>)
+
+.<span class="k"> graph</span> export weight<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>weight<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/weight.png" /></p>
+</section>
+<section id="percent">
+<h2>5.1.3 percent<a class="headerlink" href="#percent" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> rec_wgt_kg, percent
+<span class="k">graph</span> export weight2<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> hist</span> rec_wgt_kg, percent
+(bin=<span class="m">32</span>, start=<span class="m">9.67</span>, width=<span class="m">4.5596875</span>)
+
+.<span class="k"> graph</span> export weight2<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>weight2<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/weight2.png" /></p>
+</section>
+<section id="frequency">
+<h2>5.1.4 frequency<a class="headerlink" href="#frequency" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> rec_wgt_kg, freq
+<span class="k">graph</span> export weight3<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> hist</span> rec_wgt_kg, freq
+(bin=<span class="m">32</span>, start=<span class="m">9.67</span>, width=<span class="m">4.5596875</span>)
+
+.<span class="k"> graph</span> export weight3<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>weight3<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+<span class="k">end</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/weight3.png" /></p>
+</section>
+<section id="discrete">
+<h2>5.1.5 discrete<a class="headerlink" href="#discrete" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> dx 
+<span class="k">graph</span> export discrete<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> hist</span> dx 
+(bin=<span class="m">33</span>, start=<span class="m">1</span>, width=.<span class="m">24242424</span>)
+
+.<span class="k"> graph</span> export discrete<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>discrete<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/discrete.png" /></p>
+<ul class="simple">
+<li><p>0.242424 diagnoses?</p></li>
+<li><p>meaningless</p></li>
+<li><p>option to adapt output to discrete variable</p></li>
+</ul>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> dx, disc
+<span class="k">graph</span> export discrete2<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> hist</span> dx, disc
+(start=<span class="m">1</span>, width=<span class="m">1</span>)
+
+.<span class="k"> graph</span> export discrete2<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>discrete2<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/discrete2.png" /></p>
+</section>
+<section id="addplot">
+<h2>5.1.6 addplot<a class="headerlink" href="#addplot" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> height<span class="k"> if</span> gender<span class="o">==</span><span class="m">0</span>, addplot(hist height<span class="k"> if</span> gender <span class="o">==</span><span class="m">1</span>)
+<span class="k">graph</span> export addplot<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/addplot.png" /></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> rec_hgt_cm<span class="k"> if</span> gender<span class="o">==</span><span class="m">0</span>, fcolor(midblue%<span class="m">50</span>) <span class="cs">///</span>
+    addplot(hist rec_hgt_cm<span class="k"> if</span> gender <span class="o">==</span><span class="m">1</span>, fcolor(orange%<span class="m">40</span>))
+<span class="k">graph</span> export addplot2<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/addplot2.png" /></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> rec_hgt_cm<span class="k"> if</span> gender<span class="o">==</span><span class="m">0</span>, <span class="cs">///</span>
+    fcolor(midblue%<span class="m">50</span>) <span class="cs">///</span>
+    legend( <span class="cs">///</span>
+<span class="k">	    lab</span>(<span class="m">1</span> <span class="s">&quot;Male&quot;</span>) <span class="cs">///</span>
+<span class="k">		lab</span>(<span class="m">2</span> <span class="s">&quot;Female&quot;</span>)) <span class="cs">///</span>
+    addplot(hist rec_hgt_cm<span class="k"> if</span> gender <span class="o">==</span><span class="m">1</span>, fcolor(orange%<span class="m">40</span>))
+<span class="k">graph</span> export addplot3<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/addplot3.png" /></p>
+</section>
+<section id="scheme">
+<h2>5.1.7 scheme<a class="headerlink" href="#scheme" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> rec_hgt_cm, scheme(s2color)
+<span class="k">graph</span> export scheme<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/scheme.png" /></p>
+</section>
+<section id="normal">
+<h2>5.1.8 normal<a class="headerlink" href="#normal" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">hist</span> rec_hgt_cm, normal
+<span class="k">graph</span> export overlay<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/overlay.png" /></p>
+</section>
+<section id="twoway">
+<h2>5.2 twoway<a class="headerlink" href="#twoway" title="Permalink to this heading">#</a></h2>
+<p>Bivariable: correlation</p>
+</section>
+<section id="scatter">
+<h2>5.2.1 scatter<a class="headerlink" href="#scatter" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> donors,<span class="k"> clear</span>
+<span class="k">graph twoway scatter</span> don_wgt don_hgt
+<span class="k">graph</span> export twowway<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> donors,<span class="k"> clear</span>
+
+.<span class="k"> graph twoway scatter</span> don_wgt don_hgt
+
+.<span class="k"> graph</span> export twowway<span class="m">.</span>png,<span class="k"> replace</span> 
+<span class="k">file</span> <span class="o">/</span>Users<span class="o">/</span>d<span class="o">/</span>Dropbox (Personal)<span class="o">/</span>1f<span class="m">.</span>ἡἔρις,κ<span class="o">/</span><span class="m">1.</span>ontology<span class="o">/</span>summer<span class="o">/</span>twowway<span class="m">.</span>png	saved<span class="k">	as</span>	PNG<span class="k">	format</span>
+
+. 
+</pre></div>
+</div>
+<p><img alt="" src="_images/twowway.png" /></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">twoway</span></code> plot may be a simple descriptive visualization of data. But what is implied during this exploratory phase of analysis is the following regression:</p>
+<p><span class="math notranslate nohighlight">\(Y   = \beta_0    +    \beta_1 X_1 +    \beta_2 X_2   +   \cdots   +   \beta_N X_N   \pm   \varepsilon_i  \)</span></p>
+<p>So if you don’t have any predictor, then you’re left with just <span class="math notranslate nohighlight">\(Y   =    \beta_0  \pm    \varepsilon\)</span>, which includes all one-way plots such as histogram, boxplot, or a twoway plot of that one variable against a “meaningless” x-axis:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">g</span> x=<span class="m">1</span>
+<span class="k">qui sum</span> age
+<span class="k">return list</span>
+<span class="k">g</span> b0=<span class="nf">r</span>(mean)
+<span class="k">g</span> ub=<span class="nf">r</span>(mean)<span class="o">+</span><span class="nf">r</span>(sd)<span class="o">*</span><span class="m">1.96</span>
+<span class="k">g</span> lb=<span class="nf">r</span>(mean)<span class="o">-</span><span class="nf">r</span>(sd)<span class="o">*</span><span class="m">1.96</span>
+<span class="k">twoway</span> (scatter age x, <span class="cs">///</span>
+           jitter(<span class="m">5</span>) <span class="cs">///</span>
+	       xscale(off) <span class="cs">///</span>
+		   mcolor(lime%<span class="m">5</span>) <span class="cs">///</span>
+	   ) <span class="cs">///</span>
+       (scatter b0 x, <span class="cs">///</span>
+	       msize(<span class="m">2</span>) <span class="cs">///</span>
+		   mcolor(midblue%<span class="m">80</span>) <span class="cs">///</span>
+		) <span class="cs">///</span>
+		(rcap ub lb x, <span class="cs">///</span>
+		   legend(off) <span class="cs">///</span>
+		   lc(orange%<span class="m">80</span>) <span class="cs">///</span>
+		   yti(<span class="s">&quot;Age at Transplant, y&quot;</span>, orientation(horizontal)) <span class="cs">///</span>
+<span class="k">		   note</span>(<span class="s">&quot;Mean &amp; 95%CI&quot;</span>, size(<span class="m">3</span>)) <span class="cs">///</span>
+		)
+<span class="k">graph</span> export age_m_95ci<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/age_m_95ci.png" /></p>
+</section>
+<section id="line">
+<h2>5.2.2 line<a class="headerlink" href="#line" title="Permalink to this heading">#</a></h2>
+<p>“ecd” = “extended criteria donor” = donor age <span class="math notranslate nohighlight">\(\gt  60\)</span>, or donor age <span class="math notranslate nohighlight">\(50-59\)</span> with certain comorbidities</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">bys</span> age:<span class="k"> egen</span> mean_ecd =<span class="k"> mean</span>(don_ecd) 
+<span class="k">egen</span> age_tag = tag(age)
+<span class="k">graph twoway line</span> mean_ecd age<span class="k"> if</span> age_tag<span class="o">==</span><span class="m">1</span>
+<span class="k">graph</span> export twoway_egen<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/twoway_egen.png" /></p>
+<p>How has the number of standard criteria donor (SCD) and extended criteria donor (ECD) transplants changed over time?</p>
+<p><code class="docutils literal notranslate"><span class="pre">SCD</span></code> = donor age &lt; 50 or (age 50-59 and donor had at most one of: hypertension, death by cerebrovascular accident, terminal serum creatinine &gt; 1.5 mg/dL)</p>
+<p><code class="docutils literal notranslate"><span class="pre">ECD</span></code> = donor age &gt;= 60 or (age 50-59 and donor had at least two of: hypertension, death by cerebrovascular accident, terminal serum creatinine &gt; 1.5 mg/dL)</p>
+<p>Let’s graph the number of SCD and ECD transplants over time</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> tx_yr<span class="m">.</span>dta,<span class="k"> clear</span>
+<span class="k">desc</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> tx_yr<span class="m">.</span>dta,<span class="k"> clear</span>
+
+.<span class="k"> desc</span>
+
+Contains data from tx_yr<span class="m">.</span>dta
+Observations:            <span class="m">10</span>		     
+Variables:            <span class="m">13</span>		<span class="m">2</span> Jul <span class="m">2021</span> <span class="m">08</span>:<span class="m">07</span>
+				
+Variable      Storage   Display	Value
+name        <span class="k"> type</span>   <span class="k"> format	label</span>	Variable<span class="k"> label</span>
+				
+yr              int     <span class="nx">%8.0g</span>		Transplant Year
+not_working     double  <span class="nx">%9.0g</span>		Num. Unemployed Recipients
+<span class="k">n</span>               double  <span class="nx">%8.0g</span>		(sum)<span class="k"> n</span>
+hypertensive    double  <span class="nx">%9.0g</span>		(sum) hypertensive
+unknown_disease double  <span class="nx">%9.0g</span>		(sum) unknown_disease
+diabetes        double  <span class="nx">%9.0g</span>		(sum) diabetes
+ecd             double  <span class="nx">%4.0g</span>		(sum) ecd
+female          double  <span class="nx">%8.0g</span>		(sum) female
+rec_hcv_antib<span class="o">~</span>y double  <span class="nx">%9.0g</span>		Number HCV<span class="o">+</span> Recipients
+over70          double  <span class="nx">%9.0g</span>		Number Recips. Over <span class="m">70</span> Years	Old
+male            int     <span class="nx">%8.0g</span>		     
+scd             int     <span class="nx">%8.0g</span>		     
+<span class="k">total</span>           float   <span class="nx">%9.0g</span>		Total Num. of Recipients
+				
+Sorted<span class="k"> by</span>: yr
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tx_yr.dta</span></code> has data on the frequency of specific transplant types per year. For example, the variable female is the number of female transplant recipients per year. The variable scd is the number of standard criteria donor transplants performed per year.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">graph twoway line n</span> yr
+<span class="k">graph</span> export line_n_yr<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/line_n_yr.png" /></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">graph twoway line</span> ecd scd yr
+<span class="k">graph</span> export line_n_yr2<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="line_n_yr2." /></p>
+</section>
+<section id="connected">
+<h2>5.2.3 connected<a class="headerlink" href="#connected" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">graph twoway</span> connected<span class="k"> n</span> yr
+<span class="k">graph</span> export connected<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/connected.png" /></p>
+</section>
+<section id="area">
+<h2>5.2.4 area<a class="headerlink" href="#area" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">graph twoway</span> area<span class="k"> n</span> yr
+<span class="k">graph</span> export area<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/area.png" /></p>
+</section>
+<section id="bar">
+<h2>5.2.5 bar<a class="headerlink" href="#bar" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">graph twoway</span> bar<span class="k"> n</span> yr
+<span class="k">graph</span> export bar<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/bar.png" /></p>
+</section>
+<section id="function">
+<h2>5.2.6 function<a class="headerlink" href="#function" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">graph twoway</span> function y=x<span class="o">^</span><span class="m">2+2</span>
+<span class="k">graph</span> export function<span class="m">.</span>png
+</pre></div>
+</div>
+<p><img alt="" src="_images/function.png" /></p>
+</section>
+<section id="y">
+<h2>5.3 y<a class="headerlink" href="#y" title="Permalink to this heading">#</a></h2>
+<p>Several y variables</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">graph twoway</span> area ecd scd yr
+<span class="k">graph</span> export nyvar<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/nyvar.png" /></p>
+<p>Change order</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">graph twoway</span> area scd ecd yr
+<span class="k">graph</span> export nyvar2<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/nyvar2.png" /></p>
+<p>Order matters: the one listed first gets graphed first. Additional areas might overlie the first one.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">graph twoway</span> bar scd ecd yr
+<span class="k">graph</span> export nyvar3<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/nyvar3.png" /></p>
+<p>Interpretation is tricky. In 2010, were there about 130 SCD transplants (top of red to top of blue) or 170 (x- axis to top of blue)?</p>
+</section>
+<section id="overlay">
+<h2>5.4 overlay<a class="headerlink" href="#overlay" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">twoway line n</span> yr || connected male female yr
+<span class="k">graph</span> export line_connect<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/line_connect.png" /></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">regress n</span> yr
+<span class="k">twoway line n</span> yr <span class="cs">///</span>
+  || function y=_b[_cons]<span class="o">+</span>_b[yr]<span class="o">*</span>x,<span class="k"> range</span>(yr)
+<span class="k">graph</span> export line_regress<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/line_regress.png" /></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">twoway line</span> female yr <span class="cs">/// </span>
+    ||<span class="k"> line</span> male yr <span class="cs">///</span>
+    ||<span class="k"> line</span> scd yr <span class="cs">///</span>
+    ||<span class="k"> line</span> ecd yr <span class="cs">///</span>
+    ||<span class="k"> line n</span> yr
+<span class="k">graph</span> export five_overlay<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/five_overlay.png" /></p>
+</section>
+<section id="axis">
+<h2>5.5 axis<a class="headerlink" href="#axis" title="Permalink to this heading">#</a></h2>
+<p>The graph of # transplants per year exaggerates year- on-year change; the value for 2009 appears to be near zero, but is actually 180. How can we fix the axis?</p>
+<section id="scale">
+<h3>5.5.1 scale()<a class="headerlink" href="#scale" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">twoway line n</span> yr, yscale(range(<span class="m">0</span>))
+<span class="k">graph</span> export scale<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/scale.png" /></p>
+<p>Make sure the y axis range includes the number zero</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">twoway line n</span> yr, yscale(range(<span class="m">0</span> <span class="m">400</span>))
+<span class="k">graph</span> export scale2<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/scale2.png" /></p>
+<p>Make sure the y axis range includes the numbers 0 and 400</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">tw li n</span> yr, xscale(range(<span class="m">2014</span>))
+<span class="k">graph</span> export<span class="k"> range</span><span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/range.png" /></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">tw li</span> ecd yr, xscale(off) yscale(off)
+<span class="k">graph</span> export scale_off<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/scale_off.png" /></p>
+</section>
+</section>
+<section id="program">
+<h2>5.6 program<a class="headerlink" href="#program" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">capture program drop</span> figure1
+<span class="k">qui program</span> define figure1 
+<span class="k">	syntax varlist</span>, title(str) xtitle(str) ylt(str)
+<span class="k">	</span>
+<span class="k">	local</span> y_axis_var:<span class="k"> di</span> <span class="nf">word</span>(<span class="s">&quot;</span><span class="nv">`varlist&#39;</span><span class="s">&quot;</span>, <span class="m">1</span>)
+<span class="k">	local</span> x_axis_var:<span class="k"> di</span> <span class="nf">word</span>(<span class="s">&quot;</span><span class="nv">`varlist&#39;</span><span class="s">&quot;</span>, <span class="m">2</span>)
+<span class="k">	local</span> xti:<span class="k"> di</span> <span class="s">&quot;</span><span class="nv">`xtitle&#39;</span><span class="s">&quot;</span>
+<span class="k">	local</span> yline_text:<span class="k"> di</span> <span class="s">&quot;</span><span class="nv">`ylt&#39;</span><span class="s">&quot;</span>
+<span class="k">	</span>
+<span class="k">	qui sum</span> <span class="nv">`y_axis_var&#39;</span>,<span class="k"> d</span> 
+<span class="k">	g</span> p50=<span class="nf">r</span>(p50)
+<span class="k">	g</span> p25=<span class="nf">r</span>(p25)
+<span class="k">	g</span> p75=<span class="nf">r</span>(p75)
+<span class="k">	local</span> m_age=<span class="nf">r</span>(mean)
+<span class="k">	local</span> m_age_text=<span class="nf">r</span>(mean) <span class="o">+</span> <span class="m">2</span>
+<span class="k">	</span>
+<span class="k">	qui sum</span> <span class="nv">`x_axis_var&#39;</span>
+<span class="k">	local</span> m_xaxis=<span class="nf">r</span>(mean)
+	
+	#delimit ;
+<span class="k">	twoway</span> (scatter p50 abo<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">100</span>)(rcap p25 p75 abo<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">100</span>,
+	    ti(<span class="s">&quot;</span><span class="nv">`title&#39;</span><span class="s">&quot;</span>)
+		xti(<span class="s">&quot;</span><span class="nv">`xti&#39;</span><span class="s">&quot;</span>)
+		text(<span class="nv">`m_age_text&#39;</span> <span class="nv">`m_xaxis&#39;</span> <span class="s">&quot;</span><span class="nv">`yline_text&#39;</span><span class="s">&quot;</span>)
+		yline(<span class="nv">`m_age&#39;</span>,
+		    lc(lime)
+		)
+		yti(<span class="s">&quot;</span><span class="nv">`y_axis_var&#39;</span><span class="s">&quot;</span>,
+		    orientation(horizontal)
+		)
+		ylab(<span class="m">10</span>(<span class="m">10</span>)<span class="m">80</span>)
+		xlab(
+		    <span class="m">1</span> <span class="s">&quot;A&quot;</span>
+			<span class="m">2</span> <span class="s">&quot;B&quot;</span>
+			<span class="m">3</span> <span class="s">&quot;AB&quot;</span>
+			<span class="m">4</span> <span class="s">&quot;O&quot;</span>
+		)
+		legend(off
+<span class="k">		    lab</span>(<span class="m">1</span> <span class="s">&quot;Median&quot;</span>)
+<span class="k">			lab</span>(<span class="m">2</span> <span class="s">&quot;1st Quartile&quot;</span>)
+<span class="k">			lab</span>(<span class="m">3</span> <span class="s">&quot;4th Quartile&quot;</span>)
+<span class="k">			order</span>(<span class="m">3</span> <span class="m">1</span> <span class="m">2</span>)
+		)
+<span class="k">		note</span>(<span class="s">&quot;Median &amp; IQR&quot;</span>)
+	)
+	;
+	#delimit cr
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span> 
+figure1 age abo, title(<span class="s">&quot;Age at Transplant&quot;</span>) xtitle(<span class="s">&quot;ABO Blood Group&quot;</span>) ylt(<span class="s">&quot;Mean Age&quot;</span>)
+<span class="k">graph</span> export figure1<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/figure1.png" /></p>
+<p>This is a modified program with <code class="docutils literal notranslate"><span class="pre">twoway</span> <span class="pre">rcap</span></code> to draw the interquartile range. I’ve also suppressed the legend since the output is modified. Hope you can notice the difference from the one in the video. But you can still find a copy of the original program below.</p>
+<p>The original program developed together in class:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">capture program drop</span> figure1
+<span class="k">qui program</span> define figure1 
+<span class="k">	syntax varlist</span>, title(str) xtitle(str) ylt(str)
+<span class="k">	</span>
+<span class="k">	local</span> y_axis_var:<span class="k"> di</span> <span class="nf">word</span>(<span class="s">&quot;</span><span class="nv">`varlist&#39;</span><span class="s">&quot;</span>, <span class="m">1</span>)
+<span class="k">	local</span> x_axis_var:<span class="k"> di</span> <span class="nf">word</span>(<span class="s">&quot;</span><span class="nv">`varlist&#39;</span><span class="s">&quot;</span>, <span class="m">2</span>)
+<span class="k">	local</span> xti:<span class="k"> di</span> <span class="s">&quot;</span><span class="nv">`xtitle&#39;</span><span class="s">&quot;</span>
+<span class="k">	local</span> yline_text:<span class="k"> di</span> <span class="s">&quot;</span><span class="nv">`ylt&#39;</span><span class="s">&quot;</span>
+<span class="k">	</span>
+<span class="k">	qui sum</span> <span class="nv">`y_axis_var&#39;</span>,<span class="k"> d</span> 
+<span class="k">	g</span> p50=<span class="nf">r</span>(p50)
+<span class="k">	g</span> p25=<span class="nf">r</span>(p25)
+<span class="k">	g</span> p75=<span class="nf">r</span>(p75)
+<span class="k">	local</span> m_age=<span class="nf">r</span>(mean) <span class="o">+</span> <span class="m">2</span>
+<span class="k">	</span>
+<span class="k">	qui sum</span> <span class="nv">`m_axis_var&#39;</span>
+<span class="k">	local</span> m_xaxis=<span class="nf">r</span>(mean)
+	
+	#delimit ;
+<span class="k">	twoway</span> (scatter p50 abo<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">100</span>)(rcap p25 p75 abo<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">100</span>,
+	    ti(<span class="s">&quot;</span><span class="nv">`title&#39;</span><span class="s">&quot;</span>)
+		xti(<span class="s">&quot;</span><span class="nv">`xti&#39;</span><span class="s">&quot;</span>)
+		text(<span class="nv">`m_xaxis&#39;</span> <span class="nv">`m_age&#39;</span> <span class="s">&quot;</span><span class="nv">`yline_text&#39;</span><span class="s">&quot;</span>)
+		yline(<span class="nv">`m_age&#39;</span>,
+		    lc(lime)
+		)
+		yti(<span class="s">&quot;</span><span class="nv">`y_axis_var&#39;</span><span class="s">&quot;</span>,
+		    orientation(horizontal)
+		)
+		ylab(<span class="m">10</span>(<span class="m">10</span>)<span class="m">80</span>)
+		xlab(
+		    <span class="m">1</span> <span class="s">&quot;A&quot;</span>
+			<span class="m">2</span> <span class="s">&quot;B&quot;</span>
+			<span class="m">3</span> <span class="s">&quot;AB&quot;</span>
+			<span class="m">4</span> <span class="s">&quot;O&quot;</span>
+		)
+		legend(off
+<span class="k">		    lab</span>(<span class="m">1</span> <span class="s">&quot;Median&quot;</span>)
+<span class="k">			lab</span>(<span class="m">2</span> <span class="s">&quot;1st Quartile&quot;</span>)
+<span class="k">			lab</span>(<span class="m">3</span> <span class="s">&quot;4th Quartile&quot;</span>)
+<span class="k">			order</span>(<span class="m">3</span> <span class="m">1</span> <span class="m">2</span>)
+		)
+<span class="k">		note</span>(<span class="s">&quot;Median &amp; IQR&quot;</span>)
+	)
+	;
+	#delimit cr
+<span class="k">end</span> 
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">5.1  histogram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density">5.1.1 density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fraction">5.1.2 fraction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percent">5.1.3 percent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency">5.1.4 frequency</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete">5.1.5 discrete</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#addplot">5.1.6 addplot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scheme">5.1.7 scheme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normal">5.1.8 normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#twoway">5.2 twoway</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter">5.2.1 scatter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#line">5.2.2 line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connected">5.2.3 connected</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#area">5.2.4 area</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bar">5.2.5 bar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function">5.2.6 function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#y">5.3 y</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overlay">5.4 overlay</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#axis">5.5 axis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scale">5.5.1 scale()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#program">5.6 program</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Vincent Jin & Abimereki Muzaale
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

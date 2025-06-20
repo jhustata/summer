@@ -56,7 +56,7 @@ Except fill in the correct numbers.
 
 ```
 
-Lab 4 Part 2
+## Part 2
 
 6. Create a variable called `over50` which is a 1 for any recipient age >50 and 0 for everyone else. Draw a survival curve stratified by over50.     
 

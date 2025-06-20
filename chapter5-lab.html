@@ -413,42 +413,60 @@ It creates an <em>ethical workspace</em>, keeps outputs contained, and produces 
 <section id="lab5-template-do-for-students-ready-to-fill-in">
 <h1>🔹 <code class="docutils literal notranslate"><span class="pre">lab5_template.do</span></code> (for students — ready to fill in)<a class="headerlink" href="#lab5-template-do-for-students-ready-to-fill-in" title="Permalink to this heading">#</a></h1>
 <div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="c1">************************************************************</span>
-<span class="c1">*  lab5_TEMPLATE.do - Final Lab Skeleton</span>
-<span class="c1">*  Author: [student name]</span>
-<span class="c1">*  Purpose: Run Lab 5 data prep and graphs from clean workspace</span>
+<span class="c1">* lab5.do - Self-organizing portable lab file (final fix)</span>
 <span class="c1">************************************************************</span>
 
-<span class="c1">* 1. Define project root (assumes this .do is in code/)</span>
-<span class="k">cd</span> <span class="s">&quot;</span><span class="nv">`c(pwd)&#39;</span><span class="s">&quot;</span>
-<span class="k">local</span> root = <span class="nf">subinstr</span>(<span class="nf">c</span>(pwd), <span class="s">&quot;/code&quot;</span>, <span class="s">&quot;&quot;</span>, .)
+<span class="k">clear</span> all
+<span class="k">set more</span> off
 
-<span class="c1">* 2. Define folders relative to root</span>
+<span class="c1">* 1. Define root folder</span>
+<span class="k">local</span> root = <span class="nf">c</span>(pwd)
+
+<span class="c1">* 2. Define folder paths</span>
 <span class="k">local</span> data   <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/data&quot;</span>
 <span class="k">local</span> output <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/output&quot;</span>
 <span class="k">local</span> code   <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/code&quot;</span>
 <span class="k">local notes</span>  <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/notes&quot;</span>
 
-<span class="c1">* 3. Set working directory and log</span>
+<span class="c1">* 3. Create folders</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">&quot;</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">&quot;</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`code&#39;</span><span class="s">&quot;</span>
+<span class="k">capture mkdir</span> <span class="s">&quot;</span><span class="nv">`notes&#39;</span><span class="s">&quot;</span>
+
+<span class="c1">* 4. Move all .dta files into /data/</span>
+<span class="k">local</span> dtafiles :<span class="k"> dir</span> <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">&quot;</span> files <span class="s">&quot;*.dta&quot;</span>
+<span class="k">foreach</span> f of<span class="k"> local</span> dtafiles {
+<span class="k">    local</span> src <span class="s">&quot;</span><span class="nv">`root&#39;</span><span class="s">/</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
+<span class="k">    local</span> dest <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">/</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
+<span class="k">    copy</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span> <span class="s">&quot;</span><span class="nv">`dest&#39;</span><span class="s">&quot;</span>,<span class="k"> replace</span>
+<span class="k">    erase</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span>
+}
+
+<span class="c1">* 5. Change directory to /data</span>
 <span class="k">cd</span> <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">&quot;</span>
+
+<span class="c1">* 6. Start log</span>
 <span class="k">log</span> using <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">/lab5_output.log&quot;</span>,<span class="k"> replace</span>
 
-<span class="c1">* 4. Import and merge data</span>
+<span class="c1">* 7. Load and merge data</span>
 <span class="k">use</span> transplants<span class="m">.</span>dta,<span class="k"> clear</span>
 <span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using donors_recipients<span class="m">.</span>dta
 <span class="k">drop if</span> _merge <span class="o">!=</span> <span class="m">3</span>
 
-<span class="c1">* 5. Generate variables</span>
+<span class="c1">* 8. Create variables</span>
 <span class="k">gen</span> over50 = age <span class="o">&gt;</span> <span class="m">50</span>
 <span class="k">gen</span> f_time = end_d <span class="o">-</span> transplant_d
 <span class="k">format</span> transplant_d end_d <span class="nx">%td</span>
 <span class="k">stset</span> f_time, failure(died)
 
-<span class="c1">* 6. Example graph (students add others)</span>
+<span class="c1">* 9. Graph</span>
 <span class="k">sts graph</span>,<span class="k"> by</span>(over50)
 <span class="k">graph</span> export <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">/survival_over50.png&quot;</span>,<span class="k"> replace</span>
 
-<span class="c1">* 7. Close log</span>
+<span class="c1">* 10. Close log</span>
 <span class="k">log close</span>
+<span class="k">display</span> <span class="s">&quot;✅ All done. No errors. Outputs created.&quot;</span>
 </pre></div>
 </div>
 <hr class="docutils" />

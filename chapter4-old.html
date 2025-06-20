@@ -1,0 +1,1231 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. 🗃️ Advanced file management &#8212; Stata Programming</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-bootstrap.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter4-old';</script>
+    <link rel="shortcut icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logos-vertical.jpg" class="logo__image only-light" alt="Stata Programming - Home"/>
+    <script>document.write(`<img src="_static/logos-vertical.jpg" class="logo__image only-dark" alt="Stata Programming - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    🎓 Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter1.html">1. 🧠 Collaborative Stata Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter2.html">2. ✍️ <em>Macros and the Art of Memory</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter3.html">3. 🔁 Loops and program syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter4.html">4. 🗃️ Advanced file management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter5.html">5. 📊 Graphs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickrefs.html">📌 Quick References</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/abikesa/template/main?urlpath=tree/book/website/chapter4-old.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter4-old.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4. 🗃️ Advanced file management</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#by">4.1 by</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#egen">4.2 egen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tag">4.3 tag</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function">4.4 function()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#round">4.4.1 round()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#min">4.4.2 min()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exp">4.4.3 exp()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string">4.4.4 string()</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word">4.4.4.1 word()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strlen">4.4.4.2 strlen()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regexm">4.4.4.3 regexm()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strpos">4.4.5 strpos()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dates">4.4.6 dates()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stset">4.5 stset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gen">4.5.1 gen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.5.2 stset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sts">4.5.3 sts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sts-graph">4.5.3.1 sts graph</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sts-list">4.5.3.2 sts list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sts-test">4.5.3.3 sts test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stsum">4.5.3.4 stsum</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stcox">4.5.3.5 stcox</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge">4.6 merge</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="advanced-file-management">
+<h1>4. 🗃️ Advanced file management<a class="headerlink" href="#advanced-file-management" title="Permalink to this heading">#</a></h1>
+<p>Is there anything wrong with this code block?</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">program</span> define myprogram
+<span class="k">quietly</span> {
+<span class="k">forvalues</span> i=<span class="m">1</span><span class="o">/</span><span class="m">10</span> {
+<span class="k">if</span> <span class="nv">`i&#39;</span> <span class="o">&lt;</span> <span class="m">5</span> {
+<span class="k">noisily disp</span> <span class="s">&quot;</span><span class="nv">`i&#39;</span><span class="s"> is less than five&quot;</span> }
+<span class="k">else</span> {
+<span class="k">noisily disp</span> <span class="s">&quot;</span><span class="nv">`i&#39;</span><span class="s"> is at least five&quot;</span> }
+}
+} 
+<span class="k">end</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/chatgpt_indent.png" /></p>
+<p>General programming practices</p>
+<ul class="simple">
+<li><p>Indent your code</p>
+<ul>
+<li><p>or copy &amp; paste into chatGPT, which will most certainly indent the code</p></li>
+<li><p>code is much easier to read if indented</p></li>
+<li><p>much easier to see and prevent errors</p></li>
+<li><p>easier to debug</p></li>
+<li><p>you’ll find it easier to modify</p></li>
+</ul>
+</li>
+<li><p>Test, test, test</p>
+<ul>
+<li><p>Iterate, iterate, iterate</p></li>
+</ul>
+</li>
+<li><p>Collaborate, collaborate, collaborate</p>
+<ul>
+<li><p>Share, share, share</p></li>
+</ul>
+</li>
+</ul>
+<section id="by">
+<h2>4.1 by<a class="headerlink" href="#by" title="Permalink to this heading">#</a></h2>
+<p>Have you seen this syntax before?</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> record_no = _n <span class="c1">//row number </span>
+<span class="k">disp</span> _N <span class="c1">//total # rows</span>
+</pre></div>
+</div>
+<p>What if we want a variable of the total number of records in each ABO blood type category?</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">sort</span> abo
+<span class="k">by</span> abo:<span class="k"> gen</span> cat_n = _N
+</pre></div>
+</div>
+<p>Which creates a variable cat_n storing the number of records in each abo category</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">sort</span> abo age
+<span class="k">by</span> abo:<span class="k"> gen</span> cat_id = _n
+</pre></div>
+</div>
+<p>Which creates a variable <code class="docutils literal notranslate"><span class="pre">cat_id</span></code> which is 1 for the youngest patient in each category, 2 for the
+next youngest, etc.</p>
+<p>You can combine the <code class="docutils literal notranslate"><span class="pre">sort</span></code> and the <code class="docutils literal notranslate"><span class="pre">by</span></code> into <code class="docutils literal notranslate"><span class="pre">bysort</span></code> (or just <code class="docutils literal notranslate"><span class="pre">bys</span></code>)</p>
+</section>
+<section id="egen">
+<h2>4.2 egen<a class="headerlink" href="#egen" title="Permalink to this heading">#</a></h2>
+<p>We can create a new variable equal to the mean of all records…</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">sum</span> age
+<span class="k">gen</span> mean_age = <span class="nf">r</span>(mean)
+</pre></div>
+</div>
+<p>…but how can we do that with just one command?</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span> 
+<span class="k">egen</span> mean_age =<span class="k"> mean</span>(age)
+</pre></div>
+</div>
+<p>More valid egen commands:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">egen</span> median_age =<span class="k"> median</span>(age)<span class="k"> egen</span> max_age = <span class="nf">max</span>(age)
+<span class="k">egen</span> min_age = <span class="nf">min</span>(age)
+<span class="k">egen</span> age_q1 =<span class="k"> pctile</span>(age), p(<span class="m">25</span>)<span class="k"> egen</span> age_sd = sd(age)
+<span class="k">egen</span> total_prev =<span class="k"> sum</span>(prev)
+</pre></div>
+</div>
+<p>So what’s the big deal? Suppose we want the mean age, stratified by diagnosis? First, we sort on diagnosis</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span> 
+<span class="k">sort</span> dx
+</pre></div>
+</div>
+<p>Now we do <code class="docutils literal notranslate"><span class="pre">by</span> <span class="pre">dx:</span> <span class="pre">egen</span></code></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">by</span> dx:<span class="k"> egen</span> mean_age =<span class="k"> mean</span>(age)
+<span class="k">by</span> dx:<span class="k"> egen</span> min_bmi = <span class="nf">min</span>(bmi) 
+</pre></div>
+</div>
+<p>Or we can use <code class="docutils literal notranslate"><span class="pre">bysort</span></code></p>
+<p>More valid egen commands:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">bys</span> abo:<span class="k"> egen</span> m_bmi=mean(bmi)
+<span class="k">bys</span> abo gender:<span class="k"> egen</span> max_bmi = <span class="nf">max</span>(bmi) 
+<span class="k">bys</span> abo gender:<span class="k"> egen</span> min_bmi = <span class="nf">min</span>(bmi) 
+<span class="k">gen</span> spread = max_bmi – min_bmi
+</pre></div>
+</div>
+</section>
+<section id="tag">
+<h2>4.3 tag<a class="headerlink" href="#tag" title="Permalink to this heading">#</a></h2>
+<p>Supposed you’ve generated <code class="docutils literal notranslate"><span class="pre">spread</span></code> as per the previous slide. You want to look at it:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">list</span> abo gender spread
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">egen</span> <span class="pre">=</span> <span class="pre">tag</span></code> will create a new variable that “tags” one record per abo/gender pair. This
+variable is 1 for each tagged record, and 0 for all others:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">egen</span> grouptag = tag(abo gender) 
+<span class="k">list</span> abo gend spread<span class="k"> if</span> grouptag
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> donors_recipients,<span class="k"> clear</span> 
+<span class="k">bys</span> fake_don:<span class="k"> gen</span> n_tx = _N 
+<span class="k">bys</span> fake_don:<span class="k"> gen</span> tx_id = _n 
+<span class="k">egen</span> don_tag = tag(fake_don) 
+<span class="k">tab</span> n_tx<span class="k"> if</span> don_tag
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Import dataset</p></li>
+<li><p>Total number of recipients for each donor</p></li>
+<li><p>ID for each transplant for a given donor (1 or 2)</p></li>
+<li><p>Tag one record per donor</p></li>
+<li><p>Display a table of transplants per donor</p></li>
+</ol>
+<p>tagging <u>protip</u>: <code class="docutils literal notranslate"><span class="pre">egen</span> <span class="pre">=</span> <span class="pre">tag</span></code> is very handy for graphing (which we haven’t discussed yet). Many graphing commands are slow on large datasets. You can use <code class="docutils literal notranslate"><span class="pre">egen</span> <span class="pre">=</span> <span class="pre">tag</span></code> to run your graphic commands on only one record per group</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">egen</span> ethtag = tag(ethcat)
+<span class="k">bys</span> ethcat:<span class="k"> egen</span> mean_bmi=mean(bmi) 
+<span class="k">bys</span> ethcat:<span class="k"> egen</span> mean_age=mean(age)
+</pre></div>
+</div>
+</section>
+<section id="function">
+<h2>4.4 function()<a class="headerlink" href="#function" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="round">
+<h2>4.4.1 round()<a class="headerlink" href="#round" title="Permalink to this heading">#</a></h2>
+<p>Round down to the nearest integer:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nf">floor</span>(<span class="m">0.3</span>)
+<span class="k">disp</span> <span class="nf">floor</span>(<span class="m">8.9</span>)
+</pre></div>
+</div>
+<p>Round up to the nearest integer</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nf">ceil</span>(<span class="m">0.3</span>)
+<span class="k">disp</span> <span class="nf">ceil</span>(<span class="m">8.9</span>)
+</pre></div>
+</div>
+<p>Round to the nearest integer</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nf">round</span>(<span class="m">0.3</span>)
+<span class="k">disp</span> round (<span class="m">8.9</span>)
+</pre></div>
+</div>
+</section>
+<section id="min">
+<h2>4.4.2 min()<a class="headerlink" href="#min" title="Permalink to this heading">#</a></h2>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nf">min</span>(<span class="m">8</span>,<span class="m">6</span>,<span class="m">7</span>,<span class="m">5</span>,<span class="m">3</span>,<span class="m">0</span>,<span class="m">9</span>)
+<span class="k">disp</span> <span class="nf">max</span>(<span class="m">8</span>,<span class="m">6</span>,<span class="m">7</span>,<span class="m">5</span>,<span class="m">3</span>,<span class="m">0</span>,<span class="m">9</span>)
+</pre></div>
+</div>
+</section>
+<section id="exp">
+<h2>4.4.3 exp()<a class="headerlink" href="#exp" title="Permalink to this heading">#</a></h2>
+<p>Useful for transforming a variable (exponent, log, square root):</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nf">exp</span>(<span class="m">1</span>)
+<span class="k">disp</span> <span class="nf">ln</span>(<span class="m">20</span>)
+<span class="k">disp</span> <span class="nf">sqrt</span>(<span class="m">729</span>)
+</pre></div>
+</div>
+<p>Other math functions:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">di</span> <span class="nf">abs</span>(<span class="o">-</span><span class="m">6</span>) <span class="c1">//absolute value</span>
+<span class="k">disp</span> <span class="nf">mod</span>(<span class="m">529</span>, <span class="m">10</span>) <span class="c1">//modulus (remainder)</span>
+<span class="k">disp</span> <span class="nf">c</span>(pi)
+<span class="k">disp</span> <span class="nf">sin</span>(<span class="nf">c</span>(pi)<span class="o">/</span><span class="m">2</span>) <span class="c1">//sine function</span>
+</pre></div>
+</div>
+</section>
+<section id="string">
+<h2>4.4.4 string()<a class="headerlink" href="#string" title="Permalink to this heading">#</a></h2>
+<p>As discussed throughout this course, a string variable is data that takes the form of characters instead of numbers.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">ds</span>, has(type string)
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">list</span> extended_dgn<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">5</span>, clean
+</pre></div>
+</div>
+<section id="word">
+<h3>4.4.4.1 word()<a class="headerlink" href="#word" title="Permalink to this heading">#</a></h3>
+<p>The word function isolates the first (or second, etc.) word of a string.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nf">word</span>(<span class="s">&quot;Hello, is there anybody in there?&quot;</span>, <span class="m">4</span>)
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">list</span> extended_dgn<span class="k"> if</span> <span class="nf">word</span>(ext, <span class="m">5</span>) <span class="o">!=</span> <span class="s">&quot;&quot;</span>, clean noobs
+</pre></div>
+</div>
+</section>
+<section id="strlen">
+<h3>4.4.4.2 strlen()<a class="headerlink" href="#strlen" title="Permalink to this heading">#</a></h3>
+<p>The strlen function counts the number of characters in a string</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nf">strlen</span>(<span class="s">&quot;Same as it ever was&quot;</span>)
+<span class="k">list</span> extended_dgn<span class="k"> if</span> <span class="nf">strlen</span>(ext)<span class="o">&lt;</span> <span class="m">6</span>, clean
+</pre></div>
+</div>
+</section>
+<section id="regexm">
+<h3>4.4.4.3 regexm()<a class="headerlink" href="#regexm" title="Permalink to this heading">#</a></h3>
+<p>Test whether a string appears inside of another string</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="nf">regexm</span>(<span class="s">&quot;Earth&quot;</span>, <span class="s">&quot;art&quot;</span>)
+<span class="k">assert</span> <span class="o">!</span><span class="nf">regexm</span>(<span class="s">&quot;team&quot;</span>, <span class="s">&quot;I&quot;</span>)
+
+<span class="k">tab</span> ext<span class="k"> if</span> <span class="nf">regexm</span>(ext, <span class="s">&quot;HTN&quot;</span>)
+</pre></div>
+</div>
+<p>regexm actually searches for regular expressions. We won’t go into the syntax, but you can do more powerful searches.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>list ext if regexm(ext, &quot;^A&quot;) //starts with A
+
+list ext if regexm(ext, &quot;X$&quot;) //ends with X
+
+tab ext if regexm(ext, &quot;HIV.*Y&quot;) //contains &quot;HIV&quot;, then some other stuff, then Y
+
+</pre></div>
+</div>
+</section>
+<section id="strpos">
+<h3>4.4.5 strpos()<a class="headerlink" href="#strpos" title="Permalink to this heading">#</a></h3>
+<p>In Stata, you can use the <code class="docutils literal notranslate"><span class="pre">strpos()</span></code> function to find the position of the first occurrence of a substring within a string.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">di</span> <span class="nf">strpos</span>(<span class="s">&quot;history&quot;</span>, <span class="s">&quot;his&quot;</span>)
+<span class="k">di</span> <span class="nf">strpos</span>(<span class="s">&quot;history&quot;</span>, <span class="s">&quot;story&quot;</span>)
+<span class="k">di</span> <span class="nf">strpos</span>(<span class="s">&quot;history&quot;</span>, <span class="s">&quot;story&quot;</span>)<span class="o">!=</span><span class="m">0</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The substring “his” is found at the beginning of the string “history” and so the output is <code class="docutils literal notranslate"><span class="pre">1</span></code></p></li>
+<li><p>The substring “story” starts at index 4 within the string “history”</p></li>
+</ul>
+<p>If you want to check whether the substring “story” exists within the string “history” using Stata, you can use the <code class="docutils literal notranslate"><span class="pre">strpos()</span></code> function and compare the result to zero. Here’s an example:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nf">strpos</span>(<span class="s">&quot;history&quot;</span>, <span class="s">&quot;story&quot;</span>) <span class="o">!=</span> <span class="m">0</span> {
+<span class="k">    di</span> <span class="s">&quot;Substring &#39;story&#39; exists within the string &#39;history&#39;&quot;</span>
+}
+<span class="k">else</span> {
+<span class="k">    di</span> <span class="s">&quot;Substring &#39;story&#39; does not exist within the string &#39;history&#39;&quot;</span>
+}
+</pre></div>
+</div>
+<p>In this case, if the substring “story” is found within the string “history”, the message “Substring ‘story’ exists within the string ‘history’” will be displayed. Otherwise, if the substring is not found, the message “Substring ‘story’ does not exist within the string ‘history’” will be displayed.</p>
+<p>A real-world example is given below. Investigators were interested in quantifying exposure to antihistamines amongst dialysis patients in the United States in 2014 based on their catalog that included BROMPHENIRAMINE, CARBINOXAMINE, CHLORPHENIRAMINE, CLEMASTINE, CYPROHEPTADINE, DEXBROMPHENIRAMINE, DEXCHLORPHENIRAMINE, DIMENHYDRINATE, DIPHENHYDRAMINE, DOXYLAMINE, HYDROXYZINE, MECLIZINE, PROMETHAZINE, PYRILAMINE, and TRIPROLIDINE.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="m">0</span> {
+<span class="k">	log</span> using pde2014<span class="m">.</span>log,<span class="k"> replace</span> 
+<span class="k">    use</span> pde2014,<span class="k"> clear</span>
+<span class="k">    assert</span> <span class="nf">c</span>(N) <span class="o">==</span> <span class="m">25915777</span>
+<span class="k">    sample</span> .<span class="m">01</span>
+<span class="k">    keep</span> usrds_id srvc_dt gnn
+<span class="k">    count</span>
+<span class="k">    replace</span> usrds_id=<span class="nf">round</span>(<span class="nf">runiform</span>(<span class="m">0</span>,<span class="m">10</span><span class="o">^</span><span class="m">9</span>))
+<span class="k">	 sort</span> usrds_id
+<span class="k">    l in</span> <span class="m">1</span><span class="o">/</span><span class="m">10</span>
+<span class="k">    label</span> data <span class="s">&quot;strpos demo for 340.600.11&quot;</span>
+<span class="k">    save</span> strpos<span class="m">.</span>dta,<span class="k"> replace</span>
+<span class="k">	log close</span> 
+}
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.    <span class="k"> use</span> pde2014,<span class="k"> clear</span>
+.    <span class="k"> assert</span> <span class="nf">c</span>(N) <span class="o">==</span> <span class="m">25915777</span>
+.    <span class="k"> sample</span> .<span class="m">01</span>
+(<span class="m">25</span>,<span class="m">913</span>,<span class="m">185</span> observations deleted)
+.    <span class="k"> keep</span> usrds_id srvc_dt gnn
+.    <span class="k"> count</span>
+  <span class="m">2</span>,<span class="m">592</span>
+.    <span class="k"> replace</span> usrds_id=<span class="nf">round</span>(<span class="nf">runiform</span>(<span class="m">0</span>,<span class="m">10</span><span class="o">^</span><span class="m">9</span>))
+(<span class="m">2</span>,<span class="m">592</span> real changes made)
+.    <span class="k"> sort</span> usrds_id
+.    <span class="k"> l in</span> <span class="m">1</span><span class="o">/</span><span class="m">10</span>
+
+     <span class="o">+----------------------------------------------------+</span>
+     | usrds_id   gnn                             srvc_dt |
+     |<span class="o">----------------------------------------------------</span>|
+  <span class="m">1</span>. |  <span class="m">1103808</span>   VALGANCICLOVIR HCL            26jun2014 |
+  <span class="m">2</span>. |  <span class="m">1604280</span>   LEVOTHYROXINE SODIUM          13feb2014 |
+  <span class="m">3</span>. |  <span class="m">1877804</span>   AMOXICILLIN<span class="o">/</span>POTASSIUM CLAV    22sep2014 |
+  <span class="m">4</span>. |  <span class="m">2009860</span>   NEEDLES, INSULIN DISPOSABLE   23jan2014 |
+  <span class="m">5</span>. |  <span class="m">2081837</span>   LOVASTATIN                    19nov2014 |
+     |<span class="o">----------------------------------------------------</span>|
+  <span class="m">6</span>. |  <span class="m">2909567</span>   ATORVASTATIN CALCIUM          15jun2014 |
+  <span class="m">7</span>. |  <span class="m">2970910</span>   METOPROLOL TARTRATE           22may2014 |
+  <span class="m">8</span>. |  <span class="m">3321448</span>   FAMOTIDINE                    01aug2014 |
+  <span class="m">9</span>. |  <span class="m">3561603</span>   GABAPENTIN                    20dec2014 |
+ <span class="m">10</span>. |  <span class="m">3952629</span>   PREDNISONE                    17mar2014 |
+     <span class="o">+----------------------------------------------------+</span>
+.    <span class="k"> label</span> data <span class="s">&quot;strpos demo for 340.600.11&quot;</span>
+.    <span class="k"> save</span> strpos<span class="m">.</span>dta,<span class="k"> replace</span>
+<span class="k">file</span> strpos<span class="m">.</span>dta saved
+.        <span class="k"> log close</span> 
+</pre></div>
+</div>
+<p><a class="reference download internal" download="" href="_downloads/47d8620d5e05ea69c4fc4f8f3a7a0697/strpos.dta"><span class="xref download myst">strpos.dta</span></a></p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> strpos<span class="m">.</span>dta,<span class="k"> clear</span>
+<span class="k">gen</span>	antihist16=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;BROMPHENIRAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist19=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;CARBINOXAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist26=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;CHLORPHENIRAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist31=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;CLEMASTINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist36=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;CYPROHEPTADINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist39=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;DEXBROMPHENIRAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist40=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;DEXCHLORPHENIRAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist43=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;DIMENHYDRINATE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist47=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;DIPHENHYDRAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist51=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;DOXYLAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist65=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;HYDROXYZINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist77=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;MECLIZINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist101=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;PROMETHAZINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist105=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;PYRILAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+<span class="k">gen</span>	antihist127=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;TRIPROLIDINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)      
+<span class="k">g</span> antihist_rx=( <span class="cs">///	</span>
+   antihist16<span class="o">+</span>	<span class="cs">///</span>
+   antihist19<span class="o">+</span>	<span class="cs">///</span>
+   antihist26<span class="o">+</span>	<span class="cs">///</span>
+   antihist31<span class="o">+</span>	<span class="cs">///</span>
+   antihist36<span class="o">+</span>	<span class="cs">///</span>
+   antihist39<span class="o">+</span>	<span class="cs">///</span>
+   antihist40<span class="o">+</span>	<span class="cs">///</span>
+   antihist43<span class="o">+</span>	<span class="cs">///</span>
+   antihist47<span class="o">+</span>	<span class="cs">///</span>
+   antihist51<span class="o">+</span>	<span class="cs">///</span>
+   antihist65<span class="o">+</span>	<span class="cs">///</span>
+   antihist77<span class="o">+</span>	<span class="cs">///</span>
+   antihist101<span class="o">+</span>	<span class="cs">///</span>
+   antihist105<span class="o">+</span>	<span class="cs">///</span>
+   antihist127	<span class="cs">///</span>
+     <span class="o">&gt;</span><span class="m">0</span>)
+<span class="k">keep</span> usrds_id srvc_dt antihist_rx
+<span class="k">l in</span> <span class="m">100</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> strpos<span class="m">.</span>dta,<span class="k"> clear</span>
+(strpos demo<span class="k"> for</span> <span class="m">340.600.11</span>)
+
+.<span class="k"> gen</span>     antihist16=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;BROMPHENIRAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist19=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;CARBINOXAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist26=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;CHLORPHENIRAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist31=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;CLEMASTINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist36=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;CYPROHEPTADINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist39=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;DEXBROMPHENIRAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist40=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;DEXCHLORPHENIRAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist43=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;DIMENHYDRINATE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist47=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;DIPHENHYDRAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist51=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;DOXYLAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist65=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;HYDROXYZINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist77=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;MECLIZINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist101=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;PROMETHAZINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist105=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;PYRILAMINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)
+
+.<span class="k"> gen</span>     antihist127=(<span class="nf">strpos</span>(gnn,<span class="s">&quot;TRIPROLIDINE&quot;</span>)<span class="o">!=</span><span class="m">0</span>)      
+
+.<span class="k"> g</span> antihist_rx=( <span class="cs">///     </span>
+<span class="o">&gt;</span>    antihist16<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist19<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist26<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist31<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist36<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist39<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist40<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist43<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist47<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist51<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist65<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist77<span class="o">+</span>  <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist101<span class="o">+</span> <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist105<span class="o">+</span> <span class="cs">///</span>
+<span class="o">&gt;</span>    antihist127  <span class="cs">///</span>
+<span class="o">&gt;</span>      <span class="o">&gt;</span><span class="m">0</span>)
+
+.<span class="k"> keep</span> usrds_id srvc_dt antihist_rx
+
+.<span class="k"> tab</span> antihist
+
+antihist_rx |      Freq.     Percent        Cum.
+<span class="o">------------+-----------------------------------</span>
+          <span class="m">0</span> |      <span class="m">2</span>,<span class="m">580</span>       <span class="m">99.54</span>       <span class="m">99.54</span>
+          <span class="m">1</span> |         <span class="m">12</span>        <span class="m">0.46</span>      <span class="m">100.00</span>
+<span class="o">------------+-----------------------------------</span>
+      Total |      <span class="m">2</span>,<span class="m">592</span>      <span class="m">100.00</span>
+
+.<span class="k"> log close</span>  
+</pre></div>
+</div>
+</section>
+<section id="dates">
+<h3>4.4.6 dates()<a class="headerlink" href="#dates" title="Permalink to this heading">#</a></h3>
+<p>Remember this? How does Stata store dates</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nx">%3.2f</span> <span class="nf">exp</span>(<span class="m">1</span>)
+<span class="k">disp</span> <span class="nx">%4.1f</span> <span class="m">3.14159</span>
+</pre></div>
+</div>
+<p>Stata stores dates as a special format of integer – the number of days since January 1, 1960</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nx">%td</span> <span class="m">19400</span>
+<span class="k">disp</span> <span class="nx">%td</span> <span class="m">366</span>
+<span class="k">disp</span> <span class="nx">%td</span> <span class="o">-</span><span class="m">5</span>
+</pre></div>
+</div>
+<p>“td” = “time, date” (probably)</p>
+<p>Since Stata stores dates as numbers, you can do arithmetic on them.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">gen</span> oneweek = transplant_date<span class="m">+7</span>
+<span class="k">format</span> <span class="nx">%td</span> oneweek
+<span class="k">list</span> transplant_date oneweek<span class="k"> in</span> <span class="m">1</span><span class="o">/</span><span class="m">3</span>
+</pre></div>
+</div>
+<p>Converting a date to Stata %td: td()</p>
+<p>The function td() can give the number corresponding to a date written in Stata’s funny default format.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nf">td</span>(04jul1976)
+<span class="k">disp</span> <span class="nf">td</span>(26oct1985) 
+</pre></div>
+</div>
+<p>The function date() can convert a string to a numerical date. It takes two strings. The first is the date to convert, and the second is a formatting string telling the order of month, date and year.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">disp</span> <span class="nf">date</span>(<span class="s">&quot;August 15, 1969&quot;</span>, <span class="s">&quot;MDY&quot;</span>)
+<span class="k">disp</span> <span class="nf">date</span>(<span class="s">&quot;2061 28 July&quot;</span>, <span class="s">&quot;YDM&quot;</span>)
+</pre></div>
+</div>
+<p>Generate a date variable from a string</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> donors<span class="m">.</span>dta,<span class="k"> clear</span>
+<span class="k">list</span> fake_don_id fake_don_dob
+
+<span class="k">gen</span> donor_dob = <span class="nf">date</span>(fake_don_dob, <span class="s">&quot;DMY&quot;</span>)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="stset">
+<h2>4.5 stset<a class="headerlink" href="#stset" title="Permalink to this heading">#</a></h2>
+<p>This portion of the lecture is designed for people who:</p>
+<ul class="simple">
+<li><p>have not done survival analyses in Stata, but</p></li>
+<li><p>know what “survival analyses” are</p></li>
+</ul>
+<section id="gen">
+<h3>4.5.1 gen<a class="headerlink" href="#gen" title="Permalink to this heading">#</a></h3>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">gen</span> f_time = end_d<span class="o">-</span>transplant_d
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>4.5.2 stset<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>Before we start a survival analysis, we need to tell Stata two things about each individual: how long they were followed for and whether they had an outcome</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">stset</span> f_time, failure(died)
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">stset</span></code> analyzes the dataset and gives output showing:</p>
+<ul class="simple">
+<li><p>how many records were included</p></li>
+<li><p>how many failures were observed</p></li>
+<li><p>how many records were excluded (e.g. invalid data)</p></li>
+</ul>
+<p>And other useful information</p>
+<p>Instead of specifying the amount of followup time, we can specify the start and end date for each record:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">stset</span> end_date, origin(transplant_date) failure(died)
+</pre></div>
+</div>
+<p>We can specify a scale (e.g. to analyze time in years instead of days):</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">stset</span> end_date, origin(transplant_date) failure(died) scale (<span class="m">365.25</span>)
+</pre></div>
+</div>
+</section>
+<section id="sts">
+<h3>4.5.3 sts<a class="headerlink" href="#sts" title="Permalink to this heading">#</a></h3>
+<section id="sts-graph">
+<h4>4.5.3.1 sts graph<a class="headerlink" href="#sts-graph" title="Permalink to this heading">#</a></h4>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">sts graph</span>
+<span class="k">graph</span> export survival<span class="m">.</span>png,<span class="k"> replace</span> 
+</pre></div>
+</div>
+<p><img alt="" src="_images/survival.png" /></p>
+<p>Tomorrow we will learn how to make this graph more aesthetically appealing.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">sts graph</span>,<span class="k"> by</span>(don_ecd)
+<span class="k">graph</span> export survival_byecd<span class="m">.</span>png,<span class="k"> replace</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/survival_byecd.png" /></p>
+</section>
+<section id="sts-list">
+<h4>4.5.3.2 sts list<a class="headerlink" href="#sts-list" title="Permalink to this heading">#</a></h4>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">sts list in</span> <span class="m">300</span><span class="o">/</span><span class="m">310</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> sts list in</span> <span class="m">300</span><span class="o">/</span><span class="m">310</span>
+
+        Failure _d: died
+  Analysis time _t: (end_date<span class="o">-</span>origin)<span class="o">/</span><span class="m">365.25</span>
+            Origin: time transplant_date
+
+Kaplan–Meier survivor function
+
+             At                  Survivor      Std.
+  Time     risk   Fail   Lost    function    <span class="k"> error</span>     [<span class="m">95</span>%<span class="k"> conf</span>. int.]
+<span class="o">------------------------------------------------------------------------</span>
+ .<span class="m">7724</span>       <span class="m">11</span>      <span class="m">0</span>      <span class="m">1</span>      <span class="m">1.0000</span>         .          .         .
+  .<span class="m">789</span>       <span class="m">10</span>      <span class="m">0</span>      <span class="m">1</span>      <span class="m">1.0000</span>         .          .         .
+ .<span class="m">7895</span>        <span class="m">9</span>      <span class="m">0</span>      <span class="m">1</span>      <span class="m">1.0000</span>         .          .         .
+ .<span class="m">7916</span>        <span class="m">8</span>      <span class="m">0</span>      <span class="m">1</span>      <span class="m">1.0000</span>         .          .         .
+ .<span class="m">8002</span>        <span class="m">7</span>      <span class="m">1</span>      <span class="m">0</span>      <span class="m">0.8571</span>    <span class="m">0.1323</span>     <span class="m">0.3341</span>    <span class="m">0.9786</span>
+ .<span class="m">8032</span>        <span class="m">6</span>      <span class="m">0</span>      <span class="m">1</span>      <span class="m">0.8571</span>    <span class="m">0.1323</span>     <span class="m">0.3341</span>    <span class="m">0.9786</span>
+ .<span class="m">8056</span>        <span class="m">5</span>      <span class="m">1</span>      <span class="m">0</span>      <span class="m">0.6857</span>    <span class="m">0.1863</span>     <span class="m">0.2128</span>    <span class="m">0.9121</span>
+ .<span class="m">8081</span>        <span class="m">4</span>      <span class="m">1</span>      <span class="m">0</span>      <span class="m">0.5143</span>    <span class="m">0.2039</span>     <span class="m">0.1178</span>    <span class="m">0.8132</span>
+ .<span class="m">8092</span>        <span class="m">3</span>      <span class="m">0</span>      <span class="m">1</span>      <span class="m">0.5143</span>    <span class="m">0.2039</span>     <span class="m">0.1178</span>    <span class="m">0.8132</span>
+ .<span class="m">8102</span>        <span class="m">2</span>      <span class="m">0</span>      <span class="m">1</span>      <span class="m">0.5143</span>    <span class="m">0.2039</span>     <span class="m">0.1178</span>    <span class="m">0.8132</span>
+ .<span class="m">8103</span>        <span class="m">1</span>      <span class="m">0</span>      <span class="m">1</span>      <span class="m">0.5143</span>    <span class="m">0.2039</span>     <span class="m">0.1178</span>    <span class="m">0.8132</span>
+<span class="o">------------------------------------------------------------------------</span>
+</pre></div>
+</div>
+</section>
+<section id="sts-test">
+<h4>4.5.3.3 sts test<a class="headerlink" href="#sts-test" title="Permalink to this heading">#</a></h4>
+<p>Rank-sum test:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">sts test</span> don_ecd<span class="k"> sts test</span> gender <span class="c1">//p value</span>
+<span class="k">disp</span> <span class="m">1</span><span class="o">-</span><span class="nf">chi2</span>(<span class="nf">r</span>(df), <span class="nf">r</span>(chi2))
+</pre></div>
+</div>
+</section>
+<section id="stsum">
+<h4>4.5.3.4 stsum<a class="headerlink" href="#stsum" title="Permalink to this heading">#</a></h4>
+<p>Calculate the incidence rate:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">stsum</span>
+<span class="k">stsum</span>,<span class="k"> by</span>(don_ecd)
+</pre></div>
+</div>
+</section>
+<section id="stcox">
+<h4>4.5.3.5 stcox<a class="headerlink" href="#stcox" title="Permalink to this heading">#</a></h4>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">stcox</span> don_ecd age
+</pre></div>
+</div>
+<p>Obtain hazard ratios, 95% CIs, p values the same way we did for logistic regression</p>
+</section>
+</section>
+</section>
+<section id="merge">
+<h2>4.6 merge<a class="headerlink" href="#merge" title="Permalink to this heading">#</a></h2>
+<p>Let’s say we wish to assesss whether donor age is correlated with recipient age in deceased-donor transplants. How might we go about it?</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span>
+<span class="k">lookfor</span> age
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> lookfor</span> age
+
+Variable      Storage	Display	Value
+name        <span class="k"> type	format	label</span>	Variable<span class="k"> label</span>
+				
+age             byte	<span class="nx">%12.0g</span>		Age at TX
+
+. 
+<span class="k">end</span> of<span class="k"> do</span><span class="o">-</span>file
+
+. 
+</pre></div>
+</div>
+<p>We only have the recipients age. So we’ll have to look elsewhere for the donor age:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> donors,<span class="k"> clear</span>
+<span class="k">lookfor</span> age
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> donors,<span class="k">	clear</span>
+
+.<span class="k"> lookfor</span> age
+
+Variable	Storage	Display	Value
+name<span class="k">	type	format	label</span>	Variable<span class="k">	label</span>
+						
+age_don	float	<span class="nx">%9.0g</span>		     
+
+. 
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">donors.dta</span></code> has donor age, but not recipient age.</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> donors_recipients,<span class="k"> clear</span>
+<span class="k">list in</span> <span class="m">1</span><span class="o">/</span><span class="m">10</span>
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> donors_recipients,<span class="k"> clear</span>
+
+.<span class="k"> list in</span> <span class="m">1</span><span class="o">/</span><span class="m">10</span>
+
+     <span class="o">+--------------------+</span>
+     | fake_id   fake_d<span class="o">~</span>d |
+     |<span class="o">--------------------</span>|
+  <span class="m">1</span>. |       <span class="m">1</span>       <span class="m">4999</span> |
+  <span class="m">2</span>. |       <span class="m">2</span>       <span class="m">4998</span> |
+  <span class="m">3</span>. |       <span class="m">3</span>       <span class="m">4997</span> |
+  <span class="m">4</span>. |       <span class="m">4</span>       <span class="m">4996</span> |
+  <span class="m">5</span>. |       <span class="m">5</span>       <span class="m">4995</span> |
+     |<span class="o">--------------------</span>|
+  <span class="m">6</span>. |       <span class="m">6</span>       <span class="m">4994</span> |
+  <span class="m">7</span>. |       <span class="m">7</span>       <span class="m">4993</span> |
+  <span class="m">8</span>. |       <span class="m">8</span>       <span class="m">4992</span> |
+  <span class="m">9</span>. |       <span class="m">9</span>       <span class="m">4991</span> |
+ <span class="m">10</span>. |      <span class="m">10</span>       <span class="m">4990</span> |
+     <span class="o">+--------------------+</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">donors_recipients.dta</span></code> has neither age, but it has fake_id (corresponding to recipients) and fake_don_id (corresponding to donors). Solution?</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id <span class="cs">///</span>
+    using donors_recipients
+</pre></div>
+</div>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span>.<span class="k"> use</span> transplants,<span class="k"> clear</span> 
+
+.<span class="k"> merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id <span class="cs">///</span>
+<span class="o">&gt;</span>     using donors_recipients
+
+    Result                      Number of obs
+    <span class="o">-----------------------------------------</span>
+    Not matched                         <span class="m">3</span>,<span class="m">000</span>
+        from master                         <span class="m">0</span>  (_merge<span class="o">==</span><span class="m">1</span>)
+        from using                      <span class="m">3</span>,<span class="m">000</span>  (_merge<span class="o">==</span><span class="m">2</span>)
+
+    Matched                             <span class="m">2</span>,<span class="m">000</span>  (_merge<span class="o">==</span><span class="m">3</span>)
+    <span class="o">-----------------------------------------</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>We expect each fake_id to appear only once in each dataset (“one-to-one merge”)</p></li>
+<li><p>fake_id is the variable that appears in both datasets, letting us link them</p></li>
+<li><p>donors_recipients is the dataset that we’re merging with the dataset in memory</p></li>
+</ul>
+<ul class="simple">
+<li><p>Zero records appeared only in the “master” dataset (in memory before the merge command)</p></li>
+<li><p>3000 records appeared only in the “using” dataset (donors_recipients.dta)</p></li>
+<li><p>2000 records appeared in both datasets</p></li>
+<li><p>Stata created a variable called _merge telling us whether each record was master-only, using-only, or both (matched)</p></li>
+</ul>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">tab</span> _merge 
+</pre></div>
+</div>
+<p>Let’s try some fancier syntax:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span> 
+<span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using donors_recipients,<span class="k"> keep</span>(match)
+</pre></div>
+</div>
+<p>Only records that appear in both datasets will remain in memory</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span> 
+<span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using donors_recipients,<span class="k"> keep</span>(master match)
+</pre></div>
+</div>
+<p>Only records that appear in the master dataset only, or in both datasets, will remain in memory</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span> 
+<span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using donors_recipients,  <span class="k"> gen</span>(mergevar)
+</pre></div>
+</div>
+<p>Instead of creating a variable called _merge, call it mergevar</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear</span> 
+<span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using donors_recipients,   nogen
+</pre></div>
+</div>
+<p>Don’t create any new variables, <strong>NOTE:</strong> if the <code class="docutils literal notranslate"><span class="pre">_merge</span></code> variable already exists, the _merge command will give an error unless you use gen() or nogen</p>
+<p>Two merges in a row:</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id <span class="cs">///</span>
+    using donors_recipients, <span class="cs">///</span>
+<span class="k">    keep</span>(match) nogen
+<span class="k">merge m</span>:<span class="m">1</span> fake_don_id <span class="cs">///</span>
+ using donors,<span class="k"> keep</span>(match) nogen <span class="cs">///</span>
+    keepusing(age_don)
+</pre></div>
+</div>
+<p>Don’t load all variables from the new (using) dataset. Just load age_don</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">corr</span> age<span class="o">*</span>
+</pre></div>
+</div>
+<p>In our dataset, fake recipient age and fake donor age *** *** correlated.</p>
+<p>Merging protip: using merge, keep(match) might drop more records than you expect. If you think all
+records will match, it’s a good idea to check this assumption</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> transplants,<span class="k"> clear merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using donors_recipients, <span class="cs">///</span>
+<span class="k">     keep</span>(master match)
+<span class="k">assert</span> _merge<span class="o">==</span><span class="m">3</span>
+</pre></div>
+</div>
+<p>Maybe you don’t expect a perfect match, but you want to make sure nearly all of your records match use transplants, clear</p>
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using donors_recipients,<span class="k"> keep</span>(master match)
+<span class="k">quietly count if</span> _merge <span class="o">==</span> <span class="m">3</span>
+<span class="k">assert</span> <span class="nf">r</span>(N)<span class="o">/</span>_N <span class="o">&gt;</span> <span class="m">0.99</span> <span class="c1">//99% of records have _merge==3</span>
+</pre></div>
+</div>
+<p>That’s enough in way of an introduction to the <code class="docutils literal notranslate"><span class="pre">merge</span></code> command. It will come in handy only in specific projects that have relevant variables in different datasets.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#by">4.1 by</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#egen">4.2 egen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tag">4.3 tag</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#function">4.4 function()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#round">4.4.1 round()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#min">4.4.2 min()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exp">4.4.3 exp()</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string">4.4.4 string()</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word">4.4.4.1 word()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strlen">4.4.4.2 strlen()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regexm">4.4.4.3 regexm()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strpos">4.4.5 strpos()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dates">4.4.6 dates()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stset">4.5 stset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gen">4.5.1 gen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.5.2 stset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sts">4.5.3 sts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sts-graph">4.5.3.1 sts graph</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sts-list">4.5.3.2 sts list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sts-test">4.5.3.3 sts test</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stsum">4.5.3.4 stsum</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stcox">4.5.3.5 stcox</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#merge">4.6 merge</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  Copyright © 2025 Vincent Jin & Abimereki Muzaale
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

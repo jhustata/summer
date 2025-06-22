@@ -582,55 +582,63 @@ It creates an <em>ethical workspace</em>, keeps outputs contained, and produces 
 </details>
 <details>
     <summary>v1.3</summary>
-<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="k">qui</span> {
+<div class="highlight-stata notranslate"><div class="highlight"><pre><span></span><span class="cm">/**************************************************************************</span>
+<span class="cm"> 🔁 just-click.do – Self-organizing, reproducible lab file</span>
+<span class="cm">     ▸ OS-agnostic</span>
+<span class="cm">     ▸ Modular folder structure</span>
+<span class="cm">     ▸ Canonical symbolic stages: INIT → COMMIT → FORK → BRANCH → MERGE → OUTPUT</span>
+<span class="cm">**************************************************************************/</span>
 
-<span class="k">    if</span> <span class="m">0</span> {
-        just<span class="o">-</span>click<span class="m">.</span>do <span class="o">-</span> Self<span class="o">-</span>organizing, reproducible<span class="k"> lab file</span>
-        designed<span class="k"> for</span> OS<span class="o">-</span>agnostic<span class="k"> use</span> <span class="o">+</span> graceful handoff to others
-    }
+<span class="k">clear</span> all
+<span class="k">set more</span> off
 
-<span class="k">    clear</span> all
-<span class="k">    set more</span> off
-
-<span class="c1">    * 🌊 INIT: Declare root &amp; core folders (relative to current location)</span>
-<span class="k">    global</span> root = <span class="nf">c</span>(pwd)
-<span class="k">    foreach</span> folder<span class="k"> in</span> data output code<span class="k"> notes</span> {
-<span class="k">        local</span> <span class="nv">`folder&#39;</span> <span class="s">&quot;</span><span class="vg">$root</span><span class="s">/</span><span class="nv">`folder&#39;</span><span class="s">&quot;</span>
-<span class="k">        capture mkdir</span> <span class="nv">``folder&#39;&#39;</span>
-    }
-
-<span class="c1">    * ❤️ COMMIT: Move all .dta files into /data/ so it&#39;s clean + modular</span>
-<span class="k">    local</span> dtafiles :<span class="k"> dir</span> <span class="s">&quot;</span><span class="vg">$root</span><span class="s">&quot;</span> files <span class="s">&quot;*.dta&quot;</span>
-<span class="k">    foreach</span> f of<span class="k"> local</span> dtafiles {
-<span class="k">        local</span> src  <span class="s">&quot;</span><span class="vg">$root</span><span class="s">/</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
-<span class="k">        local</span> dest <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">/</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
-<span class="k">        copy</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span> <span class="s">&quot;</span><span class="nv">`dest&#39;</span><span class="s">&quot;</span>,<span class="k"> replace</span>
-<span class="k">        erase</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span>
-    }
-
-<span class="c1">    * 🌀 FORK: Create structure for logging &amp; error checking</span>
-<span class="k">    capture drop</span> _all
-<span class="k">    log</span> using <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">/lab5_output.log&quot;</span>,<span class="k"> replace</span>
-
-<span class="c1">    * 🐬 BRANCH: Load and prepare data</span>
-<span class="k">    use</span> <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">/transplants.dta&quot;</span>,<span class="k"> clear</span>
-<span class="k">    merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using <span class="s">&quot;</span><span class="nv">`data&#39;</span><span class="s">/donors_recipients.dta&quot;</span>
-<span class="k">    drop if</span> _merge <span class="o">!=</span> <span class="m">3</span>
-
-<span class="c1">    * 🔁 MERGE: Create variables, apply formats, and set survival time</span>
-<span class="k">    gen</span> over50 = age <span class="o">&gt;</span> <span class="m">50</span>
-<span class="k">    gen</span> f_time = end_d <span class="o">-</span> transplant_d
-<span class="k">    format</span> transplant_d end_d <span class="nx">%td</span>
-<span class="k">    stset</span> f_time, failure(died)
-
-<span class="c1">    * 📊 OUTPUT: Graph and export results</span>
-<span class="k">    sts graph</span>,<span class="k"> by</span>(over50)
-<span class="k">    graph</span> export <span class="s">&quot;</span><span class="nv">`output&#39;</span><span class="s">/survival_over50.png&quot;</span>,<span class="k"> replace</span>
-
-<span class="c1">    * ✅ CLOSE: Log and finish</span>
-<span class="k">    log close</span>
-<span class="k">    noi display</span> <span class="s">&quot;✅ All done. No errors. Outputs created.&quot;</span>
+<span class="c1">* 🌐 Set global slash (optional – only needed for shell calls)</span>
+<span class="k">if</span> <span class="nf">c</span>(os) <span class="o">==</span> <span class="s">&quot;Windows&quot;</span> {
+<span class="k">    global</span> SL <span class="s">&quot;</span><span class="se">\&quot;</span>
 }
+<span class="k">else</span> {
+<span class="k">    global</span> SL <span class="s">&quot;/&quot;</span>
+}
+
+<span class="c1">* 🌊 INIT: Define root + core folders (relative to current location)</span>
+<span class="k">global</span> root = <span class="nf">c</span>(pwd)
+<span class="k">foreach</span> folder<span class="k"> in</span> data output code<span class="k"> notes</span> {
+<span class="k">    local</span> fpath = <span class="s">&quot;</span><span class="vg">$root</span><span class="s">/</span><span class="vg">${SL}</span><span class="nv">`folder&#39;</span><span class="s">&quot;</span>
+<span class="k">    capture mkdir</span> <span class="s">&quot;</span><span class="nv">`fpath&#39;</span><span class="s">&quot;</span>
+<span class="k">    global</span> <span class="nv">`folder&#39;</span> <span class="s">&quot;</span><span class="nv">`fpath&#39;</span><span class="s">&quot;</span>
+}
+
+<span class="c1">* ❤️ COMMIT: Move all .dta files into /data for cleanliness</span>
+<span class="k">local</span> dtafiles :<span class="k"> dir</span> <span class="s">&quot;</span><span class="vg">$root</span><span class="s">&quot;</span> files <span class="s">&quot;*.dta&quot;</span>
+<span class="k">foreach</span> f of<span class="k"> local</span> dtafiles {
+<span class="k">    local</span> src  <span class="s">&quot;</span><span class="vg">$root</span><span class="s">/</span><span class="vg">${SL}</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
+<span class="k">    local</span> dest <span class="s">&quot;</span><span class="vg">$data</span><span class="s">/</span><span class="vg">${SL}</span><span class="nv">`f&#39;</span><span class="s">&quot;</span>
+<span class="k">    copy</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span> <span class="s">&quot;</span><span class="nv">`dest&#39;</span><span class="s">&quot;</span>,<span class="k"> replace</span>
+<span class="k">    erase</span> <span class="s">&quot;</span><span class="nv">`src&#39;</span><span class="s">&quot;</span>
+}
+
+<span class="c1">* 🌀 FORK: Setup logging and clear memory</span>
+<span class="k">capture drop</span> _all
+<span class="k">log</span> using <span class="s">&quot;</span><span class="vg">$output${SL}</span><span class="s">lab5_output.log&quot;</span>,<span class="k"> replace</span>
+
+<span class="c1">* 🐬 BRANCH: Load and prep data</span>
+<span class="k">use</span> <span class="s">&quot;</span><span class="vg">$data${SL}</span><span class="s">transplants.dta&quot;</span>,<span class="k"> clear</span>
+<span class="k">merge</span> <span class="m">1</span>:<span class="m">1</span> fake_id using <span class="s">&quot;</span><span class="vg">$data${SL}</span><span class="s">donors_recipients.dta&quot;</span>
+<span class="k">drop if</span> _merge <span class="o">!=</span> <span class="m">3</span>
+
+<span class="c1">* 🔁 MERGE: Generate variables, set time-to-event</span>
+<span class="k">gen</span> over50 = age <span class="o">&gt;</span> <span class="m">50</span>
+<span class="k">gen</span> f_time = end_d <span class="o">-</span> transplant_d
+<span class="k">format</span> transplant_d end_d <span class="nx">%td</span>
+<span class="k">stset</span> f_time, failure(died)
+
+<span class="c1">* 📊 OUTPUT: Graph results</span>
+<span class="k">sts graph</span>,<span class="k"> by</span>(over50)
+<span class="k">graph</span> export <span class="s">&quot;</span><span class="vg">$output${SL}</span><span class="s">survival_over50.png&quot;</span>,<span class="k"> replace</span>
+
+<span class="c1">* ✅ CLOSE: Done</span>
+<span class="k">log close</span>
+<span class="k">noi di as</span> result <span class="s">&quot;✅ All done. No errors. Outputs created.&quot;</span>
 </pre></div>
 </div>
 </details>
